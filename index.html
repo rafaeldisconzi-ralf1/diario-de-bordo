@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#2b2e33">
-<meta name="app-version" content="2026-11-02.2">
+<meta name="app-version" content="2026-11-03.1">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Diário de Bordo">
@@ -20,18 +20,18 @@
 :root{
   --bg:#eeede8; --surface:#ffffff; --ink:#1d1f22; --muted:#666a70; --line:#d9d7cf;
   --sign:#f2b705; --sign-ink:#1d1f22; --road:#2b2e33; --road-ink:#f4f3ee;
-  --good:#1f7a4d; --bad:#b3261e; --fuel:#1f5fa8;
+  --good:#1f7a4d; --bad:#b3261e; --fuel:#1f5fa8; --go:#1f7a4d;
   --display:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
   --body:"Barlow",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
   --bg:#16181b; --surface:#212428; --ink:#f1f0eb; --muted:#a3a7ad; --line:#33373c;
   --sign:#f2b705; --sign-ink:#1d1f22; --road:#0e0f11; --road-ink:#f4f3ee;
-  --good:#4cc38a; --bad:#ff7a70; --fuel:#6aa8f0; color-scheme:dark}}
+  --good:#4cc38a; --bad:#ff7a70; --fuel:#6aa8f0; --go:#23885a; color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#16181b; --surface:#212428; --ink:#f1f0eb; --muted:#a3a7ad; --line:#33373c;
   --sign:#f2b705; --sign-ink:#1d1f22; --road:#0e0f11; --road-ink:#f4f3ee;
-  --good:#4cc38a; --bad:#ff7a70; --fuel:#6aa8f0; color-scheme:dark}
+  --good:#4cc38a; --bad:#ff7a70; --fuel:#6aa8f0; --go:#23885a; color-scheme:dark}
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.4;
   padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 96px}
@@ -60,6 +60,7 @@ button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid 
 .btn.fuel{border-color:var(--fuel);color:var(--fuel)}
 .btn.full{grid-column:1/-1;min-height:72px;flex-direction:row;font-size:20px}
 .btn.primary{background:var(--road);color:var(--road-ink);border-color:var(--road)}
+.btn.chegada{background:var(--go);color:#fff;border-color:var(--go)}
 .btn.start{background:var(--sign);color:var(--sign-ink);border:none;min-height:140px;font-family:var(--display);font-size:30px;text-transform:uppercase;letter-spacing:.03em}
 .stats{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .stat{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px}
@@ -199,7 +200,7 @@ function inicio(){
     <div class="big-actions">
       <button class="btn fuel" data-a="diesel">${ICON.fuel}Abasteci</button>
       <button class="btn" data-a="gasto">${ICON.money}Gastei</button>
-      <button class="btn full primary" data-a="fechar">${ICON.flag}Cheguei, encerrar viagem</button>
+      <button class="btn full chegada" data-a="fechar">${ICON.flag}Cheguei, encerrar viagem</button>
     </div>
     <h2>Lançamentos desta viagem</h2>${itens(t)}`;
   }
