@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#2b2e33">
-<meta name="app-version" content="2026-11-02.1">
+<meta name="app-version" content="2026-11-02.2">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Diário de Bordo">
@@ -136,9 +136,11 @@ const ICON={
 const CATS=['Pedágio','Comida','Arla','Despachante','Balança','Manutenção','Adiantamento','Outro'];
 const KEY='diario-bordo-v1';
 const brl=v=>(v||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
-const num=v=>{if(v==null)return NaN;v=String(v).trim().replace(/\s/g,'');if(v.includes(','))v=v.replace(/\./g,'').replace(',','.');return parseFloat(v)};
+const num=v=>{if(v==null)return NaN;v=String(v).trim().replace(/\s/g,'').replace(/^R\$/i,'');if(v.includes(','))v=v.replace(/\./g,'').replace(',','.');else if(/^\d{1,3}(\.\d{3})+$/.test(v))v=v.replace(/\./g,'');return parseFloat(v)};
 const fmtN=(v,d=0)=>(v||0).toLocaleString('pt-BR',{minimumFractionDigits:d,maximumFractionDigits:d});
-const hoje=()=>new Date().toISOString().slice(0,10);
+const hoje=()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')};
+const MESES=['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
+const nomeMes=ym=>{const[y,m]=ym.split('-');return MESES[+m-1]+' de '+y};
 const dBR=s=>s?s.split('-').reverse().slice(0,2).join('/'):'';
 const uid=()=>Math.random().toString(36).slice(2,9);
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -185,7 +187,7 @@ function inicio(){
   if(!t){
     h+=`<button class="btn start" data-a="nova">${ICON.flag}Começar viagem</button>
     <div class="big-actions"><button class="btn fuel" data-a="diesel">${ICON.fuel}Abasteci</button><button class="btn" data-a="gasto">${ICON.money}Gastei</button></div>`;
-    const ym=new Date().toISOString().slice(0,7),av=S.avulsos.filter(i=>(i.data||'').slice(0,7)===ym);
+    const ym=hoje().slice(0,7),av=S.avulsos.filter(i=>(i.data||'').slice(0,7)===ym);
     if(av.length)h+=`<h2>Gastos fora de viagem</h2>`+itens({id:'avulso',itens:av});
   }else{
     const c=calc(t);
@@ -212,7 +214,7 @@ function itens(t){
     <div style="text-align:right"><div class="val">${brl(i.valor)}</div><button class="link" style="font-size:14px" data-a="del" data-t="${t.id}" data-i="${i.id}">apagar</button></div></div>`).join('')}</div>`;
 }
 function resumoMes(){
-  const ym=new Date().toISOString().slice(0,7);
+  const ym=hoje().slice(0,7);
   let ts=S.trips.filter(t=>(t.inicio||'').slice(0,7)===ym);
   let label='este mês';
   if(!ts.length&&S.exemplo){ts=S.trips;label='outubro (exemplo)'}
@@ -249,12 +251,15 @@ function bindPerfil(){
 }
 function viagens(){
   if(!S.trips.length)return `<div class="card muted">Nenhuma viagem ainda. Volte ao Início e toque em <b>Começar viagem</b>.</div>`;
-  return exBanner()+`<h2>Todas as viagens</h2>`+[...S.trips].reverse().map(t=>{const c=calc(t);return `<button class="card trip" data-a="ver" data-t="${t.id}">
+  const grupos={};[...S.trips].reverse().forEach(t=>{const k=(t.inicio||'').slice(0,7);(grupos[k]=grupos[k]||[]).push(t)});
+  return exBanner()+Object.keys(grupos).sort().reverse().map(k=>{const sobra=grupos[k].reduce((a,t)=>a+calc(t).lucro,0);
+   return `<div class="row" style="margin-top:8px"><h2 style="margin:0">${nomeMes(k)}</h2><span class="nums muted" style="font-weight:600">${grupos[k].length} ${grupos[k].length===1?'viagem':'viagens'} · sobra <span class="${sobra<0?'neg':'pos'}">${brl(sobra)}</span></span></div>`+grupos[k].map(cartao).join('')}).join('');
+}
+function cartao(t){const c=calc(t);return `<button class="card trip" data-a="ver" data-t="${t.id}">
    <div class="row"><span class="tag ${t.status==='aberta'?'':'ex'}">${t.status==='aberta'?'Em viagem':'Encerrada'}</span><span class="muted nums">${dBR(t.inicio)}${t.fim?' a '+dBR(t.fim):''}</span></div>
    <div class="route" style="font-size:24px">${esc(t.origem)}<span class="arrow">→</span>${esc(t.destino)}</div>
    <div class="mini"><div class="muted">Frete<b style="color:var(--ink)">${brl(c.frete)}</b></div><div class="muted">Gastos<b style="color:var(--ink)">${brl(c.diesel+c.gastos)}</b></div><div class="muted">Sobra<b class="${c.lucro<0?'neg':'pos'}">${brl(c.lucro)}</b></div></div>
-  </button>`}).join('');
-}
+  </button>`}
 
 /* sheets */
 function open(html,onSave){
@@ -372,6 +377,8 @@ document.getElementById('tab-inicio').onclick=()=>{view='inicio';render();scroll
 document.getElementById('tab-viagens').onclick=()=>{view='viagens';render();scrollTo(0,0)};
 document.getElementById('tab-perfil').onclick=()=>{view='perfil';render();scrollTo(0,0)};
 render();
+try{navigator.storage&&navigator.storage.persist&&navigator.storage.persist()}catch(e){}
+if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('/sw.js').catch(()=>{}));
 </script>
 
 </body>
