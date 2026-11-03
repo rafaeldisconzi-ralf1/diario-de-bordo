@@ -4,14 +4,19 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#2b2e33">
-<meta name="app-version" content="2026-11-03.2">
+<meta name="app-version" content="2026-11-03.3">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Diário de Bordo">
 <link rel="icon" type="image/png" href="/icon-32.png">
 <link rel="apple-touch-icon" href="/icon-180.png">
 <link rel="manifest" href="/manifest.json">
-<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}[hidden]{display:none!important}img{max-width:100%}</style>
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}[hidden]{display:none!important}img{max-width:100%}button{-webkit-tap-highlight-color:transparent;touch-action:manipulation;transition:transform .09s ease-out,filter .09s ease-out}
+button:active{transform:scale(.95);filter:brightness(.85)}
+.trip:active{transform:scale(.98)}
+.toast{animation:pop .18s ease-out}@keyframes pop{from{transform:translate(-50%,12px);opacity:0}}
+@media (prefers-reduced-motion: reduce){button{transition:none}button:active,.trip:active{transform:none}.toast{animation:none}}
+</style>
 <title>Diário de Bordo</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600;700&display=swap">
@@ -374,6 +379,8 @@ function bind(){
   document.querySelectorAll('#app [data-a]').forEach(b=>b.onclick=()=>{const a=b.dataset.a;
     ({perfil:()=>{view='perfil';render();scrollTo(0,0)},nova:novaViagem,diesel:abasteci,gasto:gastei,fechar:encerrar,limpar,ver:()=>detalhe(b.dataset.t),del:()=>askDel(b.dataset.t,b.dataset.i)})[a]()});
 }
+document.addEventListener('touchstart',()=>{},{passive:true});
+document.addEventListener('click',e=>{if(e.target.closest('button'))try{navigator.vibrate&&navigator.vibrate(12)}catch(_){}},true);
 document.getElementById('tab-inicio').onclick=()=>{view='inicio';render();scrollTo(0,0)};
 document.getElementById('tab-viagens').onclick=()=>{view='viagens';render();scrollTo(0,0)};
 document.getElementById('tab-perfil').onclick=()=>{view='perfil';render();scrollTo(0,0)};
