@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#2b2e33">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Diário de Bordo">
+<link rel="icon" type="image/png" href="/icon-32.png">
+<link rel="apple-touch-icon" href="/icon-180.png">
+<link rel="manifest" href="/manifest.json">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}[hidden]{display:none!important}img{max-width:100%}</style>
+<title>Diário de Bordo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: one column phone app. Big touch targets, one action per button, bottom tab bar. Road-sign amber on asphalt neutrals. */
+:root{
+  --bg:#eeede8; --surface:#ffffff; --ink:#1d1f22; --muted:#666a70; --line:#d9d7cf;
+  --sign:#f2b705; --sign-ink:#1d1f22; --road:#2b2e33; --road-ink:#f4f3ee;
+  --good:#1f7a4d; --bad:#b3261e; --fuel:#1f5fa8;
+  --display:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
+  --body:"Barlow",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#16181b; --surface:#212428; --ink:#f1f0eb; --muted:#a3a7ad; --line:#33373c;
+  --sign:#f2b705; --sign-ink:#1d1f22; --road:#0e0f11; --road-ink:#f4f3ee;
+  --good:#4cc38a; --bad:#ff7a70; --fuel:#6aa8f0; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#16181b; --surface:#212428; --ink:#f1f0eb; --muted:#a3a7ad; --line:#33373c;
+  --sign:#f2b705; --sign-ink:#1d1f22; --road:#0e0f11; --road-ink:#f4f3ee;
+  --good:#4cc38a; --bad:#ff7a70; --fuel:#6aa8f0; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.4;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 96px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--road)}
+.wrap{max-width:520px;margin:0 auto;display:flex;flex-direction:column;gap:16px}
+header.top{background:var(--road);color:var(--road-ink);margin:0 calc(-1*max(16px,env(safe-area-inset-left,0px))) 0;padding:18px max(16px,env(safe-area-inset-left,0px)) 16px;
+  display:flex;justify-content:space-between;align-items:flex-end;gap:12px}
+header.top h1{font-family:var(--display);font-weight:800;font-size:28px;letter-spacing:.02em;margin:0;text-transform:uppercase;line-height:1}
+header.top small{display:block;color:var(--sign);font-weight:600;font-size:13px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px}
+.month{font-family:var(--display);font-size:18px;font-weight:600;opacity:.85}
+h2{font-family:var(--display);font-weight:700;font-size:22px;text-transform:uppercase;letter-spacing:.03em;margin:8px 0 0;text-wrap:balance}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px}
+.trip-active{border:none;background:var(--sign);color:var(--sign-ink)}
+.route{font-family:var(--display);font-weight:800;font-size:30px;line-height:1.05;text-transform:uppercase;text-wrap:balance}
+.route .arrow{opacity:.55;padding:0 4px}
+.tag{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:999px;background:var(--road);color:var(--road-ink)}
+.tag.ex{background:var(--line);color:var(--muted)}
+.row{display:flex;justify-content:space-between;gap:12px;align-items:baseline}
+.nums{font-variant-numeric:tabular-nums}
+.big-actions{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+button{font:inherit;color:inherit;cursor:pointer;border:none;background:none}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--fuel);outline-offset:2px}
+.btn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-height:104px;border-radius:14px;
+  background:var(--surface);border:2px solid var(--line);font-weight:700;font-size:18px;text-align:center;padding:12px}
+.btn svg{width:34px;height:34px}
+.btn.fuel{border-color:var(--fuel);color:var(--fuel)}
+.btn.full{grid-column:1/-1;min-height:72px;flex-direction:row;font-size:20px}
+.btn.primary{background:var(--road);color:var(--road-ink);border-color:var(--road)}
+.btn.start{background:var(--sign);color:var(--sign-ink);border:none;min-height:140px;font-family:var(--display);font-size:30px;text-transform:uppercase;letter-spacing:.03em}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px}
+.stat .l{font-size:13px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+.stat .v{font-family:var(--display);font-size:26px;font-weight:700;font-variant-numeric:tabular-nums}
+.stat.lucro{grid-column:1/-1;background:var(--road);color:var(--road-ink);border:none}
+.stat.lucro .l{color:var(--sign)}
+.list{display:flex;flex-direction:column}
+.item{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+.item:last-child{border-bottom:none}
+.item .what{font-weight:600}
+.item .when{font-size:14px;color:var(--muted)}
+.item .val{font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:8px;background:var(--muted)}
+.dot.d{background:var(--fuel)}
+.muted{color:var(--muted)}
+.pos{color:var(--good)} .neg{color:var(--bad)}
+nav.tabs{position:fixed;left:0;right:0;bottom:0;z-index:5;background:var(--surface);border-top:1px solid var(--line);
+  display:grid;grid-template-columns:1fr 1fr 1fr;padding:6px max(16px,env(safe-area-inset-right,0px)) calc(6px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+nav.tabs button{padding:10px;font-weight:700;font-size:16px;border-radius:10px;color:var(--muted)}
+nav.tabs button[aria-current="true"]{color:var(--ink);background:var(--bg)}
+/* sheet */
+.scrim{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:20;display:flex;align-items:flex-end;justify-content:center}
+.sheet{background:var(--surface);width:100%;max-width:560px;max-height:92vh;overflow:auto;border-radius:18px 18px 0 0;
+  padding:20px max(16px,env(safe-area-inset-right,0px)) calc(20px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));display:flex;flex-direction:column;gap:14px}
+.sheet h3{font-family:var(--display);font-size:26px;font-weight:800;text-transform:uppercase;margin:0}
+label.f{display:flex;flex-direction:column;gap:6px;font-weight:600}
+label.f span.h{font-weight:400;font-size:14px;color:var(--muted)}
+input,select{font:inherit;font-size:20px;padding:14px;border-radius:12px;border:2px solid var(--line);background:var(--bg);color:var(--ink);width:100%;min-width:0}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{padding:12px 16px;border-radius:999px;border:2px solid var(--line);font-weight:600;font-size:16px}
+.chip[aria-pressed="true"]{background:var(--road);color:var(--road-ink);border-color:var(--road)}
+.calc{background:var(--bg);border-radius:12px;padding:12px 14px;font-weight:600}
+.actions{display:grid;grid-template-columns:1fr 2fr;gap:10px;margin-top:4px}
+.actions button{min-height:60px;border-radius:12px;font-weight:700;font-size:18px}
+.cancel{background:var(--bg)}
+.save{background:var(--sign);color:var(--sign-ink)}
+.save.dark{background:var(--road);color:var(--road-ink)}
+.err{color:var(--bad);font-weight:600;font-size:15px}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(80px + env(safe-area-inset-bottom,0px));background:var(--road);color:var(--road-ink);
+  padding:12px 18px;border-radius:999px;font-weight:600;z-index:30}
+.note{font-size:14px;color:var(--muted)}
+.link{color:var(--fuel);font-weight:600;text-decoration:underline;padding:4px 0}
+.trip{display:flex;flex-direction:column;gap:10px;cursor:pointer;text-align:left;width:100%}
+.mini{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;font-size:14px}
+.mini b{display:block;font-size:17px;font-variant-numeric:tabular-nums}
+@media (prefers-reduced-motion: no-preference){.sheet{animation:up .18s ease-out}@keyframes up{from{transform:translateY(30px);opacity:.6}}}
+</style>
+</head>
+<body>
+
+
+<div class="wrap">
+  <header class="top">
+    <div><small id="cam">Controle do caminhão</small><h1>Diário de Bordo</h1></div>
+    <div class="month" id="mes"></div>
+  </header>
+  <main id="app" class="wrap"></main>
+</div>
+<nav class="tabs">
+  <button id="tab-inicio" aria-current="true">Início</button>
+  <button id="tab-viagens" aria-current="false">Viagens</button>
+  <button id="tab-perfil" aria-current="false">Perfil</button>
+</nav>
+<div id="modal"></div>
+
+<script>
+const ICON={
+ fuel:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V5a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v16"/><path d="M3 21h13"/><path d="M15 9h2a2 2 0 0 1 2 2v5a1.5 1.5 0 0 0 3 0V8l-3-3"/><path d="M7 8h5"/></svg>',
+ money:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M6 12h.01M18 12h.01"/></svg>',
+ flag:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 22V4"/><path d="M5 4h12l-2 4 2 4H5"/></svg>'
+};
+const CATS=['Pedágio','Comida','Arla','Despachante','Balança','Manutenção','Adiantamento','Outro'];
+const KEY='diario-bordo-v1';
+const brl=v=>(v||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+const num=v=>{if(v==null)return NaN;v=String(v).trim().replace(/\s/g,'');if(v.includes(','))v=v.replace(/\./g,'').replace(',','.');return parseFloat(v)};
+const fmtN=(v,d=0)=>(v||0).toLocaleString('pt-BR',{minimumFractionDigits:d,maximumFractionDigits:d});
+const hoje=()=>new Date().toISOString().slice(0,10);
+const dBR=s=>s?s.split('-').reverse().slice(0,2).join('/'):'';
+const uid=()=>Math.random().toString(36).slice(2,9);
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+function exemplo(){return {exemplo:false,trips:[]};}
+let S;
+try{S=JSON.parse(localStorage.getItem(KEY))}catch(e){}
+if(!S||!Array.isArray(S.trips))S=exemplo();
+if(!S.avulsos)S.avulsos=[];
+if(!S.perfil)S.perfil={nome:'',modelo:'Volvo FH 460',placa:'IXR 3B35',ano:'',patrao:''};
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+
+function calc(t){
+  const frete=t.tipo==='km'?(t.valorKm||0)*(t.distancia||0):(t.valorFechado||0);
+  const diesel=t.itens.filter(i=>i.tipo==='diesel').reduce((a,i)=>a+i.valor,0);
+  const litros=t.itens.filter(i=>i.tipo==='diesel').reduce((a,i)=>a+(i.litros||0),0);
+  const gastos=t.itens.filter(i=>i.tipo==='gasto'&&i.cat!=='Adiantamento').reduce((a,i)=>a+i.valor,0);
+  const adiant=t.itens.filter(i=>i.cat==='Adiantamento').reduce((a,i)=>a+i.valor,0);
+  const comissao=frete*(t.comissao||0)/100;
+  const km=t.kmFim&&t.kmIni?t.kmFim-t.kmIni:null;
+  return {frete,diesel,litros,gastos,adiant,comissao,km,media:km&&litros?km/litros:null,lucro:frete-comissao-diesel-gastos,aReceber:comissao-adiant};
+}
+const ativa=()=>S.trips.find(t=>t.status==='aberta');
+
+let view='inicio';
+function render(){
+  document.getElementById('mes').textContent=new Date().toLocaleDateString('pt-BR',{month:'long',year:'numeric'});
+  document.getElementById('tab-inicio').setAttribute('aria-current',view==='inicio');
+  document.getElementById('tab-viagens').setAttribute('aria-current',view==='viagens');
+  document.getElementById('tab-perfil').setAttribute('aria-current',view==='perfil');
+  const P=S.perfil;document.getElementById('cam').textContent=[P.modelo,P.placa].filter(Boolean).join(' · ')||'Controle do caminhão';
+  const app=document.getElementById('app');
+  app.innerHTML=view==='inicio'?inicio():view==='viagens'?viagens():perfil();
+  if(view==='perfil')bindPerfil();
+  bind();
+}
+function exBanner(){
+  return S.exemplo?`<div class="card note">Estes lançamentos são <b>exemplos</b> com os dados de outubro da planilha. <button class="link" data-a="limpar">Apagar exemplos e começar</button></div>`:'';
+}
+function inicio(){
+  const t=ativa();const P=S.perfil;
+  let h=P.nome?`<div style="font-family:var(--display);font-size:26px;font-weight:700;margin-top:4px">Olá, ${esc(P.nome.split(' ')[0])}</div>`:`<div class="card" style="display:flex;flex-direction:column;gap:10px"><b>Comece pelo seu perfil</b><span class="muted">Coloque seu nome e o caminhão que você dirige.</span><button class="btn full primary" data-a="perfil" style="min-height:60px">Preencher perfil</button></div>`;
+  h+=exBanner();
+  if(!t){
+    h+=`<button class="btn start" data-a="nova">${ICON.flag}Começar viagem</button>
+    <div class="big-actions"><button class="btn fuel" data-a="diesel">${ICON.fuel}Abasteci</button><button class="btn" data-a="gasto">${ICON.money}Gastei</button></div>`;
+    const ym=new Date().toISOString().slice(0,7),av=S.avulsos.filter(i=>(i.data||'').slice(0,7)===ym);
+    if(av.length)h+=`<h2>Gastos fora de viagem</h2>`+itens({id:'avulso',itens:av});
+  }else{
+    const c=calc(t);
+    h+=`<div class="card trip-active" style="display:flex;flex-direction:column;gap:10px">
+      <div class="row"><span class="tag">Em viagem</span><span class="nums" style="font-weight:600">desde ${dBR(t.inicio)}</span></div>
+      <div class="route">${esc(t.origem)}<span class="arrow">→</span>${esc(t.destino)}</div>
+      <div class="row nums" style="font-weight:600"><span>Frete ${brl(c.frete)}</span><span>Gasto até agora ${brl(c.diesel+c.gastos)}</span></div>
+    </div>
+    <div class="big-actions">
+      <button class="btn fuel" data-a="diesel">${ICON.fuel}Abasteci</button>
+      <button class="btn" data-a="gasto">${ICON.money}Gastei</button>
+      <button class="btn full primary" data-a="fechar">${ICON.flag}Cheguei, encerrar viagem</button>
+    </div>
+    <h2>Lançamentos desta viagem</h2>${itens(t)}`;
+  }
+  h+=resumoMes();
+  return h;
+}
+function itens(t){
+  if(!t.itens.length)return `<div class="card muted">Nada lançado ainda. Toque em <b>Abasteci</b> ou <b>Gastei</b>.</div>`;
+  return `<div class="card list">${[...t.itens].reverse().map(i=>`<div class="item">
+    <div><div class="what"><span class="dot ${i.tipo==='diesel'?'d':''}"></span>${i.tipo==='diesel'?'Diesel · '+fmtN(i.litros)+' L':esc(i.cat)}</div>
+    <div class="when">${dBR(i.data)}${i.obs?' · '+esc(i.obs):''}</div></div>
+    <div style="text-align:right"><div class="val">${brl(i.valor)}</div><button class="link" style="font-size:14px" data-a="del" data-t="${t.id}" data-i="${i.id}">apagar</button></div></div>`).join('')}</div>`;
+}
+function resumoMes(){
+  const ym=new Date().toISOString().slice(0,7);
+  let ts=S.trips.filter(t=>(t.inicio||'').slice(0,7)===ym);
+  let label='este mês';
+  if(!ts.length&&S.exemplo){ts=S.trips;label='outubro (exemplo)'}
+  const tot=ts.map(calc).reduce((a,c)=>({frete:a.frete+c.frete,diesel:a.diesel+c.diesel,gastos:a.gastos+c.gastos,comissao:a.comissao+c.comissao,lucro:a.lucro+c.lucro}),{frete:0,diesel:0,gastos:0,comissao:0,lucro:0});
+  const av=S.avulsos.filter(i=>(i.data||'').slice(0,7)===ym);
+  const avD=av.filter(i=>i.tipo==='diesel').reduce((a,i)=>a+i.valor,0),avG=av.filter(i=>i.tipo==='gasto'&&i.cat!=='Adiantamento').reduce((a,i)=>a+i.valor,0);
+  tot.diesel+=avD;tot.gastos+=avG;tot.lucro-=avD+avG;
+  return `<h2>Resumo ${label===`este mês`?`deste mês`:`de `+label}</h2>
+  <div class="stats">
+   <div class="stat"><div class="l">Fretes</div><div class="v">${brl(tot.frete)}</div></div>
+   <div class="stat"><div class="l">Diesel</div><div class="v">${brl(tot.diesel)}</div></div>
+   <div class="stat"><div class="l">Outros gastos</div><div class="v">${brl(tot.gastos)}</div></div>
+   <div class="stat"><div class="l">Motorista</div><div class="v">${brl(tot.comissao)}</div></div>
+   <div class="stat lucro"><div class="l">Sobra para o patrão</div><div class="v ${tot.lucro<0?'neg':''}">${brl(tot.lucro)}</div></div>
+  </div>`;
+}
+function perfil(){
+  const P=S.perfil;
+  return `<h2>Motorista</h2><div class="card" style="display:flex;flex-direction:column;gap:14px">
+   <label class="f">Seu nome<input id="pn" autocomplete="name" value="${esc(P.nome)}" placeholder="Ex.: Paulo Souza"></label>
+   <label class="f"><span>Nome do patrão <span class="h">(opcional)</span></span><input id="pp" autocomplete="off" value="${esc(P.patrao)}"></label></div>
+  <h2>Caminhão</h2><div class="card" style="display:flex;flex-direction:column;gap:14px">
+   <label class="f">Modelo<input id="pm" autocomplete="off" value="${esc(P.modelo)}" placeholder="Ex.: Volvo FH 460"></label>
+   <div class="two"><label class="f">Placa<input id="pl" autocomplete="off" style="text-transform:uppercase" value="${esc(P.placa)}"></label><label class="f"><span>Ano <span class="h">(opcional)</span></span><input id="pa" inputmode="numeric" value="${esc(P.ano)}"></label></div></div>
+  <div class="err" id="perr"></div>
+  <button class="btn full" id="psave" style="background:var(--sign);color:var(--sign-ink);border:none;min-height:64px">Salvar perfil</button>`;
+}
+function bindPerfil(){
+  document.getElementById('psave').onclick=()=>{
+    const nome=v('pn').trim();if(!nome)return document.getElementById('perr').textContent='Coloque seu nome.';
+    S.perfil={nome,patrao:v('pp').trim(),modelo:v('pm').trim(),placa:v('pl').trim().toUpperCase(),ano:v('pa').trim()};
+    save();view='inicio';render();scrollTo(0,0);toast('Perfil salvo');
+  };
+}
+function viagens(){
+  if(!S.trips.length)return `<div class="card muted">Nenhuma viagem ainda. Volte ao Início e toque em <b>Começar viagem</b>.</div>`;
+  return exBanner()+`<h2>Todas as viagens</h2>`+[...S.trips].reverse().map(t=>{const c=calc(t);return `<button class="card trip" data-a="ver" data-t="${t.id}">
+   <div class="row"><span class="tag ${t.status==='aberta'?'':'ex'}">${t.status==='aberta'?'Em viagem':'Encerrada'}</span><span class="muted nums">${dBR(t.inicio)}${t.fim?' a '+dBR(t.fim):''}</span></div>
+   <div class="route" style="font-size:24px">${esc(t.origem)}<span class="arrow">→</span>${esc(t.destino)}</div>
+   <div class="mini"><div class="muted">Frete<b style="color:var(--ink)">${brl(c.frete)}</b></div><div class="muted">Gastos<b style="color:var(--ink)">${brl(c.diesel+c.gastos)}</b></div><div class="muted">Sobra<b class="${c.lucro<0?'neg':'pos'}">${brl(c.lucro)}</b></div></div>
+  </button>`}).join('');
+}
+
+/* sheets */
+function open(html,onSave){
+  const m=document.getElementById('modal');
+  m.innerHTML=`<div class="scrim"><div class="sheet" role="dialog" aria-modal="true">${html}<div class="err" id="err"></div>
+   <div class="actions"><button class="cancel" id="x">Voltar</button>${onSave?'<button class="save" id="ok">Salvar</button>':''}</div></div></div>`;
+  m.querySelector('#x').onclick=close;
+  m.querySelector('.scrim').onclick=e=>{if(e.target.classList.contains('scrim'))close()};
+  if(onSave)m.querySelector('#ok').onclick=()=>{const r=onSave();if(r)return m.querySelector('#err').textContent=r;close();render()};
+  const f=m.querySelector('input');if(f)setTimeout(()=>f.focus(),50);
+}
+function close(){document.getElementById('modal').innerHTML=''}
+const v=id=>document.getElementById(id)?.value;
+function toast(t){const d=document.createElement('div');d.className='toast';d.textContent=t;document.body.appendChild(d);setTimeout(()=>d.remove(),2200)}
+const lastKm=()=>{const ks=S.trips.map(t=>t.kmFim||t.kmIni).filter(Boolean);return ks.length?Math.max(...ks):''};
+
+function novaViagem(){
+  open(`<h3>Começar viagem</h3>
+   <div class="two"><label class="f">Saindo de<input id="o" autocomplete="off" placeholder="Cidade"></label><label class="f">Indo para<input id="d" autocomplete="off" placeholder="Cidade"></label></div>
+   <label class="f">Km no painel agora<input id="ki" inputmode="numeric" value="${lastKm()}"></label>
+   <label class="f">Como é o frete?</label>
+   <div class="chips"><button class="chip" aria-pressed="true" data-tipo="km">Por km</button><button class="chip" aria-pressed="false" data-tipo="fechado">Valor fechado</button></div>
+   <div id="tkm" class="two"><label class="f">Distância (km)<input id="dist" inputmode="numeric"></label><label class="f">R$ por km<input id="vkm" inputmode="decimal" placeholder="8,76"></label></div>
+   <label class="f" id="tfe" hidden>Valor do frete (R$)<input id="vf" inputmode="decimal"></label>
+   <div class="calc" id="prev">Frete: R$ 0,00</div>
+   <label class="f">Comissão do motorista (%)<span class="h">O que vocês combinaram para esta viagem</span><input id="com" inputmode="decimal" value="${S.trips.length?S.trips[S.trips.length-1].comissao:''}"></label>`,
+  ()=>{
+    const tipo=document.querySelector('[data-tipo][aria-pressed="true"]').dataset.tipo;
+    const t={id:uid(),origem:v('o').trim(),destino:v('d').trim(),kmIni:num(v('ki')),tipo,distancia:num(v('dist'))||0,valorKm:num(v('vkm'))||0,valorFechado:num(v('vf'))||0,comissao:num(v('com'))||0,inicio:hoje(),fim:null,status:'aberta',itens:[]};
+    if(!t.origem||!t.destino)return 'Preencha de onde sai e para onde vai.';
+    if(!(t.kmIni>0))return 'Coloque o km que está no painel.';
+    if(tipo==='km'&&!(t.valorKm>0&&t.distancia>0))return 'Coloque a distância e o valor por km.';
+    if(tipo==='fechado'&&!(t.valorFechado>0))return 'Coloque o valor do frete.';
+    S.trips.push(t);save();setTimeout(()=>toast('Viagem iniciada. Boa estrada!'));
+  });
+  const upd=()=>{const tipo=document.querySelector('[data-tipo][aria-pressed="true"]').dataset.tipo;
+    const f=tipo==='km'?(num(v('dist'))||0)*(num(v('vkm'))||0):(num(v('vf'))||0);document.getElementById('prev').textContent='Frete: '+brl(f)};
+  document.querySelectorAll('[data-tipo]').forEach(b=>b.onclick=()=>{document.querySelectorAll('[data-tipo]').forEach(x=>x.setAttribute('aria-pressed',x===b));
+    document.getElementById('tkm').hidden=b.dataset.tipo!=='km';document.getElementById('tfe').hidden=b.dataset.tipo==='km';upd()});
+  ['dist','vkm','vf'].forEach(i=>document.getElementById(i).oninput=upd);
+}
+function abasteci(){
+  const t=ativa()||{itens:S.avulsos};
+  open(`<h3>Abasteci</h3>
+   <div class="two"><label class="f">Litros<input id="l" inputmode="decimal"></label><label class="f">R$ por litro<input id="p" inputmode="decimal" placeholder="6,79"></label></div>
+   <div class="calc" id="tot">Total: R$ 0,00</div>
+   <label class="f"><span>Posto <span class="h">(opcional)</span></span><input id="obs" autocomplete="off"></label>`,
+  ()=>{const l=num(v('l')),p=num(v('p'));if(!(l>0&&p>0))return 'Coloque os litros e o preço do litro.';
+    t.itens.push({id:uid(),tipo:'diesel',litros:l,preco:p,valor:Math.round(l*p*100)/100,data:hoje(),obs:v('obs').trim()});save();setTimeout(()=>toast('Abastecimento salvo'))});
+  const u=()=>document.getElementById('tot').textContent='Total: '+brl((num(v('l'))||0)*(num(v('p'))||0));
+  document.getElementById('l').oninput=u;document.getElementById('p').oninput=u;
+}
+function gastei(){
+  const t=ativa()||{itens:S.avulsos};let cat='';
+  open(`<h3>Gastei</h3><label class="f">Com o quê?</label>
+   <div class="chips">${CATS.map(c=>`<button class="chip" aria-pressed="false" data-cat="${c}">${c}</button>`).join('')}</div>
+   <label class="f">Valor (R$)<input id="val" inputmode="decimal"></label>
+   <label class="f"><span>Observação <span class="h">(opcional)</span></span><input id="obs" autocomplete="off"></label>`,
+  ()=>{const val=num(v('val'));if(!cat)return 'Escolha com o que gastou.';if(!(val>0))return 'Coloque o valor.';
+    t.itens.push({id:uid(),tipo:'gasto',cat,valor:val,data:hoje(),obs:v('obs').trim()});save();setTimeout(()=>toast('Gasto salvo'))});
+  document.querySelectorAll('[data-cat]').forEach(b=>b.onclick=()=>{cat=b.dataset.cat;document.querySelectorAll('[data-cat]').forEach(x=>x.setAttribute('aria-pressed',x===b))});
+}
+function encerrar(){
+  const t=ativa();
+  open(`<h3>Cheguei</h3><p class="muted" style="margin:0">${esc(t.origem)} → ${esc(t.destino)}. Saiu com ${fmtN(t.kmIni)} km.</p>
+   <label class="f">Km no painel agora<input id="kf" inputmode="numeric"></label><div class="calc" id="kr">Rodou: —</div>`,
+  ()=>{const kf=num(v('kf'));if(!(kf>t.kmIni))return 'O km de chegada precisa ser maior que o de saída ('+fmtN(t.kmIni)+').';
+    t.kmFim=kf;t.fim=hoje();t.status='fechada';save();setTimeout(()=>detalhe(t.id))});
+  document.getElementById('kf').oninput=()=>{const k=num(v('kf'))-t.kmIni;document.getElementById('kr').textContent=k>0?'Rodou: '+fmtN(k)+' km':'Rodou: —'};
+}
+function detalhe(id){
+  const t=S.trips.find(x=>x.id===id);const c=calc(t);
+  const P=S.perfil;
+  open(`<h3>${esc(t.origem)} → ${esc(t.destino)}</h3>
+   ${P.nome||P.modelo?`<div style="font-weight:600">${esc([P.nome,P.modelo,P.placa].filter(Boolean).join(' · '))}</div>`:''}
+   <div class="muted nums">${dBR(t.inicio)}${t.fim?' a '+dBR(t.fim):' · em andamento'}${c.km?' · '+fmtN(c.km)+' km rodados':''}${c.media?' · '+fmtN(c.media,2)+' km/L':''}</div>
+   <div class="card list nums">
+    <div class="item"><span>Frete ${t.tipo==='km'?'('+fmtN(t.distancia)+' km × '+brl(t.valorKm)+')':'(fechado)'}</span><b>${brl(c.frete)}</b></div>
+    <div class="item"><span>Diesel (${fmtN(c.litros)} L)</span><b class="neg">− ${brl(c.diesel)}</b></div>
+    <div class="item"><span>Outros gastos</span><b class="neg">− ${brl(c.gastos)}</b></div>
+    <div class="item"><span>Motorista (${fmtN(t.comissao,1)}%)</span><b class="neg">− ${brl(c.comissao)}</b></div>
+    <div class="item"><b>Sobra para o patrão</b><b class="${c.lucro<0?'neg':'pos'}">${brl(c.lucro)}</b></div>
+   </div>
+   <div class="card list nums"><div class="item"><span>Comissão do motorista</span><b>${brl(c.comissao)}</b></div>
+    <div class="item"><span>Adiantamentos recebidos</span><b>− ${brl(c.adiant)}</b></div>
+    <div class="item"><b>Falta pagar a ${esc(P.nome?P.nome.split(' ')[0]:'motorista')}</b><b>${brl(c.aReceber)}</b></div></div>
+   ${itens(t)}
+   <div class="two">${t.status==='fechada'?'<button class="chip" id="reab">Reabrir viagem</button>':''}<button class="chip" id="apv" style="color:var(--bad);border-color:var(--bad)">Apagar viagem</button></div>`,null);
+  document.querySelectorAll('#modal [data-a="del"]').forEach(b=>b.onclick=()=>askDel(b.dataset.t,b.dataset.i,true));
+  const rb=document.getElementById('reab');
+  if(rb)rb.onclick=()=>{if(ativa())return toast('Encerre a viagem em andamento antes');
+    t.status='aberta';t.kmFim=null;t.fim=null;save();close();view='inicio';render();scrollTo(0,0);toast('Viagem reaberta')};
+  document.getElementById('apv').onclick=()=>{
+    open(`<h3>Apagar viagem?</h3><p style="margin:0">A viagem ${esc(t.origem)} → ${esc(t.destino)}${t.itens.length?' e '+(t.itens.length===1?'o lançamento dela':'os '+t.itens.length+' lançamentos dela'):''} vai ser apagada. Não dá para desfazer.</p>
+     <button class="save dark" id="sim" style="min-height:60px;border-radius:12px;font-weight:700;font-size:18px;background:var(--bad);color:#fff">Sim, apagar viagem</button>`,null);
+    document.getElementById('sim').onclick=()=>{S.trips=S.trips.filter(x=>x.id!==t.id);save();close();render();toast('Viagem apagada')};
+  };
+}
+function askDel(tid,iid,fromDetail){
+  const t=tid==='avulso'?{itens:S.avulsos}:S.trips.find(x=>x.id===tid);const i=t.itens.find(x=>x.id===iid);
+  open(`<h3>Apagar lançamento?</h3><p style="margin:0">${i.tipo==='diesel'?'Diesel '+fmtN(i.litros)+' L':esc(i.cat)} de ${brl(i.valor)} em ${dBR(i.data)}.</p>
+   <button class="save dark" id="sim" style="min-height:60px;border-radius:12px;font-weight:700;font-size:18px">Sim, apagar</button>`,null);
+  document.getElementById('sim').onclick=()=>{t.itens.splice(t.itens.findIndex(x=>x.id===iid),1);save();close();render();if(fromDetail)detalhe(tid);toast('Lançamento apagado')};
+}
+function limpar(){
+  open(`<h3>Apagar os exemplos?</h3><p style="margin:0">As duas viagens de exemplo somem e o app fica pronto para os lançamentos de verdade.</p>
+   <button class="save" id="sim" style="min-height:60px;border-radius:12px;font-weight:700;font-size:18px">Apagar e começar</button>`,null);
+  document.getElementById('sim').onclick=()=>{S={exemplo:false,trips:[],avulsos:[],perfil:S.perfil};save();close();view='inicio';render()};
+}
+function bind(){
+  document.querySelectorAll('#app [data-a]').forEach(b=>b.onclick=()=>{const a=b.dataset.a;
+    ({perfil:()=>{view='perfil';render();scrollTo(0,0)},nova:novaViagem,diesel:abasteci,gasto:gastei,fechar:encerrar,limpar,ver:()=>detalhe(b.dataset.t),del:()=>askDel(b.dataset.t,b.dataset.i)})[a]()});
+}
+document.getElementById('tab-inicio').onclick=()=>{view='inicio';render();scrollTo(0,0)};
+document.getElementById('tab-viagens').onclick=()=>{view='viagens';render();scrollTo(0,0)};
+document.getElementById('tab-perfil').onclick=()=>{view='perfil';render();scrollTo(0,0)};
+render();
+</script>
+
+</body>
+</html>
