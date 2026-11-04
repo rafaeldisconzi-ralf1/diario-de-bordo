@@ -287,7 +287,7 @@ function open(html,onSave){
 }
 function close(){document.getElementById('modal').innerHTML=''}
 const v=id=>document.getElementById(id)?.value;
-function toast(t){const d=document.createElement('div');d.className='toast';d.textContent=t;document.body.appendChild(d);setTimeout(()=>d.remove(),2200)}
+function toast(t){document.querySelectorAll('.toast').forEach(x=>x.remove());const d=document.createElement('div');d.className='toast';d.textContent=t;document.body.appendChild(d);setTimeout(()=>d.remove(),2200)}
 const lastKm=()=>{const ks=S.trips.map(t=>t.kmFim||t.kmIni).filter(Boolean);return ks.length?Math.max(...ks):''};
 
 function novaViagem(){
