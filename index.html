@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#2b2e33">
-<meta name="app-version" content="2026-11-03.3">
+<meta name="app-version" content="2026-11-04.1">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Diário de Bordo">
@@ -114,6 +114,10 @@ input,select{font:inherit;font-size:20px;padding:14px;border-radius:12px;border:
 .mini{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;font-size:14px}
 .mini b{display:block;font-size:17px;font-variant-numeric:tabular-nums}
 @media (prefers-reduced-motion: no-preference){.sheet{animation:up .18s ease-out}@keyframes up{from{transform:translateY(30px);opacity:.6}}}
+.acts3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.acts3 .btn{min-height:96px;font-size:17px;padding:10px 4px}
+.btn.dia svg{color:var(--good)}
+.dot.g{background:var(--good)}
 </style>
 </head>
 <body>
@@ -137,7 +141,8 @@ input,select{font:inherit;font-size:20px;padding:14px;border-radius:12px;border:
 const ICON={
  fuel:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V5a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v16"/><path d="M3 21h13"/><path d="M15 9h2a2 2 0 0 1 2 2v5a1.5 1.5 0 0 0 3 0V8l-3-3"/><path d="M7 8h5"/></svg>',
  money:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M6 12h.01M18 12h.01"/></svg>',
- flag:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 22V4"/><path d="M5 4h12l-2 4 2 4H5"/></svg>'
+ flag:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 22V4"/><path d="M5 4h12l-2 4 2 4H5"/></svg>',
+ clock:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>'
 };
 const CATS=['Pedágio','Comida','Arla','Despachante','Balança','Manutenção','Adiantamento','Outro'];
 const KEY='diario-bordo-v1';
@@ -161,14 +166,18 @@ const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
 
 function calc(t){
   const frete=t.tipo==='km'?(t.valorKm||0)*(t.distancia||0):(t.valorFechado||0);
+  const dia=t.itens.filter(i=>i.tipo==='diaria');
+  const diarias=dia.reduce((a,i)=>a+i.valor,0),nDias=dia.reduce((a,i)=>a+(i.dias||0),0);
+  const receita=frete+diarias;
   const diesel=t.itens.filter(i=>i.tipo==='diesel').reduce((a,i)=>a+i.valor,0);
   const litros=t.itens.filter(i=>i.tipo==='diesel').reduce((a,i)=>a+(i.litros||0),0);
   const gastos=t.itens.filter(i=>i.tipo==='gasto'&&i.cat!=='Adiantamento').reduce((a,i)=>a+i.valor,0);
   const adiant=t.itens.filter(i=>i.cat==='Adiantamento').reduce((a,i)=>a+i.valor,0);
-  const comissao=frete*(t.comissao||0)/100;
+  const comissao=receita*(t.comissao||0)/100;
   const km=t.kmFim&&t.kmIni?t.kmFim-t.kmIni:null;
-  return {frete,diesel,litros,gastos,adiant,comissao,km,media:km&&litros?km/litros:null,lucro:frete-comissao-diesel-gastos,aReceber:comissao-adiant};
+  return {frete,diarias,nDias,receita,diesel,litros,gastos,adiant,comissao,km,media:km&&litros?km/litros:null,lucro:receita-comissao-diesel-gastos,aReceber:comissao-adiant};
 }
+const lbl=i=>i.tipo==='diesel'?'Diesel · '+fmtN(i.litros)+' L':i.tipo==='diaria'?'Diária · '+fmtN(i.dias,i.dias%1?1:0)+(i.dias===1?' dia':' dias'):esc(i.cat);
 const ativa=()=>S.trips.find(t=>t.status==='aberta');
 
 let view='inicio';
@@ -192,7 +201,7 @@ function inicio(){
   h+=exBanner();
   if(!t){
     h+=`<button class="btn start" data-a="nova">${ICON.flag}Começar viagem</button>
-    <div class="big-actions"><button class="btn fuel" data-a="diesel">${ICON.fuel}Abasteci</button><button class="btn" data-a="gasto">${ICON.money}Gastei</button></div>`;
+    <div class="acts3"><button class="btn fuel" data-a="diesel">${ICON.fuel}Abasteci</button><button class="btn" data-a="gasto">${ICON.money}Gastei</button><button class="btn dia" data-a="diaria">${ICON.clock}Diária</button></div>`;
     const ym=hoje().slice(0,7),av=S.avulsos.filter(i=>(i.data||'').slice(0,7)===ym);
     if(av.length)h+=`<h2>Gastos fora de viagem</h2>`+itens({id:'avulso',itens:av});
   }else{
@@ -200,37 +209,36 @@ function inicio(){
     h+=`<div class="card trip-active" style="display:flex;flex-direction:column;gap:10px">
       <div class="row"><span class="tag">Em viagem</span><span class="nums" style="font-weight:600">desde ${dBR(t.inicio)}</span></div>
       <div class="route">${esc(t.origem)}<span class="arrow">→</span>${esc(t.destino)}</div>
-      <div class="row nums" style="font-weight:600"><span>Frete ${brl(c.frete)}</span><span>Gasto até agora ${brl(c.diesel+c.gastos)}</span></div>
+      <div class="row nums" style="font-weight:600"><span>${c.diarias?'Receita':'Frete'} ${brl(c.receita)}</span><span>Gasto até agora ${brl(c.diesel+c.gastos)}</span></div>
     </div>
-    <div class="big-actions">
-      <button class="btn fuel" data-a="diesel">${ICON.fuel}Abasteci</button>
-      <button class="btn" data-a="gasto">${ICON.money}Gastei</button>
-      <button class="btn full chegada" data-a="fechar">${ICON.flag}Cheguei, encerrar viagem</button>
-    </div>
+    <div class="acts3"><button class="btn fuel" data-a="diesel">${ICON.fuel}Abasteci</button><button class="btn" data-a="gasto">${ICON.money}Gastei</button><button class="btn dia" data-a="diaria">${ICON.clock}Diária</button></div>
+    <button class="btn full chegada" data-a="fechar">${ICON.flag}Cheguei, encerrar viagem</button>
     <h2>Lançamentos desta viagem</h2>${itens(t)}`;
   }
   h+=resumoMes();
   return h;
 }
 function itens(t){
-  if(!t.itens.length)return `<div class="card muted">Nada lançado ainda. Toque em <b>Abasteci</b> ou <b>Gastei</b>.</div>`;
+  if(!t.itens.length)return `<div class="card muted">Nada lançado ainda. Toque em <b>Abasteci</b>, <b>Gastei</b> ou <b>Diária</b>.</div>`;
   return `<div class="card list">${[...t.itens].reverse().map(i=>`<div class="item">
-    <div><div class="what"><span class="dot ${i.tipo==='diesel'?'d':''}"></span>${i.tipo==='diesel'?'Diesel · '+fmtN(i.litros)+' L':esc(i.cat)}</div>
+    <div><div class="what"><span class="dot ${i.tipo==='diesel'?'d':i.tipo==='diaria'?'g':''}"></span>${lbl(i)}</div>
     <div class="when">${dBR(i.data)}${i.obs?' · '+esc(i.obs):''}</div></div>
-    <div style="text-align:right"><div class="val">${brl(i.valor)}</div><button class="link" style="font-size:14px" data-a="del" data-t="${t.id}" data-i="${i.id}">apagar</button></div></div>`).join('')}</div>`;
+    <div style="text-align:right"><div class="val ${i.tipo==='diaria'?'pos':''}">${i.tipo==='diaria'?'+ ':''}${brl(i.valor)}</div><button class="link" style="font-size:14px" data-a="del" data-t="${t.id}" data-i="${i.id}">apagar</button></div></div>`).join('')}</div>`;
 }
 function resumoMes(){
   const ym=hoje().slice(0,7);
   let ts=S.trips.filter(t=>(t.inicio||'').slice(0,7)===ym);
   let label='este mês';
   if(!ts.length&&S.exemplo){ts=S.trips;label='outubro (exemplo)'}
-  const tot=ts.map(calc).reduce((a,c)=>({frete:a.frete+c.frete,diesel:a.diesel+c.diesel,gastos:a.gastos+c.gastos,comissao:a.comissao+c.comissao,lucro:a.lucro+c.lucro}),{frete:0,diesel:0,gastos:0,comissao:0,lucro:0});
+  const tot=ts.map(calc).reduce((a,c)=>({frete:a.frete+c.receita,diarias:a.diarias+c.diarias,diesel:a.diesel+c.diesel,gastos:a.gastos+c.gastos,comissao:a.comissao+c.comissao,lucro:a.lucro+c.lucro}),{frete:0,diarias:0,diesel:0,gastos:0,comissao:0,lucro:0});
   const av=S.avulsos.filter(i=>(i.data||'').slice(0,7)===ym);
   const avD=av.filter(i=>i.tipo==='diesel').reduce((a,i)=>a+i.valor,0),avG=av.filter(i=>i.tipo==='gasto'&&i.cat!=='Adiantamento').reduce((a,i)=>a+i.valor,0);
   tot.diesel+=avD;tot.gastos+=avG;tot.lucro-=avD+avG;
+  const avDi=av.filter(i=>i.tipo==='diaria'),avR=avDi.reduce((a,i)=>a+i.valor,0),avC=avDi.reduce((a,i)=>a+i.valor*(i.comissao||0)/100,0);
+  tot.frete+=avR;tot.diarias+=avR;tot.comissao+=avC;tot.lucro+=avR-avC;
   return `<h2>Resumo ${label===`este mês`?`deste mês`:`de `+label}</h2>
   <div class="stats">
-   <div class="stat"><div class="l">Fretes</div><div class="v">${brl(tot.frete)}</div></div>
+   <div class="stat"><div class="l">Faturamento</div><div class="v">${brl(tot.frete)}</div>${tot.diarias?`<div class="note nums">${brl(tot.diarias)} de diárias</div>`:''}</div>
    <div class="stat"><div class="l">Diesel</div><div class="v">${brl(tot.diesel)}</div></div>
    <div class="stat"><div class="l">Outros gastos</div><div class="v">${brl(tot.gastos)}</div></div>
    <div class="stat"><div class="l">Motorista</div><div class="v">${brl(tot.comissao)}</div></div>
@@ -264,7 +272,7 @@ function viagens(){
 function cartao(t){const c=calc(t);return `<button class="card trip" data-a="ver" data-t="${t.id}">
    <div class="row"><span class="tag ${t.status==='aberta'?'':'ex'}">${t.status==='aberta'?'Em viagem':'Encerrada'}</span><span class="muted nums">${dBR(t.inicio)}${t.fim?' a '+dBR(t.fim):''}</span></div>
    <div class="route" style="font-size:24px">${esc(t.origem)}<span class="arrow">→</span>${esc(t.destino)}</div>
-   <div class="mini"><div class="muted">Frete<b style="color:var(--ink)">${brl(c.frete)}</b></div><div class="muted">Gastos<b style="color:var(--ink)">${brl(c.diesel+c.gastos)}</b></div><div class="muted">Sobra<b class="${c.lucro<0?'neg':'pos'}">${brl(c.lucro)}</b></div></div>
+   <div class="mini"><div class="muted">Receita<b style="color:var(--ink)">${brl(c.receita)}</b></div><div class="muted">Gastos<b style="color:var(--ink)">${brl(c.diesel+c.gastos)}</b></div><div class="muted">Sobra<b class="${c.lucro<0?'neg':'pos'}">${brl(c.lucro)}</b></div></div>
   </button>`}
 
 /* sheets */
@@ -328,6 +336,23 @@ function gastei(){
     t.itens.push({id:uid(),tipo:'gasto',cat,valor:val,data:hoje(),obs:v('obs').trim()});save();setTimeout(()=>toast('Gasto salvo'))});
   document.querySelectorAll('[data-cat]').forEach(b=>b.onclick=()=>{cat=b.dataset.cat;document.querySelectorAll('[data-cat]').forEach(x=>x.setAttribute('aria-pressed',x===b))});
 }
+function diaria(){
+  const at=ativa();const t=at||{itens:S.avulsos};
+  const ult=[...S.avulsos,...S.trips.flatMap(x=>x.itens)].filter(i=>i.tipo==='diaria').sort((a,b)=>a.data<b.data?-1:1).pop();
+  let dias=1;
+  open(`<h3>Diária</h3><p class="muted" style="margin:0">Dias parado esperando carga, descarga ou liberação.</p>
+   <label class="f">Quantos dias?</label>
+   <div class="chips">${[1,2,3,4,5].map(n=>`<button class="chip" aria-pressed="${n===1}" data-dias="${n}">${n}</button>`).join('')}</div>
+   <label class="f">Valor de cada diária (R$)<input id="vd" inputmode="decimal" value="${ult?String(ult.valorDia).replace('.',','):''}"></label>
+   <div class="calc" id="tdi">Total: R$ 0,00</div>
+   <label class="f"><span>Onde <span class="h">(opcional)</span></span><input id="obs" autocomplete="off"></label>`,
+  ()=>{const vd=num(v('vd'));if(!(vd>0))return 'Coloque o valor da diária.';
+    const com=(at?at.comissao:(S.trips.length?S.trips[S.trips.length-1].comissao:0))||0;
+    t.itens.push({id:uid(),tipo:'diaria',dias,valorDia:vd,valor:Math.round(dias*vd*100)/100,comissao:com,data:hoje(),obs:v('obs').trim()});save();setTimeout(()=>toast(dias===1?'Diária salva':'Diárias salvas'))});
+  const u=()=>document.getElementById('tdi').textContent='Total: '+brl(dias*(num(v('vd'))||0));
+  document.querySelectorAll('[data-dias]').forEach(b=>b.onclick=()=>{dias=+b.dataset.dias;document.querySelectorAll('[data-dias]').forEach(x=>x.setAttribute('aria-pressed',x===b));u()});
+  document.getElementById('vd').oninput=u;u();
+}
 function encerrar(){
   const t=ativa();
   open(`<h3>Cheguei</h3><p class="muted" style="margin:0">${esc(t.origem)} → ${esc(t.destino)}. Saiu com ${fmtN(t.kmIni)} km.</p>
@@ -344,6 +369,7 @@ function detalhe(id){
    <div class="muted nums">${dBR(t.inicio)}${t.fim?' a '+dBR(t.fim):' · em andamento'}${c.km?' · '+fmtN(c.km)+' km rodados':''}${c.media?' · '+fmtN(c.media,2)+' km/L':''}</div>
    <div class="card list nums">
     <div class="item"><span>Frete ${t.tipo==='km'?'('+fmtN(t.distancia)+' km × '+brl(t.valorKm)+')':'(fechado)'}</span><b>${brl(c.frete)}</b></div>
+    ${c.diarias?`<div class="item"><span>Diárias (${fmtN(c.nDias,c.nDias%1?1:0)} ${c.nDias===1?'dia':'dias'})</span><b class="pos">+ ${brl(c.diarias)}</b></div>`:''}
     <div class="item"><span>Diesel (${fmtN(c.litros)} L)</span><b class="neg">− ${brl(c.diesel)}</b></div>
     <div class="item"><span>Outros gastos</span><b class="neg">− ${brl(c.gastos)}</b></div>
     <div class="item"><span>Motorista (${fmtN(t.comissao,1)}%)</span><b class="neg">− ${brl(c.comissao)}</b></div>
@@ -366,7 +392,7 @@ function detalhe(id){
 }
 function askDel(tid,iid,fromDetail){
   const t=tid==='avulso'?{itens:S.avulsos}:S.trips.find(x=>x.id===tid);const i=t.itens.find(x=>x.id===iid);
-  open(`<h3>Apagar lançamento?</h3><p style="margin:0">${i.tipo==='diesel'?'Diesel '+fmtN(i.litros)+' L':esc(i.cat)} de ${brl(i.valor)} em ${dBR(i.data)}.</p>
+  open(`<h3>Apagar lançamento?</h3><p style="margin:0">${lbl(i)} de ${brl(i.valor)} em ${dBR(i.data)}.</p>
    <button class="save dark" id="sim" style="min-height:60px;border-radius:12px;font-weight:700;font-size:18px">Sim, apagar</button>`,null);
   document.getElementById('sim').onclick=()=>{t.itens.splice(t.itens.findIndex(x=>x.id===iid),1);save();close();render();if(fromDetail)detalhe(tid);toast('Lançamento apagado')};
 }
@@ -377,7 +403,7 @@ function limpar(){
 }
 function bind(){
   document.querySelectorAll('#app [data-a]').forEach(b=>b.onclick=()=>{const a=b.dataset.a;
-    ({perfil:()=>{view='perfil';render();scrollTo(0,0)},nova:novaViagem,diesel:abasteci,gasto:gastei,fechar:encerrar,limpar,ver:()=>detalhe(b.dataset.t),del:()=>askDel(b.dataset.t,b.dataset.i)})[a]()});
+    ({perfil:()=>{view='perfil';render();scrollTo(0,0)},nova:novaViagem,diesel:abasteci,gasto:gastei,diaria,fechar:encerrar,limpar,ver:()=>detalhe(b.dataset.t),del:()=>askDel(b.dataset.t,b.dataset.i)})[a]()});
 }
 document.addEventListener('touchstart',()=>{},{passive:true});
 document.addEventListener('click',e=>{if(e.target.closest('button'))try{navigator.vibrate&&navigator.vibrate(12)}catch(_){}},true);
