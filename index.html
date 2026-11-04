@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#2b2e33">
-<meta name="app-version" content="2026-11-04.1">
+<meta name="app-version" content="2026-11-04.2">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Diário de Bordo">
@@ -118,6 +118,16 @@ input,select{font:inherit;font-size:20px;padding:14px;border-radius:12px;border:
 .acts3 .btn{min-height:96px;font-size:17px;padding:10px 4px}
 .btn.dia svg{color:var(--good)}
 .dot.g{background:var(--good)}
+/* botões com cara de botão: cor cheia e borda de baixo mais escura, afundam ao tocar */
+.btn.fuel,.btn.gas,.btn.dia,.btn.chegada,.btn.start,.btn.primary{border:none;box-shadow:0 5px 0 var(--edge);margin-bottom:5px;transition:transform .07s ease-out,box-shadow .07s ease-out}
+.btn.fuel:active,.btn.gas:active,.btn.dia:active,.btn.chegada:active,.btn.start:active,.btn.primary:active{transform:translateY(4px);box-shadow:0 1px 0 var(--edge);filter:none}
+.btn.fuel{background:#1f63b5;color:#fff;--edge:#13447e}
+.btn.gas{background:#c2410c;color:#fff;--edge:#8a2d07}
+.btn.dia{background:#0f766e;color:#fff;--edge:#0a4f4a}
+.btn.fuel svg,.btn.gas svg,.btn.dia svg{color:#fff}
+.btn.chegada{--edge:#12512f}
+.btn.start,.btn.primary{--edge:#a77c00}
+@media (prefers-reduced-motion: reduce){.btn.fuel:active,.btn.gas:active,.btn.dia:active,.btn.chegada:active,.btn.start:active,.btn.primary:active{transform:none}}
 </style>
 </head>
 <body>
@@ -201,7 +211,7 @@ function inicio(){
   h+=exBanner();
   if(!t){
     h+=`<button class="btn start" data-a="nova">${ICON.flag}Começar viagem</button>
-    <div class="acts3"><button class="btn fuel" data-a="diesel">${ICON.fuel}Abasteci</button><button class="btn" data-a="gasto">${ICON.money}Gastei</button><button class="btn dia" data-a="diaria">${ICON.clock}Diária</button></div>`;
+    <div class="acts3"><button class="btn fuel" data-a="diesel">${ICON.fuel}Abasteci</button><button class="btn gas" data-a="gasto">${ICON.money}Gastei</button><button class="btn dia" data-a="diaria">${ICON.clock}Diária</button></div>`;
     const ym=hoje().slice(0,7),av=S.avulsos.filter(i=>(i.data||'').slice(0,7)===ym);
     if(av.length)h+=`<h2>Gastos fora de viagem</h2>`+itens({id:'avulso',itens:av});
   }else{
@@ -211,7 +221,7 @@ function inicio(){
       <div class="route">${esc(t.origem)}<span class="arrow">→</span>${esc(t.destino)}</div>
       <div class="row nums" style="font-weight:600"><span>${c.diarias?'Receita':'Frete'} ${brl(c.receita)}</span><span>Gasto até agora ${brl(c.diesel+c.gastos)}</span></div>
     </div>
-    <div class="acts3"><button class="btn fuel" data-a="diesel">${ICON.fuel}Abasteci</button><button class="btn" data-a="gasto">${ICON.money}Gastei</button><button class="btn dia" data-a="diaria">${ICON.clock}Diária</button></div>
+    <div class="acts3"><button class="btn fuel" data-a="diesel">${ICON.fuel}Abasteci</button><button class="btn gas" data-a="gasto">${ICON.money}Gastei</button><button class="btn dia" data-a="diaria">${ICON.clock}Diária</button></div>
     <button class="btn full chegada" data-a="fechar">${ICON.flag}Cheguei, encerrar viagem</button>
     <h2>Lançamentos desta viagem</h2>${itens(t)}`;
   }
