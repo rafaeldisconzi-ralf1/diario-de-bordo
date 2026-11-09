@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#2b2e33">
-<meta name="app-version" content="nuvem-2026-11-09.3">
+<meta name="app-version" content="nuvem-2026-11-09.4">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Diário de Bordo">
@@ -432,7 +432,7 @@ function limpar(){
 }
 function bind(){
   document.querySelectorAll('#app [data-a]').forEach(b=>b.onclick=()=>{const a=b.dataset.a;
-    ({relatorio:abrirRelatorio,entrar:()=>{pularLogin=false;loginEtapa='email';render()},sair,admin:painelAdmin,perfil:()=>{view='perfil';render();scrollTo(0,0)},nova:novaViagem,diesel:abasteci,gasto:gastei,diaria,fechar:encerrar,limpar,ver:()=>detalhe(b.dataset.t),del:()=>askDel(b.dataset.t,b.dataset.i)})[a]()});
+    ({relatorio:abrirRelatorio,notif:ativarNotif,aviso:mandarAviso,entrar:()=>{pularLogin=false;loginEtapa='email';render()},sair,admin:painelAdmin,perfil:()=>{view='perfil';render();scrollTo(0,0)},nova:novaViagem,diesel:abasteci,gasto:gastei,diaria,fechar:encerrar,limpar,ver:()=>detalhe(b.dataset.t),del:()=>askDel(b.dataset.t,b.dataset.i)})[a]()});
 }
 document.addEventListener('touchstart',()=>{},{passive:true});
 document.addEventListener('click',e=>{if(e.target.closest('button'))try{navigator.vibrate&&navigator.vibrate(12)}catch(_){}},true);
@@ -652,7 +652,8 @@ function blocoConta(){
     <div class="item"><span>${pago?'Assinatura':'Teste grátis'}</span><b class="${d!==null&&d<0?'neg':''}">${a?(d<0?'venceu em ':'até ')+dBR(a)+'/'+a.slice(0,4):'—'}</b></div>
     <div class="item"><span>Nuvem</span><b id="selo" class="selo"></b></div>
   </div>
-  ${CONTA&&CONTA.admin?`<button class="btn full primary" data-a="admin" style="min-height:60px;font-size:20px">Clientes</button>`:''}
+  ${blocoNotif()}
+  ${CONTA&&CONTA.admin?`<button class="btn full primary" data-a="admin" style="min-height:60px;font-size:20px">Clientes</button><button class="btn full" data-a="aviso" style="min-height:56px;font-size:18px">Mandar aviso para todos</button>`:''}
   <button class="link" data-a="sair" style="align-self:center">Sair da conta</button>`;
 }
 async function sair(){
@@ -679,6 +680,68 @@ async function painelAdmin(){
     if(b.dataset.conf){b.disabled=true;sb.rpc('liberar_dias',{usuario:b.dataset.lib,dias:30}).then(({data:nova,error})=>{if(error){b.textContent='Erro, tente de novo';b.disabled=false;return}
       toast('Liberado até '+dBR(nova));if(SESS&&b.dataset.lib===SESS.user.id)carregarConta();painelAdmin()});return}
     b.dataset.conf='1';b.textContent='Toque de novo para confirmar ('+b.dataset.nome+')';b.style.borderColor='var(--good)'});
+}
+
+/* NOTIFICAÇÕES (Web Push) */
+const AVISOS_URL=SB_URL+'/functions/v1/avisos';
+const temPush=()=>'serviceWorker' in navigator&&'PushManager' in window&&'Notification' in window;
+const ehIphone=()=>/iphone|ipad|ipod/i.test(navigator.userAgent);
+const instalado=()=>matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;
+let NOTIF=null; // 'on' | 'off' | 'bloqueado' | 'sem'
+async function estadoNotif(){
+  if(!temPush())return NOTIF='sem';
+  if(Notification.permission==='denied')return NOTIF='bloqueado';
+  try{const r=await navigator.serviceWorker.ready;const s=await r.pushManager.getSubscription();NOTIF=s&&Notification.permission==='granted'?'on':'off'}catch(e){NOTIF='off'}
+  return NOTIF;
+}
+function blocoNotif(){
+  if(NOTIF===null){estadoNotif().then(()=>{if(view==='perfil')render()});return ''}
+  if(NOTIF==='sem')return ehIphone()&&!instalado()
+    ?`<div class="card note" style="font-size:16px">Para receber avisos no iPhone: toque em <b>Compartilhar</b> e depois em <b>Adicionar à Tela de Início</b>. Depois abra o app pelo ícone.</div>`:'';
+  if(NOTIF==='on')return `<div class="card list"><div class="item"><span>Notificações</span><b style="color:var(--good)">Ligadas</b></div></div>
+    <button class="link" data-a="notif" style="align-self:center">Desligar notificações</button>`;
+  if(NOTIF==='bloqueado')return `<div class="card note" style="font-size:16px"><b>Notificações bloqueadas.</b> Para ligar: toque no cadeado ao lado do endereço (ou em Configurações do celular), procure <b>Notificações</b> e escolha <b>Permitir</b>.</div>`;
+  return `<button class="btn full start" data-a="notif" style="min-height:60px;font-size:20px">🔔 Ativar notificações</button>
+    <div class="note" style="text-align:center;margin-top:-4px">Você recebe aviso antes do acesso vencer e novidades do app.</div>`;
+}
+function b64u(s){const p='='.repeat((4-s.length%4)%4),b=atob((s+p).replace(/-/g,'+').replace(/_/g,'/'));return Uint8Array.from(b,c=>c.charCodeAt(0))}
+async function chamarAvisos(corpo){
+  const {data}=await sb.auth.getSession();const t=data.session&&data.session.access_token;
+  const r=await fetch(AVISOS_URL,{method:'POST',headers:{'Content-Type':'application/json',apikey:SB_KEY,...(t?{Authorization:'Bearer '+t}:{})},body:JSON.stringify(corpo)});
+  const j=await r.json().catch(()=>({}));if(!r.ok)throw new Error(j.erro||'erro');return j;
+}
+async function ativarNotif(){
+  if(!SESS)return;
+  const reg=await navigator.serviceWorker.ready;
+  if(NOTIF==='on'){
+    const s=await reg.pushManager.getSubscription();
+    if(s){await sb.from('push_inscricoes').delete().eq('endpoint',s.endpoint);await s.unsubscribe()}
+    NOTIF='off';toast('Notificações desligadas');render();return;
+  }
+  if(!navigator.onLine)return toast('Precisa de internet para ativar');
+  try{
+    const perm=await Notification.requestPermission();
+    if(perm!=='granted'){NOTIF=perm==='denied'?'bloqueado':'off';render();return}
+    const {chave}=await chamarAvisos({acao:'chave'});
+    let s=await reg.pushManager.getSubscription();
+    if(!s)s=await reg.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:b64u(chave)});
+    const j=s.toJSON();
+    const {error}=await sb.from('push_inscricoes').upsert({endpoint:j.endpoint,p256dh:j.keys.p256dh,auth:j.keys.auth,user_id:SESS.user.id},{onConflict:'endpoint'});
+    if(error)throw error;
+    NOTIF='on';render();toast('Notificações ligadas');
+    chamarAvisos({acao:'teste'}).catch(()=>{});
+  }catch(e){console.error(e);toast('Não deu para ativar agora. Tente de novo.')}
+}
+function mandarAviso(){
+  open(`<h3>Aviso para todos</h3>
+   <label class="f"><span>Título</span><input id="avT" maxlength="60" value="Diário de Bordo"></label>
+   <label class="f"><span>Mensagem</span><textarea id="avM" maxlength="180" rows="3" style="font:inherit;font-size:18px;padding:12px;border-radius:12px;border:2px solid var(--line);background:var(--card);color:var(--ink)"></textarea></label>
+   <button class="save" id="avOk" style="min-height:60px;border-radius:12px;font-weight:700;font-size:18px">Enviar</button>`,null);
+  const ok=document.getElementById('avOk');
+  ok.onclick=async()=>{const texto=document.getElementById('avM').value.trim();if(!texto)return toast('Escreva a mensagem');
+    ok.disabled=true;ok.textContent='Enviando…';
+    try{const j=await chamarAvisos({acao:'enviar',titulo:document.getElementById('avT').value.trim(),texto});close();toast('Enviado para '+j.enviadas+(j.enviadas===1?' celular':' celulares'))}
+    catch(e){ok.disabled=false;ok.textContent='Enviar';toast(e.message||'Não deu para enviar')}};
 }
 if(sb){
   sb.auth.getSession().then(({data})=>{authPronto=true;if(data.session)aoEntrar(data.session);else render()}).catch(()=>{authPronto=true;pularLogin=true;render()});
