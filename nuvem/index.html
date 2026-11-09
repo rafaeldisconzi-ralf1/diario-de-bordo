@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#2b2e33">
-<meta name="app-version" content="nuvem-2026-11-08.1">
+<meta name="app-version" content="nuvem-2026-11-09.1">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Diário de Bordo">
@@ -180,7 +180,7 @@ let S;
 try{S=JSON.parse(localStorage.getItem(KEY))}catch(e){}
 if(!S||!Array.isArray(S.trips))S=exemplo();
 if(!S.avulsos)S.avulsos=[];
-if(!S.perfil)S.perfil={nome:'',modelo:'Volvo FH 460',placa:'IXR 3B35',ano:'',patrao:''};
+if(!S.perfil)S.perfil={nome:'',modelo:'',placa:'',ano:'',patrao:''};
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){};if(typeof agendarSync==='function')agendarSync()};
 let authPronto=false;
 
@@ -264,8 +264,8 @@ function resumoMes(){
    <div class="stat"><div class="l">Faturamento</div><div class="v">${brl(tot.frete)}</div>${tot.diarias?`<div class="note nums">${brl(tot.diarias)} de diárias</div>`:''}</div>
    <div class="stat"><div class="l">Diesel</div><div class="v">${brl(tot.diesel)}</div></div>
    <div class="stat"><div class="l">Outros gastos</div><div class="v">${brl(tot.gastos)}</div></div>
-   <div class="stat"><div class="l">Motorista</div><div class="v">${brl(tot.comissao)}</div></div>
-   <div class="stat lucro"><div class="l">Sobra para o patrão</div><div class="v ${tot.lucro<0?'neg':''}">${brl(tot.lucro)}</div></div>
+   ${tot.comissao?`<div class="stat"><div class="l">Motorista</div><div class="v">${brl(tot.comissao)}</div></div>`:''}
+   <div class="stat lucro"><div class="l">Sobrou no mês</div><div class="v ${tot.lucro<0?'neg':''}">${brl(tot.lucro)}</div></div>
   </div>`;
 }
 function perfil(){
@@ -322,7 +322,7 @@ function novaViagem(){
    <div id="tkm" class="two"><label class="f">Distância (km)<input id="dist" inputmode="numeric"></label><label class="f">R$ por km<input id="vkm" inputmode="decimal" placeholder="8,76"></label></div>
    <label class="f" id="tfe" hidden>Valor do frete (R$)<input id="vf" inputmode="decimal"></label>
    <div class="calc" id="prev">Frete: R$ 0,00</div>
-   <label class="f">Comissão do motorista (%)<span class="h">O que vocês combinaram para esta viagem</span><input id="com" inputmode="decimal" value="${S.trips.length?S.trips[S.trips.length-1].comissao:''}"></label>`,
+   <label class="f">Comissão do motorista (%)<span class="h">O que foi combinado com o dono do caminhão. Se o caminhão é seu, deixe 0.</span><input id="com" inputmode="decimal" value="${S.trips.length?S.trips[S.trips.length-1].comissao:0}"></label>`,
   ()=>{
     const tipo=document.querySelector('[data-tipo][aria-pressed="true"]').dataset.tipo;
     const t={id:uid(),origem:v('o').trim(),destino:v('d').trim(),kmIni:num(v('ki')),tipo,distancia:num(v('dist'))||0,valorKm:num(v('vkm'))||0,valorFechado:num(v('vf'))||0,comissao:num(v('com'))||0,inicio:hoje(),fim:null,status:'aberta',itens:[]};
@@ -395,12 +395,12 @@ function detalhe(id){
     ${c.diarias?`<div class="item"><span>Diárias (${fmtN(c.nDias,c.nDias%1?1:0)} ${c.nDias===1?'dia':'dias'})</span><b class="pos">+ ${brl(c.diarias)}</b></div>`:''}
     <div class="item"><span>Diesel (${fmtN(c.litros)} L)</span><b class="neg">− ${brl(c.diesel)}</b></div>
     <div class="item"><span>Outros gastos</span><b class="neg">− ${brl(c.gastos)}</b></div>
-    <div class="item"><span>Motorista (${fmtN(t.comissao,1)}%)</span><b class="neg">− ${brl(c.comissao)}</b></div>
-    <div class="item"><b>Sobra para o patrão</b><b class="${c.lucro<0?'neg':'pos'}">${brl(c.lucro)}</b></div>
+    ${c.comissao?`<div class="item"><span>Motorista (${fmtN(t.comissao,1)}%)</span><b class="neg">− ${brl(c.comissao)}</b></div>`:''}
+    <div class="item"><b>Sobrou da viagem</b><b class="${c.lucro<0?'neg':'pos'}">${brl(c.lucro)}</b></div>
    </div>
-   <div class="card list nums"><div class="item"><span>Comissão do motorista</span><b>${brl(c.comissao)}</b></div>
+   ${c.comissao?`<div class="card list nums"><div class="item"><span>Comissão do motorista</span><b>${brl(c.comissao)}</b></div>
     <div class="item"><span>Adiantamentos recebidos</span><b>− ${brl(c.adiant)}</b></div>
-    <div class="item"><b>Falta pagar a ${esc(P.nome?P.nome.split(' ')[0]:'motorista')}</b><b>${brl(c.aReceber)}</b></div></div>
+    <div class="item"><b>Falta pagar a ${esc(P.nome?P.nome.split(' ')[0]:'motorista')}</b><b>${brl(c.aReceber)}</b></div></div>`:''}
    ${itens(t)}
    <div class="two">${t.status==='fechada'?'<button class="chip" id="reab">Reabrir viagem</button>':''}<button class="chip" id="apv" style="color:var(--bad);border-color:var(--bad)">Apagar viagem</button></div>`,null);
   document.querySelectorAll('#modal [data-a="del"]').forEach(b=>b.onclick=()=>askDel(b.dataset.t,b.dataset.i,true));
