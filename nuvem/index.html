@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#2b2e33">
-<meta name="app-version" content="nuvem-2026-11-09.2">
+<meta name="app-version" content="nuvem-2026-11-09.3">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Diário de Bordo">
@@ -136,6 +136,8 @@ nav.tabs button:active{transform:translateY(3px);box-shadow:none;filter:none}
 .aviso{background:color-mix(in srgb,var(--sign) 22%,var(--surface));border-color:var(--sign);font-weight:600}
 .login{display:flex;flex-direction:column;gap:14px;margin-top:12px}
 .selo.ok{color:var(--good)}.selo.pend{color:var(--muted)}
+.btn.rel{background:var(--surface);border:2px solid var(--line);color:var(--ink);min-height:64px;font-size:19px;box-shadow:0 4px 0 var(--line);margin-bottom:4px}
+.btn.rel svg{width:28px;height:28px;color:var(--good)}
 </style>
 </head>
 <body>
@@ -161,6 +163,7 @@ const ICON={
  fuel:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V5a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v16"/><path d="M3 21h13"/><path d="M15 9h2a2 2 0 0 1 2 2v5a1.5 1.5 0 0 0 3 0V8l-3-3"/><path d="M7 8h5"/></svg>',
  money:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M6 12h.01M18 12h.01"/></svg>',
  flag:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 22V4"/><path d="M5 4h12l-2 4 2 4H5"/></svg>',
+ rel:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h6M9 9h2"/></svg>',
  clock:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>'
 };
 const CATS=['Pedágio','Comida','Arla','Despachante','Balança','Manutenção','Adiantamento','Outro'];
@@ -288,9 +291,11 @@ function bindPerfil(){
   };
 }
 function viagens(){
-  if(!S.trips.length)return `<div class="card muted">Nenhuma viagem ainda. Volte ao Início e toque em <b>Começar viagem</b>.</div>`;
+  const botaoRel=`<button class="btn full rel" data-a="relatorio">${ICON.rel}Gerar relatório do mês</button>`;
+  if(!S.trips.length&&!S.avulsos.length)return `<div class="card muted">Nenhuma viagem ainda. Volte ao Início e toque em <b>Começar viagem</b>.</div>`;
+  if(!S.trips.length)return botaoRel+`<div class="card muted">Nenhuma viagem ainda. Os gastos fora de viagem entram no relatório.</div>`;
   const grupos={};[...S.trips].reverse().forEach(t=>{const k=(t.inicio||'').slice(0,7);(grupos[k]=grupos[k]||[]).push(t)});
-  return exBanner()+Object.keys(grupos).sort().reverse().map(k=>{const sobra=grupos[k].reduce((a,t)=>a+calc(t).lucro,0);
+  return exBanner()+botaoRel+Object.keys(grupos).sort().reverse().map(k=>{const sobra=grupos[k].reduce((a,t)=>a+calc(t).lucro,0);
    return `<div class="row" style="margin-top:8px"><h2 style="margin:0">${nomeMes(k)}</h2><span class="nums muted" style="font-weight:600">${grupos[k].length} ${grupos[k].length===1?'viagem':'viagens'} · sobra <span class="${sobra<0?'neg':'pos'}">${brl(sobra)}</span></span></div>`+grupos[k].map(cartao).join('')}).join('');
 }
 function cartao(t){const c=calc(t);return `<button class="card trip" data-a="ver" data-t="${t.id}">
@@ -427,13 +432,86 @@ function limpar(){
 }
 function bind(){
   document.querySelectorAll('#app [data-a]').forEach(b=>b.onclick=()=>{const a=b.dataset.a;
-    ({entrar:()=>{pularLogin=false;loginEtapa='email';render()},sair,admin:painelAdmin,perfil:()=>{view='perfil';render();scrollTo(0,0)},nova:novaViagem,diesel:abasteci,gasto:gastei,diaria,fechar:encerrar,limpar,ver:()=>detalhe(b.dataset.t),del:()=>askDel(b.dataset.t,b.dataset.i)})[a]()});
+    ({relatorio:abrirRelatorio,entrar:()=>{pularLogin=false;loginEtapa='email';render()},sair,admin:painelAdmin,perfil:()=>{view='perfil';render();scrollTo(0,0)},nova:novaViagem,diesel:abasteci,gasto:gastei,diaria,fechar:encerrar,limpar,ver:()=>detalhe(b.dataset.t),del:()=>askDel(b.dataset.t,b.dataset.i)})[a]()});
 }
 document.addEventListener('touchstart',()=>{},{passive:true});
 document.addEventListener('click',e=>{if(e.target.closest('button'))try{navigator.vibrate&&navigator.vibrate(12)}catch(_){}},true);
 document.getElementById('tab-inicio').onclick=()=>{view='inicio';render();scrollTo(0,0)};
 document.getElementById('tab-viagens').onclick=()=>{view='viagens';render();scrollTo(0,0)};
 document.getElementById('tab-perfil').onclick=()=>{view='perfil';render();scrollTo(0,0)};
+/* ===== Relatório em planilha ===== */
+function mesesComDados(){
+  const m=new Set([hoje().slice(0,7)]);
+  S.trips.forEach(t=>t.inicio&&m.add(t.inicio.slice(0,7)));
+  S.avulsos.forEach(i=>i.data&&m.add(i.data.slice(0,7)));
+  return [...m].sort().reverse().slice(0,12);
+}
+function carregarXlsx(){
+  if(window.XLSX)return Promise.resolve();
+  return new Promise((ok,erro)=>{const s=document.createElement('script');s.src='/vendor/xlsx-0.18.5.mini.min.js';s.onload=ok;s.onerror=erro;document.head.appendChild(s)});
+}
+function montarPlanilha(ym){
+  const tipoItem=i=>i.tipo==='diesel'?'Diesel':i.tipo==='diaria'?'Diária':i.cat==='Adiantamento'?'Adiantamento':'Gasto';
+  const descItem=i=>i.tipo==='diesel'?`${fmtN(i.litros)} L a R$ ${fmtN(i.preco,2)}`:i.tipo==='diaria'?`${fmtN(i.dias,i.dias%1?1:0)} dia(s) de R$ ${fmtN(i.valorDia,2)}`:(i.cat||'');
+  const trips=S.trips.filter(t=>(t.inicio||'').slice(0,7)===ym);
+  const av=S.avulsos.filter(i=>(i.data||'').slice(0,7)===ym);
+  const tot={fat:0,frete:0,diarias:0,diesel:0,gastos:0,com:0,sobra:0,km:0,litros:0};
+  const linhasV=trips.map(t=>{const c=calc(t);
+    tot.fat+=c.receita;tot.frete+=c.frete;tot.diarias+=c.diarias;tot.diesel+=c.diesel;tot.gastos+=c.gastos;tot.com+=c.comissao;tot.sobra+=c.lucro;tot.km+=c.km||0;tot.litros+=c.litros;
+    return {'Início':dBR(t.inicio)+'/'+(t.inicio||'').slice(0,4),'Fim':t.fim?dBR(t.fim)+'/'+t.fim.slice(0,4):'Em viagem','Origem':t.origem,'Destino':t.destino,
+      'Km saída':t.kmIni||'','Km chegada':t.kmFim||'','Km rodado':c.km||'','Frete (R$)':c.frete,'Diárias (R$)':c.diarias,'Diesel (R$)':c.diesel,'Litros':c.litros,
+      'Outros gastos (R$)':c.gastos,'Comissão (%)':t.comissao||0,'Comissão (R$)':c.comissao,'Adiantamentos (R$)':c.adiant,'Sobrou (R$)':c.lucro}});
+  const avD=av.filter(i=>i.tipo==='diesel'),avG=av.filter(i=>i.tipo==='gasto'&&i.cat!=='Adiantamento'),avDi=av.filter(i=>i.tipo==='diaria');
+  const sD=avD.reduce((a,i)=>a+i.valor,0),sG=avG.reduce((a,i)=>a+i.valor,0),sDi=avDi.reduce((a,i)=>a+i.valor,0),sC=avDi.reduce((a,i)=>a+i.valor*(i.comissao||0)/100,0);
+  tot.diesel+=sD;tot.gastos+=sG;tot.diarias+=sDi;tot.fat+=sDi;tot.com+=sC;tot.sobra+=sDi-sC-sD-sG;tot.litros+=avD.reduce((a,i)=>a+(i.litros||0),0);
+  const P=S.perfil;
+  const resumo=[
+    ['Diário de Bordo: relatório de '+nomeMes(ym)],[],
+    ['Motorista',P.nome||''],['Caminhão',[P.modelo,P.placa].filter(Boolean).join(' · ')],[],
+    ['Viagens',trips.length],['Km rodados',tot.km],['Litros de diesel',Math.round(tot.litros*100)/100],['Média (km/L)',tot.km&&tot.litros?Math.round(tot.km/tot.litros*100)/100:''],[],
+    ['Fretes (R$)',tot.frete],['Diárias (R$)',tot.diarias],['Faturamento (R$)',tot.fat],
+    ['Diesel (R$)',tot.diesel],['Outros gastos (R$)',tot.gastos],['Comissão do motorista (R$)',tot.com],['Sobrou (R$)',tot.sobra],[],
+    ['Gerado em',new Date().toLocaleString('pt-BR')]];
+  const lanc=[];
+  trips.forEach(t=>t.itens.forEach(i=>lanc.push({'Data':dBR(i.data)+'/'+(i.data||'').slice(0,4),'Onde':`${t.origem} → ${t.destino}`,'Tipo':tipoItem(i),'Descrição':descItem(i),'Observação':i.obs||'','Valor (R$)':i.valor,_d:i.data})));
+  av.forEach(i=>lanc.push({'Data':dBR(i.data)+'/'+(i.data||'').slice(0,4),'Onde':'Fora de viagem','Tipo':tipoItem(i),'Descrição':descItem(i),'Observação':i.obs||'','Valor (R$)':i.valor,_d:i.data}));
+  lanc.sort((a,b)=>a._d<b._d?-1:1);lanc.forEach(l=>delete l._d);
+  const wb=XLSX.utils.book_new(),dinheiro='"R$" #,##0.00';
+  const formata=(ws,cols)=>{const r=XLSX.utils.decode_range(ws['!ref']||'A1');for(let R=1;R<=r.e.r;R++)cols.forEach(C=>{const c=ws[XLSX.utils.encode_cell({r:R,c:C})];if(c&&typeof c.v==='number')c.z=dinheiro})};
+  const w1=XLSX.utils.aoa_to_sheet(resumo);for(let R=10;R<=16;R++){const c=w1[XLSX.utils.encode_cell({r:R,c:1})];if(c&&typeof c.v==='number')c.z=dinheiro}
+  w1['!cols']=[{wch:30},{wch:22}];XLSX.utils.book_append_sheet(wb,w1,'Resumo');
+  const w2=XLSX.utils.json_to_sheet(linhasV.length?linhasV:[{'Viagens':'Nenhuma viagem neste mês'}]);formata(w2,[7,8,9,11,13,14,15]);
+  w2['!cols']=[{wch:12},{wch:12},{wch:18},{wch:18},{wch:10},{wch:11},{wch:10},{wch:12},{wch:12},{wch:12},{wch:8},{wch:14},{wch:12},{wch:13},{wch:15},{wch:13}];XLSX.utils.book_append_sheet(wb,w2,'Viagens');
+  const w3=XLSX.utils.json_to_sheet(lanc.length?lanc:[{'Lançamentos':'Nenhum lançamento neste mês'}]);formata(w3,[5]);
+  w3['!cols']=[{wch:12},{wch:30},{wch:13},{wch:26},{wch:22},{wch:12}];XLSX.utils.book_append_sheet(wb,w3,'Lançamentos');
+  return {wb,tot,n:trips.length};
+}
+function abrirRelatorio(){
+  const ms=mesesComDados();let mes=ms[0];
+  open(`<h3>Relatório</h3><p class="muted" style="margin:0">Uma planilha com as viagens, o diesel, os gastos e quanto sobrou no mês.</p>
+   <label class="f">Qual mês?</label>
+   <div class="chips">${ms.map((m,k)=>`<button class="chip" aria-pressed="${k===0}" data-mes="${m}">${nomeMes(m)}</button>`).join('')}</div>
+   <button class="save" id="rel-ok" style="min-height:64px;border-radius:12px;font-weight:700;font-size:20px">Gerar planilha</button>`,null);
+  document.querySelectorAll('[data-mes]').forEach(b=>b.onclick=()=>{mes=b.dataset.mes;document.querySelectorAll('[data-mes]').forEach(x=>x.setAttribute('aria-pressed',x===b))});
+  document.getElementById('rel-ok').onclick=async e=>{
+    const bt=e.currentTarget;bt.disabled=true;bt.textContent='Montando…';
+    try{
+      await carregarXlsx();
+      const {wb,tot,n}=montarPlanilha(mes);
+      const nome=`Diario-de-Bordo-${mes}.xlsx`;
+      const dados=XLSX.write(wb,{bookType:'xlsx',type:'array'});
+      const arq=new File([dados],nome,{type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
+      const texto=`Relatório do Diário de Bordo de ${nomeMes(mes)}: ${n} ${n===1?'viagem':'viagens'}, faturamento ${brl(tot.fat)}, sobrou ${brl(tot.sobra)}.`;
+      if(navigator.canShare&&navigator.canShare({files:[arq]})){
+        try{await navigator.share({files:[arq],title:nome,text:texto});close();toast('Relatório enviado');return}
+        catch(x){if(x&&x.name==='AbortError'){bt.disabled=false;bt.textContent='Gerar planilha';return}}
+      }
+      const url=URL.createObjectURL(arq),a=document.createElement('a');a.href=url;a.download=nome;document.body.appendChild(a);a.click();a.remove();
+      setTimeout(()=>URL.revokeObjectURL(url),4000);close();toast('Planilha baixada');
+    }catch(x){console.warn(x);bt.disabled=false;bt.textContent='Gerar planilha';toast('Não deu para gerar agora. Tente de novo.')}
+  };
+}
+
 /*NUVEM*/
 /* ===== Nuvem: login, sincronização e assinatura ===== */
 const SB_URL='https://kmaldmypdvapihsxpfmz.supabase.co',SB_KEY='sb_publishable_hOL3UoYwX9z7wxa8oKrpDA_CJjdwNzx';
