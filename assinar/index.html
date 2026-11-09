@@ -214,6 +214,11 @@ footer{padding-block:28px 40px;color:var(--apagado);font-size:17px;border-top:2p
 .janela .btn.cartao{background:transparent;color:var(--texto);border:2px solid var(--linha);box-shadow:none;font-size:24px;min-height:62px;flex-direction:column;gap:0}
 .janela .btn.cartao small{font-family:var(--corpo);font-size:15px;font-weight:600;color:var(--apagado)}
 .janela .btn.cartao::after{display:none}
+.seguro{display:flex;gap:18px;align-items:center;background:var(--asfalto2);border:2px solid var(--linha);border-radius:20px;padding:20px;max-width:820px}
+.seguro svg{flex:none;width:52px;height:52px;color:#4ea8ff}
+.seguro b{display:block;font-family:var(--display);font-size:30px;line-height:1.05;margin-bottom:4px}
+.selo-mp{display:flex;align-items:center;justify-content:center;gap:8px;font-size:17px;font-weight:600;color:var(--apagado);margin:0}
+.selo-mp svg{width:22px;height:22px;color:#4ea8ff;flex:none}
 </style>
 </head>
 <body>
@@ -302,6 +307,7 @@ footer{padding-block:28px 40px;color:var(--apagado);font-size:17px;border-top:2p
     </div>
   </div>
   <p class="pix"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l4.5 4.5L12 11 7.5 6.5z"/><path d="M12 13l4.5 4.5L12 22l-4.5-4.5z"/><path d="M2 12l4.5-4.5L11 12l-4.5 4.5zM13 12l4.5-4.5L22 12l-4.5 4.5z"/></svg>Pague com Pix ou cartão. Liberado na hora.</p>
+  <div class="seguro surge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="11" rx="2.5"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/><circle cx="12" cy="15.5" r="1.5"/></svg><p><b>Pagamento seguro pelo Mercado Pago</b>O Pix e o cartão são processados pelo Mercado Pago. Os dados do seu cartão não passam pelo nosso site.</p></div>
   <div class="garantia surge">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4v5c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V7z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg>
     <p><b>Não gostou? Devolvemos seu dinheiro.</b>Você tem 7 dias para pedir de volta. Sem pergunta.</p>
@@ -372,6 +378,7 @@ function telaEmail(){
    <div class="erro" id="pix-erro"></div>
    <button class="btn" id="pix-ok">Pagar com Pix</button>
    <button class="btn cartao" id="pix-cartao">Pagar com cartão${planoPix==='anual'?' <small>em até 12x</small>':''}</button>
+   <p class="selo-mp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="11" rx="2.5"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/><circle cx="12" cy="15.5" r="1.5"/></svg>Pagamento seguro pelo Mercado Pago</p>
    <button class="fechar" id="pix-x">Voltar</button>`;
   document.getElementById('pix-x').onclick=fecharPix;
   const ok=document.getElementById('pix-ok'),inp=document.getElementById('pix-email');
