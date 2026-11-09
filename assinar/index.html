@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Diário de Bordo | Quanto sobrou da sua viagem?</title>
+<meta name="description" content="App simples para caminhoneiro: lance frete, diesel, gastos e diárias pelo celular e veja quanto sobrou de cada viagem. 7 dias grátis.">
+<meta name="theme-color" content="#1d1f22">
+<meta property="og:title" content="Diário de Bordo: quanto sobrou da sua viagem?">
+<meta property="og:description" content="Frete, diesel, gastos e diárias no celular, com botões grandes. Funciona sem sinal. 7 dias grátis.">
+<meta property="og:image" content="https://frete.trilhanova.shop/icon-512.png">
+<link rel="icon" type="image/png" href="/icon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600;700&display=swap">
+<style>
+/* Página de vendas: asfalto escuro + amarelo de placa de estrada, a mesma identidade do app. Uma coluna no celular. */
+:root{
+  --asfalto:#16181b; --asfalto2:#202327; --linha:#33373c; --texto:#f1f0eb; --apagado:#a3a7ad;
+  --placa:#f2b705; --placa-escura:#a77c00; --placa-tinta:#1d1f22;
+  --azul:#1f63b5; --laranja:#c2410c; --verde-agua:#0f766e; --verde:#1f7a4d; --ok:#4cc38a;
+  --display:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
+  --corpo:"Barlow",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--asfalto);color:var(--texto);font-family:var(--corpo);font-size:18px;line-height:1.5;
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+.faixa{padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px))}
+.miolo{max-width:1040px;margin:0 auto}
+h1,h2,h3{font-family:var(--display);text-transform:uppercase;letter-spacing:.01em;line-height:.98;margin:0;text-wrap:balance}
+h1{font-size:clamp(46px,11vw,92px);font-weight:800}
+h2{font-size:clamp(34px,7vw,54px);font-weight:800}
+h3{font-size:26px;font-weight:700}
+p{margin:0}
+a{color:inherit}
+.mutado{color:var(--apagado)}
+.amarelo{color:var(--placa)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:64px;padding:0 28px;border-radius:14px;
+  background:var(--placa);color:var(--placa-tinta);font-family:var(--display);font-weight:800;font-size:26px;text-transform:uppercase;
+  text-decoration:none;box-shadow:0 6px 0 var(--placa-escura);margin-bottom:6px;transition:transform .07s,box-shadow .07s}
+.btn:active{transform:translateY(5px);box-shadow:0 1px 0 var(--placa-escura)}
+.btn:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.btn.secundario{background:transparent;color:var(--texto);box-shadow:none;border:2px solid var(--linha);font-size:22px;min-height:56px}
+.nota{font-size:15px;color:var(--apagado)}
+
+/* topo */
+.topo{display:flex;justify-content:space-between;align-items:center;padding-block:18px}
+.marca{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:800;font-size:24px;text-transform:uppercase;text-decoration:none}
+.marca img{width:36px;height:36px;border-radius:9px}
+.topo a.entrar{font-weight:600;font-size:16px;color:var(--apagado)}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;padding-block:24px 64px}
+.hero .chamada{display:flex;flex-direction:column;gap:22px;min-width:0}
+.hero .sub{font-size:21px;max-width:30ch}
+.conta{font-family:var(--display);font-size:24px;font-weight:700;background:var(--asfalto2);border:1px solid var(--linha);border-radius:12px;
+  padding:12px 16px;display:inline-flex;flex-wrap:wrap;gap:6px 10px;align-items:baseline}
+.conta .igual{color:var(--placa)}
+.conta .sobra{color:var(--ok)}
+.ctas{display:flex;flex-direction:column;align-items:flex-start;gap:10px}
+
+/* celular desenhado com o app */
+.celular{justify-self:center;width:300px;max-width:100%;border-radius:38px;background:#0b0c0e;padding:12px;border:2px solid #2c3035;
+  box-shadow:0 30px 60px -20px rgba(0,0,0,.7)}
+.tela{border-radius:28px;background:var(--asfalto);overflow:hidden;font-size:13px;display:flex;flex-direction:column;gap:10px;padding:14px 12px 16px}
+.tela .cab{font-family:var(--display);font-weight:800;font-size:20px;text-transform:uppercase}
+.tela .cab small{display:block;color:var(--placa);font-size:11px;letter-spacing:.08em;font-weight:700}
+.viagem{background:var(--placa);color:var(--placa-tinta);border-radius:14px;padding:12px;display:flex;flex-direction:column;gap:6px}
+.viagem .tag{align-self:flex-start;background:#1d1f22;color:#f4f3ee;border-radius:99px;font-size:10px;font-weight:700;padding:2px 8px;letter-spacing:.06em;text-transform:uppercase}
+.viagem .rota{font-family:var(--display);font-weight:800;font-size:24px;line-height:1;text-transform:uppercase}
+.viagem .lin{display:flex;justify-content:space-between;font-weight:700;font-size:12px}
+.tres{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+.b{border-radius:12px;color:#fff;font-weight:700;font-size:13px;display:flex;flex-direction:column;align-items:center;gap:4px;padding:12px 2px 10px}
+.b svg{width:24px;height:24px}
+.b.az{background:var(--azul);box-shadow:0 4px 0 #13447e}.b.la{background:var(--laranja);box-shadow:0 4px 0 #8a2d07}.b.vd{background:var(--verde-agua);box-shadow:0 4px 0 #0a4f4a}
+.cheguei{background:var(--verde);box-shadow:0 4px 0 #12512f;border-radius:12px;color:#fff;font-weight:700;text-align:center;padding:13px 4px;margin-top:4px}
+.sobrou{background:#0e0f11;border-radius:12px;padding:10px 12px}
+.sobrou small{color:var(--placa);font-weight:700;font-size:10px;letter-spacing:.08em;text-transform:uppercase}
+.sobrou div{font-family:var(--display);font-weight:800;font-size:26px;color:var(--ok)}
+
+/* seções */
+.secao{padding-block:64px;border-top:1px solid var(--linha)}
+.secao>.miolo{display:flex;flex-direction:column;gap:28px}
+.passos{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;counter-reset:p}
+.passo{background:var(--asfalto2);border:1px solid var(--linha);border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.passo .n{font-family:var(--display);font-weight:800;font-size:44px;line-height:1;color:var(--placa)}
+.passo p{color:var(--apagado);font-size:17px}
+.dois{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.ponto{display:flex;gap:14px;align-items:flex-start;background:var(--asfalto2);border:1px solid var(--linha);border-radius:16px;padding:20px;min-width:0}
+.ponto svg{flex:none;width:30px;height:30px;color:var(--placa);margin-top:2px}
+.ponto b{display:block;font-size:20px;margin-bottom:4px}
+.ponto p{color:var(--apagado);font-size:17px}
+.historia{background:var(--placa);color:var(--placa-tinta)}
+.historia .miolo{max-width:760px}
+.historia p{font-size:22px;font-weight:500}
+.historia h2{color:var(--placa-tinta)}
+
+/* preço */
+.planos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;max-width:780px}
+.plano{background:var(--asfalto2);border:2px solid var(--linha);border-radius:18px;padding:24px;display:flex;flex-direction:column;gap:12px;position:relative}
+.plano.destaque{border-color:var(--placa)}
+.plano .selo{position:absolute;top:-14px;left:20px;background:var(--placa);color:var(--placa-tinta);font-weight:700;font-size:13px;
+  text-transform:uppercase;letter-spacing:.06em;padding:4px 10px;border-radius:99px}
+.plano .nome{font-family:var(--display);font-weight:700;font-size:24px;text-transform:uppercase}
+.plano .de{color:var(--apagado);text-decoration:line-through;font-size:17px}
+.plano .valor{font-family:var(--display);font-weight:800;font-size:56px;line-height:1;font-variant-numeric:tabular-nums}
+.plano .valor small{font-size:22px;font-weight:700;color:var(--apagado)}
+.plano .dia{color:var(--ok);font-weight:600}
+.plano .btn{margin-top:auto;width:100%;font-size:22px}
+.inclui{display:flex;flex-wrap:wrap;gap:8px 18px;color:var(--apagado);font-size:16px;max-width:780px}
+.inclui span::before{content:"✓ ";color:var(--ok);font-weight:700}
+
+/* perguntas */
+details{background:var(--asfalto2);border:1px solid var(--linha);border-radius:14px;padding:4px 18px;max-width:780px}
+details+details{margin-top:10px}
+summary{cursor:pointer;font-weight:700;font-size:19px;padding:14px 0;list-style:none;display:flex;justify-content:space-between;gap:12px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";color:var(--placa);font-size:26px;line-height:1}
+details[open] summary::after{content:"−"}
+details p{color:var(--apagado);padding-bottom:16px}
+.fim{text-align:center}
+.fim .miolo{align-items:center}
+footer{padding-block:28px;color:var(--apagado);font-size:14px;border-top:1px solid var(--linha)}
+footer .miolo{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+#video[hidden]{display:none}
+.video{position:relative;width:100%;max-width:780px;aspect-ratio:16/9;border-radius:16px;overflow:hidden;background:#000}
+.video iframe,.video video{position:absolute;inset:0;width:100%;height:100%;border:0}
+
+@media (max-width:860px){
+  .hero{grid-template-columns:1fr;gap:36px;padding-block:8px 52px}
+  .passos{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:560px){
+  body{font-size:17px}
+  .passos,.dois,.planos{grid-template-columns:1fr}
+  .ctas .btn{width:100%}
+  .secao{padding-block:52px}
+  .hero .sub{font-size:19px}
+  .plano .valor{font-size:44px;white-space:nowrap}
+  .plano .valor small{font-size:18px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn{transition:none}}
+</style>
+</head>
+<body>
+
+<header class="faixa"><div class="miolo topo">
+  <a class="marca" href="#"><img src="/icon-192.png" alt="">Diário de Bordo</a>
+  <a class="entrar" href="/nuvem/">Já tenho conta</a>
+</div></header>
+
+<main>
+<section class="faixa"><div class="miolo hero">
+  <div class="chamada">
+    <h1>Quanto <span class="amarelo">sobrou</span> da sua viagem?</h1>
+    <p class="sub">Lance o frete, o diesel e os gastos no celular, com botões grandes. No fim da viagem o app faz a conta pra você.</p>
+    <div class="conta" aria-label="Frete mais diárias, menos diesel, menos gastos, igual ao que sobrou">
+      <span>Frete + diárias</span><span>− diesel</span><span>− gastos</span><span class="igual">=</span><span class="sobra">o que sobrou</span>
+    </div>
+    <div class="ctas">
+      <a class="btn" href="/nuvem/">Testar 7 dias grátis</a>
+      <span class="nota">Só precisa do e-mail. Sem cartão, sem Pix para testar.</span>
+    </div>
+  </div>
+
+  <div class="celular" aria-hidden="true"><div class="tela">
+    <div class="cab"><small>Volvo FH · Placa</small>Diário de Bordo</div>
+    <div class="viagem">
+      <span class="tag">Em viagem</span>
+      <span class="rota">Santiago → Curitiba</span>
+      <div class="lin"><span>Frete R$ 19.009</span><span>Gasto R$ 2.163</span></div>
+    </div>
+    <div class="tres">
+      <div class="b az"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V5a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v16"/><path d="M3 21h13"/><path d="M15 9h2a2 2 0 0 1 2 2v5a1.5 1.5 0 0 0 3 0V8l-3-3"/><path d="M7 8h5"/></svg>Abasteci</div>
+      <div class="b la"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="3"/></svg>Gastei</div>
+      <div class="b vd"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Diária</div>
+    </div>
+    <div class="cheguei">Cheguei, encerrar viagem</div>
+    <div class="sobrou"><small>Sobrou no mês</small><div>R$ 16.157,82</div></div>
+  </div></div>
+</div></section>
+
+<section class="faixa secao" id="video" hidden><div class="miolo">
+  <h2>Veja funcionando na boleia</h2>
+  <div class="video" id="video-box"></div>
+</div></section>
+
+<section class="faixa secao" id="como"><div class="miolo">
+  <h2>Quatro toques e pronto</h2>
+  <div class="passos">
+    <div class="passo"><span class="n">1</span><h3>Começar viagem</h3><p>De onde sai, para onde vai e o valor do frete, por km ou fechado.</p></div>
+    <div class="passo"><span class="n">2</span><h3>Abasteci</h3><p>Litros e preço do litro. O total o app calcula.</p></div>
+    <div class="passo"><span class="n">3</span><h3>Gastei e diária</h3><p>Pedágio, comida, arla, oficina, ou os dias parado esperando carga.</p></div>
+    <div class="passo"><span class="n">4</span><h3>Cheguei</h3><p>Coloca o km do painel e vê quanto sobrou, km rodado e a média do caminhão.</p></div>
+  </div>
+</div></section>
+
+<section class="faixa secao"><div class="miolo">
+  <h2>Feito pra quem não gosta de mexer em celular</h2>
+  <div class="dois">
+    <div class="ponto"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M8 12h8M12 8v8"/></svg><div><b>Botões grandes, poucas perguntas</b><p>Nada de cadastro de frota, pneus ou nota fiscal antes de começar. Abriu, já lança.</p></div></div>
+    <div class="ponto"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8.8a15 15 0 0 1 20 0"/><path d="M5 12.5a10 10 0 0 1 14 0"/><path d="M8.5 16a5 5 0 0 1 7 0"/><path d="M3 3l18 18"/></svg><div><b>Funciona sem sinal</b><p>Lançou no meio da serra? Fica guardado e vai pra nuvem sozinho quando o sinal volta.</p></div></div>
+    <div class="ponto"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.5 3.4-5.5 6.5-5.5s5.7 2 6.5 5.5"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18.5 14.8c1.7.8 2.7 2.6 3 5.2"/></svg><div><b>Para o dono e para o motorista</b><p>Comissão combinada, adiantamentos e quanto falta pagar ao motorista, tudo na mesma conta.</p></div></div>
+    <div class="ponto"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4v5c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V7z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg><div><b>Troca de celular sem perder nada</b><p>Entrou com o e-mail, os lançamentos aparecem em qualquer aparelho.</p></div></div>
+  </div>
+</div></section>
+
+<section class="faixa secao historia"><div class="miolo">
+  <h2>Nasceu na boleia</h2>
+  <p>O Diário de Bordo começou para trocar a planilha de fretes de um caminhoneiro de verdade. Ele usa no dia a dia, e várias ideias vieram dele na estrada, como o botão de diária para os dias parado esperando carga.</p>
+</div></section>
+
+<section class="faixa secao" id="preco"><div class="miolo">
+  <h2>Menos de 1 real por dia</h2>
+  <div class="planos">
+    <div class="plano">
+      <span class="nome">Mensal</span>
+      <span class="valor">R$ 24,90<small>/mês</small></span>
+      <span class="dia">R$ 0,83 por dia</span>
+      <a class="btn secundario" href="/nuvem/">Testar 7 dias grátis</a>
+    </div>
+    <div class="plano destaque">
+      <span class="selo">Economize 40%</span>
+      <span class="nome">Anual</span>
+      <span class="de">de R$ 298,80</span>
+      <span class="valor">R$ 179,90<small>/ano</small></span>
+      <span class="dia">Menos de R$ 0,50 por dia</span>
+      <a class="btn" href="/nuvem/">Testar 7 dias grátis</a>
+    </div>
+  </div>
+  <div class="inclui"><span>Viagens sem limite</span><span>Diesel, gastos e diárias</span><span>Comissão e acerto do motorista</span><span>Funciona sem sinal</span><span>Pagamento por Pix</span></div>
+  <p class="nota">Primeiro você testa. Só paga se gostar.</p>
+</div></section>
+
+<section class="faixa secao" id="duvidas"><div class="miolo">
+  <h2>Dúvidas</h2>
+  <div>
+    <details><summary>Precisa baixar na Play Store?</summary><p>Não. Você abre o link no Chrome e toca em "Adicionar à tela inicial". O ícone fica junto dos outros aplicativos e abre igual.</p></details>
+    <details><summary>Funciona em qualquer celular?</summary><p>Funciona em Android e iPhone, pelo navegador. Não ocupa quase nada de espaço.</p></details>
+    <details><summary>E se eu ficar sem internet na estrada?</summary><p>O app continua funcionando. Tudo que você lançar fica guardado no celular e sobe para a nuvem quando o sinal voltar.</p></details>
+    <details><summary>Como eu entro? Tem senha?</summary><p>Não tem senha para decorar. Você digita seu e-mail e recebe um código de 6 números. Depois disso fica conectado.</p></details>
+    <details><summary>Sou motorista empregado, posso usar?</summary><p>Pode. Você coloca a comissão combinada com o dono do caminhão e o app mostra quanto você tem a receber, já descontando os adiantamentos.</p></details>
+    <details><summary>Como pago depois do teste?</summary><p>Por Pix, direto no app. Você escolhe mensal ou anual e o acesso é liberado assim que o Pix cai.</p></details>
+  </div>
+</div></section>
+
+<section class="faixa secao fim"><div class="miolo">
+  <h2>Descubra quanto sobrou da próxima viagem</h2>
+  <a class="btn" href="/nuvem/">Testar 7 dias grátis</a>
+  <span class="nota">Só o e-mail. Sem cartão.</span>
+</div></section>
+</main>
+
+<footer class="faixa"><div class="miolo">
+  <span>Diário de Bordo</span>
+  <a href="/nuvem/">Entrar no app</a>
+</div></footer>
+
+<script>
+// Quando o vídeo estiver pronto, coloque o link do YouTube aqui e a seção aparece sozinha.
+const VIDEO_YOUTUBE='';
+if(VIDEO_YOUTUBE){const id=(VIDEO_YOUTUBE.match(/(?:v=|youtu\.be\/|shorts\/)([\w-]{11})/)||[])[1];
+  if(id){document.getElementById('video-box').innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+id+'" title="Diário de Bordo funcionando" allow="encrypted-media; picture-in-picture" allowfullscreen loading="lazy"></iframe>';document.getElementById('video').hidden=false}}
+</script>
+</body>
+</html>
