@@ -204,13 +204,16 @@ footer{padding-block:28px 40px;color:var(--apagado);font-size:17px;border-top:2p
 .janela .btn[disabled]{opacity:.6}
 .qr{align-self:center;background:#fff;border-radius:16px;padding:12px;width:240px;max-width:100%}
 .qr img{display:block;width:100%;height:auto;image-rendering:pixelated}
-.codigo{font-family:ui-monospace,monospace;font-size:14px;word-break:break-all;background:var(--asfalto);border:2px dashed var(--linha);border-radius:12px;padding:12px;max-height:90px;overflow:auto;color:var(--apagado)}
+.codigo{font-family:ui-monospace,monospace;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;background:var(--asfalto);border:2px dashed var(--linha);border-radius:12px;padding:12px;color:var(--apagado)}
 .passos-pix{margin:0;padding-left:26px;display:flex;flex-direction:column;gap:6px;font-size:20px}
 .esperando{display:flex;align-items:center;gap:12px;font-weight:700;color:var(--placa)}
 .esperando i{width:22px;height:22px;border-radius:50%;border:3px solid var(--placa);border-right-color:transparent;animation:gira 1s linear infinite;flex:none}
 @keyframes gira{to{transform:rotate(360deg)}}
 .aprovado{text-align:center;display:flex;flex-direction:column;gap:14px;align-items:center}
 .aprovado svg{width:96px;height:96px;color:var(--ok)}
+.janela .btn.cartao{background:transparent;color:var(--texto);border:2px solid var(--linha);box-shadow:none;font-size:24px;min-height:62px;flex-direction:column;gap:0}
+.janela .btn.cartao small{font-family:var(--corpo);font-size:15px;font-weight:600;color:var(--apagado)}
+.janela .btn.cartao::after{display:none}
 </style>
 </head>
 <body>
@@ -298,7 +301,7 @@ footer{padding-block:28px 40px;color:var(--apagado);font-size:17px;border-top:2p
       <a class="btn" href="/nuvem/" data-plano="anual">Assinar anual</a>
     </div>
   </div>
-  <p class="pix"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l4.5 4.5L12 11 7.5 6.5z"/><path d="M12 13l4.5 4.5L12 22l-4.5-4.5z"/><path d="M2 12l4.5-4.5L11 12l-4.5 4.5zM13 12l4.5-4.5L22 12l-4.5 4.5z"/></svg>Pague com Pix. Liberado na hora.</p>
+  <p class="pix"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l4.5 4.5L12 11 7.5 6.5z"/><path d="M12 13l4.5 4.5L12 22l-4.5-4.5z"/><path d="M2 12l4.5-4.5L11 12l-4.5 4.5zM13 12l4.5-4.5L22 12l-4.5 4.5z"/></svg>Pague com Pix ou cartão. Liberado na hora.</p>
   <div class="garantia surge">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4v5c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V7z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg>
     <p><b>Não gostou? Devolvemos seu dinheiro.</b>Você tem 7 dias para pedir de volta. Sem pergunta.</p>
@@ -312,7 +315,7 @@ footer{padding-block:28px 40px;color:var(--apagado);font-size:17px;border-top:2p
     <details><summary>E sem internet?</summary><p>Funciona do mesmo jeito. Quando o sinal voltar, ele guarda tudo sozinho.</p></details>
     <details><summary>Tem senha?</summary><p>Não. Você coloca seu e-mail e recebe um número de 6 dígitos. Só isso.</p></details>
     <details><summary>Sou motorista, não sou o dono. Serve?</summary><p>Serve. Coloque a comissão que você combinou. O app mostra quanto você tem pra receber.</p></details>
-    <details><summary>Como eu pago?</summary><p>Por Pix. Escolha mensal ou anual, pague e o app libera na hora.</p></details>
+    <details><summary>Como eu pago?</summary><p>Por Pix ou cartão de crédito. No anual dá para parcelar em até 12 vezes no cartão. Pagou, o app libera.</p></details>
   </div>
 </div></section>
 
@@ -367,7 +370,8 @@ function telaEmail(){
    <div class="resumo"><span>Plano ${P.nome}<br><small style="font-weight:500;color:var(--apagado);font-size:17px">${P.obs}</small></span><b>${P.valor}</b></div>
    <label>Seu e-mail<small>É com ele que você vai entrar no app.</small><input id="pix-email" type="email" inputmode="email" autocomplete="email" autocapitalize="off" placeholder="seuemail@gmail.com" value="${escH(emailPix)}"></label>
    <div class="erro" id="pix-erro"></div>
-   <button class="btn" id="pix-ok">Gerar Pix</button>
+   <button class="btn" id="pix-ok">Pagar com Pix</button>
+   <button class="btn cartao" id="pix-cartao">Pagar com cartão${planoPix==='anual'?' <small>em até 12x</small>':''}</button>
    <button class="fechar" id="pix-x">Voltar</button>`;
   document.getElementById('pix-x').onclick=fecharPix;
   const ok=document.getElementById('pix-ok'),inp=document.getElementById('pix-email');
@@ -382,7 +386,37 @@ function telaEmail(){
       telaPix(d);
     }catch(x){ok.disabled=false;ok.textContent='Gerar Pix';err.textContent='Não deu para gerar o Pix agora. Tente de novo em instantes.'}
   };
+  const ct=document.getElementById('pix-cartao');
+  ct.onclick=async()=>{
+    const e=inp.value.trim().toLowerCase(),err=document.getElementById('pix-erro');
+    if(!/^\S+@\S+\.\S+$/.test(e)){err.textContent='Confira o e-mail. Exemplo: joao@gmail.com';return}
+    emailPix=e;ct.disabled=true;ok.disabled=true;ct.textContent='Abrindo…';err.textContent='';
+    try{
+      const r=await fetch(PIX_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({acao:'cartao',email:e,plano:planoPix})});
+      const d=await r.json();if(!r.ok||!d.url)throw new Error(d.erro||'erro');
+      location.href=d.url;
+    }catch(x){ct.disabled=false;ok.disabled=false;ct.textContent='Pagar com cartão';err.textContent='Não deu para abrir o pagamento com cartão agora. Tente de novo ou pague com Pix.'}
+  };
   setTimeout(()=>inp.focus(),80);
+}
+// volta do pagamento com cartão (Mercado Pago)
+function voltaCartao(){
+  const q=new URLSearchParams(location.search);if(q.get('pago')!=='cartao')return;
+  const id=q.get('payment_id')||q.get('collection_id'),st=q.get('status')||q.get('collection_status');
+  fundo.hidden=false;document.body.style.overflow='hidden';
+  if(!id||id==='null'||st==='rejected'||st==='null'){
+    jan.innerHTML=`<h3 id="pix-titulo">O cartão não passou</h3><p>Nada foi cobrado. Tente de novo com outro cartão ou pague com Pix.</p><a class="btn" href="#preco" id="pix-x">Tentar de novo</a>`;
+    document.getElementById('pix-x').onclick=fecharPix;return;
+  }
+  jan.innerHTML=`<h3 id="pix-titulo">Conferindo o pagamento</h3><div class="esperando"><i></i>Só um instante…</div><p style="font-size:18px;color:var(--apagado)">Pagamento com cartão às vezes leva alguns minutos para ser aprovado. Pode deixar esta tela aberta.</p><button class="fechar" id="pix-x">Fechar</button>`;
+  document.getElementById('pix-x').onclick=fecharPix;
+  const inicio=Date.now();clearInterval(espera);
+  const checa=async()=>{try{const r=await fetch(PIX_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({acao:'status',id})});const j=await r.json();
+    if(j.status==='approved'){clearInterval(espera);telaAprovado()}
+    else if(j.status==='rejected'||j.status==='cancelled'){clearInterval(espera);jan.innerHTML=`<h3 id="pix-titulo">O cartão não passou</h3><p>Nada foi cobrado. Tente de novo ou pague com Pix.</p><button class="btn" id="pix-x">Tentar de novo</button>`;document.getElementById('pix-x').onclick=fecharPix}
+    else if(Date.now()-inicio>20*60e3)clearInterval(espera);
+  }catch(_){}};
+  checa();espera=setInterval(checa,5000);
 }
 function telaPix(d){
   const P=PLANOS[planoPix];
@@ -415,6 +449,7 @@ function telaAprovado(){
     <a class="btn" href="/nuvem/?email=${encodeURIComponent(emailPix)}">Abrir o app</a>
   </div>`;
 }
+voltaCartao();
 document.querySelectorAll('[data-plano]').forEach(a=>a.addEventListener('click',e=>{
   e.preventDefault();planoPix=a.dataset.plano;fundo.hidden=false;document.body.style.overflow='hidden';telaEmail();
 }));
