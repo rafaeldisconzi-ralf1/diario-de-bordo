@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#2b2e33">
-<meta name="app-version" content="nuvem-2026-11-09.1">
+<meta name="app-version" content="nuvem-2026-11-09.2">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Diário de Bordo">
@@ -210,6 +210,7 @@ function render(){
   const app=document.getElementById('app'),nav=document.querySelector('nav.tabs');
   if(sb&&!authPronto){app.innerHTML='';return}
   if(sb&&!SESS&&!pularLogin){nav.hidden=true;app.innerHTML=telaLogin();bindLogin();return}
+  if(SESS&&CONTA&&!CONTA.admin&&diasRestantes()!==null&&diasRestantes()<0){nav.hidden=true;app.innerHTML=telaAssinar();bindAssinar();return}
   nav.hidden=false;
   app.innerHTML=view==='inicio'?inicio():view==='viagens'?viagens():perfil();
   if(view==='perfil')bindPerfil();
@@ -437,7 +438,7 @@ document.getElementById('tab-perfil').onclick=()=>{view='perfil';render();scroll
 /* ===== Nuvem: login, sincronização e assinatura ===== */
 const SB_URL='https://kmaldmypdvapihsxpfmz.supabase.co',SB_KEY='sb_publishable_hOL3UoYwX9z7wxa8oKrpDA_CJjdwNzx';
 const sb=(window.supabase&&supabase.createClient)?supabase.createClient(SB_URL,SB_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true,storageKey:'bordo-auth'}}):null;
-let SESS=null,CONTA=null,pularLogin=false,syncando=false,syncDeNovo=false,syncTimer=null,loginEtapa='email',loginEmail='';
+let SESS=null,CONTA=null,pularLogin=false,syncando=false,syncDeNovo=false,syncTimer=null,loginEtapa='email',loginEmail=(new URLSearchParams(location.search).get('email')||'').trim().toLowerCase();
 if(!S.sync)S.sync={h:{},ultimo:null,uid:null};
 const gravar=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
 const estavel=o=>o===null||typeof o!=='object'?JSON.stringify(o):Array.isArray(o)?'['+o.map(estavel).join(',')+']':'{'+Object.keys(o).sort().map(k=>JSON.stringify(k)+':'+estavel(o[k])).join(',')+'}';
@@ -500,10 +501,26 @@ async function aoEntrar(sess){
 }
 const acessoAte=()=>{if(!CONTA)return null;const a=[CONTA.teste_ate,CONTA.pago_ate].filter(Boolean).sort();return a[a.length-1]||null};
 const diasRestantes=()=>{const a=acessoAte();if(!a)return null;return Math.round((new Date(a+'T12:00:00')-new Date(hoje()+'T12:00:00'))/864e5)};
+const linkAssinar=()=>'/assinar/?email='+encodeURIComponent(SESS?SESS.user.email:'')+'#preco';
+function telaAssinar(){
+  const jaPagou=CONTA&&CONTA.pago_ate;
+  return `<div class="login card">
+    <h2 style="margin:0">${jaPagou?'Seu acesso venceu':'Falta liberar seu acesso'}</h2>
+    <p style="margin:0">${jaPagou?`Venceu em ${dBR(CONTA.pago_ate)}/${CONTA.pago_ate.slice(0,4)}. Seus lançamentos estão guardados. É só pagar o Pix para continuar usando.`:'Para começar a usar, é só pagar o Pix do plano. Assim que cair, o app libera.'}</p>
+    <a class="btn full start" href="${linkAssinar()}" style="min-height:72px;font-size:24px;text-decoration:none">Pagar com Pix</a>
+    <button class="btn full" id="japaguei" style="min-height:60px">Já paguei</button>
+    <p class="muted" style="margin:0">Conta: <b>${esc(SESS.user.email)}</b></p>
+    <button class="link" id="sairbloq">Sair da conta</button>
+  </div>`;
+}
+function bindAssinar(){
+  document.getElementById('japaguei').onclick=async e=>{e.target.disabled=true;e.target.textContent='Conferindo…';await carregarConta();render();if(diasRestantes()<0)toast('Ainda não chegou. Espere uns segundos e toque de novo.')};
+  document.getElementById('sairbloq').onclick=sair;
+}
 function avisoAcesso(){
   const d=diasRestantes();if(d===null||d>5)return '';
   return d<0?`<div class="card aviso">Seu acesso venceu em ${dBR(acessoAte())}. Seus lançamentos continuam guardados. Para renovar, fale com a gente.</div>`
-    :`<div class="card aviso">Seu acesso vai até ${dBR(acessoAte())} (${d===0?'hoje':d===1?'falta 1 dia':'faltam '+d+' dias'}).</div>`;
+    :`<div class="card aviso">Seu acesso vai até ${dBR(acessoAte())} (${d===0?'hoje':d===1?'falta 1 dia':'faltam '+d+' dias'}). <a href="${linkAssinar()}">Renovar com Pix</a></div>`;
 }
 function atualizarSelo(){const el=document.getElementById('selo');if(!el)return;const n=pendentes();
   el.textContent=!SESS?'':!navigator.onLine?(n?`Sem internet · ${n} para enviar`:'Sem internet'):n?'Enviando…':'Tudo salvo na nuvem';

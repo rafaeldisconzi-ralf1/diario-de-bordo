@@ -181,6 +181,36 @@ footer{padding-block:28px 40px;color:var(--apagado);font-size:17px;border-top:2p
   .js .conta span,.js .conta .tot{animation:none!important;opacity:1!important;transform:none!important}
   .js .surge{opacity:1!important;transform:none!important;transition:none}
 }
+
+/* ===== janela do Pix ===== */
+.fundo{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.7);display:flex;align-items:flex-end;justify-content:center}
+.fundo[hidden]{display:none}
+.janela{background:var(--asfalto2);width:100%;max-width:520px;max-height:94vh;overflow:auto;border-radius:22px 22px 0 0;
+  padding:22px max(20px,env(safe-area-inset-right,0px)) calc(24px + env(safe-area-inset-bottom,0px)) max(20px,env(safe-area-inset-left,0px));
+  display:flex;flex-direction:column;gap:16px;animation:sobe .25s ease-out}
+@keyframes sobe{from{transform:translateY(40px);opacity:.5}}
+@media (min-width:700px){.fundo{align-items:center}.janela{border-radius:22px}}
+.janela h3{font-family:var(--display);font-weight:800;font-size:34px;margin:0;line-height:1.05}
+.janela .resumo{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-size:22px;font-weight:700;background:var(--asfalto);border-radius:14px;padding:14px 16px}
+.janela .resumo b{font-family:var(--display);font-size:32px;color:var(--placa)}
+.janela label{display:flex;flex-direction:column;gap:8px;font-weight:700;font-size:21px}
+.janela label small{font-weight:500;color:var(--apagado);font-size:18px}
+.janela input{font:inherit;font-size:22px;padding:16px;border-radius:14px;border:2px solid var(--linha);background:var(--asfalto);color:var(--texto);width:100%;min-width:0}
+.janela input:focus{outline:3px solid var(--placa);outline-offset:1px}
+.janela .erro{color:#ff8a80;font-weight:700;font-size:19px}
+.janela .erro:empty{display:none}
+.janela .fechar{background:none;border:none;color:var(--apagado);font:inherit;font-size:19px;text-decoration:underline;padding:10px;cursor:pointer;align-self:center}
+.janela .btn{max-width:none;border:none;cursor:pointer}
+.janela .btn[disabled]{opacity:.6}
+.qr{align-self:center;background:#fff;border-radius:16px;padding:12px;width:240px;max-width:100%}
+.qr img{display:block;width:100%;height:auto;image-rendering:pixelated}
+.codigo{font-family:ui-monospace,monospace;font-size:14px;word-break:break-all;background:var(--asfalto);border:2px dashed var(--linha);border-radius:12px;padding:12px;max-height:90px;overflow:auto;color:var(--apagado)}
+.passos-pix{margin:0;padding-left:26px;display:flex;flex-direction:column;gap:6px;font-size:20px}
+.esperando{display:flex;align-items:center;gap:12px;font-weight:700;color:var(--placa)}
+.esperando i{width:22px;height:22px;border-radius:50%;border:3px solid var(--placa);border-right-color:transparent;animation:gira 1s linear infinite;flex:none}
+@keyframes gira{to{transform:rotate(360deg)}}
+.aprovado{text-align:center;display:flex;flex-direction:column;gap:14px;align-items:center}
+.aprovado svg{width:96px;height:96px;color:var(--ok)}
 </style>
 </head>
 <body>
@@ -292,6 +322,10 @@ footer{padding-block:28px 40px;color:var(--apagado);font-size:17px;border-top:2p
 </div></section>
 </main>
 
+
+<div class="fundo" id="pix" hidden role="dialog" aria-modal="true" aria-labelledby="pix-titulo">
+ <div class="janela" id="pix-janela"></div>
+</div>
 <div class="barra" id="barra" aria-hidden="true"><span class="preco">R$ 24,90<small>por mês</small></span><a class="btn" href="#preco" tabindex="-1">Quero o meu</a></div>
 
 <footer class="faixa" style="padding-bottom:110px">Diário de Bordo · <a href="/nuvem/" style="color:inherit">Já sou cliente</a></footer>
@@ -317,6 +351,73 @@ const calmo=matchMedia('(prefers-reduced-motion: reduce)').matches;
 (function(){const barra=document.getElementById('barra'),abre=document.querySelector('.abre'),preco=document.getElementById('preco');
   const at=()=>{const passou=scrollY>innerHeight*0.9,r=preco.getBoundingClientRect(),noPreco=r.top<innerHeight&&r.bottom>0;barra.classList.toggle('mostra',passou&&!noPreco)};
   addEventListener('scroll',at,{passive:true});at()})();
+
+// ===== Pix =====
+const PIX_URL='https://kmaldmypdvapihsxpfmz.supabase.co/functions/v1/pix';
+const PLANOS={mensal:{nome:'Mensal',valor:'R$ 24,90',obs:'30 dias de acesso'},anual:{nome:'Anual',valor:'R$ 179,90',obs:'1 ano de acesso'}};
+const fundo=document.getElementById('pix'),jan=document.getElementById('pix-janela');
+let emailPix=(new URLSearchParams(location.search).get('email')||'').trim(),planoPix='anual',espera=null;
+const escH=t=>String(t||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function fecharPix(){clearInterval(espera);fundo.hidden=true;document.body.style.overflow=''}
+fundo.addEventListener('click',e=>{if(e.target===fundo)fecharPix()});
+addEventListener('keydown',e=>{if(e.key==='Escape'&&!fundo.hidden)fecharPix()});
+function telaEmail(){
+  const P=PLANOS[planoPix];
+  jan.innerHTML=`<h3 id="pix-titulo">Quase lá</h3>
+   <div class="resumo"><span>Plano ${P.nome}<br><small style="font-weight:500;color:var(--apagado);font-size:17px">${P.obs}</small></span><b>${P.valor}</b></div>
+   <label>Seu e-mail<small>É com ele que você vai entrar no app.</small><input id="pix-email" type="email" inputmode="email" autocomplete="email" autocapitalize="off" placeholder="seuemail@gmail.com" value="${escH(emailPix)}"></label>
+   <div class="erro" id="pix-erro"></div>
+   <button class="btn" id="pix-ok">Gerar Pix</button>
+   <button class="fechar" id="pix-x">Voltar</button>`;
+  document.getElementById('pix-x').onclick=fecharPix;
+  const ok=document.getElementById('pix-ok'),inp=document.getElementById('pix-email');
+  inp.addEventListener('keydown',e=>{if(e.key==='Enter')ok.click()});
+  ok.onclick=async()=>{
+    const e=inp.value.trim().toLowerCase(),err=document.getElementById('pix-erro');
+    if(!/^\S+@\S+\.\S+$/.test(e)){err.textContent='Confira o e-mail. Exemplo: joao@gmail.com';return}
+    emailPix=e;ok.disabled=true;ok.textContent='Gerando…';err.textContent='';
+    try{
+      const r=await fetch(PIX_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({acao:'criar',email:e,plano:planoPix})});
+      const d=await r.json();if(!r.ok||!d.copia_e_cola)throw new Error(d.erro||'erro');
+      telaPix(d);
+    }catch(x){ok.disabled=false;ok.textContent='Gerar Pix';err.textContent='Não deu para gerar o Pix agora. Tente de novo em instantes.'}
+  };
+  setTimeout(()=>inp.focus(),80);
+}
+function telaPix(d){
+  const P=PLANOS[planoPix];
+  jan.innerHTML=`<h3 id="pix-titulo">Pague com Pix</h3>
+   <div class="resumo"><span>Plano ${P.nome}</span><b>${P.valor}</b></div>
+   ${d.qr_base64?`<div class="qr"><img alt="QR Code do Pix" src="data:image/png;base64,${d.qr_base64}"></div>`:''}
+   <button class="btn" id="pix-copiar">Copiar código Pix</button>
+   <div class="codigo" id="pix-codigo">${escH(d.copia_e_cola)}</div>
+   <ol class="passos-pix"><li>Toque em <b>Copiar código Pix</b>.</li><li>Abra o app do seu banco e vá em <b>Pix copia e cola</b>.</li><li>Cole o código e pague.</li></ol>
+   <div class="esperando"><i></i>Esperando o pagamento…</div>
+   <p style="font-size:17px;color:var(--apagado)">Pode deixar esta tela aberta. Quando o Pix cair, ela muda sozinha.</p>
+   <button class="fechar" id="pix-x">Fechar</button>`;
+  document.getElementById('pix-x').onclick=fecharPix;
+  const cp=document.getElementById('pix-copiar');
+  cp.onclick=async()=>{try{await navigator.clipboard.writeText(d.copia_e_cola);cp.textContent='Copiado! Agora cole no banco'}catch(_){const r=document.createRange();r.selectNodeContents(document.getElementById('pix-codigo'));const s=getSelection();s.removeAllRanges();s.addRange(r);cp.textContent='Segure no código e toque em Copiar'}};
+  const inicio=Date.now();clearInterval(espera);
+  espera=setInterval(async()=>{
+    if(Date.now()-inicio>35*60e3){clearInterval(espera);return}
+    try{const r=await fetch(PIX_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({acao:'status',id:d.id})});const j=await r.json();
+      if(j.status==='approved'){clearInterval(espera);telaAprovado()}
+      else if(j.status==='cancelled'||j.status==='rejected'){clearInterval(espera);jan.querySelector('.esperando').innerHTML='O Pix venceu. Feche e gere outro.'}
+    }catch(_){}
+  },4000);
+}
+function telaAprovado(){
+  jan.innerHTML=`<div class="aprovado">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M7.5 12.5l3 3 6-6.5"/></svg>
+    <h3 id="pix-titulo">Pagamento aprovado!</h3>
+    <p style="font-size:21px">Agora entre no app com o e-mail<br><b>${escH(emailPix)}</b></p>
+    <a class="btn" href="/nuvem/?email=${encodeURIComponent(emailPix)}">Abrir o app</a>
+  </div>`;
+}
+document.querySelectorAll('[data-plano]').forEach(a=>a.addEventListener('click',e=>{
+  e.preventDefault();planoPix=a.dataset.plano;fundo.hidden=false;document.body.style.overflow='hidden';telaEmail();
+}));
 // Quando o vídeo estiver pronto, coloque o link do YouTube aqui e a seção aparece sozinha.
 const VIDEO_YOUTUBE='';
 if(VIDEO_YOUTUBE){const id=(VIDEO_YOUTUBE.match(/(?:v=|youtu\.be\/|shorts\/)([\w-]{11})/)||[])[1];
