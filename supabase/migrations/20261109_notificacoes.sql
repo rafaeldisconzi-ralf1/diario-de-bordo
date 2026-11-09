@@ -33,12 +33,12 @@ create extension if not exists pg_net;
 create extension if not exists pg_cron;
 create or replace function public.chamar_avisos() returns void
 language plpgsql security definer set search_path = public as
-$$ declare chave text; begin
-  select valor into chave from config_privada where chave = 'cron_key';
-  if chave is null then return; end if;
+$$ declare k text; begin
+  select valor into k from config_privada where config_privada.chave = 'cron_key';
+  if k is null then return; end if;
   perform net.http_post(
     url := 'https://kmaldmypdvapihsxpfmz.supabase.co/functions/v1/avisos',
-    headers := jsonb_build_object('Content-Type','application/json','x-cron', chave),
+    headers := jsonb_build_object('Content-Type','application/json','x-cron', k),
     body := '{"acao":"vencimentos"}'::jsonb);
 end $$;
 revoke all on function public.chamar_avisos() from public, anon, authenticated;
