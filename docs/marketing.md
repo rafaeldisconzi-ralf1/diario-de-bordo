@@ -32,6 +32,13 @@ Fontes em `marketing/videos/`:
 - Legendas: whisper.cpp local (modelo medium) para os tempos das palavras.
 - Render: `npx hyperframes render` com `HYPERFRAMES_BROWSER_PATH=/usr/bin/google-chrome` e GSAP local (CDN bloqueado).
 
+## Instagram (@appdiariodebordo)
+Criado em 10/11/2026, perfil vazio. Arquivos em `marketing/instagram/` (`perfil.md` tem nome, bio, link e categoria).
+- Foto: opção A (só caminhão, igual ao ícone) ou B (caminhão + "DIÁRIO DE BORDO"). Aguardando escolha do Rafael.
+- Bio pronta (134 letras), link para `/assinar/`.
+- Como trabalhamos: Claude prepara, Rafael aprova, só então posta pelo Chrome dele.
+- Próximo: postar os vídeos V1–V6 como Reels e montar os primeiros posts fixados.
+
 ## Ideias e próximos passos
 - Postar um vídeo por dia nos grupos/Status e ver qual gancho traz mais visitas.
 - Gravar o pai usando o app na boleia; colocar o link do YouTube na página.
