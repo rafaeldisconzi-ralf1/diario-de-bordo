@@ -30,3 +30,9 @@ Mudanças no código de pagamento (`supabase/functions/pix`, janela de pagamento
   e trocar o token no Supabase.
 - **Marca**: escolher nome novo e registrar no INPI (classes 9 e 42). Ver `decisoes.md`.
 - Futuro: assinatura com renovação automática no cartão.
+
+## Acessos de cortesia
+Liberados pelo SQL Editor do Supabase: uma linha em `pagamentos` com id `cortesia-<email>`, valor 0, status `approved`.
+Se a conta ainda não existe, vale no primeiro login (gatilho `novo_usuario` → `aplicar_pagamentos`); se já existe,
+rodar `select aplicar_pagamentos('<email>')`. Não entram como venda (valor 0).
+- 10/11/2026: luiscarlosdisconzi2529@gmail.com e leandrobomfim16089912@gmail.com — 365 dias (pedido do Rafael).
