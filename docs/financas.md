@@ -7,7 +7,7 @@ tabela `pagamentos`, resumo semanal/mensal de `rotinas.md` e as pendências abai
 Mudanças no código de pagamento (`supabase/functions/pix`, janela de pagamento em `assinar/`) também passam por ela.
 
 ## Preços
-- Mensal: R$ 24,90 (30 dias) · Anual: R$ 179,90 (365 dias; equivale a R$ 14,99/mês; até 12x no cartão)
+- Mensal: R$ 24,90 (30 dias) — **preço de lançamento**; depois do lançamento passa para R$ 49,90 (data a definir) · Anual: R$ 179,90 (365 dias; equivale a R$ 14,99/mês; até 12x no cartão)
 - Concorrência pesquisada: R$ 20–30/mês, com promoção anual.
 
 ## Taxas (Mercado Pago)

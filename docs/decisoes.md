@@ -15,3 +15,4 @@
 | 10/11/2026 | Viagem conta no mês em que **terminou** (em andamento: mês atual), no app com conta e no relatório | o frete é recebido na entrega; o resultado só fecha no fim da viagem. O app do pai (raiz) ainda usa o mês de início |
 
 Nomes checados no INPI em 10/11/2026: "Conta da Boleia" e "Sobrou na Estrada" sem registro; "Boleia" e "Frete Certo" com histórico parecido (evitar).
+| 10/11/2026 | **Preço de lançamento** R$ 24,90; depois do lançamento o mensal passa para **R$ 49,90** (página de vendas diz isso) | o Rafael acha que o app vale R$ 49,90. Para a frase continuar verdadeira, o preço precisa subir de fato quando o lançamento acabar. Não usar "Era/De R$ 49,90", porque nunca foi cobrado (CDC) |
