@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#2b2e33">
-<meta name="app-version" content="nuvem-2026-11-10.1">
+<meta name="app-version" content="nuvem-2026-11-10.2">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Diário de Bordo">
@@ -718,7 +718,8 @@ async function abrirInstalar(primeiraVez){
     corpo=(safari?'':'<div class="note" style="margin:0;font-size:17px"><b>No iPhone, abra este endereço no Safari</b> (a bússola azul) e faça os passos abaixo.</div>')+
       passos([[IC.share,'Toque no botão <b>Compartilhar</b> (o quadrado com a seta para cima), embaixo ou em cima da tela'],
               [IC.add,'Role e toque em <b>Adicionar à Tela de Início</b>'],
-              [IC.ok,'Toque em <b>Adicionar</b>. Pronto: o ícone amarelo aparece junto dos seus apps']]);
+              [IC.ok,'Toque em <b>Adicionar</b>. Pronto: o ícone amarelo aparece junto dos seus apps']])+
+      '<div class="note" style="margin:0;font-size:17px">Na primeira vez que abrir pelo ícone, ele pede o código do e-mail de novo. É só uma vez, e seus lançamentos continuam lá.</div>';
   }else if(window.__bip){
     corpo=`<p class="muted" style="margin:0;font-size:18px">É um toque só. O ícone amarelo vai aparecer junto dos seus apps.</p>
       <button class="save" id="instOk" style="min-height:64px;border-radius:12px;font-weight:700;font-size:20px">📲 Colocar na tela agora</button>`;
