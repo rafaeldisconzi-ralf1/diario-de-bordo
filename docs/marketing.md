@@ -34,8 +34,9 @@ Fontes em `marketing/videos/`:
 
 ## Instagram (@appdiariodebordo)
 Criado em 10/11/2026, perfil vazio. Arquivos em `marketing/instagram/` (`perfil.md` tem nome, bio, link e categoria).
-- Foto: opção A (só caminhão, igual ao ícone) ou B (caminhão + "DIÁRIO DE BORDO"). Aguardando escolha do Rafael.
-- Bio pronta (134 letras), link para `/assinar/`.
+- No ar (10/11): foto B (caminhão + "DIÁRIO DE BORDO"), nome "Diário de Bordo Caminhoneiro", bio de 4 linhas.
+- Nome só pode mudar 2 vezes em 14 dias (Central de Contas da Meta).
+- Falta o link `/assinar/`: o Instagram só deixa pôr link pelo app do celular.
 - Como trabalhamos: Claude prepara, Rafael aprova, só então posta pelo Chrome dele.
 - Próximo: postar os vídeos V1–V6 como Reels e montar os primeiros posts fixados.
 
