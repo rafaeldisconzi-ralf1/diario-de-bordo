@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#2b2e33">
-<meta name="app-version" content="nuvem-2026-11-10.2">
+<meta name="app-version" content="nuvem-2026-11-10.3">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Diário de Bordo">
@@ -500,7 +500,9 @@ function abrirRelatorio(){
   open(`<h3>Relatório</h3><p class="muted" style="margin:0">Uma planilha com as viagens, o diesel, os gastos e quanto sobrou no mês.</p>
    <label class="f">Qual mês?</label>
    <div class="chips">${ms.map((m,k)=>`<button class="chip" aria-pressed="${k===0}" data-mes="${m}">${nomeMes(m)}</button>`).join('')}</div>
-   <button class="save" id="rel-ok" style="min-height:64px;border-radius:12px;font-weight:700;font-size:20px">Gerar planilha</button>`,null);
+   <button class="save" id="rel-ok" style="min-height:64px;border-radius:12px;font-weight:700;font-size:20px">Gerar planilha</button>
+   ${SESS?`<button class="btn full" id="rel-mail" style="min-height:60px;font-size:19px">📧 Mandar para meu e-mail</button>
+   <div class="note" style="text-align:center;margin-top:-4px">Chega em ${esc(SESS.user.email)}</div>`:''}`,null);
   document.querySelectorAll('[data-mes]').forEach(b=>b.onclick=()=>{mes=b.dataset.mes;document.querySelectorAll('[data-mes]').forEach(x=>x.setAttribute('aria-pressed',x===b))});
   document.getElementById('rel-ok').onclick=async e=>{
     const bt=e.currentTarget;bt.disabled=true;bt.textContent='Montando…';
@@ -518,6 +520,22 @@ function abrirRelatorio(){
       const url=URL.createObjectURL(arq),a=document.createElement('a');a.href=url;a.download=nome;document.body.appendChild(a);a.click();a.remove();
       setTimeout(()=>URL.revokeObjectURL(url),4000);close();toast('Planilha baixada');
     }catch(x){console.warn(x);bt.disabled=false;bt.textContent='Gerar planilha';toast('Não deu para gerar agora. Tente de novo.')}
+  };
+  const bm=document.getElementById('rel-mail');
+  if(bm)bm.onclick=async()=>{
+    if(!navigator.onLine)return toast('Precisa de internet para mandar');
+    bm.disabled=true;bm.textContent='Mandando…';
+    try{
+      await carregarXlsx();
+      const {wb,tot,n}=montarPlanilha(mes);
+      const arquivo=XLSX.write(wb,{bookType:'xlsx',type:'base64'});
+      const resumo=`${nomeMes(mes)}: ${n} ${n===1?'viagem':'viagens'}, faturamento ${brl(tot.fat)}, sobrou ${brl(tot.sobra)}.`;
+      const {data}=await sb.auth.getSession();const t=data.session&&data.session.access_token;
+      const r=await fetch(SB_URL+'/functions/v1/relatorio',{method:'POST',headers:{'Content-Type':'application/json',apikey:SB_KEY,Authorization:'Bearer '+t},body:JSON.stringify({mes,arquivo,resumo,nome:S.perfil.nome||''})});
+      const j=await r.json().catch(()=>({}));
+      if(!r.ok)throw new Error(j.erro||'Não deu para mandar agora.');
+      close();toast('Enviado para '+j.email);
+    }catch(x){bm.disabled=false;bm.textContent='📧 Mandar para meu e-mail';toast(x.message||'Não deu para mandar agora.')}
   };
 }
 
