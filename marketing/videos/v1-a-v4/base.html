@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="pt-BR" data-resolution="portrait">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1080, height=1920" />
+<script src="gsap.min.js"></script>
+<style>
+@font-face{font-family:"Barlow";font-weight:600;src:url("fonts/barlow-latin-600-normal.woff2") format("woff2")}
+@font-face{font-family:"Barlow";font-weight:700;src:url("fonts/barlow-latin-700-normal.woff2") format("woff2")}
+@font-face{font-family:"Barlow";font-weight:800;src:url("fonts/barlow-latin-800-normal.woff2") format("woff2")}
+@font-face{font-family:"Barlow Condensed";font-weight:800;src:url("fonts/barlow-condensed-latin-800-normal.woff2") format("woff2")}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#16181b}
+body{font-family:"Barlow",sans-serif;color:#f4f3ee}
+.cond{font-family:"Barlow Condensed",sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:.5px}
+#bg{position:absolute;inset:0;background:#16181b;overflow:hidden}
+#glow{position:absolute;left:-300px;top:200px;width:1680px;height:1680px;border-radius:50%;background:radial-gradient(circle,rgba(242,183,5,.16) 0%,rgba(242,183,5,0) 62%)}
+.lane{position:absolute;top:-400px;width:16px;height:2720px;background:repeating-linear-gradient(180deg,rgba(242,183,5,.22) 0 140px,transparent 140px 340px)}
+#lane1{left:532px}
+.edge{position:absolute;top:0;width:10px;height:1920px;background:rgba(244,243,238,.08)}
+#edgeL{left:70px}#edgeR{right:70px}
+.scene{position:absolute;inset:0;overflow:hidden}
+/* S1 */
+#s1 .scene-content{width:100%;height:100%;display:flex;flex-direction:column;justify-content:center;padding:0 90px;gap:6px}
+#s1 .k{font-size:110px;color:#f2b705;line-height:1}
+#s1 .h{font-size:200px;line-height:.92}
+#s1 .h.y{color:#f2b705}
+/* phone scene */
+#sp{opacity:0}
+#lblWrap{position:absolute;left:0;right:0;top:95px;height:190px}
+.lbl{position:absolute;left:0;right:0;top:0;text-align:center;font-size:150px;line-height:1.05;opacity:0}
+.lbl span{color:#f2b705}
+#phone{position:absolute;left:222px;top:300px;width:636px;height:1334px;border-radius:70px;background:#0b0c0e;border:3px solid #383c42;padding:18px;box-shadow:0 40px 120px rgba(0,0,0,.6),0 0 0 10px rgba(242,183,5,.08)}
+#screen{position:relative;width:600px;height:1298px;border-radius:52px;overflow:hidden;background:#f4f3ee}
+#screen img{position:absolute;left:0;top:0;width:600px;height:1298px}
+.scr{opacity:0}
+#scr1{opacity:1}
+#tap{position:absolute;width:150px;height:150px;margin:-75px 0 0 -75px;border-radius:50%;border:8px solid #f2b705;background:rgba(242,183,5,.25);opacity:0}
+#hl{position:absolute;left:16px;top:855px;width:568px;height:76px;border:6px solid #f2b705;border-radius:14px;opacity:0;box-shadow:0 0 0 2000px rgba(0,0,0,.35)}
+/* captions */
+#caps{position:absolute;left:60px;right:60px;top:1690px;height:240px}
+.cg{position:absolute;left:0;right:0;top:0;text-align:center;font-family:"Barlow",sans-serif;font-weight:800;font-size:80px;line-height:1.08;opacity:0;text-shadow:0 4px 18px rgba(0,0,0,.7)}
+.cg b{font-weight:800;color:#f4f3ee}
+/* S7 */
+#s7,#s7b,#s8{opacity:0}
+.big{width:100%;height:100%;display:flex;flex-direction:column;justify-content:center;padding:0 90px;gap:10px}
+.big .t1{font-size:120px;color:#c3c6ca;line-height:1}
+.big .t2{font-size:190px;line-height:.95;position:relative;display:inline-block;align-self:flex-start}
+.strike{position:absolute;left:-10px;right:-10px;top:52%;height:22px;background:#f2b705;transform-origin:left center;border-radius:6px}
+.big .y{color:#f2b705}
+#sig{width:230px;height:230px;margin-bottom:30px}
+/* S8 */
+#s8 .scene-content{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:34px;padding:0 80px;text-align:center}
+#ico{width:300px;height:300px;border-radius:66px;box-shadow:0 30px 90px rgba(0,0,0,.55)}
+#marca{font-size:170px;line-height:.9}
+#preco{background:#f2b705;color:#1d1f22;font-size:96px;padding:18px 44px;border-radius:22px;line-height:1}
+#cta{font-size:62px;font-weight:700;color:#f4f3ee;border:4px solid #f2b705;border-radius:999px;padding:22px 54px}
+#fade{position:absolute;inset:0;background:#16181b;opacity:0}
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="30.5" data-width="1080" data-height="1920">
+  <div id="bg"><div id="glow"></div><div class="edge" id="edgeL"></div><div class="edge" id="edgeR"></div><div class="lane" id="lane1"></div></div>
+
+  <div id="s1" class="scene"><div class="scene-content">
+    <div class="k cond" id="s1k">Caminhoneiro,</div>
+    <div class="h cond" id="s1a">quanto sobrou</div>
+    <div class="h cond" id="s1b">da sua última</div>
+    <div class="h cond y" id="s1c">viagem?</div>
+  </div></div>
+
+  <div id="sp" class="scene">
+    <div id="lblWrap">
+      <div class="lbl cond" id="l1">Tudo no <span>celular</span></div>
+      <div class="lbl cond" id="l2"><span>Abasteceu?</span></div>
+      <div class="lbl cond" id="l3">Pagou <span>pedágio?</span></div>
+      <div class="lbl cond" id="l4">Ficou <span>parado?</span></div>
+      <div class="lbl cond" id="l5"><span>Chegou?</span></div>
+      <div class="lbl cond" id="l6">Quanto <span>sobrou</span></div>
+    </div>
+    <div id="phone"><div id="screen">
+      <img id="scr1" class="scr" src="01-inicio.png" alt="">
+      <img id="scr2" class="scr" src="02-abasteci.png" alt="">
+      <img id="scr3" class="scr" src="03-gastei.png" alt="">
+      <img id="scr4" class="scr" src="04-diaria.png" alt="">
+      <img id="scr5" class="scr" src="06-cheguei.png" alt="">
+      <img id="scr6" class="scr" src="07-sobrou.png" alt="">
+      <div id="hl"></div>
+      <div id="tap"></div>
+    </div></div>
+    <div id="caps"><div class="cg" id="cg0"><b id="cg0w0">Com</b> <b id="cg0w1">o</b> <b id="cg0w2">Diário</b> <b id="cg0w3">de</b> <b id="cg0w4">Bordo,</b></div><div class="cg" id="cg1"><b id="cg1w0">você</b> <b id="cg1w1">anota</b> <b id="cg1w2">tudo</b> <b id="cg1w3">no</b> <b id="cg1w4">celular,</b></div><div class="cg" id="cg2"><b id="cg2w0">em</b> <b id="cg2w1">poucos</b> <b id="cg2w2">toques.</b></div><div class="cg" id="cg3"><b id="cg3w0">Abasteceu?</b></div><div class="cg" id="cg4"><b id="cg4w0">Lança</b> <b id="cg4w1">o</b> <b id="cg4w2">diesel.</b></div><div class="cg" id="cg5"><b id="cg5w0">Pagou</b> <b id="cg5w1">pedágio?</b></div><div class="cg" id="cg6"><b id="cg6w0">Lança</b> <b id="cg6w1">o</b> <b id="cg6w2">gasto.</b></div><div class="cg" id="cg7"><b id="cg7w0">Ficou</b> <b id="cg7w1">parado?</b></div><div class="cg" id="cg8"><b id="cg8w0">Lança</b> <b id="cg8w1">a</b> <b id="cg8w2">diária.</b></div><div class="cg" id="cg9"><b id="cg9w0">Chegou</b> <b id="cg9w1">no</b> <b id="cg9w2">destino?</b></div><div class="cg" id="cg10"><b id="cg10w0">O</b> <b id="cg10w1">app</b> <b id="cg10w2">faz</b> <b id="cg10w3">a</b> <b id="cg10w4">conta</b></div><div class="cg" id="cg11"><b id="cg11w0">e</b> <b id="cg11w1">mostra</b> <b id="cg11w2">na</b> <b id="cg11w3">hora</b></div><div class="cg" id="cg12"><b id="cg12w0">quanto</b> <b id="cg12w1">sobrou.</b></div></div>
+  </div>
+
+  <div id="s7" class="scene"><div class="big">
+    <div class="t1 cond" id="s7a">Chega de</div>
+    <div class="t2 cond" id="s7b1">caderninho<div class="strike" id="k1"></div></div>
+    <div class="t1 cond" id="s7c">e de</div>
+    <div class="t2 cond" id="s7d">planilha<div class="strike" id="k2"></div></div>
+  </div></div>
+
+  <div id="s7b" class="scene"><div class="big">
+    <svg id="sig" viewBox="0 0 24 24" fill="none" stroke="#f2b705" stroke-width="2.2" stroke-linecap="round"><path d="M2 20h.01"/><path d="M7 20v-4"/><path d="M12 20v-8"/><path d="M17 20V8"/><path d="M22 4v16" opacity=".35"/></svg>
+    <div class="t1 cond" id="s7e">Funciona até</div>
+    <div class="t2 cond y" id="s7f">sem sinal</div>
+    <div class="t1 cond" id="s7g">na estrada</div>
+  </div></div>
+
+  <div id="s8" class="scene"><div class="scene-content">
+    <img id="ico" src="icon-512.png" alt="">
+    <div id="marca" class="cond">Diário de Bordo</div>
+    <div id="preco" class="cond">Menos de R$ 1 por dia</div>
+    <div id="cta">Toque no link e comece hoje</div>
+  </div></div>
+  <div id="fade"></div>
+
+  <audio id="vo" data-start="0" data-duration="27.25" data-track-index="2" src="narracao.mp3" data-volume="1"></audio>
+</div>
+<script>
+window.__timelines=window.__timelines||{};
+(function(){
+var G=[{"s": 3.7, "e": 4.86, "w": [["Com", 3.7], ["o", 3.86], ["Diário", 3.92], ["de", 4.39], ["Bordo,", 4.47]]}, {"s": 4.88, "e": 6.82, "w": [["você", 4.88], ["anota", 5.2], ["tudo", 5.6], ["no", 5.92], ["celular,", 6.08]]}, {"s": 6.84, "e": 8.12, "w": [["em", 6.84], ["poucos", 7.06], ["toques.", 7.56]]}, {"s": 8.14, "e": 9.12, "w": [["Abasteceu?", 8.14]]}, {"s": 9.14, "e": 10.24, "w": [["Lança", 9.14], ["o", 9.57], ["diesel.", 9.91]]}, {"s": 10.26, "e": 11.32, "w": [["Pagou", 10.26], ["pedágio?", 10.59]]}, {"s": 11.34, "e": 12.56, "w": [["Lança", 11.34], ["o", 11.75], ["gasto.", 11.82]]}, {"s": 12.58, "e": 13.64, "w": [["Ficou", 12.58], ["parado?", 12.93]]}, {"s": 13.66, "e": 14.92, "w": [["Lança", 13.66], ["a", 14.09], ["diária.", 14.09]]}, {"s": 14.94, "e": 16.16, "w": [["Chegou", 14.94], ["no", 15.31], ["destino?", 15.43]]}, {"s": 16.18, "e": 17.17, "w": [["O", 16.18], ["app", 16.24], ["faz", 16.48], ["a", 16.71], ["conta", 16.95]]}, {"s": 17.19, "e": 18.19, "w": [["e", 17.19], ["mostra", 17.27], ["na", 17.74], ["hora", 17.9]]}, {"s": 18.21, "e": 19.3, "w": [["quanto", 18.21], ["sobrou.", 18.68]]}];
+var tl=gsap.timeline({paused:true});
+// fundo vivo
+tl.fromTo("#lane1",{y:-340},{y:0,duration:1.1,ease:"none",repeat:Math.max(0,Math.floor(30.5/1.1)-1)},0);
+tl.fromTo("#glow",{scale:.92,opacity:.8},{scale:1.08,opacity:1,duration:3,ease:"sine.inOut",yoyo:true,repeat:9},0);
+
+// S1 gancho
+tl.from("#s1k",{x:-120,opacity:0,duration:.45,ease:"power3.out"},0.12);
+tl.from("#s1a",{y:90,opacity:0,duration:.5,ease:"back.out(1.6)"},1.45);
+tl.from("#s1b",{y:90,opacity:0,duration:.5,ease:"expo.out"},2.2);
+tl.from("#s1c",{scale:1.6,opacity:0,duration:.5,ease:"power4.out",transformOrigin:"left center"},2.95);
+
+// transição S1 -> celular
+tl.to("#s1",{y:-1920,duration:.4,ease:"power3.in"},3.4);
+tl.set("#sp",{opacity:1},3.5);
+tl.from("#phone",{y:1500,duration:.7,ease:"power3.out"},3.6);
+tl.set("#s1",{opacity:0},4.05);
+
+// rótulos (um por vez)
+var L=[["#l1",4.0,8.1],["#l2",8.12,10.25],["#l3",10.27,12.55],["#l4",12.57,14.9],["#l5",14.92,16.18],["#l6",16.2,19.4]];
+var eases=["expo.out","back.out(2)","power4.out","back.out(1.7)","expo.out","power3.out"];
+L.forEach(function(l,i){
+  tl.fromTo(l[0],{opacity:0,y:50,scale:.9},{opacity:1,y:0,scale:1,duration:.35,ease:eases[i]},l[1]);
+  if(i<L.length-1) tl.set(l[0],{opacity:0},l[2]);
+});
+
+// telas
+function troca(de,para,t){tl.set(para,{opacity:1,x:520},t);tl.to(para,{x:0,duration:.38,ease:"power3.out"},t);tl.set(de,{opacity:0},t+.4)}
+function toque(x,y,t){tl.set("#tap",{left:x,top:y,scale:.4,opacity:.95},t);tl.to("#tap",{scale:1.5,opacity:0,duration:.45,ease:"power2.out"},t)}
+toque(96,615,7.6);
+troca("#scr1","#scr2",8.12);
+toque(396,1218,9.75);
+troca("#scr2","#scr3",10.27);
+toque(396,1218,12.05);
+troca("#scr3","#scr4",12.57);
+toque(396,1218,14.35);
+troca("#scr4","#scr5",14.92);
+toque(396,1218,15.75);
+troca("#scr5","#scr6",16.2);
+tl.fromTo("#hl",{opacity:0,scale:1.15},{opacity:1,scale:1,duration:.35,ease:"back.out(2)"},18.15);
+tl.to("#phone",{scale:1.04,duration:1.2,ease:"sine.inOut"},18.1);
+
+// legendas
+G.forEach(function(g,gi){
+  var el="#cg"+gi;
+  tl.fromTo(el,{opacity:0,y:24},{opacity:1,y:0,duration:.16,ease:"power2.out"},g.s);
+  g.w.forEach(function(w,wi){tl.set("#cg"+gi+"w"+wi,{color:"#f2b705"},w[1]);if(wi>0)tl.set("#cg"+gi+"w"+(wi-1),{color:"#f4f3ee"},w[1])});
+  tl.set(el,{opacity:0},g.e);
+});
+
+// transição celular -> S7
+tl.to("#sp",{scale:.85,opacity:0,duration:.4,ease:"power2.in"},19.3);
+tl.set("#s7",{opacity:1},19.4);
+tl.from("#s7a",{x:-160,opacity:0,duration:.4,ease:"power3.out"},19.42);
+tl.from("#s7b1",{y:80,opacity:0,duration:.45,ease:"back.out(1.6)"},19.8);
+tl.from("#k1",{scaleX:0,duration:.35,ease:"power2.inOut"},20.4);
+tl.from("#s7c",{x:-120,opacity:0,duration:.35,ease:"expo.out"},20.55);
+tl.from("#s7d",{y:80,opacity:0,duration:.45,ease:"power4.out"},20.7);
+tl.from("#k2",{scaleX:0,duration:.35,ease:"power2.inOut"},21.35);
+
+// S7 -> S7b (empurra para o lado)
+tl.to("#s7",{x:-1080,duration:.45,ease:"power3.inOut"},21.8);
+tl.set("#s7b",{opacity:1,x:1080},21.8);
+tl.to("#s7b",{x:0,duration:.45,ease:"power3.inOut"},21.8);
+tl.from("#sig",{scale:0,rotation:-20,duration:.5,ease:"back.out(2)"},22.2);
+tl.from("#s7e",{y:50,opacity:0,duration:.35,ease:"power3.out"},22.0);
+tl.from("#s7f",{scale:1.4,opacity:0,duration:.45,ease:"expo.out",transformOrigin:"left center"},22.75);
+tl.from("#s7g",{y:50,opacity:0,duration:.35,ease:"power2.out"},23.35);
+
+// S7b -> S8
+tl.to("#s7b",{y:-1920,duration:.45,ease:"power3.in"},24.0);
+tl.set("#s8",{opacity:1},24.1);
+tl.from("#ico",{scale:0,rotation:-12,duration:.55,ease:"back.out(1.8)"},24.2);
+tl.from("#marca",{y:80,opacity:0,duration:.45,ease:"expo.out"},24.45);
+tl.from("#preco",{scale:.6,opacity:0,duration:.45,ease:"back.out(2.2)"},25.4);
+tl.from("#cta",{y:60,opacity:0,duration:.45,ease:"power3.out"},27.3);
+tl.to("#cta",{scale:1.06,duration:.5,ease:"sine.inOut",yoyo:true,repeat:3},27.9);
+tl.to("#fade",{opacity:1,duration:.4,ease:"power1.in"},30.1);
+window.__timelines["main"]=tl;
+})();
+</script>
+</body>
+</html>

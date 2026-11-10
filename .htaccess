@@ -4,3 +4,8 @@
     Header set Cache-Control "no-cache"
   </FilesMatch>
 </IfModule>
+
+# Manual e fontes de vídeo: só no GitHub, não no site
+<FilesMatch "\.(md|py|wav|mp3|webm)$">
+  Require all denied
+</FilesMatch>
