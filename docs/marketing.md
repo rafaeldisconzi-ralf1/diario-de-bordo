@@ -18,6 +18,7 @@ mexe; não andam com "reduzir movimento"), com bolinhas indicando qual está na 
 | V4 diárias | "Ficou parado esperando descarga e perdeu a conta das diárias?" | Menos de R$ 1 por dia |
 | V5 imagine (kit) | "Imagine que você rodou mil e cem quilômetros…" | Enquete: caderninho (A) ou celular (B)? |
 | V6 3 sinais (kit) | "Três sinais de que você está perdendo dinheiro na estrada" | Toque no link |
+| V7 conversa (sem voz) | Texto: "Um caminhoneiro sabe quanto sobrou. O outro não." + conversa de mensagens entre Zé e Carlos | "E você, sabe quanto sobrou?" · Toque no link · e faça igual ao Carlos |
 
 Regras: **nunca falar nem mostrar o domínio** no vídeo; nunca dados reais (placa, nome do pai).
 "Caderninho" soou infantil para o Rafael como nome; nos vídeos pode trocar por "anotar no papel" se ele pedir.
@@ -29,6 +30,7 @@ ela segue o passo a passo abaixo: roteiro para aprovar → voz (só com ok) → 
 Fontes em `marketing/videos/`:
 - `v1-a-v4/` — HyperFrames (kit "herk-edit-kit"). `base.html` é o V1; `gerar.py` monta V2–V4 trocando gancho e final
   e reaproveitando o meio da narração. Telas do app capturadas com dados inventados.
+- `v7-conversa/` — estilo conversa de mensagens, **sem narração** (custo zero). `index.html` tem a função `render(t)`; `render.py` (Playwright + ffmpeg) grava quadro a quadro; `audio.py` gera batida, "plim" de mensagem e digitação com numpy. Para outra conversa, trocar a lista `M` no `index.html` e os tempos em `audio.py`.
 - `v5-v6-kit/` — kit "série animada" (zip do Rafael): `build.py` (cenas), `mix.py` (voz + música + efeitos), `head.html`.
 - Narração: gerar na ElevenLabs pelo navegador do Rafael (o ambiente do Claude não alcança a API). Para trazer o
   áudio: capturar o `<audio>` da página com MediaRecorder, copiar como base64 e passar por um arquivo temporário
