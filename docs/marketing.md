@@ -4,6 +4,9 @@
 Visual asfalto + amarelo (fontes Barlow / Barlow Condensed), texto simples para quem lê pouco, efeitos que
 respeitam "reduzir movimento". Garantia de 7 dias. Bloco "Pagamento seguro pelo Mercado Pago".
 Faixa amarela: "Feito para facilitar sua vida".
+Depoimentos (10/11/2026): seção "O que os motoristas estão dizendo" com 4 prints de WhatsApp (Marcos, Cláudio, Juninho,
+Nando) em `assinar/img/depoimento-N.webp/.jpg`, entre a faixa amarela e os preços. O Rafael confirmou que são
+conversas reais; antes de publicar novos, confirmar que são reais e que a pessoa topou aparecer.
 
 ## Vídeos prontos (9:16, ~30 s, voz "Arnold - Br" da ElevenLabs do Rafael)
 | Vídeo | Gancho | Final |
@@ -46,6 +49,6 @@ Criado em 10/11/2026, perfil vazio. Arquivos em `marketing/instagram/` (`perfil.
 ## Ideias e próximos passos
 - Postar um vídeo por dia nos grupos/Status e ver qual gancho traz mais visitas.
 - Gravar o pai usando o app na boleia; colocar o link do YouTube na página.
-- Depoimentos dos primeiros clientes.
+- Mais depoimentos: pedir no app/WhatsApp (sempre reais e com autorização).
 - WhatsApp com IA para tirar dúvidas e mandar o link de pagamento.
 - Retenção: lembrete de vencimento já existe por notificação; falta por e-mail; resumo mensal "quanto sobrou".

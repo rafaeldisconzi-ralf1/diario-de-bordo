@@ -219,6 +219,12 @@ footer{padding-block:28px 40px;color:var(--apagado);font-size:17px;border-top:2p
 .seguro b{display:block;font-family:var(--display);font-size:30px;line-height:1.05;margin-bottom:4px}
 .selo-mp{display:flex;align-items:center;justify-content:center;gap:8px;font-size:17px;font-weight:600;color:var(--apagado);margin:0}
 .selo-mp svg{width:22px;height:22px;color:#4ea8ff;flex:none}
+
+.dep-dica{color:var(--apagado);font-size:19px;margin:10px 0 18px}
+.deps{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 2px 14px;margin:0 -16px;padding-left:16px;padding-right:16px;-webkit-overflow-scrolling:touch}
+.dep{flex:0 0 min(82vw,340px);scroll-snap-align:center;margin:0;border-radius:18px;overflow:hidden;border:2px solid var(--linha);box-shadow:0 10px 30px rgba(0,0,0,.35);background:#0b141a}
+.dep img{display:block;width:100%;height:auto}
+@media (min-width:900px){.deps{display:grid;grid-template-columns:repeat(4,1fr);overflow:visible;margin:0;padding:4px 0}.dep{flex:none}.dep-dica{font-size:18px}.so-cel{display:none}}
 </style>
 </head>
 <body>
@@ -286,6 +292,17 @@ footer{padding-block:28px 40px;color:var(--apagado);font-size:17px;border-top:2p
 <section class="faixa bloco historia"><div class="miolo">
   <h2>Feito para facilitar sua vida</h2>
   <p>Chega de caderninho e planilha de papel. Você lança tudo em poucos toques, no próprio celular, e na hora vê quanto sobrou. Menos conta pra fazer, mais tempo pra descansar.</p>
+</div></section>
+
+<section class="faixa bloco" id="depoimentos"><div class="miolo">
+  <h2>O que os motoristas <span class="amarelo">estão dizendo</span></h2>
+  <p class="dep-dica">Mensagens que recebemos no WhatsApp.<span class="so-cel"> Arraste para o lado para ver mais.</span></p>
+  <div class="deps">
+    <figure class="dep surge"><picture><source srcset="img/depoimento-1.webp" type="image/webp"><img src="img/depoimento-1.jpg" width="600" height="675" loading="lazy" decoding="async" alt="Mensagem de Marcos, motorista que usa o app"></picture></figure>
+    <figure class="dep surge"><picture><source srcset="img/depoimento-2.webp" type="image/webp"><img src="img/depoimento-2.jpg" width="600" height="675" loading="lazy" decoding="async" alt="Mensagem de Cláudio, motorista que usa o app"></picture></figure>
+    <figure class="dep surge"><picture><source srcset="img/depoimento-3.webp" type="image/webp"><img src="img/depoimento-3.jpg" width="600" height="675" loading="lazy" decoding="async" alt="Mensagem de Juninho, motorista que usa o app"></picture></figure>
+    <figure class="dep surge"><picture><source srcset="img/depoimento-4.webp" type="image/webp"><img src="img/depoimento-4.jpg" width="600" height="649" loading="lazy" decoding="async" alt="Mensagem de Nando, motorista que usa o app"></picture></figure>
+  </div>
 </div></section>
 
 <section class="faixa bloco" id="preco"><div class="miolo">
