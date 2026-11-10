@@ -1,5 +1,11 @@
 # Finanças
 
+## Conversa de finanças
+Desde 10/11/2026 existe uma conversa só para finanças e Mercado Pago no Project "Diário de Bordo".
+Ela cuida de: vendas e receitas, taxas, pagamentos (Pix e cartão), reembolsos, conta e token do Mercado Pago,
+tabela `pagamentos`, resumo semanal/mensal de `rotinas.md` e as pendências abaixo (MEI, nome no Pix, renovação automática).
+Mudanças no código de pagamento (`supabase/functions/pix`, janela de pagamento em `assinar/`) também passam por ela.
+
 ## Preços
 - Mensal: R$ 24,90 (30 dias) · Anual: R$ 179,90 (365 dias; equivale a R$ 14,99/mês; até 12x no cartão)
 - Concorrência pesquisada: R$ 20–30/mês, com promoção anual.
@@ -19,6 +25,7 @@
 - Tabela `pagamentos` no Supabase (status, valor, plano, quando foi aprovado).
 
 ## Pendências
+- **Compra de teste com cartão**: Pix real já testado (10/11/2026, aprovou e liberou a conta); falta o cartão.
 - **MEI/CNPJ**: hoje o Pix mostra o nome pessoal do Rafael. Com MEI, passar a conta do Mercado Pago para o CNPJ
   e trocar o token no Supabase.
 - **Marca**: escolher nome novo e registrar no INPI (classes 9 e 42). Ver `decisoes.md`.

@@ -14,6 +14,7 @@ Público: motoristas e donos de caminhão com pouca familiaridade com tecnologia
 - `docs/financas.md` — preços, taxas, como acompanhar vendas, pendências (MEI, marca)
 - `docs/decisoes.md` — decisões já tomadas e por quê (não reabrir sem o Rafael pedir)
 - `docs/rotinas.md` — o que fazer toda semana / todo mês
+- Conversas do Project: uma por assunto. Finanças e Mercado Pago têm conversa própria (ver `docs/financas.md`).
 - Documento vivo "Diário de Bordo: onde paramos": https://claude.ai/artifact/8AwH8QNM59JcqFtv26xUGq
 
 ## Regras que valem sempre
