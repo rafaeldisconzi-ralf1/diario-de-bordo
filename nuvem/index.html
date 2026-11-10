@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#2b2e33">
-<meta name="app-version" content="nuvem-2026-11-10.3">
+<meta name="app-version" content="nuvem-2026-11-10.5">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Diário de Bordo">
@@ -457,7 +457,7 @@ function mesesComDados(){
 }
 function carregarXlsx(){
   if(window.XLSX)return Promise.resolve();
-  return new Promise((ok,erro)=>{const s=document.createElement('script');s.src='/vendor/xlsx-0.18.5.mini.min.js';s.onload=ok;s.onerror=erro;document.head.appendChild(s)});
+  return new Promise((ok,erro)=>{const s=document.createElement('script');s.src='/vendor/xlsx-js-style-1.2.0.min.js';s.onload=ok;s.onerror=erro;document.head.appendChild(s)});
 }
 function montarPlanilha(ym){
   const tipoItem=i=>i.tipo==='diesel'?'Diesel':i.tipo==='diaria'?'Diária':i.cat==='Adiantamento'?'Adiantamento':'Gasto';
@@ -465,34 +465,67 @@ function montarPlanilha(ym){
   const trips=S.trips.filter(t=>(t.inicio||'').slice(0,7)===ym);
   const av=S.avulsos.filter(i=>(i.data||'').slice(0,7)===ym);
   const tot={fat:0,frete:0,diarias:0,diesel:0,gastos:0,com:0,sobra:0,km:0,litros:0};
+  const dt=d=>d?dBR(d)+'/'+d.slice(0,4):'';
   const linhasV=trips.map(t=>{const c=calc(t);
     tot.fat+=c.receita;tot.frete+=c.frete;tot.diarias+=c.diarias;tot.diesel+=c.diesel;tot.gastos+=c.gastos;tot.com+=c.comissao;tot.sobra+=c.lucro;tot.km+=c.km||0;tot.litros+=c.litros;
-    return {'Início':dBR(t.inicio)+'/'+(t.inicio||'').slice(0,4),'Fim':t.fim?dBR(t.fim)+'/'+t.fim.slice(0,4):'Em viagem','Origem':t.origem,'Destino':t.destino,
-      'Km saída':t.kmIni||'','Km chegada':t.kmFim||'','Km rodado':c.km||'','Frete (R$)':c.frete,'Diárias (R$)':c.diarias,'Diesel (R$)':c.diesel,'Litros':c.litros,
-      'Outros gastos (R$)':c.gastos,'Comissão (%)':t.comissao||0,'Comissão (R$)':c.comissao,'Adiantamentos (R$)':c.adiant,'Sobrou (R$)':c.lucro}});
+    return [dt(t.inicio),t.fim?dt(t.fim):'Em viagem',`${t.origem} → ${t.destino}`,c.km||'',c.frete,c.diarias,c.diesel,c.litros||'',c.gastos,c.comissao,c.lucro]});
   const avD=av.filter(i=>i.tipo==='diesel'),avG=av.filter(i=>i.tipo==='gasto'&&i.cat!=='Adiantamento'),avDi=av.filter(i=>i.tipo==='diaria');
   const sD=avD.reduce((a,i)=>a+i.valor,0),sG=avG.reduce((a,i)=>a+i.valor,0),sDi=avDi.reduce((a,i)=>a+i.valor,0),sC=avDi.reduce((a,i)=>a+i.valor*(i.comissao||0)/100,0);
   tot.diesel+=sD;tot.gastos+=sG;tot.diarias+=sDi;tot.fat+=sDi;tot.com+=sC;tot.sobra+=sDi-sC-sD-sG;tot.litros+=avD.reduce((a,i)=>a+(i.litros||0),0);
-  const P=S.perfil;
-  const resumo=[
-    ['Diário de Bordo: relatório de '+nomeMes(ym)],[],
-    ['Motorista',P.nome||''],['Caminhão',[P.modelo,P.placa].filter(Boolean).join(' · ')],[],
-    ['Viagens',trips.length],['Km rodados',tot.km],['Litros de diesel',Math.round(tot.litros*100)/100],['Média (km/L)',tot.km&&tot.litros?Math.round(tot.km/tot.litros*100)/100:''],[],
-    ['Fretes (R$)',tot.frete],['Diárias (R$)',tot.diarias],['Faturamento (R$)',tot.fat],
-    ['Diesel (R$)',tot.diesel],['Outros gastos (R$)',tot.gastos],['Comissão do motorista (R$)',tot.com],['Sobrou (R$)',tot.sobra],[],
-    ['Gerado em',new Date().toLocaleString('pt-BR')]];
   const lanc=[];
-  trips.forEach(t=>t.itens.forEach(i=>lanc.push({'Data':dBR(i.data)+'/'+(i.data||'').slice(0,4),'Onde':`${t.origem} → ${t.destino}`,'Tipo':tipoItem(i),'Descrição':descItem(i),'Observação':i.obs||'','Valor (R$)':i.valor,_d:i.data})));
-  av.forEach(i=>lanc.push({'Data':dBR(i.data)+'/'+(i.data||'').slice(0,4),'Onde':'Fora de viagem','Tipo':tipoItem(i),'Descrição':descItem(i),'Observação':i.obs||'','Valor (R$)':i.valor,_d:i.data}));
-  lanc.sort((a,b)=>a._d<b._d?-1:1);lanc.forEach(l=>delete l._d);
-  const wb=XLSX.utils.book_new(),dinheiro='"R$" #,##0.00';
-  const formata=(ws,cols)=>{const r=XLSX.utils.decode_range(ws['!ref']||'A1');for(let R=1;R<=r.e.r;R++)cols.forEach(C=>{const c=ws[XLSX.utils.encode_cell({r:R,c:C})];if(c&&typeof c.v==='number')c.z=dinheiro})};
-  const w1=XLSX.utils.aoa_to_sheet(resumo);for(let R=10;R<=16;R++){const c=w1[XLSX.utils.encode_cell({r:R,c:1})];if(c&&typeof c.v==='number')c.z=dinheiro}
-  w1['!cols']=[{wch:30},{wch:22}];XLSX.utils.book_append_sheet(wb,w1,'Resumo');
-  const w2=XLSX.utils.json_to_sheet(linhasV.length?linhasV:[{'Viagens':'Nenhuma viagem neste mês'}]);formata(w2,[7,8,9,11,13,14,15]);
-  w2['!cols']=[{wch:12},{wch:12},{wch:18},{wch:18},{wch:10},{wch:11},{wch:10},{wch:12},{wch:12},{wch:12},{wch:8},{wch:14},{wch:12},{wch:13},{wch:15},{wch:13}];XLSX.utils.book_append_sheet(wb,w2,'Viagens');
-  const w3=XLSX.utils.json_to_sheet(lanc.length?lanc:[{'Lançamentos':'Nenhum lançamento neste mês'}]);formata(w3,[5]);
-  w3['!cols']=[{wch:12},{wch:30},{wch:13},{wch:26},{wch:22},{wch:12}];XLSX.utils.book_append_sheet(wb,w3,'Lançamentos');
+  trips.forEach(t=>t.itens.forEach(i=>lanc.push({d:i.data,r:[dt(i.data),`${t.origem} → ${t.destino}`,tipoItem(i),descItem(i),i.obs||'',i.valor]})));
+  av.forEach(i=>lanc.push({d:i.data,r:[dt(i.data),'Fora de viagem',tipoItem(i),descItem(i),i.obs||'',i.valor]}));
+  lanc.sort((a,b)=>a.d<b.d?-1:1);
+  // ---- estilo ----
+  const C={asf:'2B2E33',amar:'F2B705',verde:'1F7A4D',verm:'B42318',cinza:'F3F2EE',linha:'D6D3CB',branco:'FFFFFF',tinta:'1D1F22',apag:'6B6F76'};
+  const borda={top:{style:'thin',color:{rgb:C.linha}},bottom:{style:'thin',color:{rgb:C.linha}},left:{style:'thin',color:{rgb:C.linha}},right:{style:'thin',color:{rgb:C.linha}}};
+  const F=(o={})=>({font:{name:'Arial',sz:o.sz||11,bold:!!o.b,color:{rgb:o.cor||C.tinta}},fill:o.bg?{patternType:'solid',fgColor:{rgb:o.bg}}:undefined,
+    alignment:{vertical:'center',horizontal:o.al||'left',wrapText:!!o.wrap},border:o.semBorda?undefined:borda,numFmt:o.fmt});
+  const MOEDA='"R$" #,##0.00',INT='#,##0',DEC='#,##0.00';
+  const cel=(v,st)=>({v,t:typeof v==='number'?'n':'s',s:st});
+  const P=S.perfil,nomeM=nomeMes(ym);
+  const wb=XLSX.utils.book_new();
+  // RESUMO
+  const R=[];const linha=(...c)=>R.push(c);
+  linha(cel('DIÁRIO DE BORDO',F({b:1,sz:18,cor:C.branco,bg:C.asf,semBorda:1})),cel('',F({bg:C.asf,semBorda:1})));
+  linha(cel('Relatório de '+nomeM,F({b:1,sz:13,bg:C.amar,semBorda:1})),cel('',F({bg:C.amar,semBorda:1})));
+  linha(cel('',F({semBorda:1})),cel('',F({semBorda:1})));
+  const lab=(k,v,o={})=>linha(cel(k,F({b:1,cor:C.apag,bg:C.cinza})),cel(v,F({al:typeof v==='number'?'right':'left',fmt:o.fmt,b:o.b,cor:o.cor})));
+  const sec=t=>linha(cel(t,F({b:1,cor:C.branco,bg:C.asf})),cel('',F({bg:C.asf})));
+  sec('MOTORISTA');lab('Nome',P.nome||'—');lab('Caminhão',[P.modelo,P.placa].filter(Boolean).join(' · ')||'—');
+  linha(cel('',F({semBorda:1})),cel('',F({semBorda:1})));
+  sec('VIAGENS DO MÊS');lab('Viagens',trips.length,{fmt:INT});lab('Km rodados',tot.km,{fmt:INT});lab('Litros de diesel',Math.round(tot.litros*100)/100,{fmt:DEC});
+  lab('Média (km por litro)',tot.km&&tot.litros?Math.round(tot.km/tot.litros*100)/100:'—',{fmt:DEC});
+  linha(cel('',F({semBorda:1})),cel('',F({semBorda:1})));
+  sec('DINHEIRO');lab('Fretes',tot.frete,{fmt:MOEDA});lab('Diárias',tot.diarias,{fmt:MOEDA,cor:C.verde});lab('Faturamento',tot.fat,{fmt:MOEDA,b:1});
+  lab('Diesel',-tot.diesel,{fmt:MOEDA,cor:C.verm});lab('Outros gastos',-tot.gastos,{fmt:MOEDA,cor:C.verm});lab('Comissão do motorista',-tot.com,{fmt:MOEDA,cor:C.verm});
+  linha(cel('SOBROU',F({b:1,sz:14,cor:C.branco,bg:tot.sobra>=0?C.verde:C.verm})),cel(tot.sobra,F({b:1,sz:14,cor:C.branco,bg:tot.sobra>=0?C.verde:C.verm,al:'right',fmt:MOEDA})));
+  linha(cel('',F({semBorda:1})),cel('',F({semBorda:1})));
+  linha(cel('Gerado em '+new Date().toLocaleString('pt-BR'),F({sz:9,cor:C.apag,semBorda:1})),cel('',F({semBorda:1})));
+  const w1=XLSX.utils.aoa_to_sheet(R);
+  w1['!cols']=[{wch:30},{wch:26}];w1['!rows']=[{hpt:30},{hpt:22}];
+  w1['!merges']=[{s:{r:0,c:0},e:{r:0,c:1}},{s:{r:1,c:0},e:{r:1,c:1}},{s:{r:R.length-1,c:0},e:{r:R.length-1,c:1}}];
+  XLSX.utils.book_append_sheet(wb,w1,'Resumo');
+  // tabelas
+  const tabela=(titulo,cab,linhas,moedaCols,larg,totais)=>{
+    const A=[];
+    A.push(cab.map((_,i)=>cel(i===0?titulo:'',F({b:1,sz:14,cor:C.branco,bg:C.asf,semBorda:1}))));
+    A.push(cab.map(h=>cel(h,F({b:1,cor:C.tinta,bg:C.amar,al:'center',wrap:1}))));
+    if(!linhas.length)A.push(cab.map((_,i)=>cel(i===0?'Nada lançado neste mês':'',F({cor:C.apag}))));
+    linhas.forEach((l,k)=>A.push(l.map((v,c)=>cel(v,F({bg:k%2?C.cinza:undefined,al:typeof v==='number'?'right':'left',fmt:moedaCols.includes(c)?MOEDA:(typeof v==='number'?((totais&&totais.int||[]).includes(c)?INT:DEC):undefined),
+      cor:totais&&totais.cor?totais.cor(l,c):undefined})))));
+    if(totais&&totais.cols.length&&linhas.length){A.push(cab.map((_,c)=>{const soma=totais.cols.includes(c)?linhas.reduce((a,l)=>a+(+l[c]||0),0):null;
+      return cel(c===0?'TOTAL':soma===null?'':soma,F({b:1,bg:C.amar,al:c===0?'left':'right',fmt:moedaCols.includes(c)?MOEDA:((totais.int||[]).includes(c)?INT:DEC)}))}));}
+    const ws=XLSX.utils.aoa_to_sheet(A);
+    ws['!cols']=larg.map(w=>({wch:w}));ws['!rows']=[{hpt:26},{hpt:32}];
+    ws['!merges']=[{s:{r:0,c:0},e:{r:0,c:cab.length-1}}];
+    if(linhas.length)ws['!autofilter']={ref:XLSX.utils.encode_range({s:{r:1,c:0},e:{r:1+linhas.length,c:cab.length-1}})};
+    return ws;
+  };
+  XLSX.utils.book_append_sheet(wb,tabela('Viagens de '+nomeM,['Saída','Chegada','Trajeto','Km','Frete','Diárias','Diesel','Litros','Outros gastos','Comissão','Sobrou'],linhasV,[4,5,6,8,9,10],[12,12,30,9,14,12,14,9,14,13,14],
+    {cols:[3,4,5,6,7,8,9,10],int:[3],cor:(l,c)=>c===10?(l[10]>=0?C.verde:C.verm):undefined}),'Viagens');
+  XLSX.utils.book_append_sheet(wb,tabela('Lançamentos de '+nomeM,['Data','Onde','Tipo','Detalhe','Observação','Valor'],lanc.map(x=>x.r),[5],[12,30,14,26,24,14],
+    {cols:[],cor:(l,c)=>c===2||c===5?(l[2]==='Diária'?C.verde:l[2]==='Adiantamento'?'1F63B5':C.verm):undefined}),'Lançamentos');
   return {wb,tot,n:trips.length};
 }
 function abrirRelatorio(){

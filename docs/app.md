@@ -12,7 +12,7 @@
 | `nuvem/index.html` | app com conta; meta `app-version` diz a versão |
 | `assinar/index.html` | página de vendas (efeitos, planos, janela de pagamento, FAQ). `VIDEO_YOUTUBE=''` mostra o vídeo quando preenchido |
 | `sw.js` | service worker: funciona sem sinal; recebe notificações. Ao mudar, subir `CACHE` (bordo-vN) |
-| `vendor/` | supabase-js 2.118.0 e SheetJS (planilha do relatório) — locais, sem CDN |
+| `vendor/` | supabase-js 2.118.0 e xlsx-js-style 1.2.0 (planilha do relatório com cores; licença Apache 2.0) — locais, sem CDN |
 | `supabase/migrations/*.sql` | banco (já aplicados pelo SQL Editor do Supabase) |
 | `supabase/functions/pix` | cria Pix, link do cartão, recebe aviso do Mercado Pago e libera a conta |
 | `supabase/functions/relatorio` | manda a planilha do mês para o e-mail da própria conta (só quando a pessoa pede; limite 5 por dia; tabela `relatorios_enviados`) |
