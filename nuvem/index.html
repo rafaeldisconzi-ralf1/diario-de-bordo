@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#2b2e33">
-<meta name="app-version" content="nuvem-2026-11-10.6">
+<meta name="app-version" content="nuvem-2026-11-10.7">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Diário de Bordo">
@@ -181,6 +181,7 @@ const brl=v=>(v||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
 const num=v=>{if(v==null)return NaN;v=String(v).trim().replace(/\s/g,'').replace(/^R\$/i,'');if(v.includes(','))v=v.replace(/\./g,'').replace(',','.');else if(/^\d{1,3}(\.\d{3})+$/.test(v))v=v.replace(/\./g,'');return parseFloat(v)};
 const fmtN=(v,d=0)=>(v||0).toLocaleString('pt-BR',{minimumFractionDigits:d,maximumFractionDigits:d});
 const hoje=()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')};
+const mesViagem=t=>(t.status==='fechada'&&t.fim?t.fim:hoje()).slice(0,7);
 const MESES=['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
 const nomeMes=ym=>{const[y,m]=ym.split('-');return MESES[+m-1]+' de '+y};
 const dBR=s=>s?s.split('-').reverse().slice(0,2).join('/'):'';
@@ -263,7 +264,7 @@ function itens(t){
 }
 function resumoMes(){
   const ym=hoje().slice(0,7);
-  let ts=S.trips.filter(t=>(t.inicio||'').slice(0,7)===ym);
+  let ts=S.trips.filter(t=>mesViagem(t)===ym);
   let label='este mês';
   if(!ts.length&&S.exemplo){ts=S.trips;label='outubro (exemplo)'}
   const tot=ts.map(calc).reduce((a,c)=>({frete:a.frete+c.receita,diarias:a.diarias+c.diarias,diesel:a.diesel+c.diesel,gastos:a.gastos+c.gastos,comissao:a.comissao+c.comissao,lucro:a.lucro+c.lucro}),{frete:0,diarias:0,diesel:0,gastos:0,comissao:0,lucro:0});
@@ -303,7 +304,7 @@ function viagens(){
   const botaoRel=`<button class="btn full rel" data-a="relatorio">${ICON.rel}Gerar relatório do mês</button>`;
   if(!S.trips.length&&!S.avulsos.length)return `<div class="card muted">Nenhuma viagem ainda. Volte ao Início e toque em <b>Começar viagem</b>.</div>`;
   if(!S.trips.length)return botaoRel+`<div class="card muted">Nenhuma viagem ainda. Os gastos fora de viagem entram no relatório.</div>`;
-  const grupos={};[...S.trips].reverse().forEach(t=>{const k=(t.inicio||'').slice(0,7);(grupos[k]=grupos[k]||[]).push(t)});
+  const grupos={};[...S.trips].reverse().forEach(t=>{const k=mesViagem(t);(grupos[k]=grupos[k]||[]).push(t)});
   return exBanner()+botaoRel+Object.keys(grupos).sort().reverse().map(k=>{const sobra=grupos[k].reduce((a,t)=>a+calc(t).lucro,0);
    return `<div class="row" style="margin-top:8px"><h2 style="margin:0">${nomeMes(k)}</h2><span class="nums muted" style="font-weight:600">${grupos[k].length} ${grupos[k].length===1?'viagem':'viagens'} · sobra <span class="${sobra<0?'neg':'pos'}">${brl(sobra)}</span></span></div>`+grupos[k].map(cartao).join('')}).join('');
 }
@@ -451,7 +452,7 @@ document.getElementById('tab-perfil').onclick=()=>{view='perfil';render();scroll
 /* ===== Relatório em planilha ===== */
 function mesesComDados(){
   const m=new Set([hoje().slice(0,7)]);
-  S.trips.forEach(t=>t.inicio&&m.add(t.inicio.slice(0,7)));
+  S.trips.forEach(t=>m.add(mesViagem(t)));
   S.avulsos.forEach(i=>i.data&&m.add(i.data.slice(0,7)));
   return [...m].sort().reverse().slice(0,12);
 }
@@ -460,7 +461,7 @@ function carregarXlsx(){
   return new Promise((ok,erro)=>{const s=document.createElement('script');s.src='/vendor/xlsx-js-style-1.2.0.min.js';s.onload=ok;s.onerror=erro;document.head.appendChild(s)});
 }
 function resumoTotais(ym){
-  const trips=S.trips.filter(t=>(t.inicio||'').slice(0,7)===ym),av=S.avulsos.filter(i=>(i.data||'').slice(0,7)===ym);
+  const trips=S.trips.filter(t=>mesViagem(t)===ym),av=S.avulsos.filter(i=>(i.data||'').slice(0,7)===ym);
   const tot={sobra:0};trips.forEach(t=>tot.sobra+=calc(t).lucro);
   av.forEach(i=>{if(i.tipo==='diaria')tot.sobra+=i.valor-i.valor*(i.comissao||0)/100;else if(i.tipo==='diesel'||(i.tipo==='gasto'&&i.cat!=='Adiantamento'))tot.sobra-=i.valor});
   return {tot};
@@ -468,7 +469,7 @@ function resumoTotais(ym){
 function montarPlanilha(ym){
   const tipoItem=i=>i.tipo==='diesel'?'Diesel':i.tipo==='diaria'?'Diária':i.cat==='Adiantamento'?'Adiantamento':'Gasto';
   const descItem=i=>i.tipo==='diesel'?`${fmtN(i.litros)} L a R$ ${fmtN(i.preco,2)}`:i.tipo==='diaria'?`${fmtN(i.dias,i.dias%1?1:0)} dia(s) de R$ ${fmtN(i.valorDia,2)}`:(i.cat||'');
-  const trips=S.trips.filter(t=>(t.inicio||'').slice(0,7)===ym);
+  const trips=S.trips.filter(t=>mesViagem(t)===ym);
   const av=S.avulsos.filter(i=>(i.data||'').slice(0,7)===ym);
   const tot={fat:0,frete:0,diarias:0,diesel:0,gastos:0,com:0,sobra:0,km:0,litros:0};
   const dt=d=>d?dBR(d)+'/'+d.slice(0,4):'';
@@ -507,7 +508,7 @@ function montarPlanilha(ym){
   lab('Diesel',-tot.diesel,{fmt:MOEDA,cor:C.verm});lab('Outros gastos',-tot.gastos,{fmt:MOEDA,cor:C.verm});lab('Comissão do motorista',-tot.com,{fmt:MOEDA,cor:C.verm});
   linha(cel('SOBROU',F({b:1,sz:14,cor:C.branco,bg:tot.sobra>=0?C.verde:C.verm})),cel(tot.sobra,F({b:1,sz:14,cor:C.branco,bg:tot.sobra>=0?C.verde:C.verm,al:'right',fmt:MOEDA})));
   linha(cel('',F({semBorda:1})),cel('',F({semBorda:1})));
-  linha(cel('Cada viagem entra no mês em que começou.'+(trips.some(t=>t.status!=='fechada')?' Tem viagem em andamento: os valores dela ainda podem mudar.':''),F({sz:9,cor:C.apag,semBorda:1})),cel('',F({semBorda:1})));
+  linha(cel('Cada viagem entra no mês em que terminou.'+(trips.some(t=>t.status!=='fechada')?' Tem viagem em andamento: os valores dela ainda podem mudar.':''),F({sz:9,cor:C.apag,semBorda:1})),cel('',F({semBorda:1})));
   linha(cel('Gerado em '+new Date().toLocaleString('pt-BR'),F({sz:9,cor:C.apag,semBorda:1})),cel('',F({semBorda:1})));
   const w1=XLSX.utils.aoa_to_sheet(R);
   w1['!cols']=[{wch:30},{wch:26}];w1['!rows']=[{hpt:30},{hpt:22}];
@@ -535,17 +536,17 @@ function montarPlanilha(ym){
     {cols:[],cor:(l,c)=>c===2||c===5?(l[2]==='Diária'?C.verde:l[2]==='Adiantamento'?'1F63B5':C.verm):undefined}),'Lançamentos');
   return {wb,tot,n:trips.length};
 }
-function resumoMes(ym){
-  const ts=S.trips.filter(t=>(t.inicio||'').slice(0,7)===ym),av=S.avulsos.filter(i=>(i.data||'').slice(0,7)===ym);
+function infoMes(ym){
+  const ts=S.trips.filter(t=>mesViagem(t)===ym),av=S.avulsos.filter(i=>(i.data||'').slice(0,7)===ym);
   return {viagens:ts.length,abertas:ts.filter(t=>t.status!=='fechada').length,lanc:ts.reduce((a,t)=>a+t.itens.length,0)+av.length,vazio:!ts.length&&!av.length};
 }
 function mesPadrao(ms){
   const atual=hoje().slice(0,7),d=new Date();d.setDate(1);d.setMonth(d.getMonth()-1);
   const ant=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0');
   // no começo do mês, quem pede relatório quer o mês que acabou de fechar
-  if(+hoje().slice(8)<=5&&ms.includes(ant)&&!resumoMes(ant).vazio)return ant;
-  if(!resumoMes(atual).vazio)return atual;
-  return ms.find(m=>!resumoMes(m).vazio)||atual;
+  if(+hoje().slice(8)<=5&&ms.includes(ant)&&!infoMes(ant).vazio)return ant;
+  if(!infoMes(atual).vazio)return atual;
+  return ms.find(m=>!infoMes(m).vazio)||atual;
 }
 function abrirRelatorio(){
   const ms=mesesComDados();let mes=mesPadrao(ms);
@@ -557,7 +558,7 @@ function abrirRelatorio(){
    ${SESS?`<button class="btn full" id="rel-mail" style="min-height:60px;font-size:19px">📧 Mandar para meu e-mail</button>
    <div class="note" style="text-align:center;margin-top:-4px">Chega em ${esc(SESS.user.email)}</div>`:''}`,null);
   const info=()=>{
-    const r=resumoMes(mes),el=document.getElementById('rel-info'),bOk=document.getElementById('rel-ok'),bM=document.getElementById('rel-mail');
+    const r=infoMes(mes),el=document.getElementById('rel-info'),bOk=document.getElementById('rel-ok'),bM=document.getElementById('rel-mail');
     if(r.vazio){el.innerHTML=`Nada lançado em <b>${nomeMes(mes)}</b>.`;}
     else{const {tot}=resumoTotais(mes);
       el.innerHTML=`<b>${nomeMes(mes)}</b>: ${r.viagens} ${r.viagens===1?'viagem':'viagens'}, ${r.lanc} ${r.lanc===1?'lançamento':'lançamentos'}, sobrou <b>${brl(tot.sobra)}</b>.`+

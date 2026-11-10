@@ -35,7 +35,7 @@
 
 ## Recursos do app com conta
 Sincronização automática (funciona sem sinal e sobe depois), relatório do mês em planilha (aba Viagens: baixar/compartilhar ou "Mandar para meu e-mail"; cada viagem conta no mês em que
-começou, igual à tela; mês marcado: o anterior se hoje é dia 1–5 e ele tem dados, senão o atual, senão o mais recente com dados;
+TERMINOU (em andamento: mês atual), igual às telas de Início e Viagens — `mesViagem(t)`; mês marcado: o anterior se hoje é dia 1–5 e ele tem dados, senão o atual, senão o mais recente com dados;
 mostra uma prévia do mês escolhido, avisa viagem em andamento e não deixa gerar mês vazio),
 notificações (Perfil → Ativar notificações; no iPhone só com o app na Tela de Início), bloqueio quando vence com botão de Pix,
 "Colocar o app na tela do celular" (Perfil e uma vez logo após o primeiro login): no Android abre a instalação do
