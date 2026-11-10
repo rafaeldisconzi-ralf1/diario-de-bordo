@@ -97,6 +97,24 @@ Responder comentários na 1ª hora.
 3. Gerar, mandar para o Rafael aprovar, ele posta.
 4. Anotar em `marketing/instagram/registro.md` o que foi postado e como foi.
 
+## 11. Seguir perfis sem levar bloqueio
+O Instagram não publica limite. Os números abaixo são da prática (testes de ferramentas e fóruns, 2026),
+para conta nova. Ficar bem abaixo:
+| Fase | Seguir por dia | Por hora |
+|---|---|---|
+| 1ª semana | até 20 | até 5–10, espaçado |
+| Semana 2–4 | até 50 | até 10 |
+| Depois de 1 mês | até 100 | até 15–20 |
+- Seguir + deixar de seguir contam juntos. **Nada de "segue e desfaz"**.
+- Curtidas: até ~100/dia na 1ª semana. Comentários de verdade, nunca o mesmo texto repetido.
+- Direct para quem não segue: poucos por dia (≤ 20) e com texto diferente.
+- **Nunca app/robô de seguir.** Só pelo celular, à mão.
+- Seguir só o nicho (caminhoneiros, transportadoras, postos, oficinas, frete): ajuda o Instagram a entender
+  de que assunto é a conta.
+- Se aparecer "Limitamos a frequência com que você pode fazer certas coisas": parar 24–48 h e voltar devagar.
+- Conferir de vez em quando: Configurações → **Status da conta** → "pode ser recomendado". É o único jeito oficial
+  de saber se a conta está fora das recomendações ("shadowban").
+
 ## Fontes
 - [Mosseri: 3 sinais (Blck Alpaca resume)](https://blckalpaca.at/en/knowledge-base/social-media/social-media-algorithms-distribution/instagram-algorithm-2026)
 - [Limite de 5 hashtags (Social Media Today)](https://www.socialmediatoday.com/news/instagram-implements-new-limits-on-hashtag-use/808309/)
@@ -105,4 +123,6 @@ Responder comentários na 1ª hora.
 - [Benchmarks 2026 (Socialinsider)](https://www.socialinsider.io/blog/instagram-carousel-posts-study/)
 - [Horários Brasil 2026 (Metricool)](https://metricool.com/pt/melhor-horario-para-postar-instagram/)
 - [Retenção e voz nos 3 s (Emplifi)](https://emplifi.io/?p=23678)
+- [Limites de ações (SocialRails)](https://socialrails.com/blog/instagram-follow-limits-explained)
+- [Status da conta (Engadget)](https://www.engadget.com/instagram-account-status-recommendations-shadowbans-180937137.html)
 - [Skill social / carousel-frameworks (GitHub)](https://github.com/coreyhaines31/marketingskills)
