@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<style>
+@font-face{font-family:B;src:url(fonts/barlow-latin-600-normal.woff2);font-weight:600}
+@font-face{font-family:B;src:url(fonts/barlow-latin-700-normal.woff2);font-weight:700}
+@font-face{font-family:B;src:url(fonts/barlow-latin-800-normal.woff2);font-weight:800}
+@font-face{font-family:BC;src:url(fonts/barlow-condensed-latin-800-normal.woff2);font-weight:800}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#16181b;font-family:B;color:#f4f3ee}
+#bg{position:absolute;inset:0;background:radial-gradient(ellipse 900px 1100px at 50% 62%,#2a2620 0%,#1b1c1d 55%,#141517 100%)}
+#grain{position:absolute;inset:0;opacity:.05;background-image:repeating-radial-gradient(circle at 17% 23%,#fff 0 1px,transparent 1px 3px),repeating-radial-gradient(circle at 71% 64%,#fff 0 1px,transparent 1px 4px)}
+#hook{position:absolute;left:50px;right:50px;top:640px;text-align:center;font:800 112px/1 BC;text-transform:uppercase}
+#hook .n{display:block;color:#f2b705;font-size:230px;margin-top:20px}
+#top{position:absolute;left:0;right:0;top:120px;text-align:center;opacity:0}
+#lbl{font:800 54px BC;letter-spacing:4px;color:#9aa0a6;text-transform:uppercase}
+#cnt{font:800 190px/1 BC;margin-top:6px}
+#cnt.r{color:#ff6b5e}#cnt.g{color:#5fd39a}
+#delta{font:800 70px BC;height:80px;margin-top:4px}
+#slot{position:absolute;left:60px;right:60px;top:560px;height:34px;border-radius:17px;background:#0c0d0e;box-shadow:0 4px 0 #2b2e33;opacity:0}
+#rcw{position:absolute;left:90px;width:900px;top:577px;height:0;overflow:hidden}
+#rc{position:absolute;left:0;right:0;top:0;background:#f6f3ea;color:#1b1c1d;padding:44px 56px 70px;font:600 54px/1.2 B;
+ -webkit-mask:radial-gradient(circle 14px at 50% 100%,transparent 13px,#000 14px) bottom/34px 100% repeat-x}
+#rc h4{font:800 72px BC;text-align:center;letter-spacing:2px}
+#rc .sub{text-align:center;font:600 38px B;color:#666;margin:6px 0 20px}
+#rc .ln{display:flex;justify-content:space-between;gap:20px;padding:22px 0;border-top:4px dashed #c9c4b6}
+#rc .ln b{font-weight:800;white-space:nowrap}
+#rc .p{color:#1f8a52}#rc .m{color:#c0392b}
+#rc .tot{border-radius:14px;padding-left:16px;padding-right:16px;margin-left:-16px;margin-right:-16px;border-top:5px solid #1b1c1d;margin-top:8px;padding-top:24px;display:flex;justify-content:space-between;font:800 80px BC}
+#stamp{position:absolute;left:220px;top:1540px;width:640px;border:12px solid #1f9d5c;color:#1f9d5c;border-radius:22px;text-align:center;font:800 120px/1 BC;padding:18px 0 10px;opacity:0;background:rgba(246,243,234,.85)}
+#stamp small{display:block;font-size:52px;letter-spacing:6px}
+#cap{position:absolute;left:60px;right:60px;top:1500px;text-align:center;font:800 92px/1.02 BC;text-transform:uppercase;opacity:0}
+#cap span{color:#f2b705}
+#ph{position:absolute;left:270px;top:430px;width:540px;height:1000px;border-radius:64px;background:#0c0d0e;padding:18px;box-shadow:0 40px 90px rgba(0,0,0,.6);opacity:0}
+#ph div{width:100%;height:100%;border-radius:48px;overflow:hidden}
+#ph img{width:100%;display:block}
+#end{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:36px;opacity:0;background:#16181b}
+#ico{width:240px;height:240px;border-radius:50px}
+#en{font:800 100px BC;text-transform:uppercase}
+#el{font:800 74px/1.05 BC;text-transform:uppercase;text-align:center;max-width:900px}
+#el span{color:#f2b705}
+#ep{background:#f2b705;color:#16181b;font:800 76px BC;padding:22px 70px;border-radius:999px;text-transform:uppercase}
+#fade{position:absolute;inset:0;background:#000;opacity:0}
+</style></head><body>
+<div id="bg"></div><div id="grain"></div>
+<div id="hook">Quanto sobra de<br>um frete de<span class="n">R$ 9.040?</span></div>
+<div id="top"><div id="lbl">Sobrando</div><div id="cnt">R$ 0</div><div id="delta"></div></div>
+<div id="slot"></div>
+<div id="rcw"><div id="rc">
+ <h4>NOTA DA VIAGEM</h4><div class="sub">Porto Alegre → São Paulo · Carlos</div>
+ <div class="ln"><span>Frete</span><b class="p">+ 9.040,00</b></div>
+ <div class="ln"><span>Diárias (2 dias)</span><b class="p">+ 500,00</b></div>
+ <div class="ln"><span>Diesel (730 L)</span><b class="m">− 4.737,70</b></div>
+ <div class="ln"><span>Pedágio e comida</span><b class="m">− 224,40</b></div>
+ <div class="ln"><span>Motorista (15%)</span><b class="m">− 1.431,00</b></div>
+ <div class="tot"><span>SOBROU</span><span>R$ 3.146,90</span></div>
+</div></div>
+<div id="stamp"><small>SOBROU</small>R$ 3.146,90</div>
+<div id="cap"></div>
+<div id="ph"><div><img src="app.png"></div></div>
+<div id="end">
+ <img id="ico" src="icon-512.png">
+ <div id="en">Diário de Bordo</div>
+ <div id="el">Lance sua primeira<br>viagem <span>hoje</span></div>
+ <div id="ep">Toque no link</div>
+</div>
+<div id="fade"></div>
+<script>
+const TOT=28.5;
+const $=s=>document.querySelector(s);
+const cl=x=>Math.max(0,Math.min(1,x)), eo=x=>1-Math.pow(1-cl(x),3), eio=x=>{x=cl(x);return x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2};
+const back=x=>{x=cl(x);const c=1.7;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2)};
+// linhas: [tempo, valor depois]
+const L=[[4.2,9040],[5.9,9540],[7.6,4802.3],[9.3,4577.9],[11.0,3146.9]];
+const DV=['+ R$ 9.040','+ R$ 500','− R$ 4.737,70','− R$ 224,40','− R$ 1.431'];
+const TOTL=12.6, STAMP=13.3;
+const CAPS=[[14.6,17.2,'Você faz essa conta<br><span>toda viagem?</span>'],[18.0,20.6,'O app faz <span>sozinho</span>.<br>Você só lança.'],[20.8,23.3,'Frete, diesel, diária:<br><span>um toque cada.</span>']];
+const END=23.6;
+const fmt=v=>'R$ '+v.toLocaleString('pt-BR',{minimumFractionDigits:v%1?2:0,maximumFractionDigits:2});
+let rows,totH;
+window.render=function(t){
+ if(!rows){rows=[...document.querySelectorAll('#rc .ln, #rc .tot')];}
+ const rc=$('#rc');
+ // gancho
+ const h=$('#hook');const ho=cl(t/0.3)*(1-cl((t-3.0)/0.35));h.style.opacity=ho;
+ h.style.transform='translateY('+(60*(1-eo(t/0.45))-120*eo((t-3.0)/0.35))+'px)';
+ h.querySelector('.n').style.transform='scale('+(0.5+0.5*back((t-0.9)/0.45))+')';
+ h.querySelector('.n').style.opacity=cl((t-0.9)/0.15);
+ // contador + impressora
+ const on=cl((t-3.2)/0.35);$('#top').style.opacity=on*(1-cl((t-16.0)/0.4));$('#slot').style.opacity=on*(1-cl((t-16.0)/0.4));
+ let v=0,prev=0,cur=-1;L.forEach((l,i)=>{if(t>=l[0]){cur=i}});
+ if(cur>=0){prev=cur?L[cur-1][1]:0;const k=eio((t-L[cur][0])/0.7);v=prev+(L[cur][1]-prev)*k}
+ const c=$('#cnt');c.textContent=fmt(Math.round(v*100)/100);
+ c.className=t>=STAMP?'g':(cur>=2&&t-L[cur][0]<0.9?'r':'');
+ c.style.transform='scale('+(t>=STAMP?1+0.12*Math.max(0,1-(t-STAMP)/0.4):1)+')';
+ const d=$('#delta');if(cur>=0&&t-L[cur][0]<1.4&&t<STAMP){d.textContent=DV[cur];d.style.color=cur<2?'#5fd39a':'#ff6b5e';d.style.opacity=cl((t-L[cur][0])/0.15)*(1-cl((t-L[cur][0]-1.1)/0.3))}else d.style.opacity=0;
+ // altura impressa
+ const W=$('#rcw');const tops=[];
+ const head=rows[0].offsetTop; const fullH=rc.offsetHeight;
+ let shown=head-10;
+ const times=[...L.map(l=>l[0]),TOTL];
+ rows.forEach((r,i)=>{const end=r.offsetTop+r.offsetHeight+(i==rows.length-1?70:0);const st=i?rows[i-1].offsetTop+rows[i-1].offsetHeight:head-10;
+   const k=eio((t-times[i]+0.35)/0.35);if(k>0)shown=st+(end-st)*k;});
+ if(t<3.5)shown=head*eo((t-3.3)/0.4)-10;
+ W.style.height=Math.max(0,shown)+'px';
+ // carimbo
+ const s=$('#stamp');const sk=(t-STAMP)/0.28;s.style.opacity=cl(sk*3)*(1-cl((t-16.0)/0.4));
+ s.style.display='none';const tr=rows[rows.length-1];if(t>=STAMP){const q=cl(sk);tr.style.background='rgba(31,157,92,'+(0.18*q)+')';tr.style.color='#1f8a52';tr.style.transform='scale('+(1+0.08*Math.sin(Math.PI*cl(sk*0.8)))+')'}else{tr.style.background='';tr.style.color='';tr.style.transform=''}
+ // saída da nota
+ const out=eio((t-16.0)/0.5);W.style.transform='translateX('+(-1100*out)+'px)';
+ // legendas
+ const cp=$('#cap');let ci=CAPS.findIndex(x=>t>=x[0]&&t<x[1]+0.3);
+ if(ci>=0){const x=CAPS[ci];cp.innerHTML=x[2];const a=(t-x[0])/0.35,b=(t-x[1])/0.3;cp.style.opacity=cl(a)*(1-cl(b));cp.style.transform='translateY('+(50*(1-eo(a)))+'px) scale('+(0.85+0.15*back(a))+')';cp.style.top=(ci==0?'1640px':'1470px')}else cp.style.opacity=0;
+ // celular
+ const p=$('#ph');const pk=(t-16.3)/0.55;p.style.opacity=cl(pk*2)*(1-cl((t-END)/0.3));
+ p.style.transform='translateX('+(1100*(1-eo(pk)))+'px) rotate('+(4*(1-eo(pk)))+'deg)';
+ p.querySelector('img').style.transform='translateY('+(-110*eio((t-19.5)/2.5))+'px)';
+ // final
+ const e=$('#end');e.style.opacity=cl((t-END)/0.35);
+ const pop=(id,t0,dy)=>{const q=$(id);const a=(t-t0)/0.45;q.style.opacity=cl(a*2);q.style.transform='translateY('+(dy*(1-eo(a)))+'px) scale('+(0.7+0.3*back(a))+')'};
+ pop('#ico',END+0.2,0);pop('#en',END+0.55,60);pop('#el',END+1.1,60);pop('#ep',END+1.8,60);
+ if(t>END+2.3)$('#ep').style.transform='scale('+(1+0.05*Math.sin((t-END-2.3)*6))+')';
+ $('#fade').style.opacity=cl((t-(TOT-0.4))/0.4);
+};
+window.TOT=TOT;
+</script></body></html>

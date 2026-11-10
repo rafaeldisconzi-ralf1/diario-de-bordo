@@ -19,8 +19,9 @@ mexe; não andam com "reduzir movimento"), com bolinhas indicando qual está na 
 | V5 imagine (kit) | "Imagine que você rodou mil e cem quilômetros…" | Enquete: caderninho (A) ou celular (B)? |
 | V6 3 sinais (kit) | "Três sinais de que você está perdendo dinheiro na estrada" | Toque no link |
 | V7 conversa (sem voz) | Texto: "Um caminhoneiro sabe quanto sobrou. O outro não." + conversa de mensagens entre Zé e Carlos | "E você, sabe quanto sobrou?" · Toque no link · e faça igual ao Carlos |
+| V8 nota da viagem (sem voz) | "Quanto sobra de um frete de R$ 9.040?" · nota impressa linha a linha, contador caindo até "SOBROU R$ 3.146,90" | "Lance sua primeira viagem hoje" · Toque no link |
 
-Regras: **nunca falar nem mostrar o domínio** no vídeo; nunca dados reais (placa, nome do pai).
+Regras: **sem a estrada com faixas correndo no fundo** (usada até o V7; o Rafael pediu para trocar em 10/11). Variar o fundo a cada vídeo. **Nunca falar nem mostrar o domínio** no vídeo; nunca dados reais (placa, nome do pai).
 "Caderninho" soou infantil para o Rafael como nome; nos vídeos pode trocar por "anotar no papel" se ele pedir.
 
 ## Como refazer / fazer vídeos novos
@@ -31,6 +32,7 @@ Fontes em `marketing/videos/`:
 - `v1-a-v4/` — HyperFrames (kit "herk-edit-kit"). `base.html` é o V1; `gerar.py` monta V2–V4 trocando gancho e final
   e reaproveitando o meio da narração. Telas do app capturadas com dados inventados.
 - `v7-conversa/` — estilo conversa de mensagens, **sem narração** (custo zero). `index.html` tem a função `render(t)`; `render.py` (Playwright + ffmpeg) grava quadro a quadro; `audio.py` gera batida, "plim" de mensagem e digitação com numpy. Para outra conversa, trocar a lista `M` no `index.html` e os tempos em `audio.py`.
+- `v8-nota/` — estilo nota impressa + contador, fundo escuro liso com luz quente. Mesmo esquema do V7 (`index.html` com `render(t)`, `render.py`, `audio.py`).
 - `v5-v6-kit/` — kit "série animada" (zip do Rafael): `build.py` (cenas), `mix.py` (voz + música + efeitos), `head.html`.
 - Narração: gerar na ElevenLabs pelo navegador do Rafael (o ambiente do Claude não alcança a API). Para trazer o
   áudio: capturar o `<audio>` da página com MediaRecorder, copiar como base64 e passar por um arquivo temporário

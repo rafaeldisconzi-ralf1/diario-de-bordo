@@ -11,6 +11,7 @@
 | 09/11/2026 | Vídeos não falam nem mostram o domínio | pedido do Rafael |
 | 10/11/2026 | Nome "Diário de Bordo" em revisão | marca registrada no INPI por KUAU (proc. 918614953, classe 42, até 2030); "FlightBoard Diário de Bordo Digital" foi indeferido. "Diário a Bordo" (concorrente) não tem registro |
 | 10/11/2026 | "Caderninho" no nome é infantil | opinião do Rafael |
+| 10/11/2026 | Vídeos novos sem a estrada com faixas correndo no fundo | apareceu em todos até o V7; pedido do Rafael |
 | 10/11/2026 | Viagem conta no mês em que **terminou** (em andamento: mês atual), no app com conta e no relatório | o frete é recebido na entrega; o resultado só fecha no fim da viagem. O app do pai (raiz) ainda usa o mês de início |
 
 Nomes checados no INPI em 10/11/2026: "Conta da Boleia" e "Sobrou na Estrada" sem registro; "Boleia" e "Frete Certo" com histórico parecido (evitar).
