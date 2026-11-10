@@ -31,5 +31,6 @@ Público: motoristas e donos de caminhão com pouca familiaridade com tecnologia
 ## Situação (atualize aqui)
 - Nome "Diário de Bordo" **em revisão**: existe marca "Diário de Bordo" registrada no INPI (KUAU, classe 42,
   em vigor até 2030). Opções livres na busca: "Conta da Boleia", "Sobrou na Estrada". Ver `docs/decisoes.md`.
-- Falta: compra real de teste (Pix e cartão), testar notificações num celular, passar `nuvem/` para o endereço
+- Compra real por Pix testada em 10/11/2026: aprovou, liberou a conta e o login funcionou.
+- Falta: compra de teste com cartão, testar notificações num celular, passar `nuvem/` para o endereço
   principal, liberar a conta do pai, vídeo real com o pai, depoimentos.

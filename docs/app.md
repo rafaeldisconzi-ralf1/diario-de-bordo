@@ -34,7 +34,10 @@
 
 ## Recursos do app com conta
 Sincronização automática (funciona sem sinal e sobe depois), relatório do mês em planilha (aba Viagens),
-notificações (Perfil → Ativar notificações; no iPhone só com o app na Tela de Início), bloqueio quando vence com botão de Pix.
+notificações (Perfil → Ativar notificações; no iPhone só com o app na Tela de Início), bloqueio quando vence com botão de Pix,
+"Colocar o app na tela do celular" (Perfil e uma vez logo após o primeiro login): no Android abre a instalação do
+próprio celular (`beforeinstallprompt`); no iPhone e quando o Android não oferece, um guia de 3 passos animados.
+Some quando o app já está instalado. A versão com conta tem manifesto próprio (`nuvem/manifest.json`, abre em `/nuvem/`).
 
 ## Como testar
 - Servidor local: `python3 -m http.server 8765` na pasta do repo.
