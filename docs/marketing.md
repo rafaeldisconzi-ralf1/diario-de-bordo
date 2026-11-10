@@ -6,7 +6,8 @@ respeitam "reduzir movimento". Garantia de 7 dias. Bloco "Pagamento seguro pelo 
 Faixa amarela: "Feito para facilitar sua vida".
 Depoimentos (10/11/2026): seção "O que os motoristas estão dizendo" com 4 prints de WhatsApp (Marcos, Cláudio, Juninho,
 Nando) em `assinar/img/depoimento-N.webp/.jpg`, entre a faixa amarela e os preços. O Rafael confirmou que são
-conversas reais; antes de publicar novos, confirmar que são reais e que a pessoa topou aparecer.
+conversas reais. No celular os prints passam sozinhos a cada 4,5 s (param 9 s quando a pessoa
+mexe; não andam com "reduzir movimento"), com bolinhas indicando qual está na tela. Antes de publicar novos, confirmar que são reais e que a pessoa topou aparecer.
 
 ## Vídeos prontos (9:16, ~30 s, voz "Arnold - Br" da ElevenLabs do Rafael)
 | Vídeo | Gancho | Final |

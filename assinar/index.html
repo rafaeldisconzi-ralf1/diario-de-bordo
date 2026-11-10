@@ -225,6 +225,10 @@ footer{padding-block:28px 40px;color:var(--apagado);font-size:17px;border-top:2p
 .dep{flex:0 0 min(82vw,340px);scroll-snap-align:center;margin:0;border-radius:18px;overflow:hidden;border:2px solid var(--linha);box-shadow:0 10px 30px rgba(0,0,0,.35);background:#0b141a}
 .dep img{display:block;width:100%;height:auto}
 @media (min-width:900px){.deps{display:grid;grid-template-columns:repeat(4,1fr);overflow:visible;margin:0;padding:4px 0}.dep{flex:none}.dep-dica{font-size:18px}.so-cel{display:none}}
+.dep-pontos{display:flex;justify-content:center;gap:10px;margin-top:4px}
+.dep-pontos i{width:10px;height:10px;border-radius:50%;background:var(--linha);transition:background .2s,transform .2s}
+.dep-pontos i.on{background:var(--placa);transform:scale(1.25)}
+@media (min-width:900px){.dep-pontos{display:none}}
 </style>
 </head>
 <body>
@@ -303,6 +307,7 @@ footer{padding-block:28px 40px;color:var(--apagado);font-size:17px;border-top:2p
     <figure class="dep surge"><picture><source srcset="img/depoimento-3.webp" type="image/webp"><img src="img/depoimento-3.jpg" width="600" height="675" loading="lazy" decoding="async" alt="Mensagem de Juninho, motorista que usa o app"></picture></figure>
     <figure class="dep surge"><picture><source srcset="img/depoimento-4.webp" type="image/webp"><img src="img/depoimento-4.jpg" width="600" height="649" loading="lazy" decoding="async" alt="Mensagem de Nando, motorista que usa o app"></picture></figure>
   </div>
+  <div class="dep-pontos" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
 </div></section>
 
 <section class="faixa bloco" id="preco"><div class="miolo">
@@ -373,6 +378,19 @@ const calmo=matchMedia('(prefers-reduced-motion: reduce)').matches;
   const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');io.unobserve(e.target)}}),{rootMargin:'0px 0px -8% 0px'});
   els.forEach((e,k)=>{e.style.transitionDelay=(k%2)*90+'ms';io.observe(e)});
   setTimeout(()=>els.forEach(e=>e.classList.add('vis')),8000)})();
+// depoimentos: passam sozinhos no celular (4,5 s); param quando a pessoa mexe
+(function(){const box=document.querySelector('.deps');if(!box)return;const cards=[...box.querySelectorAll('.dep')],pts=[...document.querySelectorAll('.dep-pontos i')];
+  const atual=()=>{let m=0,d=1e9;cards.forEach((c,i)=>{const x=Math.abs(c.offsetLeft-box.scrollLeft-(box.clientWidth-c.clientWidth)/2);if(x<d){d=x;m=i}});return m};
+  const marca=()=>{const k=atual();pts.forEach((p,i)=>p.classList.toggle('on',i===k))};
+  box.addEventListener('scroll',()=>requestAnimationFrame(marca),{passive:true});marca();
+  if(calmo)return;
+  let visivel=false,pausa=0;
+  const mexeu=()=>{pausa=Date.now()+9000};
+  ['touchstart','pointerdown','wheel'].forEach(ev=>box.addEventListener(ev,mexeu,{passive:true}));
+  if('IntersectionObserver' in window)new IntersectionObserver(es=>{visivel=es[0].isIntersecting},{threshold:.4}).observe(box);
+  setInterval(()=>{if(!visivel||Date.now()<pausa||document.hidden||box.scrollWidth<=box.clientWidth+4)return;
+    const k=(atual()+1)%cards.length,c=cards[k];box.scrollTo({left:c.offsetLeft-(box.clientWidth-c.clientWidth)/2,behavior:'smooth'})},4500);
+})();
 // barra de baixo: aparece depois da abertura e some na parte de preço
 (function(){const barra=document.getElementById('barra'),abre=document.querySelector('.abre'),preco=document.getElementById('preco');
   const at=()=>{const passou=scrollY>innerHeight*0.9,r=preco.getBoundingClientRect(),noPreco=r.top<innerHeight&&r.bottom>0;barra.classList.toggle('mostra',passou&&!noPreco)};
