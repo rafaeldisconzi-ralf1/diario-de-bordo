@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#2b2e33">
-<meta name="app-version" content="nuvem-2026-11-10.8">
+<meta name="app-version" content="nuvem-2026-11-10.9">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Diário de Bordo">
@@ -25,6 +25,10 @@ button:active{transform:scale(.95);filter:brightness(.85)}
 .passo svg{flex:none;width:58px;height:58px}
 @media (prefers-reduced-motion: no-preference){.passo{animation:acende 4.5s infinite}.passo:nth-child(2){animation-delay:1.5s}.passo:nth-child(3){animation-delay:3s}
 @keyframes acende{0%,30%{border-color:var(--accent);transform:scale(1.02)}34%,100%{border-color:var(--line);transform:none}}}
+.eco{font-size:21px;font-weight:800;margin-top:6px;min-height:26px;font-variant-numeric:tabular-nums}
+.eco:empty{display:none}
+.aviso{background:#fff4d6;border:2px solid #f2b705;border-radius:14px;padding:14px;color:#4a3800;font-size:18px;font-weight:600;line-height:1.35;display:flex;flex-direction:column;gap:10px}
+.aviso .fix{align-self:flex-start;background:#1d1f22;color:#fff;border:0;border-radius:12px;padding:12px 16px;font:inherit;font-weight:800;font-size:18px}
 </style>
 <title>Diário de Bordo</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -176,6 +180,8 @@ const ICON={
  clock:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>'
 };
 const CATS=['Pedágio','Comida','Arla','Despachante','Balança','Manutenção','Adiantamento','Outro'];
+// acima disso o app pergunta "está certo?" (não bloqueia)
+const LIMITE_GASTO={'Pedágio':800,'Comida':300,'Arla':1500,'Despachante':3000,'Balança':300,'Manutenção':30000,'Adiantamento':30000,'Outro':5000};
 const KEY='diario-bordo-v1';
 const brl=v=>(v||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
 const num=v=>{if(v==null)return NaN;v=String(v).trim().replace(/\s/g,'').replace(/^R\$/i,'');if(v.includes(','))v=v.replace(/\./g,'').replace(',','.');else if(/^\d{1,3}(\.\d{3})+$/.test(v))v=v.replace(/\./g,'');return parseFloat(v)};
@@ -321,9 +327,33 @@ function open(html,onSave){
    <div class="actions"><button class="cancel" id="x">Voltar</button>${onSave?'<button class="save" id="ok">Salvar</button>':''}</div></div></div>`;
   m.querySelector('#x').onclick=close;
   m.querySelector('.scrim').onclick=e=>{if(e.target.classList.contains('scrim'))close()};
-  if(onSave)m.querySelector('#ok').onclick=()=>{const r=onSave();if(r)return m.querySelector('#err').textContent=r;close();render()};
+  const ACEITOS=new Set(),okB=m.querySelector('#ok'),errEl=m.querySelector('#err');
+  const limpa=()=>{if(okB&&okB.dataset.ac){delete okB.dataset.ac;okB.textContent='Salvar';errEl.innerHTML=''}};
+  if(onSave)okB.onclick=()=>{
+    if(okB.dataset.ac)ACEITOS.add(okB.dataset.ac);
+    const r=onSave(ACEITOS);
+    if(r&&typeof r==='object'){
+      errEl.innerHTML=`<div class="aviso">⚠️ ${r.msg}${r.fix?`<button class="fix" id="fixit">${r.fix.rotulo}</button>`:''}</div>`;
+      okB.dataset.ac=r.key;okB.textContent='Sim, está certo';
+      const fx=errEl.querySelector('#fixit');if(fx)fx.onclick=()=>{const i=document.getElementById(r.fix.id);i.value=r.fix.valor;i.dispatchEvent(new Event('input',{bubbles:true}));i.focus()};
+      errEl.scrollIntoView({block:'nearest',behavior:'smooth'});return}
+    if(r){limpa();errEl.textContent=r;return}
+    close();render()};
+  // mostra por extenso o que foi digitado (R$ 2.000,00 · 350 L · 15%)
+  m.querySelectorAll('input[data-moeda],input[data-un]').forEach(i=>{
+    const e=document.createElement('div');e.className='eco';i.insertAdjacentElement('afterend',e);
+    const up=()=>{const n=num(i.value);e.textContent=!i.value.trim()||isNaN(n)?'':i.dataset.moeda!==undefined?'= '+brl(n):'= '+fmtN(n,n%1?1:0)+' '+i.dataset.un};
+    i.addEventListener('input',up);up()});
+  m.querySelectorAll('input').forEach(i=>i.addEventListener('input',limpa));
+  m.querySelectorAll('.chip').forEach(c=>c.addEventListener('click',limpa));
   const f=m.querySelector('input');if(f)setTimeout(()=>f.focus(),50);
 }
+/* conferência de valores: devolve o primeiro aviso ainda não confirmado */
+function confere(aceitos,lista){for(const a of lista)if(a&&a.se&&!aceitos.has(a.key))return a;return null}
+const semVirgula=id=>!/[.,]/.test(v(id));
+const dividido=(id,n,min,max)=>{const x=num(v(id))/n;return semVirgula(id)&&x>=min&&x<=max?x:null};
+const fixVal=(id,x,txt)=>({id,valor:String(Math.round(x*100)/100).replace('.',','),rotulo:txt||('Corrigir para '+brl(x))});
+function repetido(itens,item){const agora=Date.now();return itens.some(i=>i.criado&&agora-i.criado<10*60e3&&i.tipo===item.tipo&&Math.abs(i.valor-item.valor)<0.005&&(i.cat||'')===(item.cat||''))}
 function close(){document.getElementById('modal').innerHTML=''}
 const v=id=>document.getElementById(id)?.value;
 function toast(t){document.querySelectorAll('.toast').forEach(x=>x.remove());const d=document.createElement('div');d.className='toast';d.textContent=t;document.body.appendChild(d);setTimeout(()=>d.remove(),2200)}
@@ -332,20 +362,30 @@ const lastKm=()=>{const ks=S.trips.map(t=>t.kmFim||t.kmIni).filter(Boolean);retu
 function novaViagem(){
   open(`<h3>Começar viagem</h3>
    <div class="two"><label class="f">Saindo de<input id="o" autocomplete="off" placeholder="Cidade"></label><label class="f">Indo para<input id="d" autocomplete="off" placeholder="Cidade"></label></div>
-   <label class="f">Km no painel agora<input id="ki" inputmode="numeric" value="${lastKm()}"></label>
+   <label class="f">Km no painel agora<input id="ki" inputmode="numeric" data-un="km" value="${lastKm()}"></label>
    <label class="f">Como é o frete?</label>
    <div class="chips"><button class="chip" aria-pressed="true" data-tipo="km">Por km</button><button class="chip" aria-pressed="false" data-tipo="fechado">Valor fechado</button></div>
-   <div id="tkm" class="two"><label class="f">Distância (km)<input id="dist" inputmode="numeric"></label><label class="f">R$ por km<input id="vkm" inputmode="decimal" placeholder="8,76"></label></div>
-   <label class="f" id="tfe" hidden>Valor do frete (R$)<input id="vf" inputmode="decimal"></label>
+   <div id="tkm" class="two"><label class="f">Distância (km)<input id="dist" inputmode="numeric" data-un="km"></label><label class="f">R$ por km<input id="vkm" inputmode="decimal" placeholder="8,76" data-moeda></label></div>
+   <label class="f" id="tfe" hidden>Valor do frete (R$)<input id="vf" inputmode="decimal" data-moeda></label>
    <div class="calc" id="prev">Frete: R$ 0,00</div>
-   <label class="f">Comissão do motorista (%)<span class="h">O que foi combinado com o dono do caminhão. Se o caminhão é seu, deixe 0.</span><input id="com" inputmode="decimal" value="${S.trips.length?S.trips[S.trips.length-1].comissao:0}"></label>`,
-  ()=>{
+   <label class="f">Comissão do motorista (%)<span class="h">O que foi combinado com o dono do caminhão. Se o caminhão é seu, deixe 0.</span><input id="com" inputmode="decimal" data-un="%" value="${S.trips.length?S.trips[S.trips.length-1].comissao:0}"></label>`,
+  (ac)=>{
     const tipo=document.querySelector('[data-tipo][aria-pressed="true"]').dataset.tipo;
     const t={id:uid(),origem:v('o').trim(),destino:v('d').trim(),kmIni:num(v('ki')),tipo,distancia:num(v('dist'))||0,valorKm:num(v('vkm'))||0,valorFechado:num(v('vf'))||0,comissao:num(v('com'))||0,inicio:hoje(),fim:null,status:'aberta',itens:[]};
     if(!t.origem||!t.destino)return 'Preencha de onde sai e para onde vai.';
     if(!(t.kmIni>0))return 'Coloque o km que está no painel.';
     if(tipo==='km'&&!(t.valorKm>0&&t.distancia>0))return 'Coloque a distância e o valor por km.';
     if(tipo==='fechado'&&!(t.valorFechado>0))return 'Coloque o valor do frete.';
+    if(t.comissao>100)return 'A comissão é em porcentagem, de 0 a 100.';
+    const frete=tipo==='km'?t.valorKm*t.distancia:t.valorFechado,vk=dividido('vkm',100,0.5,40),vf=dividido('vf',100,200,100000);
+    const a=confere(ac,[
+      {se:tipo==='km'&&t.valorKm>40,key:'vkm-alto',msg:`${brl(t.valorKm)} por km parece alto.${vk?` Você quis dizer ${brl(vk)}?`:''}`,fix:vk&&fixVal('vkm',vk)},
+      {se:tipo==='km'&&t.valorKm<0.5,key:'vkm-baixo',msg:`${brl(t.valorKm)} por km parece pouco. Confere o valor?`},
+      {se:tipo==='km'&&t.distancia>6000,key:'dist',msg:`${fmtN(t.distancia)} km de distância é muito. Confere?`},
+      {se:tipo==='fechado'&&t.valorFechado<200,key:'vf-baixo',msg:`Frete de ${brl(t.valorFechado)} parece pouco. Confere o valor?`},
+      {se:frete>100000,key:'frete-alto',msg:`Frete de ${brl(frete)} parece alto.${tipo==='fechado'&&vf?` Você quis dizer ${brl(vf)}?`:''}`,fix:tipo==='fechado'&&vf&&fixVal('vf',vf)},
+      {se:t.comissao>50,key:'com',msg:`Comissão de ${fmtN(t.comissao,t.comissao%1?1:0)}% parece alta. Confere?`}]);
+    if(a)return a;
     S.trips.push(t);save();setTimeout(()=>toast('Viagem iniciada. Boa estrada!'));
   });
   const upd=()=>{const tipo=document.querySelector('[data-tipo][aria-pressed="true"]').dataset.tipo;
@@ -357,11 +397,20 @@ function novaViagem(){
 function abasteci(){
   const t=ativa()||{itens:S.avulsos};
   open(`<h3>Abasteci</h3>
-   <div class="two"><label class="f">Litros<input id="l" inputmode="decimal"></label><label class="f">R$ por litro<input id="p" inputmode="decimal" placeholder="6,79"></label></div>
+   <div class="two"><label class="f">Litros<input id="l" inputmode="decimal" data-un="L"></label><label class="f">R$ por litro<input id="p" inputmode="decimal" placeholder="6,79" data-moeda></label></div>
    <div class="calc" id="tot">Total: R$ 0,00</div>
    <label class="f"><span>Posto <span class="h">(opcional)</span></span><input id="obs" autocomplete="off"></label>`,
-  ()=>{const l=num(v('l')),p=num(v('p'));if(!(l>0&&p>0))return 'Coloque os litros e o preço do litro.';
-    t.itens.push({id:uid(),tipo:'diesel',litros:l,preco:p,valor:Math.round(l*p*100)/100,data:hoje(),obs:v('obs').trim()});save();setTimeout(()=>toast('Abastecimento salvo'))});
+  (ac)=>{const l=num(v('l')),p=num(v('p'));if(!(l>0&&p>0))return 'Coloque os litros e o preço do litro.';
+    const item={id:uid(),tipo:'diesel',litros:l,preco:p,valor:Math.round(l*p*100)/100,data:hoje(),obs:v('obs').trim(),criado:Date.now()};
+    const pc=dividido('p',100,3,12)||dividido('p',1000,3,12);
+    const a=confere(ac,[
+      {se:p>15,key:'p-alto',msg:`${brl(p)} o litro parece alto. O diesel costuma ficar entre R$ 5 e R$ 9.${pc?` Você quis dizer ${brl(pc)}?`:''}`,fix:pc&&fixVal('p',pc)},
+      {se:p<3,key:'p-baixo',msg:`${brl(p)} o litro parece pouco. Confere o preço?`},
+      {se:l>1500,key:'l-alto',msg:`${fmtN(l)} litros é muito para um abastecimento. Confere?`},
+      {se:l<5,key:'l-baixo',msg:`Só ${fmtN(l,l%1?1:0)} litros? Confere?`},
+      {se:repetido(t.itens,item),key:'rep',msg:`Você já lançou um abastecimento de ${brl(item.valor)} agora há pouco. Lançar de novo?`}]);
+    if(a)return a;
+    t.itens.push(item);save();setTimeout(()=>toast('Abastecimento salvo'))});
   const u=()=>document.getElementById('tot').textContent='Total: '+brl((num(v('l'))||0)*(num(v('p'))||0));
   document.getElementById('l').oninput=u;document.getElementById('p').oninput=u;
 }
@@ -369,10 +418,17 @@ function gastei(){
   const t=ativa()||{itens:S.avulsos};let cat='';
   open(`<h3>Gastei</h3><label class="f">Com o quê?</label>
    <div class="chips">${CATS.map(c=>`<button class="chip" aria-pressed="false" data-cat="${c}">${c}</button>`).join('')}</div>
-   <label class="f">Valor (R$)<input id="val" inputmode="decimal"></label>
+   <label class="f">Valor (R$)<input id="val" inputmode="decimal" data-moeda></label>
    <label class="f"><span>Observação <span class="h">(opcional)</span></span><input id="obs" autocomplete="off"></label>`,
-  ()=>{const val=num(v('val'));if(!cat)return 'Escolha com o que gastou.';if(!(val>0))return 'Coloque o valor.';
-    t.itens.push({id:uid(),tipo:'gasto',cat,valor:val,data:hoje(),obs:v('obs').trim()});save();setTimeout(()=>toast('Gasto salvo'))});
+  (ac)=>{const val=num(v('val'));if(!cat)return 'Escolha com o que gastou.';if(!(val>0))return 'Coloque o valor.';
+    const item={id:uid(),tipo:'gasto',cat,valor:val,data:hoje(),obs:v('obs').trim(),criado:Date.now()};
+    const lim=LIMITE_GASTO[cat]||5000,fx=dividido('val',100,1,lim);
+    const a=confere(ac,[
+      {se:val>lim,key:'alto',msg:`${brl(val)} com ${cat.toLowerCase()} parece muito.${fx?` Você quis dizer ${brl(fx)}?`:''}`,fix:fx&&fixVal('val',fx)},
+      {se:val<1,key:'baixo',msg:`${brl(val)} parece pouco. Confere o valor?`},
+      {se:repetido(t.itens,item),key:'rep',msg:`Você já lançou ${cat} de ${brl(val)} agora há pouco. Lançar de novo?`}]);
+    if(a)return a;
+    t.itens.push(item);save();setTimeout(()=>toast('Gasto salvo'))});
   document.querySelectorAll('[data-cat]').forEach(b=>b.onclick=()=>{cat=b.dataset.cat;document.querySelectorAll('[data-cat]').forEach(x=>x.setAttribute('aria-pressed',x===b))});
 }
 function diaria(){
@@ -382,12 +438,18 @@ function diaria(){
   open(`<h3>Diária</h3><p class="muted" style="margin:0">Dias parado esperando carga, descarga ou liberação.</p>
    <label class="f">Quantos dias?</label>
    <div class="chips">${[1,2,3,4,5].map(n=>`<button class="chip" aria-pressed="${n===1}" data-dias="${n}">${n}</button>`).join('')}</div>
-   <label class="f">Valor de cada diária (R$)<input id="vd" inputmode="decimal" value="${ult?String(ult.valorDia).replace('.',','):''}"></label>
+   <label class="f">Valor de cada diária (R$)<input id="vd" inputmode="decimal" data-moeda value="${ult?String(ult.valorDia).replace('.',','):''}"></label>
    <div class="calc" id="tdi">Total: R$ 0,00</div>
    <label class="f"><span>Onde <span class="h">(opcional)</span></span><input id="obs" autocomplete="off"></label>`,
-  ()=>{const vd=num(v('vd'));if(!(vd>0))return 'Coloque o valor da diária.';
+  (ac)=>{const vd=num(v('vd'));if(!(vd>0))return 'Coloque o valor da diária.';
+    const fx=dividido('vd',100,30,2500);
+    const a=confere(ac,[
+      {se:vd>2500,key:'alto',msg:`Diária de ${brl(vd)} parece alta.${fx?` Você quis dizer ${brl(fx)}?`:''}`,fix:fx&&fixVal('vd',fx)},
+      {se:vd<30,key:'baixo',msg:`Diária de ${brl(vd)} parece pouco. Confere o valor?`},
+      {se:repetido(t.itens,{tipo:'diaria',valor:Math.round(dias*vd*100)/100}),key:'rep',msg:`Você já lançou ${dias===1?'uma diária':dias+' diárias'} de ${brl(vd)} agora há pouco. Lançar de novo?`}]);
+    if(a)return a;
     const com=(at?at.comissao:(S.trips.length?S.trips[S.trips.length-1].comissao:0))||0;
-    t.itens.push({id:uid(),tipo:'diaria',dias,valorDia:vd,valor:Math.round(dias*vd*100)/100,comissao:com,data:hoje(),obs:v('obs').trim()});save();setTimeout(()=>toast(dias===1?'Diária salva':'Diárias salvas'))});
+    t.itens.push({id:uid(),tipo:'diaria',dias,valorDia:vd,valor:Math.round(dias*vd*100)/100,comissao:com,data:hoje(),obs:v('obs').trim(),criado:Date.now()});save();setTimeout(()=>toast(dias===1?'Diária salva':'Diárias salvas'))});
   const u=()=>document.getElementById('tdi').textContent='Total: '+brl(dias*(num(v('vd'))||0));
   document.querySelectorAll('[data-dias]').forEach(b=>b.onclick=()=>{dias=+b.dataset.dias;document.querySelectorAll('[data-dias]').forEach(x=>x.setAttribute('aria-pressed',x===b));u()});
   document.getElementById('vd').oninput=u;u();
@@ -396,7 +458,12 @@ function encerrar(){
   const t=ativa();
   open(`<h3>Cheguei</h3><p class="muted" style="margin:0">${esc(t.origem)} → ${esc(t.destino)}. Saiu com ${fmtN(t.kmIni)} km.</p>
    <label class="f">Km no painel agora<input id="kf" inputmode="numeric"></label><div class="calc" id="kr">Rodou: —</div>`,
-  ()=>{const kf=num(v('kf'));if(!(kf>t.kmIni))return 'O km de chegada precisa ser maior que o de saída ('+fmtN(t.kmIni)+').';
+  (ac)=>{const kf=num(v('kf'));if(!(kf>t.kmIni))return 'O km de chegada precisa ser maior que o de saída ('+fmtN(t.kmIni)+').';
+    const rod=kf-t.kmIni,d=t.tipo==='km'?t.distancia:0;
+    const a=confere(ac,[
+      {se:rod>6000,key:'rod',msg:`Rodou ${fmtN(rod)} km nesta viagem? Confere o km do painel.`},
+      {se:rod<=6000&&d>0&&(rod>d*2.5||rod<d*0.4),key:'dist',msg:`Rodou ${fmtN(rod)} km, mas a viagem era de ${fmtN(d)} km. Confere o km do painel?`}]);
+    if(a)return a;
     t.kmFim=kf;t.fim=hoje();t.status='fechada';save();setTimeout(()=>detalhe(t.id))});
   document.getElementById('kf').oninput=()=>{const k=num(v('kf'))-t.kmIni;document.getElementById('kr').textContent=k>0?'Rodou: '+fmtN(k)+' km':'Rodou: —'};
 }

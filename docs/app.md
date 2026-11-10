@@ -43,6 +43,17 @@ notificações (Perfil → Ativar notificações; no iPhone só com o app na Tel
 próprio celular (`beforeinstallprompt`); no iPhone e quando o Android não oferece, um guia de 3 passos animados.
 Some quando o app já está instalado. A versão com conta tem manifesto próprio (`nuvem/manifest.json`, abre em `/nuvem/`).
 
+## Proteção contra erro de digitação (app com conta)
+- Campos de valor mostram o número por extenso embaixo enquanto digita (`= R$ 2.000,00`, `= 350 L`, `= 15 %`):
+  atributos `data-moeda` / `data-un` no input, tratados em `open()`.
+- Ao salvar, `confere()` pergunta "está certo?" quando o valor foge do normal; se o número foi digitado sem vírgula e
+  dividido por 100 fica normal, oferece o botão "Corrigir para R$ X" (`dividido`, `fixVal`). Não bloqueia: "Sim, está certo" salva.
+- Faixas: diesel R$ 3–15/L, 5–1.500 L; gastos por categoria em `LIMITE_GASTO`; diária R$ 30–2.500; R$/km 0,5–40;
+  frete fechado ≥ R$ 200 e ≤ 100 mil; distância ≤ 6.000 km; comissão ≤ 50% (acima de 100% é erro);
+  "Cheguei": rodou ≤ 6.000 km e entre 0,4× e 2,5× a distância combinada.
+- Lançamento igual (tipo + categoria + valor) nos últimos 10 min pergunta se quer lançar de novo (campo `criado`).
+- Login corrige erros comuns no e-mail (`sugestaoEmail`).
+
 ## Como testar
 - Servidor local: `python3 -m http.server 8765` na pasta do repo.
 - Supabase falso para Playwright: um script que substitui `/vendor/supabase-2.118.0.js` (login com código 123456,
