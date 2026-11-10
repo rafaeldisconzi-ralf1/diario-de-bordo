@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#2b2e33">
-<meta name="app-version" content="nuvem-2026-11-10.11">
+<meta name="app-version" content="nuvem-2026-11-10.12">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Diário de Bordo">
@@ -788,7 +788,7 @@ function telaLogin(){
     <label class="f">Seu e-mail<input id="le" type="email" inputmode="email" autocomplete="email" autocapitalize="off" value="${esc(loginEmail)}" placeholder="voce@gmail.com"></label>
     <div class="err" id="lerr"></div>
     <button class="btn full start" id="lok" style="min-height:72px;font-size:24px">Receber código</button>
-    ${navigator.onLine?'':`<p class="muted" style="margin:0">Você está sem internet. Para entrar precisa de sinal só desta vez.</p><button class="link" id="lpular">Continuar sem internet</button>`}
+    ${navigator.onLine?'':`<p class="muted" style="margin:0">Você está sem internet. Para entrar precisa de sinal só desta vez.</p>`}
   </div>`:`<div class="login card">
     <h2 style="margin:0">Confira seu e-mail</h2>
     <p style="margin:0">Mandamos uma mensagem para <b>${esc(loginEmail)}</b>. Digite o código que veio nela, ou toque no link do e-mail.</p>
@@ -800,7 +800,6 @@ function telaLogin(){
 }
 function bindLogin(){
   const ok=document.getElementById('lok'),err=t=>document.getElementById('lerr').textContent=t;
-  const pul=document.getElementById('lpular');if(pul)pul.onclick=()=>{pularLogin=true;render()};
   const vol=document.getElementById('lvolta');if(vol)vol.onclick=()=>{loginEtapa='email';render()};
   ok.onclick=async()=>{
     if(!navigator.onLine)return err('Sem internet. Tente quando tiver sinal.');

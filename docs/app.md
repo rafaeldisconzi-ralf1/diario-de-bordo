@@ -1,14 +1,14 @@
 # App — como funciona
 
 ## Endereços
-- frete.trilhanova.shop — app sem conta (o pai usa; dados só no celular, localStorage `diario-bordo-v1`)
+- frete.trilhanova.shop — abre direto o app com conta (`/nuvem/`). O app sem conta saiu do ar em 10/11/2026.
 - frete.trilhanova.shop/nuvem/ — app com conta (login por código no e-mail, dados na nuvem) — **é o produto**
 - frete.trilhanova.shop/assinar/ — página de vendas com Pix e cartão
 
 ## Arquivos
 | Arquivo | O que é |
 |---|---|
-| `index.html` | app sem conta (não mexer sem aprovação) |
+| `index.html` | só redireciona para `/nuvem/` (mantém ?cupom e #). O app antigo está no histórico do git |
 | `nuvem/index.html` | app com conta; meta `app-version` diz a versão |
 | `assinar/index.html` | página de vendas (efeitos, planos, janela de pagamento, FAQ). `VIDEO_YOUTUBE=''` mostra o vídeo quando preenchido |
 | `sw.js` | service worker: funciona sem sinal; recebe notificações. Ao mudar, subir `CACHE` (bordo-vN) |
@@ -73,3 +73,8 @@ Adicionar página a → Tela inicial. A versão com conta tem manifesto próprio
 ## Deploy
 Hostinger → site trilhanova.shop → Avançado → GIT, branch `main`, pasta `public_html/frete`. Push = no ar.
 `.htaccess` impede cache de html/js/json e bloqueia acesso a `docs/`, `marketing/` e arquivos `.md`.
+
+## Login obrigatório (10/11/2026)
+- Não existe mais "usar sem conta": tirado o botão "Continuar sem internet" da tela de login. Sem sinal e sem conta, só aparece o aviso.
+- Quem já tinha lançamentos no app antigo (mesmo celular e mesmo navegador): os dados ficam no celular (`diario-bordo-v1`) e sobem para a conta no primeiro login. Testado no Playwright.
+- Atalho antigo na tela inicial (start_url `/`) continua funcionando: abre `/` e vai para `/nuvem/`.

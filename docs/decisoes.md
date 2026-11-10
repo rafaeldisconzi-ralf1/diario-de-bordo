@@ -16,3 +16,4 @@
 
 Nomes checados no INPI em 10/11/2026: "Conta da Boleia" e "Sobrou na Estrada" sem registro; "Boleia" e "Frete Certo" com histórico parecido (evitar).
 | 10/11/2026 | **Preço de lançamento** R$ 24,90; depois do lançamento o mensal passa para **R$ 49,90** (página de vendas diz isso) | o Rafael acha que o app vale R$ 49,90. Para a frase continuar verdadeira, o preço precisa subir de fato quando o lançamento acabar. Não usar "Era/De R$ 49,90", porque nunca foi cobrado (CDC) |
+| 10/11/2026 | App sem conta saiu do ar; o link principal exige login | todos os usuários já têm conta; acesso só para quem paga ou foi liberado |

@@ -19,8 +19,8 @@ Público: motoristas e donos de caminhão com pouca familiaridade com tecnologia
 - Documento vivo "Diário de Bordo: onde paramos": https://claude.ai/artifact/8AwH8QNM59JcqFtv26xUGq
 
 ## Regras que valem sempre
-1. **Não mexer no app do pai** (`index.html` na raiz, usado em frete.trilhanova.shop) sem aprovação do Rafael.
-   O app com conta é `nuvem/` até ele aprovar a troca.
+1. **O app sem conta saiu do ar** (10/11/2026, pedido do Rafael). `index.html` na raiz agora só manda para `/nuvem/`
+   (login obrigatório). Não voltar o app aberto sem o Rafael pedir.
 2. **Nunca colocar senha, token ou chave em código, chat ou documento.** Segredos ficam só nos painéis
    (Supabase → Edge Functions → Secrets). Quem digita senha é o Rafael.
 3. **Nada que custe dinheiro sem perguntar** (ex.: não criar projeto pago no Supabase; ElevenLabs só com aprovação).
@@ -34,5 +34,4 @@ Público: motoristas e donos de caminhão com pouca familiaridade com tecnologia
 - Nome "Diário de Bordo" **em revisão**: existe marca "Diário de Bordo" registrada no INPI (KUAU, classe 42,
   em vigor até 2030). Opções livres na busca: "Conta da Boleia", "Sobrou na Estrada". Ver `docs/decisoes.md`.
 - Compra real por Pix testada em 10/11/2026: aprovou, liberou a conta e o login funcionou.
-- Falta: compra de teste com cartão, testar notificações num celular, passar `nuvem/` para o endereço
-  principal, liberar a conta do pai, vídeo real com o pai. Depoimentos (4 prints) já na página de vendas.
+- Falta: compra de teste com cartão, testar notificações num celular, liberar a conta do pai, vídeo real com o pai. Depoimentos (4 prints) já na página de vendas.
