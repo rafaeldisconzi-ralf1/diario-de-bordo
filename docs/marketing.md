@@ -19,6 +19,9 @@ Regras: **nunca falar nem mostrar o domínio** no vídeo; nunca dados reais (pla
 "Caderninho" soou infantil para o Rafael como nome; nos vídeos pode trocar por "anotar no papel" se ele pedir.
 
 ## Como refazer / fazer vídeos novos
+Atalho: skill **video-diario-de-bordo** (criada em 10/11/2026). Basta pedir "faz vídeo novo com o gancho X";
+ela segue o passo a passo abaixo: roteiro para aprovar → voz (só com ok) → montagem → legendas → render → conferir → registrar aqui.
+
 Fontes em `marketing/videos/`:
 - `v1-a-v4/` — HyperFrames (kit "herk-edit-kit"). `base.html` é o V1; `gerar.py` monta V2–V4 trocando gancho e final
   e reaproveitando o meio da narração. Telas do app capturadas com dados inventados.
