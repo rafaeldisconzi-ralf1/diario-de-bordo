@@ -11,6 +11,7 @@ Público: motoristas e donos de caminhão com pouca familiaridade com tecnologia
 ## Mapa do manual
 - `docs/app.md` — como o app funciona por dentro: arquivos, Supabase, pagamentos, notificações, deploy
 - `docs/marketing.md` — página de vendas, vídeos, roteiros, como fazer vídeo novo
+- `docs/instagram.md` — manual do Instagram: algoritmo, Reels, carrossel, legenda, horários, rotina
 - `docs/financas.md` — preços, taxas, como acompanhar vendas, pendências (MEI, marca)
 - `docs/decisoes.md` — decisões já tomadas e por quê (não reabrir sem o Rafael pedir)
 - `docs/rotinas.md` — o que fazer toda semana / todo mês
