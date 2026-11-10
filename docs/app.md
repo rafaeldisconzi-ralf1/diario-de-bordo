@@ -19,7 +19,8 @@
 | `supabase/functions/avisos` | notificações (Web Push): chave, teste, aviso do admin, lembrete de vencimento |
 
 ## Supabase (projeto `diario-de-bordo`, ref `kmaldmypdvapihsxpfmz`, plano grátis, Organização 2)
-- Login: e-mail com código de 6 dígitos; SMTP da Hostinger (`nao-responda@trilhanova.shop`).
+- Login: e-mail com código de 6 dígitos (o app corrige erros comuns de digitação, como gmail.comll / gmail.con, e pede
+  para tocar de novo — `sugestaoEmail`); SMTP da Hostinger (`nao-responda@trilhanova.shop`).
 - Tabelas: `perfis` (teste_ate, pago_ate, admin, visto_em), `registros` (viagens e lançamentos em JSON, apagado,
   atualizado_em), `pagamentos`, `push_inscricoes`, `config_privada` (chaves VAPID, só o servidor lê), `avisos_enviados`.
 - Admin: rafaeldisconzi@gmail.com → no app, Perfil → **Clientes** (liberar +30 dias) e **Mandar aviso para todos**.

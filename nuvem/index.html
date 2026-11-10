@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#2b2e33">
-<meta name="app-version" content="nuvem-2026-11-10.7">
+<meta name="app-version" content="nuvem-2026-11-10.8">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Diário de Bordo">
@@ -720,6 +720,7 @@ function bindLogin(){
     try{
       if(loginEtapa==='email'){
         const e=v('le').trim().toLowerCase();if(!/^\S+@\S+\.\S+$/.test(e)){ok.disabled=false;return err('Confira o e-mail.')}
+        const sug=sugestaoEmail(e);if(sug&&ok.dataset.conf!==e){ok.disabled=false;ok.dataset.conf=e;document.getElementById('le').value=sug;return err('Confira o e-mail: você quis dizer '+sug+'? Corrigimos para você. Toque de novo para continuar.')}
         loginEmail=e;
         const {error}=await sb.auth.signInWithOtp({email:e,options:{shouldCreateUser:true,emailRedirectTo:location.origin+location.pathname}});
         if(error){ok.disabled=false;return err(/rate|seconds/i.test(error.message)?'Aguarde um minuto e tente de novo.':'Não deu para enviar o e-mail. Tente de novo.')}
@@ -773,6 +774,22 @@ async function painelAdmin(){
     b.dataset.conf='1';b.textContent='Toque de novo para confirmar ('+b.dataset.nome+')';b.style.borderColor='var(--good)'});
 }
 
+
+/* corrige erros comuns de digitação no e-mail (gmail.comll, gmial.com, hotmail.con…) */
+function sugestaoEmail(e){
+  const m=e.match(/^([^@\s]+)@([^@\s]+)$/);if(!m)return null;let [,u,d]=m;
+  const certos={'gmail.com':['gmial.com','gmai.com','gmal.com','gamil.com','gmail.co','gmail.cm','gnail.com','gmaill.com','gmail.comm','gmail.con','gmail.om','gmail.c'],
+    'hotmail.com':['hotmal.com','hotmai.com','hotmial.com','hotmail.co','hotmail.con','hotmil.com','hotmaill.com'],
+    'outlook.com':['outlok.com','outllok.com','outlook.co','outlook.con','oulook.com'],
+    'yahoo.com.br':['yaho.com.br','yahoo.combr','yahoo.com.b'],'icloud.com':['iclod.com','icloud.co','icloud.con']};
+  for(const [ok,errs] of Object.entries(certos)){
+    if(d===ok)return null;
+    // "gmail.comll", "gmail.com.", "gmail.com123": sobrou coisa depois do .com
+    if(d.startsWith(ok)&&d.length>ok.length&&!(ok.endsWith('.com')&&d===ok+'.br'))return u+'@'+ok;
+    if(errs.includes(d))return u+'@'+ok;
+  }
+  return null;
+}
 /* COLOCAR O APP NA TELA DO CELULAR */
 const ehAndroid=()=>/android/i.test(navigator.userAgent);
 const IC={
