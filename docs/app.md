@@ -41,7 +41,9 @@ mostra uma prévia do mês escolhido, avisa viagem em andamento e não deixa ger
 notificações (Perfil → Ativar notificações; no iPhone só com o app na Tela de Início), bloqueio quando vence com botão de Pix,
 "Colocar o app na tela do celular" (Perfil e uma vez logo após o primeiro login): no Android abre a instalação do
 próprio celular (`beforeinstallprompt`); no iPhone e quando o Android não oferece, um guia de 3 passos animados.
-Some quando o app já está instalado. A versão com conta tem manifesto próprio (`nuvem/manifest.json`, abre em `/nuvem/`).
+Some quando o app já está instalado. No Samsung Internet
+o "Instalar" pode falhar ("Não foi possível instalar o aplicativo web"), então lá o guia ensina o atalho: menu ≡ →
+Adicionar página a → Tela inicial. A versão com conta tem manifesto próprio (`nuvem/manifest.json`, abre em `/nuvem/`).
 
 ## Proteção contra erro de digitação (app com conta)
 - Campos de valor mostram o número por extenso embaixo enquanto digita (`= R$ 2.000,00`, `= 350 L`, `= 15 %`):

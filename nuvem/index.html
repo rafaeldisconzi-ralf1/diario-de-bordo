@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#2b2e33">
-<meta name="app-version" content="nuvem-2026-11-10.10">
+<meta name="app-version" content="nuvem-2026-11-10.11">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Diário de Bordo">
@@ -894,7 +894,8 @@ function blocoInstalar(){
 function passos(lista){return `<div class="inst">${lista.map((p,i)=>`<div class="passo"><span class="n">${i+1}</span><span class="t">${p[1]}</span>${p[0]}</div>`).join('')}</div>`}
 async function abrirInstalar(primeiraVez){
   if(instalado())return;
-  if(window.__bip&&!primeiraVez){
+  const samsung=/SamsungBrowser/i.test(navigator.userAgent);
+  if(window.__bip&&!primeiraVez&&!samsung){
     const e=window.__bip;window.__bip=null;
     try{e.prompt();const r=await e.userChoice;if(r&&r.outcome==='accepted'){toast('Pronto! O app está na sua tela');setTimeout(render,800);return}}catch(x){}
   }
@@ -906,6 +907,11 @@ async function abrirInstalar(primeiraVez){
               [IC.add,'Role e toque em <b>Adicionar à Tela de Início</b>'],
               [IC.ok,'Toque em <b>Adicionar</b>. Pronto: o ícone amarelo aparece junto dos seus apps']])+
       '<div class="note" style="margin:0;font-size:17px">Na primeira vez que abrir pelo ícone, ele pede o código do e-mail de novo. É só uma vez, e seus lançamentos continuam lá.</div>';
+  }else if(samsung){
+    // o "Instalar" do Samsung Internet às vezes falha ("Não foi possível instalar o aplicativo web"); o atalho sempre funciona
+    corpo=passos([[IC.dots,'Toque no <b>menu ≡</b> (os três risquinhos, embaixo à direita)'],
+                  [IC.phone,'Toque em <b>Adicionar página a</b> e depois em <b>Tela inicial</b>'],
+                  [IC.ok,'Toque em <b>Adicionar</b>. Pronto: o ícone amarelo aparece junto dos seus apps']]);
   }else if(window.__bip){
     corpo=`<p class="muted" style="margin:0;font-size:18px">É um toque só. O ícone amarelo vai aparecer junto dos seus apps.</p>
       <button class="save" id="instOk" style="min-height:64px;border-radius:12px;font-weight:700;font-size:20px">📲 Colocar na tela agora</button>`;
