@@ -39,7 +39,7 @@ Criado em 10/11/2026, perfil vazio. Arquivos em `marketing/instagram/` (`perfil.
 - Link `/assinar/` e foto C colocados pelo Rafael no celular (10/11). Postar é sempre pelo celular dele (Claude não consegue enviar arquivos).
 - Foto C (`foto-perfil-c.png`): versão maior da B, ocupa mais o círculo. O Chrome do Claude não consegue enviar arquivo; troca é pelo celular.
 - Post 01 (`post-01/`), publicado em 10/11 (instagram.com/p/Dfj89wyIEuO): carrossel 5 slides 1080x1350 (gancho "quanto sobrou", o que sai, tela início, tela sobrou, preço + garantia) e `legenda.txt`. Refazer: `python3 gerar.py` dentro da pasta (precisa das fontes e das telas `01-inicio.png`/`07-sobrou.png` de `videos/v1-a-v4/` ao lado).
-- Respostas automáticas: grátis no Meta Business Suite (computador) com conta profissional: resposta instantânea na 1ª mensagem, ausência, perguntas frequentes (até 4), palavras-chave (até 5, letra maiúscula conta, espera 15 min), comentário→direct. Ferramentas pagas (ManyChat etc.) fazem mais. Ainda não ativado.
+- Respostas automáticas (textos prontos em `respostas-automaticas.md`): conta virou Comercial em 10/11, falta ligar a uma Página do Facebook para usar o Business Suite. Grátis no Meta Business Suite (computador) com conta profissional: resposta instantânea na 1ª mensagem, ausência, perguntas frequentes (até 4), palavras-chave (até 5, letra maiúscula conta, espera 15 min), comentário→direct. Ferramentas pagas (ManyChat etc.) fazem mais. Ainda não ativado.
 - Como trabalhamos: Claude prepara, Rafael aprova, só então posta pelo Chrome dele.
 - Próximo: postar os vídeos V1–V6 como Reels e montar os primeiros posts fixados.
 
