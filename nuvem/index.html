@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#2b2e33">
-<meta name="app-version" content="nuvem-2026-11-10.13">
+<meta name="app-version" content="nuvem-2026-11-10.14">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Diário de Bordo">
@@ -145,7 +145,8 @@ nav.tabs{gap:8px;padding-top:8px}
 nav.tabs button{display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 4px;font-size:15px;border-radius:12px;color:var(--ink);background:var(--bg);border:2px solid var(--line);box-shadow:0 3px 0 var(--line);margin-bottom:3px}
 nav.tabs button svg{width:26px;height:26px}
 nav.tabs button[aria-current="true"]{background:var(--sign);color:var(--sign-ink);border-color:var(--sign);box-shadow:0 3px 0 #a77c00}
-nav.tabs button:active{transform:translateY(3px);box-shadow:none;filter:none}
+nav.tabs button:active{box-shadow:none;filter:brightness(.92)}
+html{touch-action:manipulation}button,a,input,label{touch-action:manipulation}
 .aviso{background:color-mix(in srgb,var(--sign) 22%,var(--surface));border-color:var(--sign);font-weight:600}
 .login{display:flex;flex-direction:column;gap:14px;margin-top:12px}
 .selo.ok{color:var(--good)}.selo.pend{color:var(--muted)}

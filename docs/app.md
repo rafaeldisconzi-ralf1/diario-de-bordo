@@ -85,3 +85,7 @@ Hostinger → site trilhanova.shop → Avançado → GIT, branch `main`, pasta `
 - Limites de aviso: Parcela 40 mil, Seguro 30 mil, Imposto 20 mil, Contador 3 mil.
 - Em viagem, os botões continuam os de sempre (`CATS`), sem campo de data.
 - Entram em "Outros gastos" do mês e no relatório com o nome certo (coluna Descrição).
+
+## Toques nos botões (10/11/2026)
+- Abas de baixo (Início/Viagens/Perfil) às vezes não respondiam com toques rápidos: o navegador tratava dois toques seguidos como "zoom de dois toques" e engolia o segundo, e o botão "afundava" 3px ao apertar (o dedo podia soltar fora dele).
+- Correção: `touch-action:manipulation` na página e nos botões (o zoom com dois dedos continua) e as abas não se mexem mais ao apertar (só escurecem). Não voltar o `translateY` nas abas.
