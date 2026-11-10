@@ -58,6 +58,12 @@ Adicionar página a → Tela inicial. A versão com conta tem manifesto próprio
 - Todo lançamento tem "editar" (ao lado de "apagar"): abre o mesmo formulário preenchido (`editar()` → `abasteci/gastei/diaria(ed)`).
   Viagem: "Corrigir dados da viagem" no Início e no detalhe (`novaViagem(viagem)`), inclusive km de chegada se encerrada.
 
+## Testes em celular de verdade
+- 10/11/2026: atalho na tela testado num Galaxy real pelo **Samsung Remote Test Lab** (grátis, conta Samsung do Rafael,
+  20 créditos). Alguns laboratórios bloqueiam o site pelo filtro **FortiGuard (Fortinet)** porque o domínio é novo
+  ("Unrated"): trocar de laboratório. Pendente: pedir a classificação em fortiguard.com → Web Filter → re-rating
+  (categoria Business), porque redes de empresas/postos com Fortinet também bloqueiam.
+
 ## Como testar
 - Servidor local: `python3 -m http.server 8765` na pasta do repo.
 - Supabase falso para Playwright: um script que substitui `/vendor/supabase-2.118.0.js` (login com código 123456,
