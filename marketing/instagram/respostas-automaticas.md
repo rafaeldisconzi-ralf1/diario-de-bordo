@@ -1,7 +1,9 @@
 # Respostas automáticas — textos prontos
 
 Conta virou **Comercial** (categoria Software) em 10/11/2026. Sem dados de contato no perfil.
-Ainda **não ligada a uma Página do Facebook** → o Meta Business Suite não enxerga o Instagram.
+Página do Facebook **"Diário de Bordo Caminhoneiro"** criada em 10/11 (facebook.com/profile.php?id=61596360423588), sem foto ainda.
+Ligar Instagram ↔ Página pelo Business Suite deu "vinculação não disponível no momento" (comum em página recém-criada). Tentar pelo app do Instagram no celular (Editar perfil → Página) ou de novo em 1–2 dias.
+Até ligar → o Meta Business Suite não enxerga o Instagram.
 As automações do Business Suite (resposta instantânea, palavra-chave, comentário→direct) dependem dessa ligação.
 As perguntas frequentes dá para pôr direto no app do Instagram (celular): Configurações → Ferramentas para empresas → Perguntas frequentes.
 
