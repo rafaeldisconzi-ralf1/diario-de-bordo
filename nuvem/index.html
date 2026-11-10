@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#2b2e33">
-<meta name="app-version" content="nuvem-2026-11-10.5">
+<meta name="app-version" content="nuvem-2026-11-10.6">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Diário de Bordo">
@@ -459,6 +459,12 @@ function carregarXlsx(){
   if(window.XLSX)return Promise.resolve();
   return new Promise((ok,erro)=>{const s=document.createElement('script');s.src='/vendor/xlsx-js-style-1.2.0.min.js';s.onload=ok;s.onerror=erro;document.head.appendChild(s)});
 }
+function resumoTotais(ym){
+  const trips=S.trips.filter(t=>(t.inicio||'').slice(0,7)===ym),av=S.avulsos.filter(i=>(i.data||'').slice(0,7)===ym);
+  const tot={sobra:0};trips.forEach(t=>tot.sobra+=calc(t).lucro);
+  av.forEach(i=>{if(i.tipo==='diaria')tot.sobra+=i.valor-i.valor*(i.comissao||0)/100;else if(i.tipo==='diesel'||(i.tipo==='gasto'&&i.cat!=='Adiantamento'))tot.sobra-=i.valor});
+  return {tot};
+}
 function montarPlanilha(ym){
   const tipoItem=i=>i.tipo==='diesel'?'Diesel':i.tipo==='diaria'?'Diária':i.cat==='Adiantamento'?'Adiantamento':'Gasto';
   const descItem=i=>i.tipo==='diesel'?`${fmtN(i.litros)} L a R$ ${fmtN(i.preco,2)}`:i.tipo==='diaria'?`${fmtN(i.dias,i.dias%1?1:0)} dia(s) de R$ ${fmtN(i.valorDia,2)}`:(i.cat||'');
@@ -501,10 +507,11 @@ function montarPlanilha(ym){
   lab('Diesel',-tot.diesel,{fmt:MOEDA,cor:C.verm});lab('Outros gastos',-tot.gastos,{fmt:MOEDA,cor:C.verm});lab('Comissão do motorista',-tot.com,{fmt:MOEDA,cor:C.verm});
   linha(cel('SOBROU',F({b:1,sz:14,cor:C.branco,bg:tot.sobra>=0?C.verde:C.verm})),cel(tot.sobra,F({b:1,sz:14,cor:C.branco,bg:tot.sobra>=0?C.verde:C.verm,al:'right',fmt:MOEDA})));
   linha(cel('',F({semBorda:1})),cel('',F({semBorda:1})));
+  linha(cel('Cada viagem entra no mês em que começou.'+(trips.some(t=>t.status!=='fechada')?' Tem viagem em andamento: os valores dela ainda podem mudar.':''),F({sz:9,cor:C.apag,semBorda:1})),cel('',F({semBorda:1})));
   linha(cel('Gerado em '+new Date().toLocaleString('pt-BR'),F({sz:9,cor:C.apag,semBorda:1})),cel('',F({semBorda:1})));
   const w1=XLSX.utils.aoa_to_sheet(R);
   w1['!cols']=[{wch:30},{wch:26}];w1['!rows']=[{hpt:30},{hpt:22}];
-  w1['!merges']=[{s:{r:0,c:0},e:{r:0,c:1}},{s:{r:1,c:0},e:{r:1,c:1}},{s:{r:R.length-1,c:0},e:{r:R.length-1,c:1}}];
+  w1['!merges']=[{s:{r:0,c:0},e:{r:0,c:1}},{s:{r:1,c:0},e:{r:1,c:1}},{s:{r:R.length-2,c:0},e:{r:R.length-2,c:1}},{s:{r:R.length-1,c:0},e:{r:R.length-1,c:1}}];
   XLSX.utils.book_append_sheet(wb,w1,'Resumo');
   // tabelas
   const tabela=(titulo,cab,linhas,moedaCols,larg,totais)=>{
@@ -528,15 +535,37 @@ function montarPlanilha(ym){
     {cols:[],cor:(l,c)=>c===2||c===5?(l[2]==='Diária'?C.verde:l[2]==='Adiantamento'?'1F63B5':C.verm):undefined}),'Lançamentos');
   return {wb,tot,n:trips.length};
 }
+function resumoMes(ym){
+  const ts=S.trips.filter(t=>(t.inicio||'').slice(0,7)===ym),av=S.avulsos.filter(i=>(i.data||'').slice(0,7)===ym);
+  return {viagens:ts.length,abertas:ts.filter(t=>t.status!=='fechada').length,lanc:ts.reduce((a,t)=>a+t.itens.length,0)+av.length,vazio:!ts.length&&!av.length};
+}
+function mesPadrao(ms){
+  const atual=hoje().slice(0,7),d=new Date();d.setDate(1);d.setMonth(d.getMonth()-1);
+  const ant=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0');
+  // no começo do mês, quem pede relatório quer o mês que acabou de fechar
+  if(+hoje().slice(8)<=5&&ms.includes(ant)&&!resumoMes(ant).vazio)return ant;
+  if(!resumoMes(atual).vazio)return atual;
+  return ms.find(m=>!resumoMes(m).vazio)||atual;
+}
 function abrirRelatorio(){
-  const ms=mesesComDados();let mes=ms[0];
+  const ms=mesesComDados();let mes=mesPadrao(ms);
   open(`<h3>Relatório</h3><p class="muted" style="margin:0">Uma planilha com as viagens, o diesel, os gastos e quanto sobrou no mês.</p>
    <label class="f">Qual mês?</label>
-   <div class="chips">${ms.map((m,k)=>`<button class="chip" aria-pressed="${k===0}" data-mes="${m}">${nomeMes(m)}</button>`).join('')}</div>
+   <div class="chips">${ms.map(m=>`<button class="chip" aria-pressed="${m===mes}" data-mes="${m}">${nomeMes(m)}</button>`).join('')}</div>
+   <div class="note" id="rel-info" style="font-size:17px;margin:0"></div>
    <button class="save" id="rel-ok" style="min-height:64px;border-radius:12px;font-weight:700;font-size:20px">Gerar planilha</button>
    ${SESS?`<button class="btn full" id="rel-mail" style="min-height:60px;font-size:19px">📧 Mandar para meu e-mail</button>
    <div class="note" style="text-align:center;margin-top:-4px">Chega em ${esc(SESS.user.email)}</div>`:''}`,null);
-  document.querySelectorAll('[data-mes]').forEach(b=>b.onclick=()=>{mes=b.dataset.mes;document.querySelectorAll('[data-mes]').forEach(x=>x.setAttribute('aria-pressed',x===b))});
+  const info=()=>{
+    const r=resumoMes(mes),el=document.getElementById('rel-info'),bOk=document.getElementById('rel-ok'),bM=document.getElementById('rel-mail');
+    if(r.vazio){el.innerHTML=`Nada lançado em <b>${nomeMes(mes)}</b>.`;}
+    else{const {tot}=resumoTotais(mes);
+      el.innerHTML=`<b>${nomeMes(mes)}</b>: ${r.viagens} ${r.viagens===1?'viagem':'viagens'}, ${r.lanc} ${r.lanc===1?'lançamento':'lançamentos'}, sobrou <b>${brl(tot.sobra)}</b>.`+
+        (r.abertas?`<br>⚠️ ${r.abertas===1?'1 viagem ainda está':r.abertas+' viagens ainda estão'} em andamento: os valores podem mudar.`:'');}
+    [bOk,bM].forEach(x=>{if(x){x.disabled=r.vazio;x.style.opacity=r.vazio?.45:1}});
+  };
+  document.querySelectorAll('[data-mes]').forEach(b=>b.onclick=()=>{mes=b.dataset.mes;document.querySelectorAll('[data-mes]').forEach(x=>x.setAttribute('aria-pressed',x===b));info()});
+  info();
   document.getElementById('rel-ok').onclick=async e=>{
     const bt=e.currentTarget;bt.disabled=true;bt.textContent='Montando…';
     try{
