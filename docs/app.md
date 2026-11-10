@@ -15,6 +15,7 @@
 | `vendor/` | supabase-js 2.118.0 e SheetJS (planilha do relatório) — locais, sem CDN |
 | `supabase/migrations/*.sql` | banco (já aplicados pelo SQL Editor do Supabase) |
 | `supabase/functions/pix` | cria Pix, link do cartão, recebe aviso do Mercado Pago e libera a conta |
+| `supabase/functions/relatorio` | manda a planilha do mês para o e-mail da própria conta (só quando a pessoa pede; limite 5 por dia; tabela `relatorios_enviados`) |
 | `supabase/functions/avisos` | notificações (Web Push): chave, teste, aviso do admin, lembrete de vencimento |
 
 ## Supabase (projeto `diario-de-bordo`, ref `kmaldmypdvapihsxpfmz`, plano grátis, Organização 2)
@@ -25,7 +26,7 @@
 - Sem teste grátis: conta nova nasce vencida; o pagamento aprovado soma os dias (`aplicar_pagamentos`).
 - Lembrete de vencimento: `pg_cron` todo dia 12:00 UTC (9h Brasília) chama a função `avisos` (3 dias antes, no dia, 1 dia depois).
 - Funções com "Verify JWT" **desligado** (elas checam o login no código). Deploy pelo editor do painel.
-- Segredo: `MP_ACCESS_TOKEN` (Edge Functions → Secrets). Nunca no código.
+- Segredos: `MP_ACCESS_TOKEN` e `SMTP_PASS` (senha do nao-responda@trilhanova.shop, usada pelo relatório por e-mail; SMTP smtp.hostinger.com:465). Ficam em Edge Functions → Secrets. Nunca no código.
 
 ## Mercado Pago
 - Pix: `/v1/payments`, vence em 30 min, a tela confere o status a cada 4 s.
@@ -33,7 +34,7 @@
 - O aviso (webhook) só é aceito do tipo `payment`; o servidor sempre consulta o pagamento no MP antes de liberar.
 
 ## Recursos do app com conta
-Sincronização automática (funciona sem sinal e sobe depois), relatório do mês em planilha (aba Viagens),
+Sincronização automática (funciona sem sinal e sobe depois), relatório do mês em planilha (aba Viagens: baixar/compartilhar ou "Mandar para meu e-mail"),
 notificações (Perfil → Ativar notificações; no iPhone só com o app na Tela de Início), bloqueio quando vence com botão de Pix,
 "Colocar o app na tela do celular" (Perfil e uma vez logo após o primeiro login): no Android abre a instalação do
 próprio celular (`beforeinstallprompt`); no iPhone e quando o Android não oferece, um guia de 3 passos animados.
