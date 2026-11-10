@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#2b2e33">
-<meta name="app-version" content="nuvem-2026-11-10.12">
+<meta name="app-version" content="nuvem-2026-11-10.13">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Diário de Bordo">
@@ -180,8 +180,10 @@ const ICON={
  clock:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>'
 };
 const CATS=['Pedágio','Comida','Arla','Despachante','Balança','Manutenção','Adiantamento','Outro'];
+// Fora de viagem aparecem também as contas fixas do dono do caminhão
+const CATS_FORA=['Parcela do caminhão','Seguro','Imposto','Contador','Manutenção','Comida','Outro'];
 // acima disso o app pergunta "está certo?" (não bloqueia)
-const LIMITE_GASTO={'Pedágio':800,'Comida':300,'Arla':1500,'Despachante':3000,'Balança':300,'Manutenção':30000,'Adiantamento':30000,'Outro':5000};
+const LIMITE_GASTO={'Pedágio':800,'Comida':300,'Arla':1500,'Despachante':3000,'Balança':300,'Manutenção':30000,'Adiantamento':30000,'Outro':5000,'Parcela do caminhão':40000,'Seguro':30000,'Imposto':20000,'Contador':3000};
 const KEY='diario-bordo-v1';
 const brl=v=>(v||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
 const num=v=>{if(v==null)return NaN;v=String(v).trim().replace(/\s/g,'').replace(/^R\$/i,'');if(v.includes(','))v=v.replace(/\./g,'').replace(',','.');else if(/^\d{1,3}(\.\d{3})+$/.test(v))v=v.replace(/\./g,'');return parseFloat(v)};
@@ -427,20 +429,25 @@ function abasteci(ed){
 }
 function gastei(ed){
   const t=ed?ed.t:(ativa()||{itens:S.avulsos}),I=ed?ed.item:{};let cat=I.cat||'';
-  open(`<h3>${ed?'Corrigir gasto':'Gastei'}</h3><label class="f">Com o quê?</label>
-   <div class="chips">${CATS.map(c=>`<button class="chip" aria-pressed="${c===cat}" data-cat="${c}">${c}</button>`).join('')}</div>
+  const fora=t.itens===S.avulsos,lista=fora?CATS_FORA.concat(I.cat&&!CATS_FORA.includes(I.cat)?[I.cat]:[]):CATS.concat(I.cat&&!CATS.includes(I.cat)?[I.cat]:[]);
+  open(`<h3>${ed?'Corrigir gasto':fora?'Gasto fora de viagem':'Gastei'}</h3><label class="f">Com o quê?</label>
+   <div class="chips">${lista.map(c=>`<button class="chip" aria-pressed="${c===cat}" data-cat="${c}">${c}</button>`).join('')}</div>
    <label class="f">Valor (R$)<input id="val" inputmode="decimal" data-moeda value="${fmtIn(I.valor)}"></label>
+   ${fora?`<label class="f"><span>Dia do gasto <span class="h">(se não foi hoje, troque)</span></span><input id="dg" type="date" max="${hoje()}" value="${I.data||hoje()}"></label>`:''}
    <label class="f"><span>Observação <span class="h">(opcional)</span></span><input id="obs" autocomplete="off" value="${esc(I.obs||'')}"></label>`,
   (ac)=>{const val=num(v('val'));if(!cat)return 'Escolha com o que gastou.';if(!(val>0))return 'Coloque o valor.';
-    const item={id:uid(),tipo:'gasto',cat,valor:val,data:hoje(),obs:v('obs').trim(),criado:Date.now()};
+    const dia=fora?(v('dg')||hoje()):(I.data||hoje());if(dia>hoje())return 'Essa data ainda não chegou. Confira o dia.';
+    const velho=(new Date(hoje())-new Date(dia))/864e5>60;
+    const item={id:uid(),tipo:'gasto',cat,valor:val,data:dia,obs:v('obs').trim(),criado:Date.now()};
     const lim=LIMITE_GASTO[cat]||5000,fx=dividido('val',100,1,lim);
     const a=confere(ac,[
       {se:val>lim,key:'alto',msg:`${brl(val)} com ${cat.toLowerCase()} parece muito.${fx?` Você quis dizer ${brl(fx)}?`:''}`,fix:fx&&fixVal('val',fx)},
       {se:val<1,key:'baixo',msg:`${brl(val)} parece pouco. Confere o valor?`},
+      {se:velho,key:'velho',msg:`O dia ${dia.split('-').reverse().join('/')} já faz mais de 2 meses. Está certo?`},
       {se:!ed&&repetido(t.itens,item),key:'rep',msg:`Você já lançou ${cat} de ${brl(val)} agora há pouco. Lançar de novo?`}]);
     if(a)return a;
-    if(ed){Object.assign(ed.item,{cat,valor:val,obs:item.obs});save();ed.depois();return}
-    t.itens.push(item);save();setTimeout(()=>toast('Gasto salvo'))});
+    if(ed){Object.assign(ed.item,{cat,valor:val,obs:item.obs,data:dia});save();ed.depois();return}
+    t.itens.push(item);save();setTimeout(()=>toast(dia===hoje()?'Gasto salvo':'Gasto salvo no dia '+dia.split('-').reverse().slice(0,2).join('/')))});
   document.querySelectorAll('[data-cat]').forEach(b=>b.onclick=()=>{cat=b.dataset.cat;document.querySelectorAll('[data-cat]').forEach(x=>x.setAttribute('aria-pressed',x===b))});
 }
 function diaria(ed){

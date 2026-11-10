@@ -78,3 +78,10 @@ Hostinger → site trilhanova.shop → Avançado → GIT, branch `main`, pasta `
 - Não existe mais "usar sem conta": tirado o botão "Continuar sem internet" da tela de login. Sem sinal e sem conta, só aparece o aviso.
 - Quem já tinha lançamentos no app antigo (mesmo celular e mesmo navegador): os dados ficam no celular (`diario-bordo-v1`) e sobem para a conta no primeiro login. Testado no Playwright.
 - Atalho antigo na tela inicial (start_url `/`) continua funcionando: abre `/` e vai para `/nuvem/`.
+
+## Gastos fora de viagem (10/11/2026)
+- Sem viagem aberta, "Gastei" abre "Gasto fora de viagem" com botões próprios: Parcela do caminhão, Seguro, Imposto, Contador, Manutenção, Comida, Outro (`CATS_FORA`).
+- Só fora de viagem tem o campo "Dia do gasto" (vem com hoje; não aceita data futura; avisa se tem mais de 2 meses).
+- Limites de aviso: Parcela 40 mil, Seguro 30 mil, Imposto 20 mil, Contador 3 mil.
+- Em viagem, os botões continuam os de sempre (`CATS`), sem campo de data.
+- Entram em "Outros gastos" do mês e no relatório com o nome certo (coluna Descrição).
