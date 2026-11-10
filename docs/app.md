@@ -53,6 +53,8 @@ Some quando o app já está instalado. A versão com conta tem manifesto própri
   "Cheguei": rodou ≤ 6.000 km e entre 0,4× e 2,5× a distância combinada.
 - Lançamento igual (tipo + categoria + valor) nos últimos 10 min pergunta se quer lançar de novo (campo `criado`).
 - Login corrige erros comuns no e-mail (`sugestaoEmail`).
+- Todo lançamento tem "editar" (ao lado de "apagar"): abre o mesmo formulário preenchido (`editar()` → `abasteci/gastei/diaria(ed)`).
+  Viagem: "Corrigir dados da viagem" no Início e no detalhe (`novaViagem(viagem)`), inclusive km de chegada se encerrada.
 
 ## Como testar
 - Servidor local: `python3 -m http.server 8765` na pasta do repo.
