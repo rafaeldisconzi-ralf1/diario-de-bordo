@@ -4,3 +4,4 @@
 |---|---|---|---|---|
 | 10/11/2026 | post-01 | Carrossel 5 | "Quanto sobrou da sua última viagem?" | (preencher) |
 | 10/11/2026 | reel-01 | Reels 28 s (V8 nota) | "Quanto sobra de um frete de R$ 9.040?" | (preencher) |
+| 11/11/2026 | reel-02 | Reels 34 s (V4 diárias, versão Carlos) | "Ficou parado esperando descarga e perdeu a conta?" | (preencher) |
