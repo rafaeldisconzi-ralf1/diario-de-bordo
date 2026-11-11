@@ -97,3 +97,6 @@ Hostinger → site trilhanova.shop → Avançado → GIT, branch `main`, pasta `
 - Admin não conta: o app com conta grava `bordo-admin=1` no navegador do admin.
 - Ver: app → Perfil → **📊 Números do app** (Hoje / 7 / 30 dias). Função `resumo_funil(dias)`, só admin. "Pagaram" vem da tabela `pagamentos` (aprovados, valor > 0). Conta a partir de 10/11/2026 22h.
 - Parte "Clientes" no mesmo painel (função `resumo_clientes()`, só admin, migração `20261110_clientes.sql`): usaram o app em 24 h e 7 dias (`perfis.visto_em`, atualizado quando o app abre), com acesso (pagando × cortesia = sem pagamento aprovado com valor > 0), vencem em 7 dias, sem acesso, total e novos em 7 dias. Não conta admin nem contas de teste (nao-responda@trilhanova.shop, pelecoreana@…, e-mail terminado em .comll).
+
+## Perfil do admin (10/11/2026)
+- Na conta admin, o Perfil não mostra Motorista nem Caminhão. Em cima fica "Administração" (Clientes, 📊 Números do app, Mandar aviso para todos); depois Conta. Clientes continuam vendo o Perfil normal.
