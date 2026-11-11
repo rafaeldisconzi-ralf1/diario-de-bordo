@@ -20,6 +20,7 @@ mexe; não andam com "reduzir movimento"), com bolinhas indicando qual está na 
 | V6 3 sinais (kit) | "Três sinais de que você está perdendo dinheiro na estrada" | Toque no link |
 | V7 conversa (sem voz) | Texto: "Um caminhoneiro sabe quanto sobrou. O outro não." + conversa de mensagens entre Zé e Carlos | "E você, sabe quanto sobrou?" · Toque no link · e faça igual ao Carlos |
 | V8 nota da viagem (sem voz) | "Quanto sobra de um frete de R$ 9.040?" · nota impressa linha a linha, contador caindo até "SOBROU R$ 3.146,90" | "Lance sua primeira viagem hoje" · Toque no link |
+| V9 10 segundos (sem voz, 10 s, fundo amarelo listrado) | "Uma viagem inteira em 10 segundos" · Abasteceu? Gastou? Parou? Chegou? com as telas do app | "Saiba quanto sobrou de cada viagem" · Toque no link |
 
 Arquivos no PC do Rafael: `Desktop/Diário de Bordo/Vídeos`. **Atenção:** as cópias com número no fim (`propaganda1`, `caderninho11`, `garantia22`, `diarias33`) mostram nome e placa reais no app ("Olá, Ademir"); não publicar. Usar as versões sem número (motorista Carlos).
 

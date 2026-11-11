@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<style>
+@font-face{font-family:B;src:url(fonts/barlow-latin-700-normal.woff2);font-weight:700}
+@font-face{font-family:BC;src:url(fonts/barlow-condensed-latin-800-normal.woff2);font-weight:800}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#f2b705;font-family:B;color:#16181b}
+#bg{position:absolute;inset:-400px;background:repeating-linear-gradient(-55deg,#f2b705 0 120px,#e9ae00 120px 240px)}
+#hook{position:absolute;left:60px;right:60px;top:560px;text-align:center;font:800 150px/.95 BC;text-transform:uppercase}
+#hook b{display:inline-block;background:#16181b;color:#f2b705;padding:6px 34px 0;margin-top:26px;font-size:170px;white-space:nowrap}
+#lab{position:absolute;left:0;right:0;top:120px;text-align:center;font:800 190px/1 BC;text-transform:uppercase}
+#sub{position:absolute;left:0;right:0;top:1700px;text-align:center}
+#sub span{display:inline-block;background:#16181b;color:#f4f3ee;font:800 84px BC;text-transform:uppercase;padding:14px 46px 8px;border-radius:18px}
+#sub span i{font-style:normal;color:#5fd39a}
+#ph{position:absolute;left:210px;top:360px;width:660px;height:1290px;border-radius:76px;background:#0c0d0e;padding:20px;box-shadow:0 40px 0 rgba(0,0,0,.18)}
+#scr{width:100%;height:100%;border-radius:58px;overflow:hidden;position:relative;background:#eee}
+#scr img{position:absolute;left:0;top:0;width:100%}
+#tap{position:absolute;width:130px;height:130px;border-radius:50%;border:10px solid #f2b705;background:rgba(242,183,5,.35);left:0;top:0;opacity:0}
+#end{position:absolute;inset:0;background:#16181b;color:#f4f3ee;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:40px;opacity:0}
+#ico{width:260px;height:260px;border-radius:56px}
+#en{font:800 120px BC;text-transform:uppercase}
+#el{font:800 84px/1.05 BC;text-transform:uppercase;text-align:center}
+#el span{color:#5fd39a}
+#ep{background:#f2b705;color:#16181b;font:800 84px BC;padding:24px 76px 16px;border-radius:999px;text-transform:uppercase}
+</style></head><body>
+<div id="bg"></div>
+<div id="hook">Uma viagem<br>inteira em<br><b>10 segundos</b></div>
+<div id="lab"></div>
+<div id="ph"><div id="scr">
+ <img id="i0" src="02-abasteci.png"><img id="i1" src="03-gastei.png"><img id="i2" src="04-diaria.png"><img id="i3" src="07-sobrou.png">
+ <div id="tap"></div>
+</div></div>
+<div id="sub"><span></span></div>
+<div id="end">
+ <img id="ico" src="icon-512.png">
+ <div id="en">Diário de Bordo</div>
+ <div id="el">Saiba quanto <span>sobrou</span><br>de cada viagem</div>
+ <div id="ep">Toque no link</div>
+</div>
+<script>
+const TOT=10;
+const $=s=>document.querySelector(s);
+const cl=x=>Math.max(0,Math.min(1,x)), eo=x=>1-Math.pow(1-cl(x),3);
+const back=x=>{x=cl(x);const c=1.7;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2)};
+// [início, rótulo, legenda, deslocamento da tela, toque x,y]
+const S=[[1.5,'Abasteceu?','Um toque',-70,410,1178],
+         [3.0,'Gastou?','Um toque',-70,410,1178],
+         [4.5,'Parou?','Lança a diária',-70,410,1178],
+         [6.0,'Chegou?','Sobrou <i>R$ 3.146,90</i>',-170,-1,-1]];
+const END=8.0;
+window.render=function(t){
+ $('#bg').style.transform='translateX('+(-t*24)+'px)';
+ const h=$('#hook');h.style.opacity=cl(t/0.15)*(1-cl((t-1.3)/0.2));
+ h.style.transform='scale('+(0.8+0.2*back(t/0.4))+') translateY('+(-200*eo((t-1.3)/0.2))+'px)';
+ h.querySelector('b').style.transform='scale('+(0.4+0.6*back((t-0.45)/0.35))+') rotate(-3deg)';
+ h.querySelector('b').style.opacity=cl((t-0.45)/0.1);
+ let ci=-1;S.forEach((s,i)=>{if(t>=s[0])ci=i});
+ const ph=$('#ph'),lab=$('#lab'),sub=$('#sub'),tap=$('#tap');
+ const vis=cl((t-1.4)/0.3)*(1-cl((t-END)/0.25));
+ ph.style.opacity=vis;lab.style.opacity=ci<0?0:vis;sub.style.opacity=ci<0?0:vis;
+ ph.style.transform='translateY('+(900*(1-eo((t-1.4)/0.45)))+'px)';
+ for(let i=0;i<4;i++)$('#i'+i).style.opacity=0;
+ if(ci>=0){const s=S[ci],a=t-s[0];
+  lab.textContent=s[1];lab.style.transform='scale('+(0.6+0.4*back(a/0.3))+')';
+  const im=$('#i'+ci);im.style.opacity=1;
+  im.style.transform='translate('+(ci&&ci<3?620*(1-eo(a/0.28)):0)+'px,'+(s[3]*(ci==3?eo((a-0.2)/0.6):1))+'px)';
+  if(ci&&ci<3){const pv=$('#i'+(ci-1));pv.style.opacity=1-cl(a/0.28)}
+  if(ci==3){const pv=$('#i2');pv.style.opacity=1-cl(a/0.2)}
+  const sp=sub.querySelector('span');sp.innerHTML=s[2];const b=(a-(ci==3?0.9:0.75))/0.3;
+  sp.style.opacity=cl(b*2);sp.style.transform='scale('+(0.6+0.4*back(b))+')';
+  if(s[4]>=0){const k=(a-0.7)/0.35;tap.style.left=(s[4]-65)+'px';tap.style.top=(s[5]-65)+'px';
+   tap.style.opacity=cl(k*4)*(1-cl(k));tap.style.transform='scale('+(0.5+1.1*eo(k))+')'}else tap.style.opacity=0;
+ }
+ const e=$('#end');e.style.opacity=cl((t-END)/0.25);
+ const pop=(id,t0)=>{const q=$(id);const a=(t-t0)/0.4;q.style.opacity=cl(a*2);q.style.transform='translateY('+(60*(1-eo(a)))+'px) scale('+(0.7+0.3*back(a))+')'};
+ pop('#ico',END+0.1);pop('#en',END+0.3);pop('#el',END+0.55);pop('#ep',END+0.85);
+ if(t>END+1.3)$('#ep').style.transform='scale('+(1+0.05*Math.sin((t-END-1.3)*7))+')';
+};
+window.TOT=TOT;
+</script></body></html>
