@@ -60,3 +60,10 @@ Criado em 10/11/2026, perfil vazio. Arquivos em `marketing/instagram/` (`perfil.
 - Mais depoimentos: pedir no app/WhatsApp (sempre reais e com autorização).
 - WhatsApp com IA para tirar dúvidas e mandar o link de pagamento.
 - Retenção: lembrete de vencimento já existe por notificação; falta por e-mail; resumo mensal "quanto sobrou".
+
+## Série do Zé (animada) — Parte 1 (11/11/2026)
+- Fontes em `marketing/videos/v10-ze-parte1/` (build.py → index.html, audio.py, render.py, ze_svg.py). Vídeo final `ze-parte1.mp4` (6 MB).
+- Premissa: Zé, autônomo, 2 propostas de frete (A R$ 8.000 volta vazia; B R$ 6.000+3.000, espera de 2 dias). Fim: "Comenta A ou B". Números são EXEMPLO (só o diesel ≈ R$ 7 é real, ANP).
+- Parte 2 (conta): diesel R$ 7/L, 2,2 km/l cheio, 3 km/l vazio, pedágio R$ 1.200, diária R$ 300 → A sobra ~R$ 1.280; B ~R$ 840. Pedir ao pai para conferir consumo e diária antes de postar.
+- Voz: transferir áudio com captureStream+MediaRecorder, colar em branch nova no GitHub, buscar com `git fetch origin refs/heads/<branch>:refs/remotes/origin/x`, apagar a branch pela tela do GitHub.
+- Armadilha: id "cap" do SVG do Zé conflita; legenda usa `#subs`.

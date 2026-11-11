@@ -1,0 +1,208 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><style>
+@font-face{font-family:B;src:url(fonts/barlow-latin-700-normal.woff2);font-weight:700}
+@font-face{font-family:B8;src:url(fonts/barlow-latin-800-normal.woff2);font-weight:800}
+@font-face{font-family:BC;src:url(fonts/barlow-condensed-latin-800-normal.woff2);font-weight:800}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#14202e;font-family:B;color:#f4f3ee}
+#sky{position:absolute;inset:0}
+#sun{position:absolute;width:300px;height:300px;border-radius:50%;left:640px;top:880px}
+.hl{position:absolute;left:0;width:4320px;height:420px}
+#cloud1,#cloud2{position:absolute;height:70px;border-radius:70px;background:rgba(244,243,238,.16)}
+#ze{position:absolute;left:260px;top:800px;width:560px;height:728px;transform-origin:50% 90%}
+#ze svg{width:100%;height:100%}
+.abs{position:absolute;opacity:0;transform-origin:50% 50%}
+.box{background:#16181b;border-radius:40px;box-shadow:0 20px 0 rgba(0,0,0,.3)}
+.yel{color:#f2b705}.grn{color:#5fd39a}
+.big{font:800 168px/.92 BC;text-transform:uppercase;text-align:center}
+.mid{white-space:nowrap;font:800 100px/1 BC;text-transform:uppercase}
+.sm{font:700 44px/1.1 B;text-transform:uppercase;letter-spacing:1px}
+.badge{flex-shrink:0;width:168px;height:168px;border-radius:34px;background:#f2b705;color:#16181b;font:800 150px/1 BC;display:flex;align-items:center;justify-content:center;padding-top:10px}
+.trl{fill:#e8e3d6}.empty .trl{fill:#2b3138;stroke:#8a8f98;stroke-width:4;stroke-dasharray:14 10}
+#wm{position:absolute;font:700 38px B;color:#fff;opacity:.78;letter-spacing:1px;text-shadow:0 2px 6px rgba(0,0,0,.5);z-index:50}
+#subs{position:absolute;left:40px;right:40px;top:1462px;text-align:center;z-index:40}
+#subs .g{position:absolute;left:0;right:0;top:0;opacity:0}
+#subs span.w{display:inline-block;margin:0 14px;font:800 104px/1.05 BC;text-transform:uppercase;color:#f4f3ee;
+ -webkit-text-stroke:0;text-shadow:0 0 0 #000,0 6px 0 rgba(0,0,0,.55),0 0 18px rgba(0,0,0,.6);background:rgba(22,24,27,.0)}
+#subs span.w.on{color:#f2b705}
+.rule{width:880px;height:190px;background:#f2b705;color:#16181b;border-radius:30px;box-shadow:0 18px 0 rgba(0,0,0,.3);padding:18px 34px;display:flex;align-items:center;gap:30px}
+.rule .n{font:800 70px/1 BC;text-transform:uppercase;writing-mode:horizontal-tb;background:#16181b;color:#f2b705;padding:16px 22px 8px;border-radius:18px;white-space:nowrap}
+.rule .t{font:800 74px/.98 BC;text-transform:uppercase}
+.row{display:flex;align-items:center;gap:26px}
+.ab{width:430px;height:290px;border-radius:36px;background:#16181b;box-shadow:0 20px 0 rgba(0,0,0,.3);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px}
+.ab .badge{width:120px;height:120px;font-size:108px;border-radius:26px}
+.ab .v{font:800 84px/1 BC}.ab .s{font:700 36px/1.1 B;text-transform:uppercase;letter-spacing:1px;color:#c9c5ba}
+.pill{background:#f2b705;color:#16181b;font:800 108px/1 BC;text-transform:uppercase;padding:26px 60px 14px;border-radius:999px;box-shadow:0 16px 0 rgba(0,0,0,.3);white-space:nowrap}
+</style></head><body>
+<div id="sky"></div><div id="sun"></div>
+
+<svg class="hl" id="h1" style="top:1040px" viewBox="0 0 4320 420"><defs><pattern id="p1" width="720" height="420" patternUnits="userSpaceOnUse"><path d="M0 220 C120 120 260 120 360 210 C460 300 600 290 720 220 L720 420 L0 420Z" fill="#26404a"/></pattern></defs><rect width="4320" height="420" fill="url(#p1)"/></svg>
+<svg class="hl" id="h2" style="top:1150px" viewBox="0 0 4320 420"><defs><pattern id="p2" width="540" height="420" patternUnits="userSpaceOnUse"><path d="M0 170 C90 100 190 100 270 160 C350 220 450 220 540 170 L540 420 L0 420Z" fill="#1a2c33"/></pattern></defs><rect width="4320" height="420" fill="url(#p2)"/></svg>
+<svg class="hl" id="h3" style="top:1290px" viewBox="0 0 4320 420"><defs><pattern id="p3" width="900" height="420" patternUnits="userSpaceOnUse"><path d="M0 120 C150 60 330 60 450 110 C570 160 750 160 900 120 L900 420 L0 420Z" fill="#101d22"/></pattern></defs><rect width="4320" height="420" fill="url(#p3)"/></svg>
+<div style="position:absolute;left:0;right:0;top:1600px;bottom:0;background:#101d22"></div><div id="wm">@appdiariodebordo</div>
+
+<!-- 1 gancho -->
+<div class="abs" id="hook1" style="left:40px;width:1000px;top:250px"><div class="big" style="font-size:150px">Tu é<br><span class="yel">caminhoneiro?</span></div></div>
+<div class="abs" id="hook2" style="left:90px;width:900px;top:640px;text-align:center"><div class="pill" style="font-size:80px;padding:20px 44px 10px;display:inline-block">Então me ajuda nessa</div></div>
+<!-- 2 nome -->
+<div class="abs" id="name" style="left:90px;width:900px;top:290px;text-align:center"><div class="big" style="font-size:300px">ZÉ</div><div class="pill" style="font-size:78px;padding:20px 44px 10px;display:inline-block;margin-top:10px">Caminhoneiro autônomo</div></div>
+<!-- 3 carreta -->
+<div class="abs box" id="truck" style="left:70px;width:940px;top:250px;height:430px;padding:34px 50px">
+ <div class="sm yel" style="font-size:52px">Carreta · viagem de</div>
+ <div class="mid" style="font-size:210px;line-height:1.05"><span id="km">0</span> <span style="font-size:110px">km</span></div>
+ <div id="truckic" style="position:absolute;left:50px;bottom:24px;width:300px"><svg viewBox="0 0 300 140" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="18" width="172" height="84" rx="8" class="trl"/><rect x="10" y="62" width="172" height="10" fill="#f2b705" opacity=".85"/>
+<path d="M188 44 L242 44 L278 80 L284 102 L188 102Z" fill="#f2b705"/><path d="M226 52 L248 52 L266 78 L226 78Z" fill="#2b4553"/><rect x="186" y="98" width="100" height="8" fill="#16181b"/>
+<g fill="#16181b"><circle cx="48" cy="108" r="17"/><circle cx="88" cy="108" r="17"/><circle cx="126" cy="108" r="17"/><circle cx="216" cy="108" r="17"/><circle cx="256" cy="108" r="17"/></g>
+<g fill="#8a8f98"><circle cx="48" cy="108" r="7"/><circle cx="88" cy="108" r="7"/><circle cx="126" cy="108" r="7"/><circle cx="216" cy="108" r="7"/><circle cx="256" cy="108" r="7"/></g></svg></div></div>
+<!-- 4 propostas -->
+<div class="abs box" id="prop" style="left:70px;width:940px;top:250px;height:430px;display:flex;align-items:center;justify-content:center;gap:40px">
+ <div id="phone" style="width:230px;height:230px"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><rect x="62" y="20" width="76" height="150" rx="16" fill="#16181b" stroke="#f4f3ee" stroke-width="7"/><rect x="72" y="36" width="56" height="104" rx="6" fill="#5fd39a"/><circle cx="100" cy="156" r="6" fill="#f4f3ee"/>
+<path d="M30 64 Q16 100 30 136" stroke="#f2b705" stroke-width="8" fill="none" stroke-linecap="round"/><path d="M12 48 Q-8 100 12 152" stroke="#f2b705" stroke-width="8" fill="none" stroke-linecap="round"/>
+<path d="M170 64 Q184 100 170 136" stroke="#f2b705" stroke-width="8" fill="none" stroke-linecap="round"/><path d="M188 48 Q208 100 188 152" stroke="#f2b705" stroke-width="8" fill="none" stroke-linecap="round"/></svg></div>
+ <div><div class="sm" style="font-size:50px;color:#c9c5ba">Ligaram pra ele</div><div class="mid" style="font-size:150px;line-height:1"><span class="yel">2</span> propostas</div></div></div>
+<!-- 5 proposta A -->
+<div class="abs box" id="cA" style="left:70px;width:940px;top:250px;height:440px;padding:34px 44px">
+ <div class="row"><div class="badge">A</div><div><div class="mid" style="font-size:150px;line-height:1">R$ <span id="vA">0</span></div><div class="sm" style="font-size:46px;color:#c9c5ba">Ida · carga cheia</div></div></div>
+ <div class="row" id="rowA2" style="margin-top:24px;opacity:0"><div id="emptyT" class="empty" style="width:230px"><svg viewBox="0 0 300 140" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="18" width="172" height="84" rx="8" class="trl"/><rect x="10" y="62" width="172" height="10" fill="#f2b705" opacity=".85"/>
+<path d="M188 44 L242 44 L278 80 L284 102 L188 102Z" fill="#f2b705"/><path d="M226 52 L248 52 L266 78 L226 78Z" fill="#2b4553"/><rect x="186" y="98" width="100" height="8" fill="#16181b"/>
+<g fill="#16181b"><circle cx="48" cy="108" r="17"/><circle cx="88" cy="108" r="17"/><circle cx="126" cy="108" r="17"/><circle cx="216" cy="108" r="17"/><circle cx="256" cy="108" r="17"/></g>
+<g fill="#8a8f98"><circle cx="48" cy="108" r="7"/><circle cx="88" cy="108" r="7"/><circle cx="126" cy="108" r="7"/><circle cx="216" cy="108" r="7"/><circle cx="256" cy="108" r="7"/></g></svg></div><div><div class="mid" style="font-size:96px;line-height:1">Volta <span class="yel">vazia</span></div><div class="sm" style="font-size:42px;color:#c9c5ba">sem frete na volta</div></div></div></div>
+<!-- regra 1 -->
+<div class="abs rule" id="r1" style="left:100px;top:716px"><div class="n">REGRA 1</div><div class="t">Volta vazia perde metade da viagem</div></div>
+<!-- 6 proposta B -->
+<div class="abs box" id="cB" style="left:70px;width:940px;top:250px;height:450px;padding:30px 44px">
+ <div class="row" style="align-items:flex-start"><div class="badge">B</div><div style="flex:1">
+  <div class="row" id="b1" style="opacity:0;justify-content:space-between"><div class="sm" style="font-size:38px;color:#c9c5ba;white-space:nowrap">Ida · carga cheia</div><div class="mid" style="font-size:96px">R$ <span id="vB1">0</span></div></div>
+  <div class="row" id="b2" style="opacity:0;justify-content:space-between;margin-top:8px"><div class="sm" style="font-size:38px;color:#c9c5ba;white-space:nowrap">Volta · carga cheia</div><div class="mid" style="font-size:100px">+ R$ <span id="vB2">0</span></div></div>
+  <div class="row" id="b3" style="opacity:0;justify-content:space-between;margin-top:14px;border-top:6px solid #f2b705;padding-top:12px"><div class="sm yel" style="font-size:50px">No total</div><div class="mid" style="font-size:124px">R$ <span id="vB3">0</span></div></div>
+ </div></div></div>
+<!-- 7 espera -->
+<div class="abs box" id="wait" style="left:70px;width:940px;top:250px;height:440px;padding:30px 44px">
+ <div class="sm yel" style="font-size:48px">Carga da volta pronta só em</div>
+ <div class="row" style="margin-top:10px"><div id="clock" style="width:170px;height:170px"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><circle cx="100" cy="100" r="84" fill="#f4f3ee" stroke="#16181b" stroke-width="10"/><circle cx="100" cy="100" r="7" fill="#16181b"/>
+<path id="hand" d="M100 100 L100 40" stroke="#16181b" stroke-width="10" stroke-linecap="round"/><path d="M100 100 L140 118" stroke="#f2b705" stroke-width="10" stroke-linecap="round"/></svg></div><div class="mid" style="font-size:190px;line-height:1"><span id="dias">0</span> <span style="font-size:110px">dias</span></div></div>
+ <div class="row" style="margin-top:20px;gap:20px"><div id="d1" class="pill" style="font-size:62px;padding:16px 36px 8px;opacity:0;background:#2b3138;color:#f4f3ee;box-shadow:none">Dia 1 · parado</div><div id="d2" class="pill" style="font-size:62px;padding:16px 36px 8px;opacity:0;background:#2b3138;color:#f4f3ee;box-shadow:none">Dia 2 · parado</div></div></div>
+<!-- 8 diesel -->
+<div class="abs box" id="dsl" style="left:70px;width:940px;top:250px;height:430px;padding:34px 50px;display:flex;align-items:center;gap:44px">
+ <div id="pump" style="width:190px;height:240px"><svg viewBox="0 0 160 200" xmlns="http://www.w3.org/2000/svg"><rect x="14" y="20" width="84" height="160" rx="12" fill="#f4f3ee"/><rect x="28" y="36" width="56" height="40" rx="6" fill="#16181b"/><rect x="28" y="92" width="56" height="10" rx="3" fill="#f2b705"/>
+<rect x="6" y="176" width="100" height="14" rx="5" fill="#8a8f98"/><path d="M98 54 L128 54 Q146 54 146 72 L146 140 Q146 156 132 156 Q120 156 120 144 L120 76 L98 76Z" fill="#16181b"/></svg></div>
+ <div><div class="sm yel" style="font-size:52px">Diesel · litro</div><div class="mid" style="font-size:190px;line-height:1">R$ <span id="dv">0,00</span></div><div class="sm" style="font-size:34px;color:#c9c5ba">perto de sete reais · média do Brasil</div></div></div>
+<!-- regra 2 -->
+<div class="abs rule" id="r2" style="left:100px;top:716px"><div class="n">REGRA 2</div><div class="t">Parado também se gasta</div></div>
+<!-- 9 pergunta final -->
+<div class="abs" id="q" style="left:60px;width:960px;top:236px;text-align:center"><div class="big" style="font-size:112px;line-height:1">Qual deixa mais<br><span class="yel">dinheiro</span> no bolso?</div></div>
+<div class="abs" id="cta" style="left:60px;width:960px;top:262px;text-align:center"><div class="pill" style="display:inline-block">Comente A ou B</div></div>
+<div class="abs" id="fa" style="left:60px;top:500px"><div class="ab"><div class="badge">A</div><div class="v">R$ 8.000</div><div class="s">volta vazia</div></div></div>
+<div class="abs" id="fb" style="left:590px;top:500px"><div class="ab"><div class="badge">B</div><div class="v">R$ 9.000</div><div class="s">espera de 2 dias</div></div></div>
+<div class="abs" id="tz" style="left:60px;width:960px;top:812px;text-align:center"><div class="sm" style="white-space:nowrap;font-size:38px;background:#16181b;display:inline-block;padding:14px 34px 8px;border-radius:999px;color:#f4f3ee">Parte 2 amanhã: a conta no <span class="yel">Diário de Bordo</span></div></div>
+<div class="abs" id="ex" style="left:60px;width:960px;top:196px;text-align:center;font:700 30px B;color:#c9c5ba;text-transform:uppercase;letter-spacing:2px">números de exemplo</div>
+
+<div id="ze"><svg id="zesvg" viewBox="0 0 400 520" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<linearGradient id="sk" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#d9a379"/><stop offset="1" stop-color="#b57a51"/></linearGradient>
+<linearGradient id="sh" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4f79b4"/><stop offset="1" stop-color="#2c4f80"/></linearGradient>
+<linearGradient id="cap" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f6c22a"/><stop offset="1" stop-color="#d79f00"/></linearGradient>
+</defs>
+<path d="M70 520 C72 440 110 404 168 392 L200 412 L232 392 C290 404 328 440 330 520Z" fill="url(#sh)"/>
+<path d="M168 392 L200 440 L232 392 L222 386 L200 418 L178 386Z" fill="#24466f"/>
+<path d="M200 418 L200 470" stroke="#24466f" stroke-width="3"/><circle cx="200" cy="440" r="4" fill="#e9e3d6"/><circle cx="200" cy="460" r="4" fill="#e9e3d6"/>
+<path d="M166 340 L166 396 Q200 420 234 396 L234 340Z" fill="#a86f47"/>
+<ellipse cx="128" cy="250" rx="14" ry="24" fill="#c08356"/><ellipse cx="272" cy="250" rx="14" ry="24" fill="#c08356"/>
+<path d="M132 200 C130 150 160 132 200 132 C240 132 270 150 268 200 C268 262 262 300 244 330 C232 350 216 360 200 360 C184 360 168 350 156 330 C138 300 132 262 132 200Z" fill="url(#sk)"/>
+<path d="M140 268 C146 310 168 352 200 356 C232 352 254 310 260 268 C254 300 240 330 222 338 C210 328 190 328 178 338 C160 330 146 300 140 268Z" fill="#3a2e28" opacity=".28"/>
+<path d="M132 214 C130 190 134 176 140 170 L146 230 Z" fill="#5a524c"/><path d="M268 214 C270 190 266 176 260 170 L254 230 Z" fill="#5a524c"/>
+<g id="ex_calm" style="display:none"><path d="M186 212 Q170 201 152 208 L152 214 Q170 207 186 219Z" fill="#2a1f19"/><path d="M214 212 Q230 201 248 208 L248 214 Q230 207 214 219Z" fill="#2a1f19"/><path d="M153 234 Q170 217 187 234 Q170 246.0 153 234Z" fill="#f4efe6"/>
+<circle cx="170" cy="235" r="8.5" fill="#4a3220"/><circle cx="170" cy="235" r="4.5" fill="#140d09"/>
+<circle cx="173" cy="232" r="2.2" fill="#fff"/>
+<path d="M152 234 Q170 215 188 234 Q170 220 152 234Z" fill="#9a6440" opacity=".55"/><path d="M213 234 Q230 217 247 234 Q230 246.0 213 234Z" fill="#f4efe6"/>
+<circle cx="230" cy="235" r="8.5" fill="#4a3220"/><circle cx="230" cy="235" r="4.5" fill="#140d09"/>
+<circle cx="233" cy="232" r="2.2" fill="#fff"/>
+<path d="M212 234 Q230 215 248 234 Q230 220 212 234Z" fill="#9a6440" opacity=".55"/></g><g id="ex_worried" style="display:none"><path d="M186 202 Q170 195 152 212 L152 218 Q170 201 186 209Z" fill="#2a1f19"/><path d="M214 202 Q230 195 248 212 L248 218 Q230 201 214 209Z" fill="#2a1f19"/><path d="M153 234 Q170 215 187 234 Q170 246.6 153 234Z" fill="#f4efe6"/>
+<circle cx="170" cy="238" r="8.5" fill="#4a3220"/><circle cx="170" cy="238" r="4.5" fill="#140d09"/>
+<circle cx="173" cy="235" r="2.2" fill="#fff"/>
+<path d="M152 234 Q170 213 188 234 Q170 218 152 234Z" fill="#9a6440" opacity=".55"/><path d="M213 234 Q230 215 247 234 Q230 246.6 213 234Z" fill="#f4efe6"/>
+<circle cx="230" cy="238" r="8.5" fill="#4a3220"/><circle cx="230" cy="238" r="4.5" fill="#140d09"/>
+<circle cx="233" cy="235" r="2.2" fill="#fff"/>
+<path d="M212 234 Q230 213 248 234 Q230 218 212 234Z" fill="#9a6440" opacity=".55"/></g><g id="ex_shock" style="display:none"><path d="M186 198 Q170 191 152 198 L152 204 Q170 197 186 205Z" fill="#2a1f19"/><path d="M214 198 Q230 191 248 198 L248 204 Q230 197 214 205Z" fill="#2a1f19"/><path d="M153 234 Q170 212 187 234 Q170 247.5 153 234Z" fill="#f4efe6"/>
+<circle cx="170" cy="235" r="8.5" fill="#4a3220"/><circle cx="170" cy="235" r="4.5" fill="#140d09"/>
+<circle cx="173" cy="232" r="2.2" fill="#fff"/>
+<path d="M152 234 Q170 210 188 234 Q170 215 152 234Z" fill="#9a6440" opacity=".55"/><path d="M213 234 Q230 212 247 234 Q230 247.5 213 234Z" fill="#f4efe6"/>
+<circle cx="230" cy="235" r="8.5" fill="#4a3220"/><circle cx="230" cy="235" r="4.5" fill="#140d09"/>
+<circle cx="233" cy="232" r="2.2" fill="#fff"/>
+<path d="M212 234 Q230 210 248 234 Q230 215 212 234Z" fill="#9a6440" opacity=".55"/></g><g id="ex_happy" style="display:none"><path d="M186 208 Q170 199 152 206 L152 212 Q170 205 186 215Z" fill="#2a1f19"/><path d="M214 208 Q230 199 248 206 L248 212 Q230 205 214 215Z" fill="#2a1f19"/><path d="M153 234 Q170 220 187 234 Q170 245.1 153 234Z" fill="#f4efe6"/>
+<circle cx="170" cy="235" r="8.5" fill="#4a3220"/><circle cx="170" cy="235" r="4.5" fill="#140d09"/>
+<circle cx="173" cy="232" r="2.2" fill="#fff"/>
+<path d="M152 234 Q170 218 188 234 Q170 223 152 234Z" fill="#9a6440" opacity=".55"/><path d="M213 234 Q230 220 247 234 Q230 245.1 213 234Z" fill="#f4efe6"/>
+<circle cx="230" cy="235" r="8.5" fill="#4a3220"/><circle cx="230" cy="235" r="4.5" fill="#140d09"/>
+<circle cx="233" cy="232" r="2.2" fill="#fff"/>
+<path d="M212 234 Q230 218 248 234 Q230 223 212 234Z" fill="#9a6440" opacity=".55"/></g>
+<g id="blink" style="display:none"><ellipse cx="170" cy="235" rx="21" ry="13" fill="#c98e63"/><path d="M152 238 Q170 246 188 238" stroke="#2a1f19" stroke-width="3.5" fill="none" stroke-linecap="round"/><ellipse cx="230" cy="235" rx="21" ry="13" fill="#c98e63"/><path d="M212 238 Q230 246 248 238" stroke="#2a1f19" stroke-width="3.5" fill="none" stroke-linecap="round"/></g>
+<path d="M200 244 C196 262 188 276 190 284 C194 292 206 292 210 284 C212 276 204 262 200 244Z" fill="#a86f47" opacity=".7"/>
+<path d="M168 304 C180 292 194 294 200 298 C206 294 220 292 232 304 C224 310 212 308 200 304 C188 308 176 310 168 304Z" fill="#2f2622"/>
+<g id="mo_calm" style="display:none"><path d="M174 318 Q200 326 226 318" stroke="#6e3a2e" stroke-width="5" fill="none" stroke-linecap="round"/></g><g id="mo_worried" style="display:none"><path d="M176 324 Q200 312 224 324" stroke="#6e3a2e" stroke-width="5" fill="none" stroke-linecap="round"/></g><g id="mo_shock" style="display:none"><ellipse cx="200" cy="322" rx="13" ry="17" fill="#4a1f1a"/><ellipse cx="200" cy="330" rx="8" ry="6" fill="#b65a52"/></g><g id="mo_happy" style="display:none"><path d="M170 312 Q200 342 230 312 Q200 324 170 312Z" fill="#4a1f1a"/><path d="M176 315 Q200 324 224 315 L224 318 Q200 327 176 318Z" fill="#f1ece2"/></g>
+<g id="sp1" style="display:none"><ellipse cx="200" cy="321" rx="15" ry="7" fill="#4a1f1a"/><path d="M187 317 Q200 321 213 317 L213 319 Q200 323 187 319Z" fill="#f1ece2"/></g><g id="sp2" style="display:none"><ellipse cx="200" cy="324" rx="17" ry="13" fill="#4a1f1a"/><path d="M185 315 Q200 320 215 315 L215 319 Q200 324 185 319Z" fill="#f1ece2"/><ellipse cx="200" cy="332" rx="9" ry="5" fill="#b65a52"/></g>
+<path d="M126 196 C122 120 166 92 200 92 C246 92 280 122 274 196 C250 180 150 180 126 196Z" fill="url(#cap)"/>
+<path d="M200 92 C176 92 150 104 140 130 L140 190 C160 184 180 182 200 182Z" fill="#f2efe6" opacity=".9"/>
+<path d="M150 150 L196 150 L196 176 L150 176Z" fill="#16181b"/><path d="M158 160 l20 0 l6 6 l0 6 l-26 0z" fill="#f2b705"/><circle cx="163" cy="173" r="3" fill="#f2b705"/><circle cx="178" cy="173" r="3" fill="#f2b705"/>
+<path d="M118 196 C150 176 250 176 282 196 C296 204 292 214 276 212 C240 202 160 202 124 212 C108 214 104 204 118 196Z" fill="#c99500"/>
+<circle cx="200" cy="94" r="7" fill="#c99500"/>
+</svg></div>
+<div id="subs"></div>
+<script>
+const TOT=36.6, WORDS=[{"id": 0, "text": "Tu", "start": 0.12, "end": 0.29}, {"id": 1, "text": "é", "start": 0.29, "end": 0.54}, {"id": 2, "text": "caminhoneiro?", "start": 0.54, "end": 1.2}, {"id": 3, "text": "Então", "start": 1.2, "end": 1.44}, {"id": 4, "text": "me", "start": 1.44, "end": 1.56}, {"id": 5, "text": "ajuda", "start": 1.56, "end": 2.13}, {"id": 6, "text": "nessa.", "start": 2.13, "end": 2.36}, {"id": 7, "text": "O", "start": 2.74, "end": 2.97}, {"id": 8, "text": "Zé", "start": 2.97, "end": 3.23}, {"id": 9, "text": "é", "start": 3.23, "end": 3.51}, {"id": 10, "text": "autônomo.", "start": 3.51, "end": 4.18}, {"id": 11, "text": "Carreta,", "start": 4.34, "end": 4.93}, {"id": 12, "text": "mil", "start": 4.93, "end": 5.18}, {"id": 13, "text": "quilômetros", "start": 5.18, "end": 6.07}, {"id": 14, "text": "de", "start": 6.07, "end": 6.3}, {"id": 15, "text": "estrada.", "start": 6.3, "end": 6.86}, {"id": 16, "text": "Ligaram", "start": 7.19, "end": 7.62}, {"id": 17, "text": "pra", "start": 7.62, "end": 7.92}, {"id": 18, "text": "ele", "start": 7.92, "end": 8.19}, {"id": 19, "text": "com", "start": 8.19, "end": 8.41}, {"id": 20, "text": "duas", "start": 8.41, "end": 8.65}, {"id": 21, "text": "propostas.", "start": 8.65, "end": 9.18}, {"id": 22, "text": "A", "start": 9.47, "end": 9.57}, {"id": 23, "text": "primeira:", "start": 9.57, "end": 10.04}, {"id": 24, "text": "oito", "start": 10.34, "end": 10.6}, {"id": 25, "text": "mil", "start": 10.6, "end": 10.86}, {"id": 26, "text": "reais", "start": 10.86, "end": 11.26}, {"id": 27, "text": "pra", "start": 11.26, "end": 11.34}, {"id": 28, "text": "levar", "start": 11.34, "end": 11.77}, {"id": 29, "text": "a", "start": 11.77, "end": 11.98}, {"id": 30, "text": "carga.", "start": 11.98, "end": 12.24}, {"id": 31, "text": "Mas", "start": 12.47, "end": 12.77}, {"id": 32, "text": "a", "start": 12.77, "end": 12.85}, {"id": 33, "text": "volta", "start": 12.85, "end": 13.34}, {"id": 34, "text": "é", "start": 13.34, "end": 13.5}, {"id": 35, "text": "vazia.", "start": 13.5, "end": 14.09}, {"id": 36, "text": "A", "start": 14.49, "end": 14.62}, {"id": 37, "text": "segunda:", "start": 14.62, "end": 15.09}, {"id": 38, "text": "seis", "start": 15.35, "end": 15.52}, {"id": 39, "text": "mil", "start": 15.52, "end": 15.79}, {"id": 40, "text": "na", "start": 15.79, "end": 16.01}, {"id": 41, "text": "ida", "start": 16.01, "end": 16.57}, {"id": 42, "text": "e", "start": 16.57, "end": 16.81}, {"id": 43, "text": "três", "start": 16.81, "end": 17.06}, {"id": 44, "text": "mil", "start": 17.06, "end": 17.16}, {"id": 45, "text": "na", "start": 17.16, "end": 17.52}, {"id": 46, "text": "volta.", "start": 17.52, "end": 17.89}, {"id": 47, "text": "Nove", "start": 18.1, "end": 18.38}, {"id": 48, "text": "mil", "start": 18.38, "end": 18.7}, {"id": 49, "text": "no", "start": 18.7, "end": 18.81}, {"id": 50, "text": "total.", "start": 18.81, "end": 19.19}, {"id": 51, "text": "Só", "start": 19.52, "end": 19.7}, {"id": 52, "text": "que", "start": 19.7, "end": 19.9}, {"id": 53, "text": "a", "start": 19.9, "end": 20.13}, {"id": 54, "text": "carga", "start": 20.13, "end": 20.39}, {"id": 55, "text": "da", "start": 20.39, "end": 20.65}, {"id": 56, "text": "volta", "start": 20.65, "end": 21.02}, {"id": 57, "text": "só", "start": 21.02, "end": 21.14}, {"id": 58, "text": "fica", "start": 21.14, "end": 21.54}, {"id": 59, "text": "pronta", "start": 21.54, "end": 21.78}, {"id": 60, "text": "daqui", "start": 21.78, "end": 22.06}, {"id": 61, "text": "a", "start": 22.06, "end": 22.37}, {"id": 62, "text": "dois", "start": 22.37, "end": 22.45}, {"id": 63, "text": "dias.", "start": 22.45, "end": 22.84}, {"id": 64, "text": "O", "start": 23.13, "end": 23.28}, {"id": 65, "text": "diesel", "start": 23.28, "end": 23.88}, {"id": 66, "text": "tá", "start": 23.88, "end": 23.96}, {"id": 67, "text": "perto", "start": 23.96, "end": 24.28}, {"id": 68, "text": "de", "start": 24.28, "end": 24.49}, {"id": 69, "text": "sete", "start": 24.49, "end": 24.82}, {"id": 70, "text": "reais", "start": 24.82, "end": 25.25}, {"id": 71, "text": "o", "start": 25.25, "end": 25.4}, {"id": 72, "text": "litro.", "start": 25.4, "end": 25.77}, {"id": 73, "text": "E", "start": 25.97, "end": 26.15}, {"id": 74, "text": "parado", "start": 26.15, "end": 26.71}, {"id": 75, "text": "também", "start": 26.71, "end": 27.17}, {"id": 76, "text": "se", "start": 27.17, "end": 27.26}, {"id": 77, "text": "gasta.", "start": 27.26, "end": 27.7}, {"id": 78, "text": "Qual", "start": 28.06, "end": 28.25}, {"id": 79, "text": "dos", "start": 28.25, "end": 28.43}, {"id": 80, "text": "dois", "start": 28.43, "end": 28.73}, {"id": 81, "text": "fretes", "start": 28.73, "end": 29.0}, {"id": 82, "text": "deixa", "start": 29.0, "end": 29.39}, {"id": 83, "text": "mais", "start": 29.39, "end": 29.62}, {"id": 84, "text": "dinheiro", "start": 29.62, "end": 30.24}, {"id": 85, "text": "no", "start": 30.24, "end": 30.45}, {"id": 86, "text": "bolso", "start": 30.45, "end": 30.72}, {"id": 87, "text": "do", "start": 30.72, "end": 30.94}, {"id": 88, "text": "Zé?", "start": 30.94, "end": 31.18}, {"id": 89, "text": "Comenta", "start": 31.54, "end": 32.28}, {"id": 90, "text": "A", "start": 32.28, "end": 32.42}, {"id": 91, "text": "ou", "start": 32.42, "end": 32.83}, {"id": 92, "text": "B.", "start": 32.83, "end": 33.03}, {"id": 93, "text": "Amanhã", "start": 33.19, "end": 33.53}, {"id": 94, "text": "eu", "start": 33.53, "end": 33.77}, {"id": 95, "text": "mostro", "start": 33.77, "end": 34.13}, {"id": 96, "text": "a", "start": 34.13, "end": 34.21}, {"id": 97, "text": "conta.", "start": 34.21, "end": 34.52}], MOUTH="00001222112222222222222222101100000000001210122222222122222222111111100000000000000222211122222210012222210000122221111110000000000000122211222222100022210000122222222110122222222222101122111111001122110010000000000012212222221122222222221012221111222211122210122111000001010000000000022112222222211100000000000222210022222222222222222211112222221122220001222110011000000000012211221001222221001110000011111222211111111100000000000000002222222112211111100000000001111222222112222222222222221122210000120000022222211122222222211222210011000000000122222212222222222201221012211100000000000112201221000122221221221001222221001111112111110021000122221121121001221111222222111011111110011100000000000221111222221121100220000122211011111111111112221111222222222221122111210001100000000000110012222122222211100122221122211111122221110001000000000000022221122211222211100122222101111101221212222222222221111222222222222222112222111111211122110000000000000222222210122100122222100000122211222210000000000001222222222222222222221112200122211011100000000000000000000000000000000000000000000000000000000000000000";
+const $=s=>document.querySelector(s);
+const cl=x=>Math.max(0,Math.min(1,x)), eo=x=>1-Math.pow(1-cl(x),3), eio=x=>{x=cl(x);return x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2};
+const back=x=>{x=cl(x);const c=1.6;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2)};
+const ws=i=>WORDS[i].start, we=i=>WORDS[i].end;
+const fmt=n=>String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g,'.');
+// cartões: [id, início, fim]
+const C=[['hook1',0,we(6)+.25],['hook2',ws(3),we(6)+.25],['name',ws(7)-.05,we(10)+.4],['truck',ws(11)-.05,we(15)+.3],['prop',ws(16)-.05,we(21)+.3],
+ ['cA',ws(22),we(35)+.45],['r1',ws(31)-.05,we(35)+.5],['cB',ws(36),we(50)+.3],['wait',ws(51),we(63)+.3],['dsl',ws(64)-.05,we(72)+.3],['r2',ws(73)-.05,we(77)+.35],
+ ['q',ws(78),ws(89)-.1],['fa',ws(78)+.3,TOT],['fb',ws(78)+.5,TOT],['cta',ws(89)-.05,TOT],['tz',ws(93)-.1,TOT],['ex',ws(36),TOT]];
+const EXPR=[[0,'calm'],[ws(16),'happy'],[ws(22),'calm'],[ws(31),'worried'],[ws(36),'calm'],[ws(51),'worried'],[ws(64),'calm'],[ws(73),'shock'],[ws(78),'calm']];
+const BLINK=[1.9,4.9,8.4,11.3,15.0,18.6,22.2,26.4,30.1,33.4];
+// legenda: grupos de até 4 palavras
+const G=[];(function(){let g=[];WORDS.forEach((w,i)=>{g.push(i);const last=/[.?:,]$/.test(w.text)||g.length>=4||g.join('').length>14&&g.length>=3;if(last){G.push(g);g=[]}});if(g.length)G.push(g)})();
+const cap=$('#subs');G.forEach((g,gi)=>{const d=document.createElement('div');d.className='g';d.innerHTML=g.map(i=>'<span class="w" data-i="'+i+'">'+WORDS[i].text.replace(/[,]$/,'')+'</span>').join(' ');cap.appendChild(d)});
+const GT=G.map((g,gi)=>{const s=ws(g[0])-.04;const ne=gi+1<G.length?ws(G[gi+1][0])-.04:TOT;const e=Math.min(we(g[g.length-1])+.25,ne);return [s,e]});
+const SKY=[[0,'#18273a','#34516a','#d98a3a'],[19.3,'#101b2a','#1f3347','#4a6a82'],[28,'#14202e','#14202e','#1d2f3d']];
+const lerp=(a,b,t)=>a+(b-a)*t;
+function hex(c){return [1,3,5].map(i=>parseInt(c.substr(i,2),16))}
+function mix(a,b,t){const A=hex(a),B=hex(b);return 'rgb('+A.map((v,i)=>Math.round(lerp(v,B[i],t))).join(',')+')'}
+function skyAt(t){let i=0;while(i<SKY.length-1&&t>=SKY[i+1][0])i++;const a=SKY[i],b=SKY[Math.min(i+1,SKY.length-1)];const k=i<SKY.length-1?eio((t-a[0])/(b[0]+(i==0?0:0)-a[0]>0?Math.min(2.5,(b[0]-a[0]))/1:1)):0;
+ const kk=i<SKY.length-1?cl((t-b[0]+2.5)/2.5):0;return [mix(a[1],b[1],kk),mix(a[2],b[2],kk),mix(a[3],b[3],kk)]}
+const COUNT={km:[ws(12),we(13)+.1,1000,'#km',n=>fmt(n)],vA:[ws(24),we(26),8000,'#vA',n=>fmt(n)],vB1:[ws(38),we(39),6000,'#vB1',n=>fmt(n)],vB2:[ws(43),we(44),3000,'#vB2',n=>fmt(n)],vB3:[ws(47),we(48)+.15,9000,'#vB3',n=>fmt(n)]};
+window.render=function(t){
+ const [c1,c2,c3]=skyAt(t);$('#sky').style.background='linear-gradient(180deg,'+c1+' 0%,'+c2+' 55%,'+c3+' 78%,'+c3+' 100%)';
+ const night=cl((t-19)/2.5)*(1-cl((t-27.5)/1.5)*0);
+ const s=$('#sun');s.style.background=mix('#f2b705','#e8ecef',night);s.style.opacity=.9-.25*night;s.style.top=(1000+night*20)+'px';s.style.left=(700-t*3)+'px';
+
+ $('#h1').style.transform='translateX('+(-(t*18)%720)+'px)';$('#h2').style.transform='translateX('+(-(t*34)%540)+'px)';$('#h3').style.transform='translateX('+(-(t*60)%900)+'px)';
+ // marca d'água
+ const wm=$('#wm');const pos=Math.floor(t/8)%2;wm.style.top='150px';wm.style.left=pos?'auto':'48px';wm.style.right=pos?'48px':'auto';
+ // Zé
+ let ex='calm';EXPR.forEach(e=>{if(t>=e[0])ex=e[1]});
+ ['calm','worried','shock','happy'].forEach(k=>{$('#ex_'+k).style.display=k==ex?'':'none';});
+ const f=Math.min(MOUTH.length-1,Math.round(t*30));const m=+MOUTH[f];
+ ['calm','worried','shock','happy'].forEach(k=>{$('#mo_'+k).style.display=(k==ex&&m==0)?'':'none'});
+ $('#sp1').style.display=m==1?'':'none';$('#sp2').style.display=m==2?'':'none';
+ let bl=false;BLINK.forEach(b=>{if(t>=b&&t<b+.13)bl=true});$('#blink').style.display=bl?'':'none';
+ const ze=$('#ze');const nod=(m>0?1:0);ze.style.transform='translateY('+(Math.sin(t*2.3)*5-(m>1?4:0))+'px) rotate('+(Math.sin(t*1.4)*1.1)+'deg) scale('+(1+0.012*Math.sin(t*3.1))+')';
+ // cartões
+ C.forEach(([id,a,b])=>{const el=document.getElementById(id);let o=0,sc=1,ty=0;
+  if(t>=a&&t<=b){const i=cl((t-a)/.3),ou=cl((b-t)/.22);o=Math.min(1,i*3)*Math.min(1,ou*3+(b>=TOT-.01?1:0));sc=(0.82+0.18*back((t-a)/.38));ty=(1-eo((t-a)/.3))*40;if(id=='hook1'&&t<.2){o=1;sc=.94+.06*back(t/.2);ty=0}
+   if(/^r/.test(id)){sc=1+.1*Math.max(0,1-(t-a)/.15)}}
+  el.style.opacity=o;el.style.transform='translateY('+ty+'px) scale('+sc+')'});
+ // contadores
+ for(const k in COUNT){const [a,b,v,sel,fn]=COUNT[k];$(sel).textContent=fn(v*eio((t-a)/(b-a)))}
+ $('#dv').textContent=(7*eio((t-ws(67))/(we(69)-ws(67)))).toFixed(2).replace('.',',');
+ $('#dias').textContent=Math.round(2*eio((t-ws(60))/(we(63)-ws(60))));
+ $('#rowA2').style.opacity=eo((t-ws(33)+.2)/.3);
+ [['b1',ws(38)-.1],['b2',ws(43)-.1],['b3',ws(47)-.1],['d1',ws(58)],['d2',ws(62)-.05]].forEach(([id,a])=>{const e=$('#'+id);const k=eo((t-a)/.25);e.style.opacity=k;e.style.transform='translateX('+((1-k)*60)+'px)'});
+ $('#truckic').style.transform='translateX('+(eo((t-ws(11))/1.8)*560)+'px)';
+ $('#phone').style.transform='rotate('+(Math.sin(t*38)*(t>ws(16)&&t<we(21)?7:0))+'deg)';
+ $('#clock').querySelector('#hand').style.transform='rotate('+((t-ws(51))*220)+'deg)';$('#clock').querySelector('#hand').style.transformOrigin='100px 100px';
+ // legenda
+ const gs=cap.children;for(let gi=0;gi<G.length;gi++){const el=gs[gi],[a,b]=GT[gi];const on=t>=a&&t<=b;el.style.opacity=on?1:0;if(on){el.style.transform='scale('+(0.92+0.08*back((t-a)/.15))+')';el.querySelectorAll('span.w').forEach(sp=>{const i=+sp.dataset.i;sp.className='w'+(t>=ws(i)-.02&&t<we(i)+.04?' on':'')})}}
+};
+window.render(0);
+</script></body></html>
