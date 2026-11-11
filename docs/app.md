@@ -89,3 +89,10 @@ Hostinger → site trilhanova.shop → Avançado → GIT, branch `main`, pasta `
 ## Toques nos botões (10/11/2026)
 - Abas de baixo (Início/Viagens/Perfil) às vezes não respondiam com toques rápidos: o navegador tratava dois toques seguidos como "zoom de dois toques" e engolia o segundo, e o botão "afundava" 3px ao apertar (o dedo podia soltar fora dele).
 - Correção: `touch-action:manipulation` na página e nos botões (o zoom com dois dedos continua) e as abas não se mexem mais ao apertar (só escurecem). Não voltar o `translateY` nas abas.
+
+## Visitas e vendas (funil) — 10/11/2026
+- Página de vendas registra: `visita` (ao abrir), `assinar` (tocou em Assinar), `pix` (Pix gerado), `cartao` (foi para o cartão). Tabela `eventos`, função `registrar_evento` (anon pode chamar; 1 vez por visitante a cada 12 h por tipo). Migração `20261110_funil.sql`.
+- Sem dado pessoal: só tipo, origem e um código aleatório do navegador (`bordo-vis` no localStorage).
+- Origem: `?utm_source=` ou `?origem=` no link > navegador do Instagram/Facebook > site de onde veio > "direto". Link de WhatsApp quase sempre cai em "direto". Para separar, usar links com `?origem=whatsapp`, `?origem=status` etc.
+- Admin não conta: o app com conta grava `bordo-admin=1` no navegador do admin.
+- Ver: app → Perfil → **Visitas e vendas** (Hoje / 7 / 30 dias). Função `resumo_funil(dias)`, só admin. "Pagaram" vem da tabela `pagamentos` (aprovados, valor > 0). Conta a partir de 10/11/2026 22h.

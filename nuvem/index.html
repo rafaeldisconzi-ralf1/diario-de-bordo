@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#2b2e33">
-<meta name="app-version" content="nuvem-2026-11-10.14">
+<meta name="app-version" content="nuvem-2026-11-10.15">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Diário de Bordo">
@@ -538,7 +538,7 @@ function limpar(){
 }
 function bind(){
   document.querySelectorAll('#app [data-a]').forEach(b=>b.onclick=()=>{const a=b.dataset.a;
-    ({edit:()=>editar(b.dataset.t,b.dataset.i,false),editv:()=>novaViagem(S.trips.find(x=>x.id===b.dataset.t)),instalar:()=>abrirInstalar(false),relatorio:abrirRelatorio,notif:ativarNotif,aviso:mandarAviso,entrar:()=>{pularLogin=false;loginEtapa='email';render()},sair,admin:painelAdmin,perfil:()=>{view='perfil';render();scrollTo(0,0)},nova:novaViagem,diesel:abasteci,gasto:gastei,diaria,fechar:encerrar,limpar,ver:()=>detalhe(b.dataset.t),del:()=>askDel(b.dataset.t,b.dataset.i)})[a]()});
+    ({edit:()=>editar(b.dataset.t,b.dataset.i,false),editv:()=>novaViagem(S.trips.find(x=>x.id===b.dataset.t)),instalar:()=>abrirInstalar(false),relatorio:abrirRelatorio,notif:ativarNotif,aviso:mandarAviso,funil:()=>painelFunil(0),entrar:()=>{pularLogin=false;loginEtapa='email';render()},sair,admin:painelAdmin,perfil:()=>{view='perfil';render();scrollTo(0,0)},nova:novaViagem,diesel:abasteci,gasto:gastei,diaria,fechar:encerrar,limpar,ver:()=>detalhe(b.dataset.t),del:()=>askDel(b.dataset.t,b.dataset.i)})[a]()});
 }
 document.addEventListener('touchstart',()=>{},{passive:true});
 document.addEventListener('click',e=>{if(e.target.closest('button'))try{navigator.vibrate&&navigator.vibrate(12)}catch(_){}},true);
@@ -751,7 +751,7 @@ async function enviarPerfil(){
 async function carregarConta(){
   if(!SESS)return;
   const {data}=await sb.from('perfis').select('*').eq('id',SESS.user.id).maybeSingle();
-  if(data){CONTA=data;
+  if(data){CONTA=data;try{if(data.admin)localStorage.setItem('bordo-admin','1');else localStorage.removeItem('bordo-admin')}catch(_){}
     if(data.nome&&!S.perfil.nome)S.perfil={nome:data.nome||'',modelo:data.modelo||'',placa:data.placa||'',ano:data.ano||'',patrao:data.patrao||''};
     else if(S.perfil.nome&&!data.nome)S.sync.perfilPend=true;
     gravar();sb.from('perfis').update({visto_em:new Date().toISOString()}).eq('id',SESS.user.id).then(()=>{});
@@ -840,7 +840,7 @@ function blocoConta(){
   </div>
   ${blocoInstalar()}
   ${blocoNotif()}
-  ${CONTA&&CONTA.admin?`<button class="btn full primary" data-a="admin" style="min-height:60px;font-size:20px">Clientes</button><button class="btn full" data-a="aviso" style="min-height:56px;font-size:18px">Mandar aviso para todos</button>`:''}
+  ${CONTA&&CONTA.admin?`<button class="btn full primary" data-a="admin" style="min-height:60px;font-size:20px">Clientes</button><button class="btn full" data-a="funil" style="min-height:56px;font-size:18px">Visitas e vendas</button><button class="btn full" data-a="aviso" style="min-height:56px;font-size:18px">Mandar aviso para todos</button>`:''}
   <button class="link" data-a="sair" style="align-self:center">Sair da conta</button>`;
 }
 async function sair(){
@@ -850,6 +850,21 @@ async function sair(){
    <button class="save dark" id="sim" style="min-height:60px;border-radius:12px;font-weight:700;font-size:18px">Sim, sair</button>`,null);
   document.getElementById('sim').onclick=async()=>{await sb.auth.signOut({scope:'local'});SESS=null;CONTA=null;
     S={trips:[],avulsos:[],perfil:{nome:'',modelo:'',placa:'',ano:'',patrao:''},sync:{h:{},ultimo:null,uid:null}};gravar();close();view='inicio';render()};
+}
+async function painelFunil(dias){
+  const P=[[0,'Hoje'],[7,'7 dias'],[30,'30 dias']];
+  open(`<h3>Visitas e vendas</h3><div class="chips">${P.map(([d,t])=>`<button class="chip" data-fd="${d}" aria-pressed="${d===dias}">${t}</button>`).join('')}</div><div id="fun" class="muted">Carregando…</div>`,null);
+  document.querySelectorAll('[data-fd]').forEach(b=>b.onclick=()=>painelFunil(+b.dataset.fd));
+  const {data:f,error}=await sb.rpc('resumo_funil',{dias});const el=document.getElementById('fun');if(!el)return;
+  if(error||!f){el.textContent='Não deu para carregar. Confira a internet.';return}
+  const pc=(a,b)=>b?` <span class="muted">(${Math.round(a/b*100)}%)</span>`:'';
+  const linha=(t,n,ant,nota)=>`<div style="display:flex;justify-content:space-between;gap:10px;padding:12px 0;border-bottom:1px solid var(--line)"><span>${t}${nota?`<br><span class="muted" style="font-size:15px">${nota}</span>`:''}</span><b style="font-size:22px;white-space:nowrap">${n}${ant!=null?pc(n,ant):''}</b></div>`;
+  const nomes={instagram:'Instagram',facebook:'Facebook',whatsapp:'WhatsApp',google:'Google',youtube:'YouTube',tiktok:'TikTok',direto:'Direto / WhatsApp',site:'Do próprio site'};
+  el.className='';el.innerHTML=linha('Abriram a página de vendas',f.visitas)+linha('Tocaram em Assinar',f.assinar,f.visitas)
+   +linha('Geraram Pix',f.pix,f.assinar)+linha('Foram pagar com cartão',f.cartao,f.assinar)+linha('Pagaram',f.pagos,f.assinar)
+   +(f.nao_pagos?linha('Pix ou cartão sem pagar',f.nao_pagos,null,'Gerou e não pagou (ou ainda vai pagar)'):'')
+   +`<h4 style="margin:18px 0 4px">De onde vieram</h4>`+(f.origens.length?f.origens.map(o=>linha(nomes[o.origem]||o.origem,o.n,f.visitas)).join(''):'<p class="muted">Nenhuma visita ainda.</p>')
+   +`<p class="muted" style="font-size:15px">Cada pessoa conta 1 vez a cada 12 horas. Suas visitas (admin) não contam. Link do WhatsApp quase sempre aparece como "Direto". Contando desde 10/11/2026.</p>`;
 }
 async function painelAdmin(){
   open(`<h3>Clientes</h3><div id="adm" class="muted">Carregando…</div>`,null);

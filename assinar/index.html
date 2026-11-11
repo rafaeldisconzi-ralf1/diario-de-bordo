@@ -401,6 +401,19 @@ const calmo=matchMedia('(prefers-reduced-motion: reduce)').matches;
   const at=()=>{const passou=scrollY>innerHeight*0.9,r=preco.getBoundingClientRect(),noPreco=r.top<innerHeight&&r.bottom>0;barra.classList.toggle('mostra',passou&&!noPreco)};
   addEventListener('scroll',at,{passive:true});at()})();
 
+// ===== Contador de visitas (sem dado pessoal: só tipo, origem e um código aleatório do navegador) =====
+const EV_URL='https://kmaldmypdvapihsxpfmz.supabase.co/rest/v1/rpc/registrar_evento',EV_KEY='sb_publishable_hOL3UoYwX9z7wxa8oKrpDA_CJjdwNzx';
+const EV_VIS=(()=>{try{let v=localStorage.getItem('bordo-vis');if(!v){v=Math.random().toString(36).slice(2)+Date.now().toString(36);localStorage.setItem('bordo-vis',v)}return v}catch(_){return 's'+Math.random().toString(36).slice(2)}})();
+const EV_ORIGEM=(()=>{const q=new URLSearchParams(location.search),u=(q.get('utm_source')||q.get('origem')||'').toLowerCase().replace(/[^a-z0-9_-]/g,'');if(u)return u.slice(0,20);
+  const ua=navigator.userAgent;if(/Instagram/i.test(ua))return 'instagram';if(/FBAN|FBAV|FB_IAB/i.test(ua)||q.has('fbclid'))return 'facebook';
+  const r=document.referrer;if(!r)return 'direto';
+  try{const h=new URL(r).hostname.replace(/^www\./,'');if(h===location.hostname)return 'site';
+    for(const [k,re] of [['instagram',/instagram/],['facebook',/facebook|fb\.|messenger/],['whatsapp',/whatsapp|wa\.me/],['google',/google/],['youtube',/youtube|youtu\.be/],['tiktok',/tiktok/]])if(re.test(h))return k;
+    return h.slice(0,20)}catch(_){return 'direto'}})();
+function evento(tipo){try{if(localStorage.getItem('bordo-admin')==='1')return}catch(_){}
+  try{fetch(EV_URL,{method:'POST',keepalive:true,headers:{'Content-Type':'application/json',apikey:EV_KEY,Authorization:'Bearer '+EV_KEY},body:JSON.stringify({p_tipo:tipo,p_origem:EV_ORIGEM,p_visitante:EV_VIS})}).catch(()=>{})}catch(_){}}
+if(!new URLSearchParams(location.search).has('pago'))evento('visita');
+
 // ===== Pix =====
 const PIX_URL='https://kmaldmypdvapihsxpfmz.supabase.co/functions/v1/pix';
 const PLANOS={mensal:{nome:'Mensal',valor:'R$ 24,90',obs:'30 dias de acesso'},anual:{nome:'Anual',valor:'R$ 179,90',obs:'1 ano de acesso'}};
@@ -430,7 +443,7 @@ function telaEmail(){
     try{
       const r=await fetch(PIX_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({acao:'criar',email:e,plano:planoPix})});
       const d=await r.json();if(!r.ok||!d.copia_e_cola)throw new Error(d.erro||'erro');
-      telaPix(d);
+      telaPix(d);evento('pix');
     }catch(x){ok.disabled=false;ok.textContent='Gerar Pix';err.textContent='Não deu para gerar o Pix agora. Tente de novo em instantes.'}
   };
   const ct=document.getElementById('pix-cartao');
@@ -441,7 +454,7 @@ function telaEmail(){
     try{
       const r=await fetch(PIX_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({acao:'cartao',email:e,plano:planoPix})});
       const d=await r.json();if(!r.ok||!d.url)throw new Error(d.erro||'erro');
-      location.href=d.url;
+      evento('cartao');location.href=d.url;
     }catch(x){ct.disabled=false;ok.disabled=false;ct.textContent='Pagar com cartão';err.textContent='Não deu para abrir o pagamento com cartão agora. Tente de novo ou pague com Pix.'}
   };
   setTimeout(()=>inp.focus(),80);
@@ -498,7 +511,7 @@ function telaAprovado(){
 }
 voltaCartao();
 document.querySelectorAll('[data-plano]').forEach(a=>a.addEventListener('click',e=>{
-  e.preventDefault();planoPix=a.dataset.plano;fundo.hidden=false;document.body.style.overflow='hidden';telaEmail();
+  e.preventDefault();planoPix=a.dataset.plano;evento('assinar');fundo.hidden=false;document.body.style.overflow='hidden';telaEmail();
 }));
 // Quando o vídeo estiver pronto, coloque o link do YouTube aqui e a seção aparece sozinha.
 const VIDEO_YOUTUBE='';
