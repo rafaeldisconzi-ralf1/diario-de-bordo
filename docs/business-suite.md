@@ -36,9 +36,10 @@ Dica: depois de digitar a legenda, aparece sugestão de hashtag; clicar fora par
 - Conferir eventos em: Gerenciador de Eventos → Conjuntos de dados → Diario de Bordo - Site.
 
 ## Bio do Instagram (13/11/2026)
-- Pelo computador o Instagram deu "Ocorreu um problema ao salvar seu perfil" (provável trava temporária depois de muitas respostas seguidas). O link do site só muda pelo celular.
+- Pelo computador deu "Ocorreu um problema ao salvar seu perfil". A causa era o emoji ✅: o Instagram não aceita esse emoji na bio desta conta (Rafael confirmou). Não era bloqueio. O link do site só muda pelo celular.
+- Bio publicada pelo Rafael em 13/11 (sem o ✅).
 - Texto novo combinado:
-  🚛 App pro caminhoneiro / ⛽ Frete, diesel, manutenção e diárias / 💰 Veja quanto sobrou de cada viagem / ✅ R$ 24,90/mês · 7 dias de garantia / 👇 Conheça
+  🚛 App pro caminhoneiro / ⛽ Frete, diesel, manutenção e diárias / 💰 Veja quanto sobrou de cada viagem / R$ 24,90/mês · 7 dias de garantia / 👇 Conheça (sem ✅)
 - Link: https://frete.trilhanova.shop/assinar/?utm_source=ig_bio
 
 ## Comentários e direct (13/11/2026)
