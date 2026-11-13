@@ -233,6 +233,12 @@ footer{padding-block:28px 40px;color:var(--apagado);font-size:17px;border-top:2p
 .lanc-tag{background:var(--placa);color:var(--placa-tinta);font-family:var(--display);font-weight:800;font-size:20px;letter-spacing:.04em;text-transform:uppercase;padding:5px 14px;border-radius:99px}
 .lanc p{margin:0;font-size:20px;line-height:1.35}
 </style>
+<!-- Meta Pixel (Diario de Bordo - Site). ID publico, nao e segredo. Admin (bordo-admin=1) nao conta. -->
+<script>
+(function(){try{if(localStorage.getItem('bordo-admin')==='1')return}catch(_){}
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','2259208501675823');fbq('track','PageView');})();
+</script>
 </head>
 <body>
 <script>document.documentElement.classList.add("js")</script>
@@ -411,6 +417,7 @@ const EV_ORIGEM=(()=>{const q=new URLSearchParams(location.search),u=(q.get('utm
     for(const [k,re] of [['instagram',/instagram/],['facebook',/facebook|fb\.|messenger/],['whatsapp',/whatsapp|wa\.me/],['google',/google/],['youtube',/youtube|youtu\.be/],['tiktok',/tiktok/]])if(re.test(h))return k;
     return h.slice(0,20)}catch(_){return 'direto'}})();
 function evento(tipo){try{if(localStorage.getItem('bordo-admin')==='1')return}catch(_){}
+  try{if(window.fbq){const v={mensal:24.90,anual:179.90}[typeof planoPix!=='undefined'?planoPix:'']||0;if(tipo==='assinar')fbq('track','InitiateCheckout',{currency:'BRL',value:v});else if(tipo==='pix'||tipo==='cartao')fbq('track','AddPaymentInfo',{currency:'BRL',value:v,payment_type:tipo})}}catch(_){}
   try{fetch(EV_URL,{method:'POST',keepalive:true,headers:{'Content-Type':'application/json',apikey:EV_KEY,Authorization:'Bearer '+EV_KEY},body:JSON.stringify({p_tipo:tipo,p_origem:EV_ORIGEM,p_visitante:EV_VIS})}).catch(()=>{})}catch(_){}}
 if(!new URLSearchParams(location.search).has('pago'))evento('visita');
 
@@ -502,6 +509,7 @@ function telaPix(d){
   },4000);
 }
 function telaAprovado(){
+  try{if(window.fbq&&!sessionStorage.getItem('bordo-fbp')){sessionStorage.setItem('bordo-fbp','1');const pc=new URLSearchParams(location.search).get('pago')==='cartao';fbq('track','Purchase',pc?{currency:'BRL'}:{currency:'BRL',value:{mensal:24.90,anual:179.90}[planoPix]||0})}}catch(_){}
   jan.innerHTML=`<div class="aprovado">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M7.5 12.5l3 3 6-6.5"/></svg>
     <h3 id="pix-titulo">Pagamento aprovado!</h3>
