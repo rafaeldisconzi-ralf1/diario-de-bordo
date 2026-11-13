@@ -115,6 +115,43 @@ para conta nova. Ficar bem abaixo:
 - Conferir de vez em quando: Configurações → **Status da conta** → "pode ser recomendado". É o único jeito oficial
   de saber se a conta está fora das recomendações ("shadowban").
 
+## 12. Responder comentários e mandar direct sem levar bloqueio (pesquisa 13/11/2026)
+O Instagram **não publica** limite para uso normal. Os números de blogs e fóruns variam muito (uns falam 12–14
+comentários/hora, outros 60). Ninguém sabe o número certo, então a regra é **ficar muito abaixo** e agir como gente.
+O sistema é um robô que olha: rapidez, ritmo igual demais, texto repetido, e denúncias de spam.
+
+**Como nós fazemos (conta nova, menos de 3 meses):**
+| Ação | Nosso limite | Por quê |
+|---|---|---|
+| Responder comentário no nosso post | até 5 por hora, 5–10 min entre cada; até ~20 por dia | Fontes falam em 12–14/h com 6 min de intervalo; ficamos abaixo |
+| Direct para quem comentou/segue | até 5–10 por dia, 2–3 por hora | Conta nova: 30–50 "quentes"/dia é o teto citado |
+| Direct para quem nunca interagiu | **não fazemos** | Vai para "Solicitações", só 1 mensagem permitida, e denúncia derruba a conta |
+| Link no direct | só para quem comentou/pediu; melhor depois da pessoa responder | Link na 1ª mensagem para desconhecido é o que mais marca spam |
+| Link no comentário | nunca; escrever "link na bio" | Link em comentário não clica e parece spam |
+
+**Texto:**
+- Nunca copiar e colar o mesmo texto. Copiar ~10 vezes seguidas já dá bloqueio de direct, segundo vários relatos.
+- Cada resposta diferente e ligada ao que a pessoa escreveu. Sem muitas menções (@) nem hashtags em comentário.
+- Responder com curtida em parte dos comentários também conta como atenção e é mais leve.
+
+**Automação:**
+- Só a oficial da Meta (resposta automática do Business Suite) ou ferramenta que use a API oficial.
+- Pela regra oficial da Meta, a resposta automática em privado a um comentário é **uma mensagem por comentário**,
+  em até 7 dias. Mensagem de venda só dentro de 24 h depois que a pessoa falou com a gente.
+- Nunca robô de seguir, curtir ou mandar direct em massa. Nunca app que pede a senha do Instagram.
+
+**Se der problema** ("Tente novamente mais tarde", "Ação bloqueada", "Limitamos a frequência…", mensagem presa em "enviando"):
+1. Parar **aquela ação** na hora. Não tentar de novo: cada tentativa estica o bloqueio.
+2. Esperar 24–48 h sem repetir. Não usar VPN, não reinstalar o app, não trocar de aparelho (piora).
+3. Se tiver botão "Informe-nos", usar uma vez.
+4. Ver Configurações → **Status da conta**. Se aparecer "não pode ser recomendado", ver qual post e pedir revisão.
+5. Voltar devagar, metade do ritmo de antes, por uma semana.
+
+**Ritmo de post:** até 2 por dia, com horas de intervalo (já é o nosso: 07h e 19h). Nunca vários de uma vez.
+
+**Lição nossa:** em 13/11 respondi 11 comentários em ~5 minutos. Metade não apareceu. Não veio aviso, mas foi
+rápido demais. Na mesma hora a bio deu erro; a causa era o emoji ✅ (esta conta não aceita esse emoji na bio).
+
 ## Fontes
 - [Mosseri: 3 sinais (Blck Alpaca resume)](https://blckalpaca.at/en/knowledge-base/social-media/social-media-algorithms-distribution/instagram-algorithm-2026)
 - [Limite de 5 hashtags (Social Media Today)](https://www.socialmediatoday.com/news/instagram-implements-new-limits-on-hashtag-use/808309/)
@@ -126,3 +163,11 @@ para conta nova. Ficar bem abaixo:
 - [Limites de ações (SocialRails)](https://socialrails.com/blog/instagram-follow-limits-explained)
 - [Status da conta (Engadget)](https://www.engadget.com/instagram-account-status-recommendations-shadowbans-180937137.html)
 - [Skill social / carousel-frameworks (GitHub)](https://github.com/coreyhaines31/marketingskills)
+- [Limites 2026: o que realmente bloqueia (ChatPlace)](https://blog.chatplace.io/en/instagram-limits/)
+- [Comentários 12–14/h com 350–400 s (Tagembed)](https://tagembed.com/blog/instagram-restrictions-follow-like-comment/)
+- [Direct em conta nova, links (InstantDM)](https://instantdm.com/blog/instagram-dm-limits-rules-2026-the-ultimate-account-safety-guide)
+- [Texto copiado ~10x dá bloqueio (Unfollr)](https://www.unfollr.com/blog/instagram-action-blocked)
+- [Limites oficiais da API: 750 respostas privadas/h, 1 por comentário (Superprofile)](https://superprofile.bio/guides/instagram-dm-limits)
+- [Janela de 24 h (Planoly)](https://www.planoly.com/blog/instagram-24-hour-messaging-window-explained.md)
+- [O que fazer no bloqueio (CyberYozh)](https://app.cyberyozh.com/blog/how-to-fix-an-instagram-action-blocked/)
+- [Recomendações e Status da conta (Instagram Creators)](https://creators.instagram.com/blog/instagram-recommendations-eligibility-tips-creators)

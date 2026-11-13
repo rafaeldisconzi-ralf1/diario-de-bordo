@@ -24,7 +24,7 @@ Nomes checados no INPI em 10/11/2026: "Conta da Boleia" e "Sobrou na Estrada" se
 
 ## 13/11/2026 — Rafael: cuidado com respostas e direct para não tomar bloqueio
 Regras para o Instagram (conta nova, ainda frágil):
-- No máximo 5 respostas de comentário por hora, com pelo menos 5 a 10 minutos entre uma e outra.
+- No máximo 5 respostas de comentário por hora, com pelo menos 5 a 10 minutos entre uma e outra (e até ~20 por dia). Detalhes e fontes: docs/instagram.md, seção 12.
 - Nunca o mesmo texto: cada resposta diferente e ligada ao que a pessoa escreveu.
 - Link clicável só no direct; nos comentários, só "link na bio".
 - Direct: no máximo 5 a 10 por dia, só para quem comentou ou segue. Nunca para quem não interagiu.
