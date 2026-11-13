@@ -46,3 +46,19 @@ Dica: depois de digitar a legenda, aparece sugestão de hashtag; clicar fora par
 - Direct só abre para quem segue/tem botão "Enviar mensagem". Do Zé Parte 1: direct enviado para brunojpbh e qra_sertanejo (utm_source=ig_dm).
 - Os outros (perfil privado) receberam resposta no comentário apontando a Parte 2 e o link da bio. Confirmadas: gabriel_felype13, vitao__mtf, armored.23, velosoyv, 000_jose.pr, lucas._.gabriiel009. Pendentes: wtz_well (talvez), hebron_vinicius, diogo_camargos__, paulovictorcarvalhoalves, marcos_matias_ofc.
 - Lição: responder com intervalo maior. Regras completas em docs/decisoes.md (13/11).
+
+## Leitura do Business Suite em 13/11/2026 (por post, últimos 28 dias)
+| Post | Views | Curtidas | Coment. | Compart. | Salvos | Seguidores ganhos |
+|---|---|---|---|---|---|---|
+| Zé Parte 1 (12/11, enquete A/B) | 3.577 | 128 | 26 | 11 | 7 | **+24** |
+| Zé Parte 2 (13/11, 2 h no ar) | 1.337 | 47 | 1 | 0 | 2 | +2 |
+| "Controle de frete R$ 9.040" (10/11) | 5.368 (**5.271 de anúncio**) | 39 | 1 | 0 | 7 | +7 (6 do anúncio) |
+| "Diária parado" (11/11) | 88 | 1 | 0 | 0 | 0 | +1 |
+| Carrossel "quanto sobrou" (10/11) | 29 | 1 | 0 | 0 | 0 | 0 |
+- Único anúncio até hoje: R$ 21,27 no reel "Controle de frete". Rendeu 5.271 views e ~6 seguidores (~R$ 3,50 por seguidor). Nenhuma venda ligada a ele.
+- Ou seja, a maior parte das 8.010 views dos 28 dias foi paga. O que é orgânico de verdade: Zé Parte 1 (3.577) e Parte 2.
+- O que funciona de graça: série com enquete (comentário + compartilhamento + seguidor). Vídeo só de apresentar o app quase não rende sem anúncio.
+- 12/11: 133 visitas ao perfil, mas 0 cliques no link. Perfil precisa converter melhor (bio nova de 13/11 ajuda).
+- Comentário novo (marcos_matias_ofc): "E a manutenção? E os pneus...". Bom gancho de vídeo e confirma a regra de incluir manutenção.
+- Direct enviado a Bruno e Alan (12:08): sem resposta ainda.
+- Alertas: Business Suite pede e-mail/celular de contato para alertas da conta de anúncios (falta preencher).
