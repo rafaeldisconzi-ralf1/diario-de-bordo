@@ -1,5 +1,5 @@
 # Zé Parte 3: "O frete de 9 mil deu prejuízo" (roteiro p/ aprovação, 13/11/2026)
-Status: AGUARDANDO OK DO RAFAEL. Não gerar voz (ElevenLabs) antes do ok.
+Status: V1 enviada ao Rafael em 13/11; ele pediu: (1) uma enquete levar à outra, (2) conferir duração. V2 abaixo (mais curta, com enquete encadeada). AGUARDANDO OK. Não gerar voz antes do ok.
 Ideia nasceu de comentário real no Parte 1 ("E a manutenção? E os pneus?"). Não citar o nome da pessoa.
 Postagem prevista: ter 17/11 às 19h (calendário).
 
@@ -27,3 +27,16 @@ Mesmo Zé animado da Parte 2. Barra de dinheiro do B cruzando o zero e ficando v
 ## Final / CTA
 Pergunta SIM ou NÃO (comentário fácil) + "Comenta APP". Quem comentar APP recebe resposta e, se abrir conversa, o link por direct.
 Respeitar docs/instagram.md seção 12 (máx. 5 respostas/hora, texto diferente, direct só 5 a 10 por dia).
+
+
+## V2 (13/11, 12:50): ~40 s, enquete encadeada
+Mudanças: mais curto (Parte 2 teve 60 s e só 35% do tempo assistido); sem "Comenta APP" no corpo (vai no 2º plano); termina com enquete nova que leva à Parte 4.
+Texto falado (~95 palavras):
+> O frete de nove mil deu prejuízo pro Zé.
+> Um caminhoneiro perguntou: e a manutenção? Tinha razão.
+> No A, volta vazia: pneu, óleo e freio custam setecentos. Sobram quinhentos e oitenta.
+> No B, carregado nos dois sentidos, mil reais de manutenção. Sobra? Menos cento e sessenta. Prejuízo.
+> O Zé agora lança tudo no Diário de Bordo, manutenção também. Na hora, ele vê quanto sobrou.
+> Mas a história não acabou. Chegou o frete C: onze mil, por estrada de terra. Aceita ou recusa? Comenta SIM ou NÃO. A conta sai na Parte 4.
+Legenda: "(números de exemplo) ... Quer o app? Comenta APP."
+Cadeia de enquetes: P1 A ou B → P2 resultado + conta → P3 resultado com manutenção + enquete C (aceita ou recusa) → P4 conta do C (estrada de terra: mais diesel, mais pneu) + nova enquete.

@@ -152,6 +152,31 @@ O sistema é um robô que olha: rapidez, ritmo igual demais, texto repetido, e d
 **Lição nossa:** em 13/11 respondi 11 comentários em ~5 minutos. Metade não apareceu. Não veio aviso, mas foi
 rápido demais. Na mesma hora a bio deu erro; a causa era o emoji ✅ (esta conta não aceita esse emoji na bio).
 
+## 13. Duração do vídeo e série com enquete encadeada (pesquisa 13/11/2026)
+**O que a pesquisa mostra (sem número mágico):**
+- O sinal que mais pesa no Reels é o tempo assistido e se a pessoa chega ao fim; depois vêm envios por direct e curtidas. Mosseri disse que conta os segundos assistidos, não só a porcentagem.
+- Num estudo com ~140 mil Reels de empresas (Socialinsider, jul/2026), 45–60 s deu mais engajamento (0,35%) e mais views (mediana ~10 mil). Abaixo de 30 s ficou em 0,28%; acima de 3 min caiu para 0,15%.
+- Outro estudo (315 Reels): engajamento por view foi maior em 15–30 s. Metas diferentes dão respostas diferentes: curto = alcance e envio; 30–90 s = história.
+- Regra que se repete: vídeo do tamanho que a ideia precisa, e o fim tem que ser assistido. Vídeo curto que a pessoa vê inteiro vale mais que longo abandonado.
+
+**Nossos números (Business Suite, 13/11):**
+| Vídeo | Duração | Tempo médio assistido | Resultado |
+|---|---|---|---|
+| Zé Parte 2 | 60 s | 21 s (35%) | 1.337 views, 1 comentário |
+| Zé Parte 1 | ~45 s | 18 s | 3.577 views, 26 comentários, +24 seguidores |
+| Diária (sem série) | ~30 s | 13 s | 88 views |
+Conclusão: a pergunta (enquete) pesa mais que a duração. Mas a Parte 2 tem pouco tempo assistido, então Parte 3 em ~40 s.
+
+**Regras novas para os vídeos do Zé:**
+1. Duração: 30–45 s. Só passa de 45 s se o vídeo for puro conteúdo e prender até o fim.
+2. Gancho com resultado inesperado nos 3 primeiros segundos.
+3. Todo vídeo termina com **pergunta nova** que só a próxima parte responde (enquete encadeada): A/B → conta → aceita/recusa → conta...
+4. Máximo de 3 a 5 partes por arco; depois, outro personagem ou caso.
+5. Postar a parte seguinte em 1 a 2 dias, sem espaçar demais.
+6. Cada parte precisa fazer sentido sozinha (explica em uma frase o que veio antes).
+7. Conferir depois de 24 h: tempo médio assistido e comentários. Testar 30–40 s contra 55–60 s e ficar com o que segura mais gente.
+8. O Instagram tem o recurso "Reels vinculados" (série). Quando tiver 3 partes, usar para juntar.
+
 ## Fontes
 - [Mosseri: 3 sinais (Blck Alpaca resume)](https://blckalpaca.at/en/knowledge-base/social-media/social-media-algorithms-distribution/instagram-algorithm-2026)
 - [Limite de 5 hashtags (Social Media Today)](https://www.socialmediatoday.com/news/instagram-implements-new-limits-on-hashtag-use/808309/)
@@ -171,3 +196,8 @@ rápido demais. Na mesma hora a bio deu erro; a causa era o emoji ✅ (esta cont
 - [Janela de 24 h (Planoly)](https://www.planoly.com/blog/instagram-24-hour-messaging-window-explained.md)
 - [O que fazer no bloqueio (CyberYozh)](https://app.cyberyozh.com/blog/how-to-fix-an-instagram-action-blocked/)
 - [Recomendações e Status da conta (Instagram Creators)](https://creators.instagram.com/blog/instagram-recommendations-eligibility-tips-creators)
+- [Duração ideal, 140 mil Reels (Socialinsider)](https://socialinsider.io/blog/instagram-reels-length/)
+- [Sinais de ranking do Reels (SocialPilot)](https://www.socialpilot.co/blog/instagram-reels-algorithm)
+- [Mosseri: segundos assistidos (Hypebot)](https://www.hypebot.com/how-instagram-reels-algorithm-works.md)
+- [Séries com cliffhanger: 3 a 5 partes (Influencers Time)](https://www.influencers-time.com/cliffhanger-series-the-retention-loop-that-beats-one-off-pos/)
+- [Reels vinculados (eMarketer)](https://www.emarketer.com/content/instagram-introduces-linked-reels-enable-serialized-storytelling-drive-engagement)
