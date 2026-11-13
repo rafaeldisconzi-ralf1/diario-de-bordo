@@ -6,9 +6,10 @@ Depois Claude avança e programa data e hora.
 
 | Dia | Hora | Vídeo (arquivo) | Status |
 |---|---|---|---|
-| Sáb 14/11 | 07h | V9 10 s (`v9-10s.mp4`) | legenda pronta no Business Suite |
-| Sáb 14/11 | 19h | 3D caderninho v2 (`caderno-3d-v2.mp4`) | |
-| Dom 15/11 | 07h | V7 conversa (`v7-conversa.mp4`) | |
+| Sex 13/11 | 19h | 3D caderninho v2 (`caderno-3d-v2.mp4`) | ✅ programado |
+| Sáb 14/11 | 07h | V9 10 s (`v9-10s.mp4`) | ✅ programado |
+| Sáb 14/11 | 19h | V7 conversa (`v7-conversa.mp4`) | legenda pronta |
+| Dom 15/11 | 07h | V2 caderninho (pasta do Rafael) — ou outro | |
 | Dom 15/11 | 19h | V3 garantia (pasta do Rafael) | |
 | Seg 16/11 | 07h | V6 3 sinais (pasta do Rafael) | |
 | Seg 16/11 | 19h | V1 propaganda (pasta do Rafael) | |
