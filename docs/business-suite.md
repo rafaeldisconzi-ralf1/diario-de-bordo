@@ -28,3 +28,20 @@ Dica: depois de digitar a legenda, aparece sugestão de hashtag; clicar fora par
 ## Anúncios
 - Gerenciador de Anúncios / Turbinar. Precisa de forma de pagamento → sempre perguntar ao Rafael antes (custa dinheiro).
 - Para otimizar vendas: instalar Pixel da Meta na página de vendas (/assinar) com eventos PageView, InitiateCheckout, Purchase.
+
+## Pixel da Meta (13/11/2026)
+- Conjunto de dados "Diario de Bordo - Site", ID **2259208501675823** (ID público, não é segredo). Ligado à conta de anúncios 1143873108021402.
+- Instalado em `assinar/index.html`: PageView (abrir a página), InitiateCheckout (tocar em assinar), AddPaymentInfo (gerou Pix ou abriu cartão), Purchase (pagamento aprovado; no cartão vai sem valor).
+- Navegador com `bordo-admin=1` (o do Rafael) não dispara o Pixel, igual ao contador de visitas.
+- Conferir eventos em: Gerenciador de Eventos → Conjuntos de dados → Diario de Bordo - Site.
+
+## Bio do Instagram (13/11/2026)
+- Pelo computador o Instagram deu "Ocorreu um problema ao salvar seu perfil" (provável trava temporária depois de muitas respostas seguidas). O link do site só muda pelo celular.
+- Texto novo combinado:
+  🚛 App pro caminhoneiro / ⛽ Frete, diesel, manutenção e diárias / 💰 Veja quanto sobrou de cada viagem / ✅ R$ 24,90/mês · 7 dias de garantia / 👇 Conheça
+- Link: https://frete.trilhanova.shop/assinar/?utm_source=ig_bio
+
+## Comentários e direct (13/11/2026)
+- Direct só abre para quem segue/tem botão "Enviar mensagem". Do Zé Parte 1: direct enviado para brunojpbh e qra_sertanejo (utm_source=ig_dm).
+- Os outros (perfil privado) receberam resposta no comentário apontando a Parte 2 e o link da bio. Confirmadas: gabriel_felype13, vitao__mtf, armored.23, velosoyv, 000_jose.pr, lucas._.gabriiel009. Pendentes: wtz_well (talvez), hebron_vinicius, diogo_camargos__, paulovictorcarvalhoalves, marcos_matias_ofc.
+- Lição: responder com intervalo maior (vários minutos); muitas seguidas o Instagram segura.
