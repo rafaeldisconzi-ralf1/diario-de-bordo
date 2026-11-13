@@ -163,9 +163,9 @@ rápido demais. Na mesma hora a bio deu erro; a causa era o emoji ✅ (esta cont
 | Vídeo | Duração | Tempo médio assistido | Resultado |
 |---|---|---|---|
 | Zé Parte 2 | 60 s | 21 s (35%) | 1.337 views, 1 comentário |
-| Zé Parte 1 | ~45 s | 18 s | 3.577 views, 26 comentários, +24 seguidores |
+| Zé Parte 1 | 37 s | 18 s (~49%) | 3.577 views, 26 comentários, +24 seguidores |
 | Diária (sem série) | ~30 s | 13 s | 88 views |
-Conclusão: a pergunta (enquete) pesa mais que a duração. Mas a Parte 2 tem pouco tempo assistido, então Parte 3 em ~40 s.
+Conclusão: a pergunta (enquete) pesa mais que a duração. A Parte 1 (37 s) segurou ~49% do vídeo; a Parte 2 (60 s) só 35%. Por isso Parte 3 em ~40 s.
 
 **Regras novas para os vídeos do Zé:**
 1. Duração: 30–45 s. Só passa de 45 s se o vídeo for puro conteúdo e prender até o fim.
