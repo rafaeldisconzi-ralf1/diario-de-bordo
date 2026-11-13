@@ -76,7 +76,7 @@ Criado em 10/11/2026, perfil vazio. Arquivos em `marketing/instagram/` (`perfil.
 - Alinhamento das palavras: words.py com programação dinâmica (frases → trechos de fala), sem modelo de voz.
 
 ## Vídeo 3D "O caderninho" (13/11/2026)
-- Fontes em `marketing/videos/v12-3d-caderno/` (build.py → index.html com Three.js, render.py com WebGL swiftshader, ~3 quadros/s). Vídeo `caderno-3d.mp4` (14,8 MB, 47,6 s) fora do repo.
+- v1 (blocos, "lego") reprovada pelo Rafael; v2 em `marketing/videos/v13-3d-caderno-v2/` (scene.js: Zé arredondado, caminhão detalhado, cenário com cercas/postes/nuvens, luz ACES, ~1 quadro/s). Fontes v1 em `marketing/videos/v12-3d-caderno/` (build.py → index.html com Three.js, render.py com WebGL swiftshader, ~3 quadros/s). Vídeo `caderno-3d.mp4` (14,8 MB, 47,6 s) fora do repo.
 - Estilo maquete 3D inspirado no @madrazzo3d: Zé de blocos, posto, pedágio, borracharia, oficina; pilha de dinheiro diminui em cada parada. Caderno e celular em HTML por cima.
 - Números de exemplo: frete 8.000, diesel 5.520, pedágio 1.200, manutenção 700 (pneu 300, óleo/filtro 200, freio/revisão 200) → sobra 580.
 - Áudio grande (>1 MB em base64) travou o editor do GitHub: mandar em 4 pedaços na mesma branch temporária e juntar com `git show`.
