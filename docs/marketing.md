@@ -67,3 +67,10 @@ Criado em 10/11/2026, perfil vazio. Arquivos em `marketing/instagram/` (`perfil.
 - Parte 2 (conta): diesel R$ 7/L, 2,2 km/l cheio, 3 km/l vazio, pedágio R$ 1.200, diária R$ 300 → A sobra ~R$ 1.280; B ~R$ 840. Pedir ao pai para conferir consumo e diária antes de postar.
 - Voz: transferir áudio com captureStream+MediaRecorder, colar em branch nova no GitHub, buscar com `git fetch origin refs/heads/<branch>:refs/remotes/origin/x`, apagar a branch pela tela do GitHub.
 - Armadilha: id "cap" do SVG do Zé conflita; legenda usa `#subs`.
+
+## Série do Zé — Parte 2 (13/11/2026)
+- Fontes em `marketing/videos/v11-ze-parte2/` (build.py → index.html, audio.py, render.py). Vídeo `ze-parte2.mp4` (10,5 MB, 59,6 s) fica fora do repo.
+- Estilo novo inspirado na @redcardi.app (Argentina): uma cena a cada 2–3 s, legenda pequena no alto com palavra-chave em caixa amarela, câmera que mexe, fim com o app.
+- Votos da Parte 1 (23 h): A 11, B 1. Rafael pediu para NÃO falar o número no vídeo ("a maioria votou A").
+- Conta (exemplo): A 8.000 − diesel 5.520 − pedágio 1.200 = 1.280; B 9.000 − 6.360 − 1.200 − 600 (2 dias) = 840. Consumo carreta 1,8–2,5 km/l (tabela cidesp); vazio 3 km/l e R$ 300/dia parado são exemplo.
+- Alinhamento das palavras: words.py com programação dinâmica (frases → trechos de fala), sem modelo de voz.
