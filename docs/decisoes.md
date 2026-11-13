@@ -19,3 +19,5 @@ Nomes checados no INPI em 10/11/2026: "Conta da Boleia" e "Sobrou na Estrada" se
 | 10/11/2026 | App sem conta saiu do ar; o link principal exige login | todos os usuários já têm conta; acesso só para quem paga ou foi liberado |
 | 10/11/2026 | Contas fixas do dono (parcela, seguro, imposto, contador) só como gasto fora de viagem, com data | o "sobrou" fica real para o dono do caminhão sem encher a tela de quem é empregado. Sem gasto repetido automático por enquanto |
 | 10/11/2026 | Contador próprio de visitas no Supabase (sem Google Analytics/Pixel) | de graça, sem cookie de terceiros e sem dado pessoal; mostra onde as pessoas desistem |
+
+- 13/11/2026 — Rafael: todo vídeo com conta de viagem deve incluir **manutenção** (pneu, óleo, filtro, freio, revisão). Caminhão dá bastante manutenção.
