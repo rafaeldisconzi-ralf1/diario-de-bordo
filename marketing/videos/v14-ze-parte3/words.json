@@ -1,0 +1,308 @@
+[
+{
+"id": 0,
+"text": "Fixo",
+"start": 0.06,
+"end": 0.64
+},
+{
+"id": 1,
+"text": "ou",
+"start": 0.64,
+"end": 0.94
+},
+{
+"id": 2,
+"text": "comissão?",
+"start": 0.94,
+"end": 1.6
+},
+{
+"id": 3,
+"text": "O",
+"start": 2.2,
+"end": 2.39
+},
+{
+"id": 4,
+"text": "Zé",
+"start": 2.39,
+"end": 2.64
+},
+{
+"id": 5,
+"text": "é",
+"start": 2.64,
+"end": 2.72
+},
+{
+"id": 6,
+"text": "motorista",
+"start": 2.72,
+"end": 3.36
+},
+{
+"id": 7,
+"text": "empregado,",
+"start": 3.36,
+"end": 3.94
+},
+{
+"id": 8,
+"text": "e",
+"start": 4.15,
+"end": 4.26
+},
+{
+"id": 9,
+"text": "duas",
+"start": 4.26,
+"end": 4.62
+},
+{
+"id": 10,
+"text": "empresas",
+"start": 4.62,
+"end": 5.16
+},
+{
+"id": 11,
+"text": "querem",
+"start": 5.16,
+"end": 5.41
+},
+{
+"id": 12,
+"text": "ele.",
+"start": 5.41,
+"end": 5.71
+},
+{
+"id": 13,
+"text": "Empresa",
+"start": 6.23,
+"end": 6.73
+},
+{
+"id": 14,
+"text": "A:",
+"start": 6.73,
+"end": 6.99
+},
+{
+"id": 15,
+"text": "salário",
+"start": 7.34,
+"end": 7.84
+},
+{
+"id": 16,
+"text": "fixo",
+"start": 7.84,
+"end": 8.23
+},
+{
+"id": 17,
+"text": "de",
+"start": 8.23,
+"end": 8.4
+},
+{
+"id": 18,
+"text": "quatro",
+"start": 8.4,
+"end": 8.75
+},
+{
+"id": 19,
+"text": "mil",
+"start": 8.75,
+"end": 9.09
+},
+{
+"id": 20,
+"text": "e",
+"start": 9.09,
+"end": 9.32
+},
+{
+"id": 21,
+"text": "quinhentos.",
+"start": 9.32,
+"end": 9.77
+},
+{
+"id": 22,
+"text": "Empresa",
+"start": 10.15,
+"end": 10.65
+},
+{
+"id": 23,
+"text": "B:",
+"start": 10.65,
+"end": 10.84
+},
+{
+"id": 24,
+"text": "dois",
+"start": 11.14,
+"end": 11.37
+},
+{
+"id": 25,
+"text": "mil",
+"start": 11.37,
+"end": 11.65
+},
+{
+"id": 26,
+"text": "e",
+"start": 11.65,
+"end": 11.82
+},
+{
+"id": 27,
+"text": "setecentos,",
+"start": 11.82,
+"end": 12.42
+},
+{
+"id": 28,
+"text": "mais",
+"start": 12.42,
+"end": 12.77
+},
+{
+"id": 29,
+"text": "seis",
+"start": 12.77,
+"end": 12.86
+},
+{
+"id": 30,
+"text": "por",
+"start": 12.86,
+"end": 13.12
+},
+{
+"id": 31,
+"text": "cento",
+"start": 13.12,
+"end": 13.52
+},
+{
+"id": 32,
+"text": "de",
+"start": 13.52,
+"end": 13.71
+},
+{
+"id": 33,
+"text": "cada",
+"start": 13.71,
+"end": 14.07
+},
+{
+"id": 34,
+"text": "frete.",
+"start": 14.07,
+"end": 14.47
+},
+{
+"id": 35,
+"text": "Qual",
+"start": 14.92,
+"end": 15.14
+},
+{
+"id": 36,
+"text": "paga",
+"start": 15.14,
+"end": 15.43
+},
+{
+"id": 37,
+"text": "mais",
+"start": 15.43,
+"end": 15.76
+},
+{
+"id": 38,
+"text": "no",
+"start": 15.76,
+"end": 15.89
+},
+{
+"id": 39,
+"text": "fim",
+"start": 15.89,
+"end": 16.14
+},
+{
+"id": 40,
+"text": "do",
+"start": 16.14,
+"end": 16.33
+},
+{
+"id": 41,
+"text": "mês?",
+"start": 16.33,
+"end": 16.52
+},
+{
+"id": 42,
+"text": "Comenta",
+"start": 16.92,
+"end": 17.45
+},
+{
+"id": 43,
+"text": "A",
+"start": 17.45,
+"end": 17.77
+},
+{
+"id": 44,
+"text": "ou",
+"start": 17.77,
+"end": 18.0
+},
+{
+"id": 45,
+"text": "B.",
+"start": 18.0,
+"end": 18.26
+},
+{
+"id": 46,
+"text": "Amanhã",
+"start": 18.63,
+"end": 18.93
+},
+{
+"id": 47,
+"text": "eu",
+"start": 18.93,
+"end": 19.12
+},
+{
+"id": 48,
+"text": "mostro",
+"start": 19.12,
+"end": 19.47
+},
+{
+"id": 49,
+"text": "a",
+"start": 19.47,
+"end": 19.55
+},
+{
+"id": 50,
+"text": "conta.",
+"start": 19.55,
+"end": 19.82
+}
+]

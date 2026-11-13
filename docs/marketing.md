@@ -80,3 +80,10 @@ Criado em 10/11/2026, perfil vazio. Arquivos em `marketing/instagram/` (`perfil.
 - Estilo maquete 3D inspirado no @madrazzo3d: Zé de blocos, posto, pedágio, borracharia, oficina; pilha de dinheiro diminui em cada parada. Caderno e celular em HTML por cima.
 - Números de exemplo: frete 8.000, diesel 5.520, pedágio 1.200, manutenção 700 (pneu 300, óleo/filtro 200, freio/revisão 200) → sobra 580.
 - Áudio grande (>1 MB em base64) travou o editor do GitHub: mandar em 4 pedaços na mesma branch temporária e juntar com `git show`.
+
+## Série do Zé — Parte 3 (13/11/2026)
+- Tema "Fixo ou comissão?" (motorista empregado: A salário fixo R$ 4.500 x B R$ 2.700 + 6% de cada frete). Texto, pesquisa e conta da Parte 4 em `marketing/ideias/ze-parte3-fixo-ou-comissao.md`.
+- Fontes em `marketing/videos/v14-ze-parte3/` (words.py → words.json, build.py → index.html, audio.py, render.py). Vídeo `ze-parte3.mp4` (3,5 MB, 20,6 s).
+- Cartões A e B com os valores na tela desde o 1º segundo, destaque no cartão que a voz cita, "no mês: R$ ?" piscando na pergunta.
+- Rafael vetou terra x asfalto; temas devem ser reais e de interesse atual (pesquisar no Instagram, vagas, fóruns, notícias).
+- Transferir voz: o `<audio>` do ElevenLabs já tem o MP3 em `data:` (currentSrc). Copiar com textarea + ctrl+c e colar no editor do GitHub (nova branch). Não precisa MediaRecorder. `window.name` não passa entre sites.
