@@ -100,3 +100,4 @@ Hostinger → site trilhanova.shop → Avançado → GIT, branch `main`, pasta `
 
 ## Perfil do admin (10/11/2026)
 - Na conta admin, o Perfil não mostra Motorista nem Caminhão. Em cima fica "Administração" (Clientes, 📊 Números do app, Mandar aviso para todos); depois Conta. Clientes continuam vendo o Perfil normal.
+- Origens (13/11): `ig` e `ig_bio` vêm do próprio Instagram (ele põe `utm_source` no link da bio). `facebook` = aberto dentro do app do Facebook/Messenger. `anuncio_meta` = link com `fbclid` (clique em anúncio ou post turbinado aberto fora do navegador do Instagram). Antes de 13/11, `fbclid` também caía em `facebook`.
