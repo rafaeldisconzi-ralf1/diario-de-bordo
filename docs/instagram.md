@@ -177,6 +177,13 @@ Conclusão: a pergunta (enquete) pesa mais que a duração. A Parte 1 (37 s) seg
 7. Conferir depois de 24 h: tempo médio assistido e comentários. Testar 30–40 s contra 55–60 s e ficar com o que segura mais gente.
 8. O Instagram tem o recurso "Reels vinculados" (série). Quando tiver 3 partes, usar para juntar.
 
+## 14. Resposta automática "Comenta APP" (feita em 13/11/2026)
+
+- Foi criada a Página do Facebook **"Diário de Bordo Caminhoneiro"** (nome pode mudar com a revisão do nome do app) e ligada ao @appdiariodebordo no Meta Business Suite. Página vazia, sem foto nem texto.
+- Dica: ligar pelo Business Suite → Configurações → Páginas → Conectar ativos → Conta do Instagram. Tem uma tela extra com o botão "Adicionar"; sem clicar nela, a ligação não termina.
+- Automação "Comenta APP" (Caixa de Entrada → Automações → Comentar para enviar mensagem): quem comenta APP em qualquer post recebe um direct com o link de vendas; o comentário recebe "Enviei uma mensagem para você!".
+- Falta testar com outra conta. Se for pedir "Comenta APP", escrever isso na legenda/vídeo.
+
 ## Fontes
 - [Mosseri: 3 sinais (Blck Alpaca resume)](https://blckalpaca.at/en/knowledge-base/social-media/social-media-algorithms-distribution/instagram-algorithm-2026)
 - [Limite de 5 hashtags (Social Media Today)](https://www.socialmediatoday.com/news/instagram-implements-new-limits-on-hashtag-use/808309/)
