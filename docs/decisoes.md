@@ -21,3 +21,12 @@ Nomes checados no INPI em 10/11/2026: "Conta da Boleia" e "Sobrou na Estrada" se
 | 10/11/2026 | Contador próprio de visitas no Supabase (sem Google Analytics/Pixel) | de graça, sem cookie de terceiros e sem dado pessoal; mostra onde as pessoas desistem |
 
 - 13/11/2026 — Rafael: todo vídeo com conta de viagem deve incluir **manutenção** (pneu, óleo, filtro, freio, revisão). Caminhão dá bastante manutenção.
+
+## 13/11/2026 — Rafael: cuidado com respostas e direct para não tomar bloqueio
+Regras para o Instagram (conta nova, ainda frágil):
+- No máximo 5 respostas de comentário por hora, com pelo menos 5 a 10 minutos entre uma e outra.
+- Nunca o mesmo texto: cada resposta diferente e ligada ao que a pessoa escreveu.
+- Link clicável só no direct; nos comentários, só "link na bio".
+- Direct: no máximo 5 a 10 por dia, só para quem comentou ou segue. Nunca para quem não interagiu.
+- Se aparecer "tente mais tarde", "ação bloqueada" ou "problema ao salvar": parar tudo por 24 h e avisar o Rafael.
+- Nada de ferramenta de automação de fora sem aprovação (só a resposta automática oficial da Meta).

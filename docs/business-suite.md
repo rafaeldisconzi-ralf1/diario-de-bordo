@@ -44,4 +44,4 @@ Dica: depois de digitar a legenda, aparece sugestão de hashtag; clicar fora par
 ## Comentários e direct (13/11/2026)
 - Direct só abre para quem segue/tem botão "Enviar mensagem". Do Zé Parte 1: direct enviado para brunojpbh e qra_sertanejo (utm_source=ig_dm).
 - Os outros (perfil privado) receberam resposta no comentário apontando a Parte 2 e o link da bio. Confirmadas: gabriel_felype13, vitao__mtf, armored.23, velosoyv, 000_jose.pr, lucas._.gabriiel009. Pendentes: wtz_well (talvez), hebron_vinicius, diogo_camargos__, paulovictorcarvalhoalves, marcos_matias_ofc.
-- Lição: responder com intervalo maior (vários minutos); muitas seguidas o Instagram segura.
+- Lição: responder com intervalo maior. Regras completas em docs/decisoes.md (13/11).
