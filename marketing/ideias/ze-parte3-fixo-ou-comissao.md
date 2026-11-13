@@ -14,3 +14,10 @@ Fechar com enquete de outro tema (ideias: comprar caminhão financiado x continu
 ## Postagem
 Legenda: "Fixo ou comissão? (números de exemplo) Amanhã eu mostro a conta. Quer o app? Comenta APP."
 Ver data no calendário (planejado ter 17/11 19h). Fontes do vídeo em `marketing/videos/v14-ze-parte3/`.
+
+## Parte 4: decisão (13/11/2026) — sem perguntar ao pai
+Rafael decidiu: não perguntar ao pai, o Claude decide pela pesquisa.
+- Viagens por mês: pesquisa com caminhoneiros mostra que 74,2% fazem de 1 a 10 viagens/mês (Bem Paraná). Faixa larga, então o vídeo mostra 3, 4 e 5 viagens em vez de afirmar um número.
+- Comissão 6%: vem das vagas reais já pesquisadas (6% do frete + base). Vídeo diz "números de exemplo".
+- Conta (frete R$ 8.000 → R$ 480 por viagem): 3 viagens = B R$ 4.140 (A ganha); 4 viagens = B R$ 4.620 (B ganha); 5 viagens = B R$ 5.100.
+- Ponto de virada: 3,75 viagens. Mensagem: "Depende de quantas viagens você faz".
