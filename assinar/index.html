@@ -411,7 +411,7 @@ const calmo=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const EV_URL='https://kmaldmypdvapihsxpfmz.supabase.co/rest/v1/rpc/registrar_evento',EV_KEY='sb_publishable_hOL3UoYwX9z7wxa8oKrpDA_CJjdwNzx';
 const EV_VIS=(()=>{try{let v=localStorage.getItem('bordo-vis');if(!v){v=Math.random().toString(36).slice(2)+Date.now().toString(36);localStorage.setItem('bordo-vis',v)}return v}catch(_){return 's'+Math.random().toString(36).slice(2)}})();
 const EV_ORIGEM=(()=>{const q=new URLSearchParams(location.search),u=(q.get('utm_source')||q.get('origem')||'').toLowerCase().replace(/[^a-z0-9_-]/g,'');if(u)return u.slice(0,20);
-  const ua=navigator.userAgent;if(/Instagram/i.test(ua))return 'instagram';if(/FBAN|FBAV|FB_IAB/i.test(ua)||q.has('fbclid'))return 'facebook';
+  const ua=navigator.userAgent;if(/Instagram/i.test(ua))return 'instagram';if(/FBAN|FBAV|FB_IAB|FB4A|FBIOS/i.test(ua))return 'facebook';if(q.has('fbclid'))return 'anuncio_meta';
   const r=document.referrer;if(!r)return 'direto';
   try{const h=new URL(r).hostname.replace(/^www\./,'');if(h===location.hostname)return 'site';
     for(const [k,re] of [['instagram',/instagram/],['facebook',/facebook|fb\.|messenger/],['whatsapp',/whatsapp|wa\.me/],['google',/google/],['youtube',/youtube|youtu\.be/],['tiktok',/tiktok/]])if(re.test(h))return k;

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#2b2e33">
-<meta name="app-version" content="nuvem-2026-11-10.17">
+<meta name="app-version" content="nuvem-2026-11-13.1">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Diário de Bordo">
@@ -861,7 +861,7 @@ async function painelFunil(dias){
   if(error||!f){el.textContent='Não deu para carregar. Confira a internet.';return}
   const pc=(a,b)=>b?` <span class="muted">(${Math.round(a/b*100)}%)</span>`:'';
   const linha=(t,n,ant,nota)=>`<div style="display:flex;justify-content:space-between;gap:10px;padding:12px 0;border-bottom:1px solid var(--line)"><span>${t}${nota?`<br><span class="muted" style="font-size:15px">${nota}</span>`:''}</span><b style="font-size:22px;white-space:nowrap">${n}${ant!=null?pc(n,ant):''}</b></div>`;
-  const nomes={instagram:'Instagram',facebook:'Facebook',whatsapp:'WhatsApp',google:'Google',youtube:'YouTube',tiktok:'TikTok',direto:'Direto / WhatsApp',site:'Do próprio site'};
+  const nomes={instagram:'Instagram',ig:'Instagram',ig_bio:'Instagram (link da bio)',anuncio_meta:'Anúncio (Instagram ou Facebook)',facebook:'App do Facebook',whatsapp:'WhatsApp',google:'Google',youtube:'YouTube',tiktok:'TikTok',direto:'Direto / WhatsApp',site:'Do próprio site'};
   const cli=c?`<h4 style="margin:6px 0 4px">Clientes</h4>`+linha('Usaram o app nas últimas 24 h',c.ativos_24h)+linha('Usaram nos últimos 7 dias',c.ativos_7d)
    +linha('Com acesso liberado',c.com_acesso,null,`${c.pagantes} pagando · ${c.cortesia} cortesia`)+linha('Vencem nos próximos 7 dias',c.vencem_7d)
    +linha('Sem acesso (vencidos ou nunca pagaram)',c.vencidos)+linha('Contas criadas (total)',c.total,null,`${c.novos_7d} novas nos últimos 7 dias`)
