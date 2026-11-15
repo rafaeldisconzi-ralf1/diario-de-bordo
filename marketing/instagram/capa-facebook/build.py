@@ -18,7 +18,7 @@ html,body{{margin:0}}
 .ph{{position:absolute;left:1185px;top:165px;width:240px;height:520px;border-radius:38px;background:#0d0e10;padding:12px;box-shadow:0 30px 60px rgba(0,0,0,.5)}}
 .ph img{{width:100%;height:100%;object-fit:cover;object-position:top;border-radius:28px}}
 </style></head><body><div id="c">
-<div class="sky"></div><div class="sun"></div>
+<div class="sky"></div>
 <svg class="hills" viewBox="0 0 1640 420" preserveAspectRatio="none"><path d="M0 220 Q300 120 620 210 T1240 190 T1640 170 V420 H0Z" fill="#26323d"/><path d="M0 300 Q400 220 820 300 T1640 270 V420 H0Z" fill="#1d252d"/><path d="M0 360 Q500 320 1000 360 T1640 350 V420 H0Z" fill="#16181b"/></svg>
 <div id="ze">{z}</div>
 <div class="t"><h1>Quanto <span class="y">sobrou</span><br>da sua viagem?</h1>
