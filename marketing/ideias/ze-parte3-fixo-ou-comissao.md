@@ -21,3 +21,8 @@ Rafael decidiu: não perguntar ao pai, o Claude decide pela pesquisa.
 - Comissão 6%: vem das vagas reais já pesquisadas (6% do frete + base). Vídeo diz "números de exemplo".
 - Conta (frete R$ 8.000 → R$ 480 por viagem): 3 viagens = B R$ 4.140 (A ganha); 4 viagens = B R$ 4.620 (B ganha); 5 viagens = B R$ 5.100.
 - Ponto de virada: 3,75 viagens. Mensagem: "Depende de quantas viagens você faz".
+
+## Parte 4 pronta (15/11/2026)
+Voz gerada com OK do Rafael. Vídeo `marketing/videos/v15-ze-parte4/ze-parte4.mp4` (40 s). Fecha com nova enquete: Zé compra o próprio caminhão financiado (A) ou continua empregado (B)? Esse é o tema da próxima parte.
+Texto falado: "Fixo ou comissão? A conta do Zé. A empresa A paga quatro mil e quinhentos fixo. Na empresa B, cada frete de oito mil rende quatrocentos e oitenta de comissão. Com três viagens no mês, a B paga quatro mil cento e quarenta: o fixo ganha. Com quatro viagens, a B paga quatro mil seiscentos e vinte: a comissão ganha. Com cinco, passa de cinco mil. Ou seja: depende de quantas viagens você faz. E agora? O Zé quer comprar o próprio caminhão, financiado. A: ele compra. B: continua empregado. Comenta A ou B."
+Áudio trazido gravando o <audio> do ElevenLabs (blob) com MediaRecorder + colado no GitHub em branch temporária (apagada). `git push --delete` daqui dá 403: apagar pela página de branches.
