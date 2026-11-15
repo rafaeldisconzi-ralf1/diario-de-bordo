@@ -19,3 +19,14 @@ Obs.: o Zé Parte 3 foi para domingo 12h porque sábado já tinha 2 posts (limit
 
 ## Automação (13/11/2026)
 Página "Diário de Bordo Caminhoneiro" ligada ao Instagram. Automação "Comenta APP" ativa (comentário APP → direct com link). Falta teste com outra conta.
+
+## Programados no Business Suite (15/11/2026) — Facebook + Instagram juntos
+| Data e hora | Post | Tema/gancho |
+|---|---|---|
+| Dom 15/11 12:00 | Zé Parte 3 | "Fixo ou comissão?" (só Instagram, programado antes) |
+| Dom 15/11 19:00 | V3 garantia | "Fechou o mês e não sabe se ganhou ou perdeu dinheiro?" |
+| Seg 16/11 07:00 | V2 caderninho | "Ainda anota frete e diesel no caderninho?" |
+| Seg 16/11 19:00 | Zé Parte 4 | "A conta" + enquete viagem A (R$ 8 mil/1.500 km) x B (R$ 6 mil/800 km) |
+| Ter 17/11 07:00 | V1 propaganda | "Caminhoneiro, você sabe quanto sobrou da sua última viagem?" |
+Regra (Rafael, 15/11): 2 vídeos por dia, sendo 1 historinha do Zé com enquete. Legendas com "Comenta APP". Legendas automáticas do Meta desligadas (vídeo já tem legenda).
+Falta: Zé Parte 5 (resposta: B vale mais por km) para ter 17/11 19h; vídeo comum para qua 18/11 07h (V5/V6 não estão na pasta; V4 já saiu em 11/11).
