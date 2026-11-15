@@ -10,8 +10,10 @@ html,body{{margin:0}}
 .sun{{position:absolute;left:250px;top:250px;width:280px;height:280px;border-radius:50%;background:#f2b705}}
 .hills{{position:absolute;left:0;bottom:0;width:1640px;height:420px}}
 #ze{{position:absolute;left:170px;top:190px;width:430px}}
-.t{{position:absolute;left:610px;top:215px;width:560px;color:#f4f3ee}}
+.t{{position:absolute;left:610px;top:175px;width:560px;color:#f4f3ee}}
 .t h1{{font:800 92px/0.95 BC;text-transform:uppercase;margin:0}}
+.brand{{font:800 34px/1 BC;color:#f2b705;text-transform:uppercase;letter-spacing:3px;margin-bottom:12px}}
+.sub2{{font:700 24px/1 B;color:#c9c5ba;margin-top:14px}}
 .y{{color:#f2b705}} .g{{color:#5fd39a}}
 .t p{{font:700 30px/1.25 B;margin:18px 0 0;color:#e8e4da}}
 .pill{{display:inline-block;margin-top:22px;background:#f2b705;color:#16181b;font:800 42px/1 BC;text-transform:uppercase;padding:16px 26px 10px;border-radius:18px}}
@@ -21,9 +23,9 @@ html,body{{margin:0}}
 <div class="sky"></div>
 <svg class="hills" viewBox="0 0 1640 420" preserveAspectRatio="none"><path d="M0 220 Q300 120 620 210 T1240 190 T1640 170 V420 H0Z" fill="#26323d"/><path d="M0 300 Q400 220 820 300 T1640 270 V420 H0Z" fill="#1d252d"/><path d="M0 360 Q500 320 1000 360 T1640 350 V420 H0Z" fill="#16181b"/></svg>
 <div id="ze">{z}</div>
-<div class="t"><h1>Quanto <span class="y">sobrou</span><br>da sua viagem?</h1>
+<div class="t"><div class="brand">Diário de Bordo</div><h1>Quanto <span class="y">sobrou</span><br>da sua viagem?</h1>
 <p>Frete, diesel, gastos e diárias<br>anotados no celular.</p>
-<div class="pill">Diário de Bordo</div></div>
+<div class="pill">Comece hoje ›</div><div class="sub2">Menos de R$ 1 por dia · 7 dias de garantia</div></div>
 <div class="ph"><img src="07-sobrou.png"></div>
 </div></body></html>'''
 open('index.html','w').write(html)
