@@ -1,0 +1,18 @@
+# Zé: formato novela (decidido 15/11/2026)
+
+Rafael achou as enquetes "muito no detalhe" (contas). Novo formato:
+- Cena do cotidiano do Zé na estrada + um problema → "O que o Zé faz? A ou B? Comenta aí."
+- O público decide; a opção mais votada vira a história do episódio seguinte ("Vocês escolheram B. Olha o que aconteceu…").
+- Não precisa ter resposta certa nem conta. App aparece de leve (Zé anota o que gastou/recebeu).
+- Continua: 1 episódio do Zé por dia, "números de exemplo" quando houver número.
+
+## Parte 5 (ter 17/11 19h) — fecha o arco + dilema da descarga
+Contar votos da Parte 4 na terça ~14h (A = viagem longa R$ 8 mil/1.500 km; B = curta R$ 6 mil/800 km).
+Roteiro: "Vocês escolheram [A/B]. O Zé pegou a viagem [mais longa/mais curta] e chegou no destino. Mas na descarga, o conferente avisou: só vão descarregar daqui a dois dias. E hoje é aniversário da filha do Zé. A: ele espera os dois dias e cobra a diária. B: larga tudo e vai pra casa. O que o Zé faz? Comenta A ou B."
+Tela: Zé, pátio cheio, celular com mensagem da filha "Pai, você vem hoje?", cartões A/B.
+
+## Ideias para os próximos dilemas
+- Colega com pneu furado na estrada: A para e ajuda (perde 2 h) / B segue.
+- Esposa liga: conta de luz atrasada: A pede adiantamento ao patrão / B espera fechar o frete.
+- Almoço: A prato feito R$ 35 / B marmita fria de casa.
+Evitar: dirigir cansado/sem dormir, coisas ilegais (frete sem nota).

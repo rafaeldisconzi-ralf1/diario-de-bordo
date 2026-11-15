@@ -176,7 +176,8 @@ Conclusão: a pergunta (enquete) pesa mais que a duração. A Parte 1 (37 s) seg
 6. Cada parte precisa fazer sentido sozinha (explica em uma frase o que veio antes).
 7. Conferir depois de 24 h: tempo médio assistido e comentários. Testar 30–40 s contra 55–60 s e ficar com o que segura mais gente.
 8. A enquete precisa ter resposta certa por conta (não 'depende da vida de cada um'). Ex. ruim: 'compra caminhão ou continua empregado?' (Rafael vetou, 15/11).
-9. O Instagram tem o recurso "Reels vinculados" (série). Quando tiver 3 partes, usar para juntar.
+9. Série do Zé virou NOVELA (15/11): cotidiano + A ou B, o público decide o rumo, sem conta. Ver marketing/ideias/ze-novela.md.
+10. O Instagram tem o recurso "Reels vinculados" (série). Quando tiver 3 partes, usar para juntar.
 
 ## 14. Resposta automática "Comenta APP" (feita em 13/11/2026)
 
