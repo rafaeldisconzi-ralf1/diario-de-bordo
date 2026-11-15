@@ -2,9 +2,7 @@ import json, numpy as np
 d=json.load(open('env.json')); db=np.array(d['db'])
 regs=[r for r in d['regs']]
 chunks=[
- [("Fixo",2),("ou",1)],
- [("comissão?",3)],
- [("A",1),("conta",2),("do",1),("Zé.",1)],
+ [("Fixo",2),("ou",1),("comissão?",3),("A",1),("conta",2),("do",1),("Zé.",1)],
  [("A",1),("empresa",3),("A",1),("paga",2),("quatro",2),("mil",1),("e",1),("quinhentos",3),("fixo.",2)],
  [("Na",1),("empresa",3),("B,",1),("cada",2),("frete",2),("de",1),("oito",2),("mil",1),("rende",2),("quatrocentos",4),("e",1),("oitenta",3),("de",1),("comissão.",3)],
  [("Com",1),("três",1),("viagens",3),("no",1),("mês,",1),("a",1),("B",1),("paga",2),("quatro",2),("mil",1),("cento",2),("e",1),("quarenta:",3)],
@@ -15,11 +13,14 @@ chunks=[
  [("Ou",1),("seja:",2)],
  [("depende",3),("de",1),("quantas",2),("viagens",3),("você",2),("faz.",1)],
  [("E",1),("agora?",3)],
- [("O",1),("Zé",1),("quer",1),("comprar",2),("o",1),("próprio",2),("caminhão,",3),("financiado.",4)],
+ [("O",1),("Zé",1),("foi",1),("pra",1),("B,",1),("de",1),("comissão.",3)],
+ [("E",1),("tem",1),("duas",2),("viagens",3),("pra",1),("escolher.",3)],
  [("A:",1)],
- [("ele",1),("compra.",2)],
+ [("frete",2),("de",1),("oito",2),("mil,",1)],
+ [("mil",1),("e",1),("quinhentos",3),("quilômetros.",4)],
  [("B:",1)],
- [("continua",3),("empregado.",4)],
+ [("frete",2),("de",1),("seis",1),("mil,",1),("oitocentos",3),("quilômetros.",4)],
+ [("Qual",1),("vale",1),("mais",1),("a",1),("pena?",2)],
  [("Comenta",3),("A",1)],
  [("ou",1),("B.",1)],
 ]

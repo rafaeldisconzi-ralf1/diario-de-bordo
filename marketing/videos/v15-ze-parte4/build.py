@@ -6,7 +6,7 @@ env=json.load(open('/tmp/env.json'))['db'] if False else None
 import os
 dbf=json.load(open('env.json'))['db'] if os.path.exists('env.json') else json.load(open('/tmp/env.json'))['db']
 db=np.array(dbf); mx=db.max()
-FPS=30; TOT=40.1
+FPS=30; TOT=45.0
 mouth=''
 for f in range(int(TOT*FPS)+2):
     t=f/FPS; a=int(max(0,(t-0.02)*100)); b=int((t+0.02)*100)+1
@@ -87,9 +87,9 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#14202e;font-fam
 <div class="abs tr" id="r5" style="left:60px;top:770px"><div class="nv">5</div><div class="tx">viagens<br><b>B: R$ 5.100</b></div><div class="win g" id="w5">B ganha</div></div>
 <div class="abs" id="dep" style="left:40px;width:1000px;top:250px;text-align:center"><div class="big" style="font-size:124px;line-height:1">Depende de quantas <span class="yel">viagens</span> você faz</div></div>
 <div class="abs" id="ag" style="left:40px;width:1000px;top:250px;text-align:center"><div class="big" style="font-size:150px">E <span class="yel">agora?</span></div></div>
-<div class="abs" id="nq" style="left:40px;width:1000px;top:236px;text-align:center"><div class="mid" style="font-size:88px">Comprar o <span class="yel">próprio caminhão</span>?</div></div>
-<div class="abs cd" id="qA" style="left:50px;top:420px;height:400px"><div class="badge">A</div><div class="val" style="font-size:104px">Compra</div><div class="sub">caminhão financiado</div></div>
-<div class="abs cd" id="qB" style="left:560px;top:420px;height:400px"><div class="badge">B</div><div class="val" style="font-size:104px">Continua</div><div class="sub">empregado</div></div>
+<div class="abs" id="nq" style="left:40px;width:1000px;top:226px;text-align:center"><div class="mid" style="font-size:96px">Qual viagem <span class="yel">vale mais?</span></div><div class="sm" style="margin-top:14px;color:#c9c5ba">O Zé foi pra B: ganha 6% do frete</div></div>
+<div class="abs cd" id="qA" style="left:50px;top:420px;height:400px"><div class="badge">A</div><div class="lab">Frete</div><div class="val" style="font-size:110px">R$ 8.000</div><div class="sub yel" style="font:800 64px BC">1.500 km</div></div>
+<div class="abs cd" id="qB" style="left:560px;top:420px;height:400px"><div class="badge">B</div><div class="lab">Frete</div><div class="val" style="font-size:110px">R$ 6.000</div><div class="sub yel" style="font:800 64px BC">800 km</div></div>
 <div class="abs" id="cta" style="left:40px;width:1000px;top:236px;text-align:center"><div class="pill" style="display:inline-block">Comente A ou B</div></div>
 
 <div id="ze">__ZE__</div>
@@ -103,12 +103,12 @@ const ws=i=>WORDS[i].start, we=i=>WORDS[i].end;
 // [id, início, fim]
 const C=[['ex',0.1,TOT],['title',0,ws(7)-.05],['cA',0.15,ws(30)-.05],['cB',0.3,ws(30)-.05],
  ['hd',ws(30)-.05,ws(66)-.05],['r3',ws(30)-.05,ws(66)-.05],['r4',ws(46)-.05,ws(66)-.05],['r5',ws(60)-.05,ws(66)-.05],
- ['dep',ws(66)-.05,ws(74)-.05],['ag',ws(74)-.05,ws(76)-.05],['nq',ws(76)-.05,ws(90)-.05],
- ['qA',ws(84)-.25,TOT],['qB',ws(87)-.25,TOT],['cta',ws(90)-.05,TOT]];
+ ['dep',ws(66)-.05,ws(74)-.05],['ag',ws(74)-.05,ws(76)-.05],['nq',ws(76)-.05,ws(110)-.05],
+ ['qA',ws(89)-.25,TOT],['qB',ws(98)-.25,TOT],['cta',ws(110)-.05,TOT]];
 const HA=[ws(7)-.05,we(15)+.25], HB=[ws(16)-.05,we(29)+.25];
 const WIN=[['w3',ws(43)],['w4',ws(57)],['w5',ws(62)]];
-const EXPR=[[0,'calm'],[ws(3),'happy'],[ws(7),'calm'],[ws(43),'happy'],[ws(57),'shock'],[ws(66),'calm'],[ws(74),'worried'],[ws(90),'happy']];
-const BLINK=[1.9,4.9,8.4,11.3,15.0,18.6,22.2,26.0,29.5,33.1,36.4];
+const EXPR=[[0,'calm'],[ws(3),'happy'],[ws(7),'calm'],[ws(43),'happy'],[ws(57),'shock'],[ws(66),'calm'],[ws(74),'worried'],[ws(110),'happy']];
+const BLINK=[1.9,4.9,8.4,11.3,15.0,18.6,22.2,26.0,29.5,33.1,36.4,40.0,43.2];
 const G=[];(function(){let g=[];WORDS.forEach((w,i)=>{g.push(i);const last=/[.?:,]$/.test(w.text)||g.length>=4||g.join('').length>14&&g.length>=3;if(last){G.push(g);g=[]}});if(g.length)G.push(g)})();
 const cap=$('#subs');G.forEach((g,gi)=>{const d=document.createElement('div');d.className='g';d.innerHTML=g.map(i=>'<span class="w" data-i="'+i+'">'+WORDS[i].text.replace(/[,]$/,'')+'</span>').join(' ');cap.appendChild(d)});
 const GT=G.map((g,gi)=>{const s=ws(g[0])-.04;const ne=gi+1<G.length?ws(G[gi+1][0])-.04:TOT;const e=Math.min(we(g[g.length-1])+.25,ne);return [s,e]});
@@ -137,8 +137,8 @@ window.render=function(t){
   el.style.opacity=o;el.style.transform='translateY('+ty+'px) scale('+sc+')'});
  $('#b480').style.opacity=eo((t-ws(24))/.3);
  WIN.forEach(([id,a])=>{const e=$('#'+id);const k=eo((t-a)/.3);e.style.opacity=k;e.style.transform='scale('+(.7+.3*back((t-a)/.35))+')';});
- const q=act(t,[ws(84)-.05,we(86)+.3]),q2=act(t,[ws(87)-.05,we(89)+.3]);
- [['qA',q,q2],['qB',q2,q]].forEach(([id,me,ot])=>{const e=$('#'+id);if(t>=ws(84)-.25){e.style.outlineWidth=(10*me)+'px';}});
+ const q=act(t,[ws(89)-.05,we(97)+.3]),q2=act(t,[ws(98)-.05,we(104)+.3]);
+ [['qA',q,q2],['qB',q2,q]].forEach(([id,me,ot])=>{const e=$('#'+id);if(t>=ws(89)-.25){e.style.outlineWidth=(10*me)+'px';}});
  const gs=cap.children;for(let gi=0;gi<G.length;gi++){const el=gs[gi],[a,b]=GT[gi];const on=t>=a&&t<=b;el.style.opacity=on?1:0;if(on){el.style.transform='scale('+(0.92+0.08*back((t-a)/.15))+')';el.querySelectorAll('span.w').forEach(sp=>{const i=+sp.dataset.i;sp.className='w'+(t>=ws(i)-.02&&t<we(i)+.04?' on':'')})}}
 };
 window.render(0);
@@ -148,10 +148,10 @@ open('index.html','w').write(HTML)
 def ws(i): return W[i]['start']
 def we(i): return W[i]['end']
 cues=[]
-for a in [0.02,0.12,0.3,ws(7)-.05,ws(30)-.05,ws(66)-.05,ws(74)-.05,ws(76)-.05,ws(90)-.05]: cues.append(dict(t=round(a,3),k='whoosh'))
-for a in [ws(7)-.05,ws(16)-.05,ws(24),ws(46)-.05,ws(60)-.05,ws(84)-.25,ws(87)-.25]: cues.append(dict(t=round(a,3),k='pop'))
+for a in [0.02,0.12,0.3,ws(7)-.05,ws(30)-.05,ws(66)-.05,ws(74)-.05,ws(76)-.05,ws(110)-.05]: cues.append(dict(t=round(a,3),k='whoosh'))
+for a in [ws(7)-.05,ws(16)-.05,ws(24),ws(46)-.05,ws(60)-.05,ws(89)-.25,ws(98)-.25]: cues.append(dict(t=round(a,3),k='pop'))
 cues.append(dict(t=round(ws(66)-.05,3),k='slam'))
 [cues.append(dict(t=round(ws(i),3),k='ding')) for i in (43,57,62)]
-cues.append(dict(t=round(ws(90)-.05,3),k='ding'))
+cues.append(dict(t=round(ws(110)-.05,3),k='ding'))
 json.dump(cues,open('cues.json','w'))
 print('ok',len(HTML)//1024,'KB',len(cues),'efeitos')

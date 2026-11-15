@@ -175,7 +175,8 @@ Conclusão: a pergunta (enquete) pesa mais que a duração. A Parte 1 (37 s) seg
 5. Postar a parte seguinte em 1 a 2 dias, sem espaçar demais.
 6. Cada parte precisa fazer sentido sozinha (explica em uma frase o que veio antes).
 7. Conferir depois de 24 h: tempo médio assistido e comentários. Testar 30–40 s contra 55–60 s e ficar com o que segura mais gente.
-8. O Instagram tem o recurso "Reels vinculados" (série). Quando tiver 3 partes, usar para juntar.
+8. A enquete precisa ter resposta certa por conta (não 'depende da vida de cada um'). Ex. ruim: 'compra caminhão ou continua empregado?' (Rafael vetou, 15/11).
+9. O Instagram tem o recurso "Reels vinculados" (série). Quando tiver 3 partes, usar para juntar.
 
 ## 14. Resposta automática "Comenta APP" (feita em 13/11/2026)
 

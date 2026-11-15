@@ -1,6 +1,6 @@
 # Mixa narração + cama suave + efeitos (cues.json). Saída: audio.wav (loudnorm feito no ffmpeg final).
 import numpy as np, wave, json, subprocess
-SR=44100; TOT=40.1; N=int(SR*TOT); out=np.zeros(N); rng=np.random.default_rng(7)
+SR=44100; TOT=45.0; N=int(SR*TOT); out=np.zeros(N); rng=np.random.default_rng(7)
 def add(sig,t0,g=1.0):
     i=int(t0*SR); j=min(N,i+len(sig))
     if 0<=i<N: out[i:j]+=g*sig[:j-i]
