@@ -1,0 +1,168 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><style>
+@font-face{font-family:B;src:url(fonts/barlow-latin-700-normal.woff2);font-weight:700}
+@font-face{font-family:B8;src:url(fonts/barlow-latin-800-normal.woff2);font-weight:800}
+@font-face{font-family:BC;src:url(fonts/barlow-condensed-latin-800-normal.woff2);font-weight:800}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#14202e;font-family:B;color:#f4f3ee}
+#sky{position:absolute;inset:0}
+#sun{position:absolute;width:300px;height:300px;border-radius:50%;left:640px;top:880px}
+.hl{position:absolute;left:0;width:4320px;height:420px}
+#cloud1,#cloud2{position:absolute;height:70px;border-radius:70px;background:rgba(244,243,238,.16)}
+#ze{z-index:2;position:absolute;left:260px;top:850px;width:560px;height:728px;transform-origin:50% 90%}
+#ze svg{width:100%;height:100%}
+.abs{position:absolute;opacity:0;transform-origin:50% 50%}
+.box{background:#16181b;border-radius:40px;box-shadow:0 20px 0 rgba(0,0,0,.3)}
+.yel{color:#f2b705}.grn{color:#5fd39a}
+.big{font:800 168px/.92 BC;text-transform:uppercase;text-align:center}
+.mid{white-space:nowrap;font:800 100px/1 BC;text-transform:uppercase}
+.sm{font:700 44px/1.1 B;text-transform:uppercase;letter-spacing:1px}
+.badge{flex-shrink:0;width:168px;height:168px;border-radius:34px;background:#f2b705;color:#16181b;font:800 150px/1 BC;display:flex;align-items:center;justify-content:center;padding-top:10px}
+.trl{fill:#e8e3d6}.empty .trl{fill:#2b3138;stroke:#8a8f98;stroke-width:4;stroke-dasharray:14 10}
+#wm{position:absolute;font:700 38px B;color:#fff;opacity:.78;letter-spacing:1px;text-shadow:0 2px 6px rgba(0,0,0,.5);z-index:50}
+#subs{position:absolute;left:40px;right:40px;top:1462px;text-align:center;z-index:40}
+#subs .g{position:absolute;left:0;right:0;top:0;opacity:0}
+#subs span.w{display:inline-block;margin:0 14px;font:800 104px/1.05 BC;text-transform:uppercase;color:#f4f3ee;
+ -webkit-text-stroke:0;text-shadow:0 0 0 #000,0 6px 0 rgba(0,0,0,.55),0 0 18px rgba(0,0,0,.6);background:rgba(22,24,27,.0)}
+#subs span.w.on{color:#f2b705}
+.rule{width:880px;height:190px;background:#f2b705;color:#16181b;border-radius:30px;box-shadow:0 18px 0 rgba(0,0,0,.3);padding:18px 34px;display:flex;align-items:center;gap:30px}
+.rule .n{font:800 70px/1 BC;text-transform:uppercase;writing-mode:horizontal-tb;background:#16181b;color:#f2b705;padding:16px 22px 8px;border-radius:18px;white-space:nowrap}
+.rule .t{font:800 74px/.98 BC;text-transform:uppercase}
+.row{display:flex;align-items:center;gap:26px}
+.ab{width:430px;height:290px;border-radius:36px;background:#16181b;box-shadow:0 20px 0 rgba(0,0,0,.3);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px}
+.ab .badge{width:120px;height:120px;font-size:108px;border-radius:26px}
+.ab .v{font:800 84px/1 BC}.ab .s{font:700 36px/1.1 B;text-transform:uppercase;letter-spacing:1px;color:#c9c5ba}
+.pill{background:#f2b705;color:#16181b;font:800 108px/1 BC;text-transform:uppercase;padding:26px 60px 14px;border-radius:999px;box-shadow:0 16px 0 rgba(0,0,0,.3);white-space:nowrap}
+.cd{width:470px;height:480px;border-radius:38px;background:#16181b;box-shadow:0 20px 0 rgba(0,0,0,.3);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:18px 14px;outline:0 solid #f2b705}
+.cd .badge{width:110px;height:110px;font-size:100px;border-radius:24px;margin-bottom:6px}
+.cd .lab{font:700 38px B;text-transform:uppercase;letter-spacing:1px;color:#c9c5ba;text-align:center}
+.cd .val{font:800 126px/1 BC;white-space:nowrap;text-transform:uppercase}
+.cd .sub{font:700 40px/1.1 B;text-transform:uppercase;color:#c9c5ba;text-align:center}
+.cd .tot{font:800 62px/1 BC;text-transform:uppercase;margin-top:12px;opacity:0;border-top:6px solid #f2b705;padding-top:12px;width:100%;text-align:center}
+.tr{width:960px;height:150px;border-radius:30px;background:#16181b;box-shadow:0 16px 0 rgba(0,0,0,.3);display:flex;align-items:center;gap:28px;padding:0 26px}
+.tr .nv{width:110px;height:110px;border-radius:24px;background:#f2b705;color:#16181b;font:800 100px/1 BC;display:flex;align-items:center;justify-content:center;padding-top:8px}
+.tr .tx{flex:1;font:700 36px/1.15 B;text-transform:uppercase;color:#c9c5ba;letter-spacing:1px}.tr .tx b{font:800 70px/1 BC;color:#f4f3ee;letter-spacing:0}
+.tr .win{font:800 64px/1 BC;text-transform:uppercase;padding:18px 26px 10px;border-radius:20px;background:#2b3138;color:#f4f3ee;opacity:0}
+.tr .win.g{background:#5fd39a;color:#16181b}
+</style></head><body>
+<div id="sky"></div><div id="sun"></div>
+
+<svg class="hl" id="h1" style="top:1040px" viewBox="0 0 4320 420"><defs><pattern id="p1" width="720" height="420" patternUnits="userSpaceOnUse"><path d="M0 220 C120 120 260 120 360 210 C460 300 600 290 720 220 L720 420 L0 420Z" fill="#26404a"/></pattern></defs><rect width="4320" height="420" fill="url(#p1)"/></svg>
+<svg class="hl" id="h2" style="top:1150px" viewBox="0 0 4320 420"><defs><pattern id="p2" width="540" height="420" patternUnits="userSpaceOnUse"><path d="M0 170 C90 100 190 100 270 160 C350 220 450 220 540 170 L540 420 L0 420Z" fill="#1a2c33"/></pattern></defs><rect width="4320" height="420" fill="url(#p2)"/></svg>
+<svg class="hl" id="h3" style="top:1290px" viewBox="0 0 4320 420"><defs><pattern id="p3" width="900" height="420" patternUnits="userSpaceOnUse"><path d="M0 120 C150 60 330 60 450 110 C570 160 750 160 900 120 L900 420 L0 420Z" fill="#101d22"/></pattern></defs><rect width="4320" height="420" fill="url(#p3)"/></svg>
+<div style="position:absolute;left:0;right:0;top:1600px;bottom:0;background:#101d22"></div><div id="wm">@appdiariodebordo</div>
+
+<!-- cartões -->
+<div class="abs" id="ex" style="left:40px;width:1000px;top:196px;text-align:center;font:700 30px B;color:#c9c5ba;text-transform:uppercase;letter-spacing:2px">números de exemplo</div>
+<div class="abs" id="t1" style="left:40px;width:1000px;top:250px;text-align:center"><div class="big" style="font-size:118px;line-height:1">Vocês escolheram</div><div class="pill" style="display:inline-block;margin-top:26px;font-size:96px">B · 800 km</div></div>
+<div class="abs" id="t2" style="left:40px;width:1000px;top:250px;text-align:center"><div class="mid" style="font-size:92px">Na <span class="yel">descarga</span>:</div><div class="big" style="font-size:132px;line-height:1;margin-top:18px">Só daqui a <span class="yel">2 dias</span></div></div>
+<div class="abs cd" id="ph" style="left:140px;top:430px;width:800px;height:380px"><div class="lab">Mensagem da filha</div><div class="val" style="font-size:104px;white-space:normal;text-align:center;line-height:1">Pai, você vem <span class="yel">hoje?</span></div><div class="sub">hoje é o aniversário dela</div></div>
+<div class="abs" id="hd" style="left:40px;width:1000px;top:230px;text-align:center"><div class="mid" style="font-size:110px">Dois <span class="yel">caminhos</span></div></div>
+<div class="abs cd" id="cA" style="left:50px;top:420px;height:400px"><div class="badge">A</div><div class="lab">Espera 2 dias</div><div class="val" style="font-size:88px">e cobra</div><div class="sub yel" style="font:800 64px BC">a diária</div></div>
+<div class="abs cd" id="cB" style="left:560px;top:420px;height:400px"><div class="badge">B</div><div class="lab">Larga tudo</div><div class="val" style="font-size:88px">e vai</div><div class="sub yel" style="font:800 64px BC">pra casa</div></div>
+<div class="abs" id="ag" style="left:40px;width:1000px;top:250px;text-align:center"><div class="big" style="font-size:140px">O que o <span class="yel">Zé</span> faz?</div></div>
+<div class="abs" id="cta" style="left:40px;width:1000px;top:236px;text-align:center"><div class="pill" style="display:inline-block">Comente A ou B</div></div>
+<div class="abs" id="yard" style="left:0;top:1330px;width:1080px;height:140px;opacity:0;z-index:0"><div style="position:absolute;left:10px;top:0;width:270px"><svg viewBox="0 0 300 140" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="18" width="172" height="84" rx="8" class="trl"/><rect x="10" y="62" width="172" height="10" fill="#f2b705" opacity=".85"/>
+<path d="M188 44 L242 44 L278 80 L284 102 L188 102Z" fill="#f2b705"/><path d="M226 52 L248 52 L266 78 L226 78Z" fill="#2b4553"/><rect x="186" y="98" width="100" height="8" fill="#16181b"/>
+<g fill="#16181b"><circle cx="48" cy="108" r="17"/><circle cx="88" cy="108" r="17"/><circle cx="126" cy="108" r="17"/><circle cx="216" cy="108" r="17"/><circle cx="256" cy="108" r="17"/></g>
+<g fill="#8a8f98"><circle cx="48" cy="108" r="7"/><circle cx="88" cy="108" r="7"/><circle cx="126" cy="108" r="7"/><circle cx="216" cy="108" r="7"/><circle cx="256" cy="108" r="7"/></g></svg></div><div style="position:absolute;left:405px;top:0;width:270px"><svg viewBox="0 0 300 140" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="18" width="172" height="84" rx="8" class="trl"/><rect x="10" y="62" width="172" height="10" fill="#f2b705" opacity=".85"/>
+<path d="M188 44 L242 44 L278 80 L284 102 L188 102Z" fill="#f2b705"/><path d="M226 52 L248 52 L266 78 L226 78Z" fill="#2b4553"/><rect x="186" y="98" width="100" height="8" fill="#16181b"/>
+<g fill="#16181b"><circle cx="48" cy="108" r="17"/><circle cx="88" cy="108" r="17"/><circle cx="126" cy="108" r="17"/><circle cx="216" cy="108" r="17"/><circle cx="256" cy="108" r="17"/></g>
+<g fill="#8a8f98"><circle cx="48" cy="108" r="7"/><circle cx="88" cy="108" r="7"/><circle cx="126" cy="108" r="7"/><circle cx="216" cy="108" r="7"/><circle cx="256" cy="108" r="7"/></g></svg></div><div style="position:absolute;left:800px;top:0;width:270px"><svg viewBox="0 0 300 140" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="18" width="172" height="84" rx="8" class="trl"/><rect x="10" y="62" width="172" height="10" fill="#f2b705" opacity=".85"/>
+<path d="M188 44 L242 44 L278 80 L284 102 L188 102Z" fill="#f2b705"/><path d="M226 52 L248 52 L266 78 L226 78Z" fill="#2b4553"/><rect x="186" y="98" width="100" height="8" fill="#16181b"/>
+<g fill="#16181b"><circle cx="48" cy="108" r="17"/><circle cx="88" cy="108" r="17"/><circle cx="126" cy="108" r="17"/><circle cx="216" cy="108" r="17"/><circle cx="256" cy="108" r="17"/></g>
+<g fill="#8a8f98"><circle cx="48" cy="108" r="7"/><circle cx="88" cy="108" r="7"/><circle cx="126" cy="108" r="7"/><circle cx="216" cy="108" r="7"/><circle cx="256" cy="108" r="7"/></g></svg></div></div>
+
+<div id="ze"><svg id="zesvg" viewBox="0 0 400 520" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<linearGradient id="sk" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#d9a379"/><stop offset="1" stop-color="#b57a51"/></linearGradient>
+<linearGradient id="sh" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4f79b4"/><stop offset="1" stop-color="#2c4f80"/></linearGradient>
+<linearGradient id="cap" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f6c22a"/><stop offset="1" stop-color="#d79f00"/></linearGradient>
+</defs>
+<path d="M70 520 C72 440 110 404 168 392 L200 412 L232 392 C290 404 328 440 330 520Z" fill="url(#sh)"/>
+<path d="M168 392 L200 440 L232 392 L222 386 L200 418 L178 386Z" fill="#24466f"/>
+<path d="M200 418 L200 470" stroke="#24466f" stroke-width="3"/><circle cx="200" cy="440" r="4" fill="#e9e3d6"/><circle cx="200" cy="460" r="4" fill="#e9e3d6"/>
+<path d="M166 340 L166 396 Q200 420 234 396 L234 340Z" fill="#a86f47"/>
+<ellipse cx="128" cy="250" rx="14" ry="24" fill="#c08356"/><ellipse cx="272" cy="250" rx="14" ry="24" fill="#c08356"/>
+<path d="M132 200 C130 150 160 132 200 132 C240 132 270 150 268 200 C268 262 262 300 244 330 C232 350 216 360 200 360 C184 360 168 350 156 330 C138 300 132 262 132 200Z" fill="url(#sk)"/>
+<path d="M140 268 C146 310 168 352 200 356 C232 352 254 310 260 268 C254 300 240 330 222 338 C210 328 190 328 178 338 C160 330 146 300 140 268Z" fill="#3a2e28" opacity=".28"/>
+<path d="M132 214 C130 190 134 176 140 170 L146 230 Z" fill="#5a524c"/><path d="M268 214 C270 190 266 176 260 170 L254 230 Z" fill="#5a524c"/>
+<g id="ex_calm" style="display:none"><path d="M186 212 Q170 201 152 208 L152 214 Q170 207 186 219Z" fill="#2a1f19"/><path d="M214 212 Q230 201 248 208 L248 214 Q230 207 214 219Z" fill="#2a1f19"/><path d="M153 234 Q170 217 187 234 Q170 246.0 153 234Z" fill="#f4efe6"/>
+<circle cx="170" cy="235" r="8.5" fill="#4a3220"/><circle cx="170" cy="235" r="4.5" fill="#140d09"/>
+<circle cx="173" cy="232" r="2.2" fill="#fff"/>
+<path d="M152 234 Q170 215 188 234 Q170 220 152 234Z" fill="#9a6440" opacity=".55"/><path d="M213 234 Q230 217 247 234 Q230 246.0 213 234Z" fill="#f4efe6"/>
+<circle cx="230" cy="235" r="8.5" fill="#4a3220"/><circle cx="230" cy="235" r="4.5" fill="#140d09"/>
+<circle cx="233" cy="232" r="2.2" fill="#fff"/>
+<path d="M212 234 Q230 215 248 234 Q230 220 212 234Z" fill="#9a6440" opacity=".55"/></g><g id="ex_worried" style="display:none"><path d="M186 202 Q170 195 152 212 L152 218 Q170 201 186 209Z" fill="#2a1f19"/><path d="M214 202 Q230 195 248 212 L248 218 Q230 201 214 209Z" fill="#2a1f19"/><path d="M153 234 Q170 215 187 234 Q170 246.6 153 234Z" fill="#f4efe6"/>
+<circle cx="170" cy="238" r="8.5" fill="#4a3220"/><circle cx="170" cy="238" r="4.5" fill="#140d09"/>
+<circle cx="173" cy="235" r="2.2" fill="#fff"/>
+<path d="M152 234 Q170 213 188 234 Q170 218 152 234Z" fill="#9a6440" opacity=".55"/><path d="M213 234 Q230 215 247 234 Q230 246.6 213 234Z" fill="#f4efe6"/>
+<circle cx="230" cy="238" r="8.5" fill="#4a3220"/><circle cx="230" cy="238" r="4.5" fill="#140d09"/>
+<circle cx="233" cy="235" r="2.2" fill="#fff"/>
+<path d="M212 234 Q230 213 248 234 Q230 218 212 234Z" fill="#9a6440" opacity=".55"/></g><g id="ex_shock" style="display:none"><path d="M186 198 Q170 191 152 198 L152 204 Q170 197 186 205Z" fill="#2a1f19"/><path d="M214 198 Q230 191 248 198 L248 204 Q230 197 214 205Z" fill="#2a1f19"/><path d="M153 234 Q170 212 187 234 Q170 247.5 153 234Z" fill="#f4efe6"/>
+<circle cx="170" cy="235" r="8.5" fill="#4a3220"/><circle cx="170" cy="235" r="4.5" fill="#140d09"/>
+<circle cx="173" cy="232" r="2.2" fill="#fff"/>
+<path d="M152 234 Q170 210 188 234 Q170 215 152 234Z" fill="#9a6440" opacity=".55"/><path d="M213 234 Q230 212 247 234 Q230 247.5 213 234Z" fill="#f4efe6"/>
+<circle cx="230" cy="235" r="8.5" fill="#4a3220"/><circle cx="230" cy="235" r="4.5" fill="#140d09"/>
+<circle cx="233" cy="232" r="2.2" fill="#fff"/>
+<path d="M212 234 Q230 210 248 234 Q230 215 212 234Z" fill="#9a6440" opacity=".55"/></g><g id="ex_happy" style="display:none"><path d="M186 208 Q170 199 152 206 L152 212 Q170 205 186 215Z" fill="#2a1f19"/><path d="M214 208 Q230 199 248 206 L248 212 Q230 205 214 215Z" fill="#2a1f19"/><path d="M153 234 Q170 220 187 234 Q170 245.1 153 234Z" fill="#f4efe6"/>
+<circle cx="170" cy="235" r="8.5" fill="#4a3220"/><circle cx="170" cy="235" r="4.5" fill="#140d09"/>
+<circle cx="173" cy="232" r="2.2" fill="#fff"/>
+<path d="M152 234 Q170 218 188 234 Q170 223 152 234Z" fill="#9a6440" opacity=".55"/><path d="M213 234 Q230 220 247 234 Q230 245.1 213 234Z" fill="#f4efe6"/>
+<circle cx="230" cy="235" r="8.5" fill="#4a3220"/><circle cx="230" cy="235" r="4.5" fill="#140d09"/>
+<circle cx="233" cy="232" r="2.2" fill="#fff"/>
+<path d="M212 234 Q230 218 248 234 Q230 223 212 234Z" fill="#9a6440" opacity=".55"/></g>
+<g id="blink" style="display:none"><ellipse cx="170" cy="235" rx="21" ry="13" fill="#c98e63"/><path d="M152 238 Q170 246 188 238" stroke="#2a1f19" stroke-width="3.5" fill="none" stroke-linecap="round"/><ellipse cx="230" cy="235" rx="21" ry="13" fill="#c98e63"/><path d="M212 238 Q230 246 248 238" stroke="#2a1f19" stroke-width="3.5" fill="none" stroke-linecap="round"/></g>
+<path d="M200 244 C196 262 188 276 190 284 C194 292 206 292 210 284 C212 276 204 262 200 244Z" fill="#a86f47" opacity=".7"/>
+<path d="M168 304 C180 292 194 294 200 298 C206 294 220 292 232 304 C224 310 212 308 200 304 C188 308 176 310 168 304Z" fill="#2f2622"/>
+<g id="mo_calm" style="display:none"><path d="M174 318 Q200 326 226 318" stroke="#6e3a2e" stroke-width="5" fill="none" stroke-linecap="round"/></g><g id="mo_worried" style="display:none"><path d="M176 324 Q200 312 224 324" stroke="#6e3a2e" stroke-width="5" fill="none" stroke-linecap="round"/></g><g id="mo_shock" style="display:none"><ellipse cx="200" cy="322" rx="13" ry="17" fill="#4a1f1a"/><ellipse cx="200" cy="330" rx="8" ry="6" fill="#b65a52"/></g><g id="mo_happy" style="display:none"><path d="M170 312 Q200 342 230 312 Q200 324 170 312Z" fill="#4a1f1a"/><path d="M176 315 Q200 324 224 315 L224 318 Q200 327 176 318Z" fill="#f1ece2"/></g>
+<g id="sp1" style="display:none"><ellipse cx="200" cy="321" rx="15" ry="7" fill="#4a1f1a"/><path d="M187 317 Q200 321 213 317 L213 319 Q200 323 187 319Z" fill="#f1ece2"/></g><g id="sp2" style="display:none"><ellipse cx="200" cy="324" rx="17" ry="13" fill="#4a1f1a"/><path d="M185 315 Q200 320 215 315 L215 319 Q200 324 185 319Z" fill="#f1ece2"/><ellipse cx="200" cy="332" rx="9" ry="5" fill="#b65a52"/></g>
+<path d="M126 196 C122 120 166 92 200 92 C246 92 280 122 274 196 C250 180 150 180 126 196Z" fill="url(#cap)"/>
+<path d="M200 92 C176 92 150 104 140 130 L140 190 C160 184 180 182 200 182Z" fill="#f2efe6" opacity=".9"/>
+<path d="M150 150 L196 150 L196 176 L150 176Z" fill="#16181b"/><path d="M158 160 l20 0 l6 6 l0 6 l-26 0z" fill="#f2b705"/><circle cx="163" cy="173" r="3" fill="#f2b705"/><circle cx="178" cy="173" r="3" fill="#f2b705"/>
+<path d="M118 196 C150 176 250 176 282 196 C296 204 292 214 276 212 C240 202 160 202 124 212 C108 214 104 204 118 196Z" fill="#c99500"/>
+<circle cx="200" cy="94" r="7" fill="#c99500"/>
+</svg></div>
+<div id="subs"></div>
+<script>
+const TOT=25.0, WORDS=[{"id": 0, "text": "Vocês", "start": 0.0, "end": 0.45}, {"id": 1, "text": "escolheram", "start": 0.45, "end": 1.01}, {"id": 2, "text": "B.", "start": 1.01, "end": 1.17}, {"id": 3, "text": "O", "start": 1.51, "end": 1.72}, {"id": 4, "text": "Zé", "start": 1.72, "end": 1.98}, {"id": 5, "text": "pegou", "start": 1.98, "end": 2.2}, {"id": 6, "text": "a", "start": 2.2, "end": 2.41}, {"id": 7, "text": "viagem", "start": 2.41, "end": 2.76}, {"id": 8, "text": "mais", "start": 2.76, "end": 3.15}, {"id": 9, "text": "curta", "start": 3.15, "end": 3.6}, {"id": 10, "text": "e", "start": 3.6, "end": 3.68}, {"id": 11, "text": "chegou", "start": 3.68, "end": 4.13}, {"id": 12, "text": "no", "start": 4.13, "end": 4.25}, {"id": 13, "text": "destino.", "start": 4.25, "end": 4.79}, {"id": 14, "text": "Mas", "start": 5.18, "end": 5.44}, {"id": 15, "text": "na", "start": 5.44, "end": 5.62}, {"id": 16, "text": "descarga,", "start": 5.62, "end": 6.3}, {"id": 17, "text": "o", "start": 6.3, "end": 6.48}, {"id": 18, "text": "conferente", "start": 6.48, "end": 7.08}, {"id": 19, "text": "avisou:", "start": 7.08, "end": 7.54}, {"id": 20, "text": "só", "start": 7.68, "end": 7.85}, {"id": 21, "text": "vão", "start": 7.85, "end": 8.11}, {"id": 22, "text": "descarregar", "start": 8.11, "end": 8.72}, {"id": 23, "text": "daqui", "start": 8.72, "end": 9.11}, {"id": 24, "text": "a", "start": 9.11, "end": 9.37}, {"id": 25, "text": "dois", "start": 9.37, "end": 9.72}, {"id": 26, "text": "dias.", "start": 9.72, "end": 10.2}, {"id": 27, "text": "E", "start": 10.5, "end": 10.64}, {"id": 28, "text": "hoje", "start": 10.64, "end": 11.08}, {"id": 29, "text": "é", "start": 11.08, "end": 11.35}, {"id": 30, "text": "aniversário", "start": 11.35, "end": 11.85}, {"id": 31, "text": "da", "start": 11.85, "end": 11.93}, {"id": 32, "text": "filha", "start": 11.93, "end": 12.36}, {"id": 33, "text": "do", "start": 12.36, "end": 12.5}, {"id": 34, "text": "Zé.", "start": 12.5, "end": 12.78}, {"id": 35, "text": "A:", "start": 13.3, "end": 13.56}, {"id": 36, "text": "ele", "start": 14.01, "end": 14.28}, {"id": 37, "text": "espera", "start": 14.28, "end": 14.53}, {"id": 38, "text": "os", "start": 14.53, "end": 14.68}, {"id": 39, "text": "dois", "start": 14.68, "end": 15.0}, {"id": 40, "text": "dias", "start": 15.0, "end": 15.45}, {"id": 41, "text": "e", "start": 15.45, "end": 15.6}, {"id": 42, "text": "cobra", "start": 15.6, "end": 16.01}, {"id": 43, "text": "a", "start": 16.01, "end": 16.09}, {"id": 44, "text": "diária.", "start": 16.09, "end": 16.47}, {"id": 45, "text": "B:", "start": 16.98, "end": 17.41}, {"id": 46, "text": "larga", "start": 17.67, "end": 18.17}, {"id": 47, "text": "tudo", "start": 18.17, "end": 18.5}, {"id": 48, "text": "e", "start": 18.5, "end": 18.7}, {"id": 49, "text": "vai", "start": 18.7, "end": 18.95}, {"id": 50, "text": "pra", "start": 18.95, "end": 19.3}, {"id": 51, "text": "casa.", "start": 19.3, "end": 19.7}, {"id": 52, "text": "O", "start": 20.08, "end": 20.23}, {"id": 53, "text": "que", "start": 20.23, "end": 20.47}, {"id": 54, "text": "o", "start": 20.47, "end": 20.69}, {"id": 55, "text": "Zé", "start": 20.69, "end": 20.91}, {"id": 56, "text": "faz?", "start": 20.91, "end": 21.12}, {"id": 57, "text": "Comenta", "start": 21.49, "end": 22.08}, {"id": 58, "text": "A", "start": 22.08, "end": 22.37}, {"id": 59, "text": "ou", "start": 22.52, "end": 22.67}, {"id": 60, "text": "B.", "start": 22.67, "end": 22.91}], MOUTH="22211122222222222221111122221000000000000000001222211222222001221122222112222221222222222211110012222221122100012222221122222221122111112211110000000000000012222210122211211110122222211211000012112222112222221122222221222110000000000000112222111222222211112222211222221121000122211112222221111111111101110000000000000222222222222221112222222112222211122222221222211121221122112222100000000000000000012222100000000000000001222221211022221211111222222111122222221110012100122222222211222222111110000000000000000011122222100000000000011222222212221000012222212221001221111122211222101222110010000000000000001210112222122221112221101111000000000000012222222100122100012222210000002222122221000000000000000000000000000000000000000000000000000000000000000000";
+const $=s=>document.querySelector(s);
+const cl=x=>Math.max(0,Math.min(1,x)), eo=x=>1-Math.pow(1-cl(x),3), eio=x=>{x=cl(x);return x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2};
+const back=x=>{x=cl(x);const c=1.6;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2)};
+const ws=i=>WORDS[i].start, we=i=>WORDS[i].end;
+// [id, início, fim]
+const C=[['ex',0.1,TOT],['t1',0,ws(14)-.05],['t2',ws(14)-.05,ws(27)-.05],['ph',ws(27)-.05,ws(35)-.05],
+ ['hd',ws(35)-.05,ws(52)-.05],['cA',ws(35)-.05,TOT],['cB',ws(45)-.05,TOT],['ag',ws(52)-.05,ws(57)-.05],['cta',ws(57)-.05,TOT]];
+const HA=[ws(35)-.05,we(44)+.25], HB=[ws(45)-.05,we(51)+.25];
+const EXPR=[[0,'calm'],[ws(11),'happy'],[ws(14),'worried'],[ws(20),'shock'],[ws(27),'worried'],[ws(52),'worried'],[ws(57),'happy']];
+const BLINK=[1.9,4.9,8.4,11.3,15.0,18.6,22.2];
+const G=[];(function(){let g=[];WORDS.forEach((w,i)=>{g.push(i);const last=/[.?:,]$/.test(w.text)||g.length>=4||g.join('').length>14&&g.length>=3;if(last){G.push(g);g=[]}});if(g.length)G.push(g)})();
+const cap=$('#subs');G.forEach((g,gi)=>{const d=document.createElement('div');d.className='g';d.innerHTML=g.map(i=>'<span class="w" data-i="'+i+'">'+WORDS[i].text.replace(/[,]$/,'')+'</span>').join(' ');cap.appendChild(d)});
+const GT=G.map((g,gi)=>{const s=ws(g[0])-.04;const ne=gi+1<G.length?ws(G[gi+1][0])-.04:TOT;const e=Math.min(we(g[g.length-1])+.25,ne);return [s,e]});
+const lerp=(a,b,t)=>a+(b-a)*t;
+function hex(c){return [1,3,5].map(i=>parseInt(c.substr(i,2),16))}
+function mix(a,b,t){const A=hex(a),B=hex(b);return 'rgb('+A.map((v,i)=>Math.round(lerp(v,B[i],t))).join(',')+')'}
+function act(t,w){if(t<w[0]||t>w[1])return 0;return Math.min(1,(t-w[0])/.18)*Math.min(1,(w[1]-t)/.18)}
+window.render=function(t){
+ const k=cl((t-9)/6);const c1=mix('#18273a','#101b2a',k),c2=mix('#34516a','#1f3347',k),c3=mix('#d98a3a','#4a6a82',k);
+ $('#sky').style.background='linear-gradient(180deg,'+c1+' 0%,'+c2+' 55%,'+c3+' 78%,'+c3+' 100%)';
+ const s=$('#sun');s.style.background=mix('#f2b705','#e8ecef',k);s.style.opacity=.9-.25*k;s.style.top=(1000+k*20)+'px';s.style.left=(700-t*3)+'px';
+ $('#h1').style.transform='translateX('+(-(t*18)%720)+'px)';$('#h2').style.transform='translateX('+(-(t*34)%540)+'px)';$('#h3').style.transform='translateX('+(-(t*60)%900)+'px)';
+ const wm=$('#wm');const pos=Math.floor(t/8)%2;wm.style.top='150px';wm.style.left=pos?'auto':'48px';wm.style.right=pos?'48px':'auto';
+ let ex='calm';EXPR.forEach(e=>{if(t>=e[0])ex=e[1]});
+ ['calm','worried','shock','happy'].forEach(k=>{$('#ex_'+k).style.display=k==ex?'':'none';});
+ const f=Math.min(MOUTH.length-1,Math.round(t*30));const m=+MOUTH[f];
+ ['calm','worried','shock','happy'].forEach(k=>{$('#mo_'+k).style.display=(k==ex&&m==0)?'':'none'});
+ $('#sp1').style.display=m==1?'':'none';$('#sp2').style.display=m==2?'':'none';
+ let bl=false;BLINK.forEach(b=>{if(t>=b&&t<b+.13)bl=true});$('#blink').style.display=bl?'':'none';
+ const ze=$('#ze');ze.style.transform='translateY('+(Math.sin(t*2.3)*5-(m>1?4:0))+'px) rotate('+(Math.sin(t*1.4)*1.1)+'deg) scale('+(1+0.012*Math.sin(t*3.1))+')';
+ const aA=act(t,HA),aB=act(t,HB);
+ C.forEach(([id,a,b])=>{const el=document.getElementById(id);let o=0,sc=1,ty=0;
+  if(t>=a&&t<=b){const i=cl((t-a)/.3),ou=cl((b-t)/.22);o=Math.min(1,i*3)*Math.min(1,ou*3+(b>=TOT-.01?1:0));sc=(0.82+0.18*back((t-a)/.38));ty=(1-eo((t-a)/.3))*40;if(id=='title'&&t<.2){o=1;sc=.94+.06*back(t/.2);ty=0}}
+  if(id=='cA'||id=='cB'){const me=id=='cA'?aA:aB,other=id=='cA'?aB:aA;sc*=1+.07*me-.02*other;o*=1-.35*other;
+    el.style.outlineWidth=(10*me)+'px';ty-=10*me}
+  el.style.opacity=o;el.style.transform='translateY('+ty+'px) scale('+sc+')'});
+ $('#yard').style.opacity=.55*eo((t-ws(14))/.5);
+ const gs=cap.children;for(let gi=0;gi<G.length;gi++){const el=gs[gi],[a,b]=GT[gi];const on=t>=a&&t<=b;el.style.opacity=on?1:0;if(on){el.style.transform='scale('+(0.92+0.08*back((t-a)/.15))+')';el.querySelectorAll('span.w').forEach(sp=>{const i=+sp.dataset.i;sp.className='w'+(t>=ws(i)-.02&&t<we(i)+.04?' on':'')})}}
+};
+window.render(0);
+</script></body></html>

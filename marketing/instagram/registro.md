@@ -29,4 +29,5 @@ Página "Diário de Bordo Caminhoneiro" ligada ao Instagram. Automação "Coment
 | Seg 16/11 19:00 | Zé Parte 4 | "A conta" + enquete viagem A (R$ 8 mil/1.500 km) x B (R$ 6 mil/800 km) |
 | Ter 17/11 07:00 | V1 propaganda | "Caminhoneiro, você sabe quanto sobrou da sua última viagem?" |
 Regra (Rafael, 15/11): 2 vídeos por dia, sendo 1 historinha do Zé com enquete. Legendas com "Comenta APP". Legendas automáticas do Meta desligadas (vídeo já tem legenda).
-Falta: Zé Parte 5 (resposta: B vale mais por km) para ter 17/11 19h; vídeo comum para qua 18/11 07h (V5/V6 não estão na pasta; V4 já saiu em 11/11).
+| Ter 17/11 19:00 | Zé Parte 5 (programado 17/11, FB+IG) | "Vocês escolheram B" (4 a 0) + dilema da descarga: A espera 2 dias e cobra diária / B vai pra casa (aniversário da filha) |
+Falta: vídeo comum para qua 18/11 07h (V5/V6 não estão na pasta; V4 já saiu em 11/11).

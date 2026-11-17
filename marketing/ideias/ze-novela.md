@@ -8,7 +8,8 @@ Rafael achou as enquetes "muito no detalhe" (contas). Novo formato:
 
 ## Parte 5 (ter 17/11 19h) — fecha o arco + dilema da descarga
 Contar votos da Parte 4 na terça ~14h (A = viagem longa R$ 8 mil/1.500 km; B = curta R$ 6 mil/800 km).
-Roteiro: "Vocês escolheram [A/B]. O Zé pegou a viagem [mais longa/mais curta] e chegou no destino. Mas na descarga, o conferente avisou: só vão descarregar daqui a dois dias. E hoje é aniversário da filha do Zé. A: ele espera os dois dias e cobra a diária. B: larga tudo e vai pra casa. O que o Zé faz? Comenta A ou B."
+Votos da Parte 4: B 4 x A 0. Feito em videos/v16-ze-parte5 (programado 17/11 19h).
+Roteiro: "Vocês escolheram B. O Zé pegou a viagem mais curta e chegou no destino. Mas na descarga, o conferente avisou: só vão descarregar daqui a dois dias. E hoje é aniversário da filha do Zé. A: ele espera os dois dias e cobra a diária. B: larga tudo e vai pra casa. O que o Zé faz? Comenta A ou B."
 Tela: Zé, pátio cheio, celular com mensagem da filha "Pai, você vem hoje?", cartões A/B.
 
 ## Ideias para os próximos dilemas
@@ -16,3 +17,6 @@ Tela: Zé, pátio cheio, celular com mensagem da filha "Pai, você vem hoje?", c
 - Esposa liga: conta de luz atrasada: A pede adiantamento ao patrão / B espera fechar o frete.
 - Almoço: A prato feito R$ 35 / B marmita fria de casa.
 Evitar: dirigir cansado/sem dormir, coisas ilegais (frete sem nota).
+
+## Parte 6 (qua 18/11 19h)
+Rafael pediu (17/11): mais imagens e cenas animadas, não só cards com o Zé falando. Dilema: pneu furado do colega (A ajuda, perde 2 h / B segue). Roteiro aguardando ok antes de gastar voz.
