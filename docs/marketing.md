@@ -20,6 +20,7 @@ mexe; não andam com "reduzir movimento"), com bolinhas indicando qual está na 
 | V6 3 sinais (kit) | "Três sinais de que você está perdendo dinheiro na estrada" | Toque no link |
 | V7 conversa (sem voz) | Texto: "Um caminhoneiro sabe quanto sobrou. O outro não." + conversa de mensagens entre Zé e Carlos | "E você, sabe quanto sobrou?" · Toque no link · e faça igual ao Carlos |
 | V8 nota da viagem (sem voz) | "Quanto sobra de um frete de R$ 9.040?" · nota impressa linha a linha, contador caindo até "SOBROU R$ 3.146,90" | "Lance sua primeira viagem hoje" · Toque no link |
+| V10 frete bom/ruim (sem voz, 22 s, fundo azul quadriculado; pasta v17-frete-bom-ruim) | "Esse frete paga R$ 9.000. Mas sobra quanto?" · fretes A 1.100 km x B 700 km, descontos caindo, B sobra mais | "Não é o frete que paga. É o que sobra." · Comenta APP |
 | V9 10 segundos (sem voz, 10 s, fundo amarelo listrado) | "Uma viagem inteira em 10 segundos" · Abasteceu? Gastou? Parou? Chegou? com as telas do app | "Saiba quanto sobrou de cada viagem" · Toque no link |
 
 Arquivos no PC do Rafael: `Desktop/Diário de Bordo/Vídeos`. **Atenção:** as cópias com número no fim (`propaganda1`, `caderninho11`, `garantia22`, `diarias33`) mostram nome e placa reais no app ("Olá, Ademir"); não publicar. Usar as versões sem número (motorista Carlos).
@@ -87,3 +88,5 @@ Criado em 10/11/2026, perfil vazio. Arquivos em `marketing/instagram/` (`perfil.
 - Cartões A e B com os valores na tela desde o 1º segundo, destaque no cartão que a voz cita, "no mês: R$ ?" piscando na pergunta.
 - Rafael vetou terra x asfalto; temas devem ser reais e de interesse atual (pesquisar no Instagram, vagas, fóruns, notícias).
 - Transferir voz: o `<audio>` do ElevenLabs já tem o MP3 em `data:` (currentSrc). Copiar com textarea + ctrl+c e colar no editor do GitHub (nova branch). Não precisa MediaRecorder. `window.name` não passa entre sites.
+
+- Chamada final nos vídeos novos: **Comenta APP** (link em legenda de Reel não abre). Automação testada em 17/11.

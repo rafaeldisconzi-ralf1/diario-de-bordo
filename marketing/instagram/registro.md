@@ -18,7 +18,7 @@
 Obs.: o Zé Parte 3 foi para domingo 12h porque sábado já tinha 2 posts (limite: 2 por dia). No Business Suite, para mudar a hora: ⋯ → Gerenciar post → Reprogramar post.
 
 ## Automação (13/11/2026)
-Página "Diário de Bordo Caminhoneiro" ligada ao Instagram. Automação "Comenta APP" ativa (comentário APP → direct com link). Falta teste com outra conta.
+Página "Diário de Bordo Caminhoneiro" ligada ao Instagram. Automação "Comenta APP" ativa (comentário APP → direct com link). Testada com outra conta em 17/11/2026: funciona (direct chega).
 
 ## Programados no Business Suite (15/11/2026) — Facebook + Instagram juntos
 | Data e hora | Post | Tema/gancho |
