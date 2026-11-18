@@ -19,4 +19,4 @@ Tela: Zé, pátio cheio, celular com mensagem da filha "Pai, você vem hoje?", c
 Evitar: dirigir cansado/sem dormir, coisas ilegais (frete sem nota).
 
 ## Parte 6 (qua 18/11 19h)
-Rafael pediu (17/11): mais imagens e cenas animadas, não só cards com o Zé falando. Dilema: pneu furado do colega (A ajuda, perde 2 h / B segue). Roteiro aguardando ok antes de gastar voz.
+Rafael pediu (17/11): mais imagens e cenas animadas, não só cards com o Zé falando. Dilema: pneu furado do colega (A ajuda, perde 2 h / B segue). Votos Parte 5: A 2 x B 0. Feito em videos/v18-ze-parte6 com cenas (pátio, videochamada, estrada, relógio x jantar, A/B) e Zé num círculo azul. Programado 18/11 19h.

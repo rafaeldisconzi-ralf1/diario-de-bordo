@@ -1,0 +1,380 @@
+[
+{
+"id": 0,
+"text": "Vocês",
+"start": 0.04,
+"end": 0.59
+},
+{
+"id": 1,
+"text": "escolheram",
+"start": 0.59,
+"end": 1.17
+},
+{
+"id": 2,
+"text": "A.",
+"start": 1.17,
+"end": 1.53
+},
+{
+"id": 3,
+"text": "O",
+"start": 1.94,
+"end": 2.08
+},
+{
+"id": 4,
+"text": "Zé",
+"start": 2.08,
+"end": 2.41
+},
+{
+"id": 5,
+"text": "esperou",
+"start": 2.41,
+"end": 2.9
+},
+{
+"id": 6,
+"text": "os",
+"start": 2.9,
+"end": 3.07
+},
+{
+"id": 7,
+"text": "dois",
+"start": 3.07,
+"end": 3.3
+},
+{
+"id": 8,
+"text": "dias",
+"start": 3.3,
+"end": 3.69
+},
+{
+"id": 9,
+"text": "e",
+"start": 3.69,
+"end": 3.84
+},
+{
+"id": 10,
+"text": "cobrou",
+"start": 3.84,
+"end": 4.31
+},
+{
+"id": 11,
+"text": "a",
+"start": 4.31,
+"end": 4.53
+},
+{
+"id": 12,
+"text": "diária.",
+"start": 4.53,
+"end": 4.8
+},
+{
+"id": 13,
+"text": "Ligou",
+"start": 5.16,
+"end": 5.44
+},
+{
+"id": 14,
+"text": "pra",
+"start": 5.44,
+"end": 5.67
+},
+{
+"id": 15,
+"text": "filha",
+"start": 5.67,
+"end": 6.13
+},
+{
+"id": 16,
+"text": "por",
+"start": 6.13,
+"end": 6.21
+},
+{
+"id": 17,
+"text": "vídeo",
+"start": 6.21,
+"end": 6.56
+},
+{
+"id": 18,
+"text": "e",
+"start": 6.56,
+"end": 6.75
+},
+{
+"id": 19,
+"text": "prometeu",
+"start": 6.75,
+"end": 7.34
+},
+{
+"id": 20,
+"text": "um",
+"start": 7.34,
+"end": 7.56
+},
+{
+"id": 21,
+"text": "presente.",
+"start": 7.56,
+"end": 8.01
+},
+{
+"id": 22,
+"text": "Agora,",
+"start": 8.43,
+"end": 8.95
+},
+{
+"id": 23,
+"text": "voltando",
+"start": 8.95,
+"end": 9.52
+},
+{
+"id": 24,
+"text": "pra",
+"start": 9.52,
+"end": 9.73
+},
+{
+"id": 25,
+"text": "casa,",
+"start": 9.73,
+"end": 10.23
+},
+{
+"id": 26,
+"text": "viu",
+"start": 10.35,
+"end": 10.62
+},
+{
+"id": 27,
+"text": "um",
+"start": 10.62,
+"end": 10.71
+},
+{
+"id": 28,
+"text": "colega",
+"start": 10.71,
+"end": 11.14
+},
+{
+"id": 29,
+"text": "parado",
+"start": 11.14,
+"end": 11.49
+},
+{
+"id": 30,
+"text": "com",
+"start": 11.49,
+"end": 11.6
+},
+{
+"id": 31,
+"text": "o",
+"start": 11.6,
+"end": 11.79
+},
+{
+"id": 32,
+"text": "pneu",
+"start": 11.79,
+"end": 12.2
+},
+{
+"id": 33,
+"text": "furado.",
+"start": 12.2,
+"end": 12.56
+},
+{
+"id": 34,
+"text": "Ajudar",
+"start": 12.91,
+"end": 13.36
+},
+{
+"id": 35,
+"text": "leva",
+"start": 13.36,
+"end": 13.74
+},
+{
+"id": 36,
+"text": "duas",
+"start": 13.74,
+"end": 14.12
+},
+{
+"id": 37,
+"text": "horas,",
+"start": 14.12,
+"end": 14.44
+},
+{
+"id": 38,
+"text": "e",
+"start": 14.44,
+"end": 14.66
+},
+{
+"id": 39,
+"text": "o",
+"start": 14.66,
+"end": 14.81
+},
+{
+"id": 40,
+"text": "Zé",
+"start": 14.81,
+"end": 15.17
+},
+{
+"id": 41,
+"text": "prometeu",
+"start": 15.17,
+"end": 15.63
+},
+{
+"id": 42,
+"text": "chegar",
+"start": 15.63,
+"end": 16.02
+},
+{
+"id": 43,
+"text": "pro",
+"start": 16.02,
+"end": 16.27
+},
+{
+"id": 44,
+"text": "jantar.",
+"start": 16.27,
+"end": 16.63
+},
+{
+"id": 45,
+"text": "A:",
+"start": 17.2,
+"end": 17.57
+},
+{
+"id": 46,
+"text": "ele",
+"start": 17.89,
+"end": 18.17
+},
+{
+"id": 47,
+"text": "para",
+"start": 18.17,
+"end": 18.59
+},
+{
+"id": 48,
+"text": "e",
+"start": 18.59,
+"end": 18.9
+},
+{
+"id": 49,
+"text": "ajuda.",
+"start": 18.9,
+"end": 19.26
+},
+{
+"id": 50,
+"text": "B:",
+"start": 19.75,
+"end": 20.14
+},
+{
+"id": 51,
+"text": "ele",
+"start": 20.14,
+"end": 20.41
+},
+{
+"id": 52,
+"text": "segue",
+"start": 20.41,
+"end": 21.04
+},
+{
+"id": 53,
+"text": "viagem.",
+"start": 21.04,
+"end": 21.54
+},
+{
+"id": 54,
+"text": "O",
+"start": 22.01,
+"end": 22.16
+},
+{
+"id": 55,
+"text": "que",
+"start": 22.16,
+"end": 22.5
+},
+{
+"id": 56,
+"text": "o",
+"start": 22.5,
+"end": 22.72
+},
+{
+"id": 57,
+"text": "Zé",
+"start": 22.72,
+"end": 22.93
+},
+{
+"id": 58,
+"text": "faz?",
+"start": 22.93,
+"end": 23.07
+},
+{
+"id": 59,
+"text": "Comenta",
+"start": 23.25,
+"end": 23.85
+},
+{
+"id": 60,
+"text": "A",
+"start": 23.85,
+"end": 24.14
+},
+{
+"id": 61,
+"text": "ou",
+"start": 24.31,
+"end": 24.46
+},
+{
+"id": 62,
+"text": "B.",
+"start": 24.46,
+"end": 24.7
+}
+]
