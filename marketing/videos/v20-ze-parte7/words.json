@@ -1,0 +1,356 @@
+[
+{
+"id": 0,
+"text": "O",
+"start": 0.02,
+"end": 0.2
+},
+{
+"id": 1,
+"text": "Zé",
+"start": 0.2,
+"end": 0.39
+},
+{
+"id": 2,
+"text": "parou",
+"start": 0.39,
+"end": 0.9
+},
+{
+"id": 3,
+"text": "e",
+"start": 0.9,
+"end": 0.98
+},
+{
+"id": 4,
+"text": "ajudou",
+"start": 0.98,
+"end": 1.54
+},
+{
+"id": 5,
+"text": "o",
+"start": 1.54,
+"end": 1.86
+},
+{
+"id": 6,
+"text": "colega.",
+"start": 1.86,
+"end": 2.16
+},
+{
+"id": 7,
+"text": "Duas",
+"start": 2.39,
+"end": 2.78
+},
+{
+"id": 8,
+"text": "horas",
+"start": 2.78,
+"end": 3.23
+},
+{
+"id": 9,
+"text": "depois,",
+"start": 3.23,
+"end": 3.72
+},
+{
+"id": 10,
+"text": "pneu",
+"start": 3.72,
+"end": 4.16
+},
+{
+"id": 11,
+"text": "trocado.",
+"start": 4.16,
+"end": 4.64
+},
+{
+"id": 12,
+"text": "O",
+"start": 5.12,
+"end": 5.3
+},
+{
+"id": 13,
+"text": "colega",
+"start": 5.3,
+"end": 5.62
+},
+{
+"id": 14,
+"text": "agradeceu",
+"start": 5.62,
+"end": 6.27
+},
+{
+"id": 15,
+"text": "e",
+"start": 6.27,
+"end": 6.48
+},
+{
+"id": 16,
+"text": "avisou:",
+"start": 6.48,
+"end": 6.91
+},
+{
+"id": 17,
+"text": "tem",
+"start": 6.91,
+"end": 7.14
+},
+{
+"id": 18,
+"text": "um",
+"start": 7.14,
+"end": 7.27
+},
+{
+"id": 19,
+"text": "frete",
+"start": 7.27,
+"end": 7.74
+},
+{
+"id": 20,
+"text": "de",
+"start": 7.74,
+"end": 7.97
+},
+{
+"id": 21,
+"text": "volta,",
+"start": 7.97,
+"end": 8.47
+},
+{
+"id": 22,
+"text": "pagando",
+"start": 8.47,
+"end": 8.94
+},
+{
+"id": 23,
+"text": "bem,",
+"start": 8.94,
+"end": 9.3
+},
+{
+"id": 24,
+"text": "saindo",
+"start": 9.3,
+"end": 9.68
+},
+{
+"id": 25,
+"text": "amanhã",
+"start": 9.68,
+"end": 10.2
+},
+{
+"id": 26,
+"text": "cedo.",
+"start": 10.2,
+"end": 10.53
+},
+{
+"id": 27,
+"text": "Mas",
+"start": 10.92,
+"end": 11.19
+},
+{
+"id": 28,
+"text": "a",
+"start": 11.19,
+"end": 11.39
+},
+{
+"id": 29,
+"text": "filha",
+"start": 11.39,
+"end": 11.65
+},
+{
+"id": 30,
+"text": "do",
+"start": 11.65,
+"end": 11.87
+},
+{
+"id": 31,
+"text": "Zé",
+"start": 11.87,
+"end": 12.12
+},
+{
+"id": 32,
+"text": "espera",
+"start": 12.12,
+"end": 12.52
+},
+{
+"id": 33,
+"text": "ele",
+"start": 12.52,
+"end": 12.73
+},
+{
+"id": 34,
+"text": "pro",
+"start": 12.73,
+"end": 12.89
+},
+{
+"id": 35,
+"text": "jantar.",
+"start": 12.89,
+"end": 13.41
+},
+{
+"id": 36,
+"text": "A:",
+"start": 14.02,
+"end": 14.5
+},
+{
+"id": 37,
+"text": "ele",
+"start": 14.68,
+"end": 14.94
+},
+{
+"id": 38,
+"text": "aceita",
+"start": 14.94,
+"end": 15.4
+},
+{
+"id": 39,
+"text": "o",
+"start": 15.4,
+"end": 15.48
+},
+{
+"id": 40,
+"text": "frete",
+"start": 15.48,
+"end": 15.9
+},
+{
+"id": 41,
+"text": "e",
+"start": 15.9,
+"end": 16.01
+},
+{
+"id": 42,
+"text": "liga",
+"start": 16.01,
+"end": 16.31
+},
+{
+"id": 43,
+"text": "pra",
+"start": 16.31,
+"end": 16.53
+},
+{
+"id": 44,
+"text": "filha.",
+"start": 16.53,
+"end": 16.88
+},
+{
+"id": 45,
+"text": "B:",
+"start": 17.39,
+"end": 17.85
+},
+{
+"id": 46,
+"text": "ele",
+"start": 18.07,
+"end": 18.28
+},
+{
+"id": 47,
+"text": "vai",
+"start": 18.28,
+"end": 18.43
+},
+{
+"id": 48,
+"text": "pra",
+"start": 18.43,
+"end": 18.61
+},
+{
+"id": 49,
+"text": "casa.",
+"start": 18.61,
+"end": 19.01
+},
+{
+"id": 50,
+"text": "O",
+"start": 19.57,
+"end": 19.91
+},
+{
+"id": 51,
+"text": "que",
+"start": 19.91,
+"end": 20.16
+},
+{
+"id": 52,
+"text": "o",
+"start": 20.16,
+"end": 20.38
+},
+{
+"id": 53,
+"text": "Zé",
+"start": 20.38,
+"end": 20.67
+},
+{
+"id": 54,
+"text": "faz?",
+"start": 20.67,
+"end": 20.85
+},
+{
+"id": 55,
+"text": "Comenta",
+"start": 20.85,
+"end": 21.53
+},
+{
+"id": 56,
+"text": "A",
+"start": 21.53,
+"end": 21.89
+},
+{
+"id": 57,
+"text": "ou",
+"start": 21.89,
+"end": 22.11
+},
+{
+"id": 58,
+"text": "B.",
+"start": 22.11,
+"end": 22.38
+}
+]

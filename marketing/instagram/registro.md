@@ -34,4 +34,4 @@ Regra (Rafael, 15/11): 2 vídeos por dia, sendo 1 historinha do Zé com enquete.
 Obs. 17/11: o V10 saiu por engano às 22:39 (clique em Compartilhar) e foi apagado em ~7 min, 0 visualizações. Sempre escolher "Programar" antes do botão final.
 | Qua 18/11 19:00 | Zé Parte 6 (programado 18/11, FB+IG; pasta v18-ze-parte6) | "Vocês escolheram A" (2 a 0) + pneu furado do colega: A para e ajuda / B segue viagem. Primeira parte com cenas desenhadas |
 | Qui 19/11 07:00 | V11 custo por km (programado 18/11, FB+IG; pasta v19-custo-km) | "Quanto custa cada km do seu caminhão?" · R$ 3,53/km, 800 km = R$ 2.824 pra empatar · Comenta APP |
-Falta: vídeo comum para qua 18/11 07h (V5/V6 não estão na pasta; V4 já saiu em 11/11).
+| Qui 19/11 19:00 | Zé Parte 7 (pasta v20-ze-parte7) | Parte 6 saiu sem votos (0 comentários): Zé ajuda o colega por escolha da casa. Dilema A aceita frete de volta / B vai pra casa |
