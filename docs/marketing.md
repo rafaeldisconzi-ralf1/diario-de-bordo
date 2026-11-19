@@ -20,6 +20,7 @@ mexe; não andam com "reduzir movimento"), com bolinhas indicando qual está na 
 | V6 3 sinais (kit) | "Três sinais de que você está perdendo dinheiro na estrada" | Toque no link |
 | V7 conversa (sem voz) | Texto: "Um caminhoneiro sabe quanto sobrou. O outro não." + conversa de mensagens entre Zé e Carlos | "E você, sabe quanto sobrou?" · Toque no link · e faça igual ao Carlos |
 | V8 nota da viagem (sem voz) | "Quanto sobra de um frete de R$ 9.040?" · nota impressa linha a linha, contador caindo até "SOBROU R$ 3.146,90" | "Lance sua primeira viagem hoje" · Toque no link |
+| V11 custo por km (sem voz, 22 s, fundo verde pontilhado + hodômetro; pasta v19-custo-km) | "Quanto custa cada km do seu caminhão?" · diesel+pneu+manutenção+pedágio = R$ 3,53/km | "Saiba o seu custo por km" · Comenta APP |
 | V10 frete bom/ruim (sem voz, 22 s, fundo azul quadriculado; pasta v17-frete-bom-ruim) | "Esse frete paga R$ 9.000. Mas sobra quanto?" · fretes A 1.100 km x B 700 km, descontos caindo, B sobra mais | "Não é o frete que paga. É o que sobra." · Comenta APP |
 | V9 10 segundos (sem voz, 10 s, fundo amarelo listrado) | "Uma viagem inteira em 10 segundos" · Abasteceu? Gastou? Parou? Chegou? com as telas do app | "Saiba quanto sobrou de cada viagem" · Toque no link |
 

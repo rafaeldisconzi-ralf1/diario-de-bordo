@@ -33,4 +33,5 @@ Regra (Rafael, 15/11): 2 vídeos por dia, sendo 1 historinha do Zé com enquete.
 | Qua 18/11 07:00 | V10 frete bom/ruim (programado 17/11, FB+IG) | "Esse frete paga R$ 9.000. Mas sobra quanto?" · Comenta APP |
 Obs. 17/11: o V10 saiu por engano às 22:39 (clique em Compartilhar) e foi apagado em ~7 min, 0 visualizações. Sempre escolher "Programar" antes do botão final.
 | Qua 18/11 19:00 | Zé Parte 6 (programado 18/11, FB+IG; pasta v18-ze-parte6) | "Vocês escolheram A" (2 a 0) + pneu furado do colega: A para e ajuda / B segue viagem. Primeira parte com cenas desenhadas |
+| Qui 19/11 07:00 | V11 custo por km (programado 18/11, FB+IG; pasta v19-custo-km) | "Quanto custa cada km do seu caminhão?" · R$ 3,53/km, 800 km = R$ 2.824 pra empatar · Comenta APP |
 Falta: vídeo comum para qua 18/11 07h (V5/V6 não estão na pasta; V4 já saiu em 11/11).
