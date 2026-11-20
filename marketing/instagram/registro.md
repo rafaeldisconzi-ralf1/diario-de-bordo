@@ -36,3 +36,5 @@ Obs. 17/11: o V10 saiu por engano às 22:39 (clique em Compartilhar) e foi apaga
 | Qui 19/11 07:00 | V11 custo por km (programado 18/11, FB+IG; pasta v19-custo-km) | "Quanto custa cada km do seu caminhão?" · R$ 3,53/km, 800 km = R$ 2.824 pra empatar · Comenta APP |
 | Qui 19/11 19:20 | Zé Parte 7 (programado 19/11, FB+IG; pasta v20-ze-parte7) | Parte 6 saiu sem votos (0 comentários): Zé ajuda o colega por escolha da casa. Dilema A aceita frete de volta / B vai pra casa |
 | Sex 20/11 07:00 | V12 meta de sobra (programado 19/11, FB+IG; pasta v21-meta-sobra) | "Quer sobrar R$ 5.000 por mês?" · 10.000 km x R$ 3,53 = faturar R$ 40.300 = R$ 4,03 por km · Comenta APP |
+| Sex 20/11 (noite) | V13 piso do frete (sem voz, pasta v22-piso-frete) | "Já te pagaram frete abaixo do piso mínimo?" · Lei 13.703/2018, ANTT · Comenta SIM ou NÃO + Comenta APP |
+Obs. 20/11: Zé Parte 6 e 7 sem votos (0 comentários). Rafael pediu algo novo, ligado a notícia do meio: piso mínimo do frete.
