@@ -35,4 +35,4 @@ Obs. 17/11: o V10 saiu por engano às 22:39 (clique em Compartilhar) e foi apaga
 | Qua 18/11 19:00 | Zé Parte 6 (programado 18/11, FB+IG; pasta v18-ze-parte6) | "Vocês escolheram A" (2 a 0) + pneu furado do colega: A para e ajuda / B segue viagem. Primeira parte com cenas desenhadas |
 | Qui 19/11 07:00 | V11 custo por km (programado 18/11, FB+IG; pasta v19-custo-km) | "Quanto custa cada km do seu caminhão?" · R$ 3,53/km, 800 km = R$ 2.824 pra empatar · Comenta APP |
 | Qui 19/11 19:20 | Zé Parte 7 (programado 19/11, FB+IG; pasta v20-ze-parte7) | Parte 6 saiu sem votos (0 comentários): Zé ajuda o colega por escolha da casa. Dilema A aceita frete de volta / B vai pra casa |
-| Sex 20/11 07:00 | V12 meta de sobra (sem voz, pasta v21-meta-sobra) | "Quer sobrar R$ 5.000 por mês?" · 10.000 km x R$ 3,53 = faturar R$ 40.300 = R$ 4,03 por km · Comenta APP |
+| Sex 20/11 07:00 | V12 meta de sobra (programado 19/11, FB+IG; pasta v21-meta-sobra) | "Quer sobrar R$ 5.000 por mês?" · 10.000 km x R$ 3,53 = faturar R$ 40.300 = R$ 4,03 por km · Comenta APP |
