@@ -30,3 +30,8 @@ Regras para o Instagram (conta nova, ainda frágil):
 - Direct: no máximo 5 a 10 por dia, só para quem comentou ou segue. Nunca para quem não interagiu.
 - Se aparecer "tente mais tarde", "ação bloqueada" ou "problema ao salvar": parar tudo por 24 h e avisar o Rafael.
 - Nada de ferramenta de automação de fora sem aprovação (só a resposta automática oficial da Meta).
+
+## 20/11/2026 — Rafael: quem paga o diesel e vídeos com voz
+- Motorista empregado NÃO paga diesel, pedágio nem diária: quem paga é o patrão. Só o dono do caminhão (autônomo) paga do próprio bolso. Todo texto sobre custo de diesel/gasto deve falar ao DONO DO CAMINHÃO, nunca dizer que "sai do seu bolso" para qualquer motorista.
+- Daqui para frente os vídeos novos (mesmo fora da série do Zé) levam narração e legenda. Voz Arnold-Br só com ok do Rafael no texto (custa crédito).
+- Pergunta "Comenta DONO" separa autônomo (cliente do app) de empregado.
