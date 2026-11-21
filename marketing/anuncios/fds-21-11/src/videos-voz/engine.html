@@ -1,0 +1,100 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><style>
+@font-face{font-family:B;src:url(fonts/barlow-latin-700-normal.woff2);font-weight:700}
+@font-face{font-family:BC;src:url(fonts/barlow-condensed-latin-800-normal.woff2);font-weight:800}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#111;font-family:B;color:#fff}
+.ph{position:absolute;inset:0;opacity:0;overflow:hidden}
+.ph img{position:absolute;left:0;top:-7px;width:1080px;height:1934px;object-fit:cover;transform-origin:50% 60%}
+.ph .sh{position:absolute;inset:0;background:linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.05) 35%,rgba(0,0,0,.05) 55%,rgba(0,0,0,.6))}
+.ph.blur img{filter:blur(14px) brightness(.55)}
+.t{position:absolute;left:50px;right:50px;text-align:center;font:800 130px/.95 BC;text-transform:uppercase;text-shadow:0 6px 30px rgba(0,0,0,.7);opacity:0}
+.y{color:#f2b705}.g{color:#5fd39a}
+.phone{position:absolute;left:50%;width:560px;height:1060px;margin-left:-280px;border-radius:56px;border:14px solid #1a1c1f;background:#fff;overflow:hidden;box-shadow:0 40px 90px rgba(0,0,0,.7);opacity:0}
+.phone img{position:absolute;left:0;top:0;width:100%}
+.chip{position:absolute;font:800 64px/1 BC;text-transform:uppercase;padding:18px 34px 10px;border-radius:18px;box-shadow:0 10px 30px rgba(0,0,0,.5);opacity:0;white-space:nowrap}
+.pill{position:absolute;left:50%;transform:translateX(-50%);background:#f2b705;color:#16181b;font:800 92px/1 BC;padding:22px 60px 12px;border-radius:999px;text-transform:uppercase;white-space:nowrap;opacity:0;box-shadow:0 14px 40px rgba(0,0,0,.6)}
+#sub{position:absolute;left:30px;right:30px;top:1250px;min-height:200px;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;text-align:center;font:800 92px/1.02 BC;text-transform:uppercase;-webkit-text-stroke:12px #000;paint-order:stroke fill;opacity:0;z-index:20}
+#sub span{display:inline-block;margin:0 .12em}
+#sub span.on{color:#f2b705}
+#end{position:absolute;inset:0;background:#16181b;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding-top:330px;gap:34px;opacity:0;z-index:10}
+#end img{width:220px;height:220px;border-radius:48px}
+#end .n{font:800 110px BC;text-transform:uppercase}
+#end .l{font:800 84px/1.05 BC;text-transform:uppercase;text-align:center}
+#end .p{background:#f2b705;color:#16181b;font:800 84px BC;padding:22px 60px 12px;border-radius:999px;text-transform:uppercase}
+#end .s{font:700 40px B;color:#c9c5ba;text-transform:uppercase;letter-spacing:1px}
+</style></head><body><div id="stage"></div><div id="sub"></div>
+<div id="end"><img src="icon-512.png"><div class="n">Diário de Bordo</div><div class="l" id="el"></div><div class="p">Toque em Saiba mais</div><div class="s">R$ 24,90/mês · 7 dias de garantia</div></div>
+<script>
+const v=new URLSearchParams(location.search).get('v')||'A', $=s=>document.querySelector(s);
+const cl=x=>Math.max(0,Math.min(1,x)),eo=x=>1-Math.pow(1-cl(x),3);
+const back=x=>{x=cl(x);const c=1.7;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2)};
+const CFG={
+A:{TOT:22.3,END:20.35,el:'Veja quanto <span class="g">sobrou</span><br>de cada viagem',
+ SEG:[[0.07,0.61,"Caminhoneiro:5"],[0.85,3.3,"você:2 sabe:2 / quanto:2 sobrou:2 / da:1 sua:1 última:3 viagem?:3"],[3.78,6.75,"No:1 Diário:3 de:1 Bordo:2 / você:2 lança:2 o:1 frete:2 / o:1 diesel:2"],[6.9,8.34,"os:1 gastos:2 / e:1 as:1 diárias:3"],[8.52,9.23,"com:1 um:1 toque:2"],[9.69,10.11,"No:1 fim:1"],[10.34,11.94,"o:1 app:1 mostra:2 / quanto:2 sobrou:2"],[12.38,14.42,"Custa:2 R$_24,90:10 / por:1 mês:1"],[14.63,15.13,"menos:2 de:1"],[15.28,16.27,"R$_1:3 por:1 dia:1"],[16.61,18.34,"E:1 tem:1 7:2 dias:1 / de:1 garantia:3"],[18.79,20.05,"Toque:1 em:1 Saiba:2 mais:1"]],
+ S:[
+  {k:'ph',f:1,a:0,b:3.55,z:[1.0,1.12]},
+  {k:'t',a:0.85,b:3.45,top:330,h:'Quanto<br><span class="g">sobrou?</span>'},
+  {k:'ph',f:3,a:3.55,b:9.6,z:[1.05,1.0],blur:1},
+  {k:'phone',img:'01-inicio.png',a:3.7,b:9.55,top:150,y:[0.0,0.14],ya:3.9,yb:8.3},
+  {k:'chip',a:5.2,b:9.55,x:70,top:420,bg:'#2163b3',h:'Frete'},
+  {k:'chip',a:6.4,b:9.55,x:720,top:660,bg:'#c4410f',h:'Diesel'},
+  {k:'chip',a:7.2,b:9.55,x:60,top:880,bg:'#11796f',h:'Gastos'},
+  {k:'chip',a:7.8,b:9.55,x:720,top:1080,bg:'#6a3fb5',h:'Diárias'},
+  {k:'ph',f:6,a:9.6,b:12.3,z:[1.06,1.0],blur:1},
+  {k:'phone',img:'07-sobrou-full.png',a:9.65,b:12.25,top:150,y:[0.03,0.2],ya:9.8,yb:11.5},
+  {k:'chip',a:10.9,b:12.25,x:150,top:1085,bg:'#5fd39a',c:'#10241a',h:'Sobrou R$ 3.146,90',fs:76},
+  {k:'ph',f:4,a:12.3,b:16.5,z:[1.0,1.1]},
+  {k:'pill',a:12.6,b:16.45,top:330,h:'R$ 24,90/mês'},
+  {k:'t',a:14.6,b:16.45,top:520,h:'Menos de<br><span class="y">R$ 1 por dia</span>',fs:110},
+  {k:'ph',f:6,a:16.5,b:20.5,z:[1.0,1.1]},
+  {k:'t',a:16.6,b:20.4,top:330,h:'<span class="g">7 dias</span><br>de garantia'},
+  {k:'t',a:17.4,b:20.4,top:600,h:'Não gostou?<br>Seu dinheiro de volta',fs:70}
+ ]},
+B:{TOT:18.8,END:16.65,el:'Comissão e diárias<br><span class="g">certinhas</span>',
+ SEG:[[0.08,1.22,"Você:1 dirige:2 pra:1 patrão?:3"],[1.7,4.91,"Então:2 anota:2 as:1 diárias:3 / os:1 adiantamentos:5 / e:1 a:1 comissão:3"],[5.07,6.42,"de:1 cada:2 viagem:2 / no:1 celular:3"],[6.76,7.21,"No:1 fim:1"],[7.42,10.01,"o:1 app:1 mostra:2 certinho:3 / o:1 que:1 você:1 tem:1 / pra:1 receber:3"],[10.38,12.84,"Sem:1 papel:2 / e:1 sem:1 briga:2 / na:1 hora:2 do:1 acerto:3"],[13.23,16.58,"Toque:1 em:1 Saiba:2 mais:1 / e:1 teste:2 com:1 7:2 dias:1 / de:1 garantia:3"]],
+ S:[
+  {k:'ph',f:5,a:0,b:1.75,z:[1.0,1.1]},
+  {k:'t',a:0.1,b:1.7,top:330,h:'Dirige pra<br><span class="y">patrão?</span>'},
+  {k:'ph',f:5,a:1.75,b:7.0,z:[1.08,1.0],blur:1},
+  {k:'phone',img:'07-sobrou-full.png',a:1.8,b:6.95,top:150,y:[0.08,0.16],ya:2.0,yb:6.5},
+  {k:'chip',a:2.4,b:6.95,x:60,top:420,bg:'#6a3fb5',h:'Diárias'},
+  {k:'chip',a:3.3,b:6.95,x:560,top:700,bg:'#c4410f',h:'Adiantamentos'},
+  {k:'chip',a:4.3,b:6.95,x:60,top:980,bg:'#2163b3',h:'Comissão'},
+  {k:'ph',f:1,a:7.0,b:10.3,z:[1.06,1.0],blur:1},
+  {k:'phone',img:'07-sobrou-full.png',a:7.05,b:10.25,top:150,y:[0.16,0.16],ya:7.2,yb:9.0},
+  {k:'chip',a:8.0,b:10.25,x:110,top:1085,bg:'#5fd39a',c:'#10241a',h:'A receber: R$ 1.431,00',fs:66},
+  {k:'ph',f:2,a:10.3,b:13.1,z:[1.0,1.1]},
+  {k:'t',a:10.4,b:13.0,top:330,h:'Sem <span class="y">papel</span>'},
+  {k:'t',a:11.3,b:13.0,top:500,h:'Sem briga<br>no acerto',fs:100},
+  {k:'ph',f:6,a:13.1,b:16.7,z:[1.0,1.08]},
+  {k:'t',a:13.2,b:16.6,top:330,h:'Teste com<br><span class="g">7 dias</span> de garantia',fs:110}
+ ]}};
+const C=CFG[v]; window.TOT=C.TOT; $('#el').innerHTML=C.el;
+const st=$('#stage');
+C.S.forEach((s,i)=>{let e=document.createElement('div');s.el=e;
+ if(s.k==='ph'){e.className='ph'+(s.blur?' blur':'');e.innerHTML='<img src="fotos/foto'+s.f+'.jpg"><div class="sh"></div>';}
+ else if(s.k==='t'){e.className='t';e.style.top=s.top+'px';if(s.fs)e.style.fontSize=s.fs+'px';e.innerHTML=s.h;}
+ else if(s.k==='phone'){e.className='phone';e.style.top=s.top+'px';e.innerHTML='<img src="'+s.img+'">';}
+ else if(s.k==='chip'){e.className='chip';e.style.left=s.x+'px';e.style.top=s.top+'px';e.style.background=s.bg;e.style.color=s.c||'#fff';if(s.fs)e.style.fontSize=s.fs+'px';e.innerHTML=s.h;}
+ else if(s.k==='pill'){e.className='pill';e.style.top=s.top+'px';e.innerHTML=s.h;}
+ st.appendChild(e);});
+// legendas
+const CH=[];
+C.SEG.forEach(([a,b,s])=>{const tk=s.split(' ').filter(x=>x!=='/');const tw=tk.reduce((q,x)=>q+(+x.split(':')[1]),0);let acc=0,cur=null;
+ s.split(' ').forEach(x=>{if(x==='/'){cur=null;return}const [w,k]=x.split(':');const ws=a+(b-a)*acc/tw;acc+=+k;const we=a+(b-a)*acc/tw;
+  if(!cur){cur={w:[],a:ws,b:we};CH.push(cur)}cur.w.push({t:w.replace(/_/g,' '),a:ws,b:we});cur.b=we;});});
+CH.forEach((c,i)=>{const n=CH[i+1];c.s0=c.a-0.04;c.s1=(n&&n.a-c.b<0.45)?n.a-0.04:c.b+0.15});
+let last=-1;
+window.render=function(t){
+ C.S.forEach(s=>{const e=s.el;const o=cl((t-s.a)/.22)*(1-cl((t-s.b)/.2));e.style.opacity=o;
+  if(s.k==='ph'){const p=cl((t-s.a)/(s.b-s.a));e.firstChild.style.transform='scale('+(s.z[0]+(s.z[1]-s.z[0])*p)+')'}
+  else if(s.k==='phone'){const p=eo((t-s.ya)/(s.yb-s.ya));const H=e.firstChild.offsetHeight||1;e.firstChild.style.top=-(H*(s.y[0]+(s.y[1]-s.y[0])*p))+'px';e.style.transform='translateY('+(60*(1-eo((t-s.a)/.5)))+'px)'}
+  else if(s.k==='chip'||s.k==='t'){e.style.transform='scale('+(0.8+0.2*back((t-s.a)/.4))+')'}
+  else if(s.k==='pill'){e.style.transform='translateX(-50%) scale('+(0.8+0.2*back((t-s.a)/.4))+')'}});
+ const en=$('#end');en.style.opacity=cl((t-C.END)/.3);
+ const el=$('#sub');const i=CH.findIndex(c=>t>=c.s0&&t<c.s1);
+ if(i<0||t>=C.END+0.05&&false){el.style.opacity=0;last=-1}else{if(i!==last){el.innerHTML=CH[i].w.map(w=>'<span>'+w.t+'</span>').join('');last=i}el.style.opacity=1;[...el.children].forEach((s,k)=>{const w=CH[i].w[k];s.className=(t>=w.a&&t<w.b)?'on':''})}
+ el.style.top=(t>=C.END?1480:1250)+'px';
+};
+window.render(0);
+</script></body></html>
