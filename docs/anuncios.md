@@ -3,7 +3,7 @@
 Plano completo (doc vivo): https://claude.ai/artifact/AMsPbNAjyBwKhrzTR9Msp1
 
 ## Campanha do fim de semana 21–23/11/2026 (pronta, aguardando ok do valor)
-- Pacote em `marketing/anuncios/fds-21-11/`: 6 imagens (4:5 e 9:16) com fotos feitas por IA (Gemini grátis do Rafael) + texto e tela do app por cima; 3 vídeos (nota da viagem, 10 segundos, frete bom/ruim com final "Toque em Saiba mais"). 2 vídeos com voz aguardando ok do roteiro.
+- Pacote em `marketing/anuncios/fds-21-11/`: 6 imagens (4:5 e 9:16) com fotos feitas por IA (Gemini grátis do Rafael; refeitas em 20/11 com caminhões novos, limpos e realistas tipo Scania R ou Volvo FH, e motorista bem arrumado. O Rafael não gostou de caminhoneiro e caminhão sujos, nem de cabine irreal sem coluna: conferir cada foto de perto antes de usar) + texto e tela do app por cima; 3 vídeos (nota da viagem, 10 segundos, frete bom/ruim com final "Toque em Saiba mais"). 2 vídeos com voz aguardando ok do roteiro.
 - Estrutura nova (pesquisa 20/11): 1 campanha de Vendas, 1 conjunto amplo (Advantage+), 9 anúncios diferentes, R$ 40/dia sáb–seg (R$ 120). Otimizar para InitiateCheckout. Substitui o 1-3-1: com pouco dinheiro, 3 conjuntos não aprendem; o Meta (Andromeda) acha o público pelo criativo.
 - Textos, links com UTM (`utm_campaign=fds2111`, `utm_content=img1…vid3`) e checklist: no doc do plano, seção "Campanha do fim de semana".
 - Rafael pediu (20/11): imagens não devem ser desenhadas pelo Claude ("fica ruim"); usar gerador de imagem com IA para as fotos.

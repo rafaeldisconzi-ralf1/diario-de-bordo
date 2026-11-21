@@ -32,20 +32,20 @@ const OFF='<div class="pill">R$ 24,90 por mês</div><div class="sm">7 dias de ga
 const ph=(x,y,w,h,pos)=>`<div class="ph" style="left:${x}px;top:${y}px;width:${w}px;height:${h}px"><img src="07-sobrou-full.png" style="object-position:${pos}"></div>`;
 const T=tall?240:0; // deslocamento 9:16
 const C={
-sobrou:{f:1,pos:'50% 60%',h:`<h1 style="font-size:100px">Quanto <span class="g">sobrou</span> da<br>sua última viagem?</h1>
+sobrou:{f:1,pos:'50% 70%',h:`<h1 style="font-size:100px">Quanto <span class="g">sobrou</span> da<br>sua última viagem?</h1>
  <div class="sub" style="top:${tall?560:300}px">Lance frete, diesel, gastos e diárias.<br>O app faz a conta.</div>
- ${ph(70,tall?760:470,380,tall?520:420,'0 34%')}`},
-papel:{f:2,pos:'50% 50%',h:`<h1>Ainda anota<br>a viagem <span class="y">no papel?</span></h1>
+ ${ph(tall?40:70,tall?760:470,tall?320:380,tall?480:420,tall?'0 41%':'0 38%')}`},
+papel:{f:2,pos:'50% 60%',h:`<h1>Ainda anota<br>a viagem <span class="y">no papel?</span></h1>
  <div class="sub" style="bottom:${tall?640:250}px">No celular, diesel, gastos e diárias<br>somam sozinhos. No fim: <span class="g">quanto sobrou.</span></div>`},
-toque:{f:3,pos:'50% 55%',h:`<h1>Abasteceu?<br><span class="y">Um toque.</span></h1>
+toque:{f:3,pos:'50% 60%',h:`<h1>Abasteceu?<br><span class="y">Um toque.</span></h1>
  <div class="btns" style="bottom:${tall?640:250}px">
   <div class="bt" style="background:#2163b3">Abasteci</div><div class="bt" style="background:#c4410f">Gastei</div><div class="bt" style="background:#11796f">Diária</div></div>`},
-preco:{f:4,pos:'50% 62%',h:`<h1 style="font-size:96px">Custa menos<br>que esse <span class="y">cafezinho</span></h1>
+preco:{f:4,pos:'50% 70%',h:`<h1 style="font-size:96px">Custa menos<br>que esse <span class="y">cafezinho</span></h1>
  <div class="price" style="bottom:${tall?600:250}px"><div style="font:800 200px/.9 BC;color:#f2b705;text-shadow:0 6px 30px rgba(0,0,0,.7)">R$ 0,83</div><div style="font:800 64px BC;text-transform:uppercase">por dia</div></div>`},
-diaria:{f:5,pos:'50% 50%',h:`<h1 style="font-size:100px">Parado esperando<br><span class="y">descarga?</span></h1>
+diaria:{f:5,pos:'50% 75%',h:`<h1 style="font-size:100px">Parado esperando<br><span class="y">descarga?</span></h1>
  <div class="sub" style="top:${tall?520:290}px">Lance as diárias e veja sua comissão<br>e o que ainda falta receber.</div>
  ${ph(tall?600:640,tall?820:560,380,tall?400:330,'0 92%')}`},
-depo:{f:6,pos:'50% 55%',h:`<h1 style="font-size:92px">“Agora sei quanto<br><span class="g">sobrou</span> no frete”</h1>
+depo:{f:6,pos:'50% 75%',h:`<h1 style="font-size:92px">“Agora sei quanto<br><span class="g">sobrou</span> no frete”</h1>
  <div style="position:absolute;left:60px;right:60px;top:${tall?560:300}px">
   <div class="q">“Antes eu anotava diesel e pedágio em papel e depois me perdia todo. Agora lanço na hora.”</div>
   <div class="q v">“O relatório das viagens é top! Me ajuda a saber se a viagem deu lucro.”</div>
