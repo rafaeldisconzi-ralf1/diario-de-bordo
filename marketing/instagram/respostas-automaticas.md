@@ -8,6 +8,7 @@ As automações do Business Suite (resposta instantânea, palavra-chave, coment�
 As perguntas frequentes dá para pôr direto no app do Instagram (celular): Configurações → Ferramentas para empresas → Perguntas frequentes.
 
 ## Resposta instantânea (1ª mensagem)
+No ar desde 21/11/2026 (Messenger e Instagram), texto abaixo numa linha só.
 Oi! Aqui é do Diário de Bordo 🚛
 O app para caminhoneiro lançar frete, diesel, gastos e diárias e ver quanto sobrou de cada viagem.
 Assine aqui: frete.trilhanova.shop/assinar
