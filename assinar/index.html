@@ -461,7 +461,7 @@ function telaEmail(){
     try{
       const r=await fetch(PIX_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({acao:'cartao',email:e,plano:planoPix})});
       const d=await r.json();if(!r.ok||!d.url)throw new Error(d.erro||'erro');
-      evento('cartao');location.href=d.url;
+      evento('cartao');try{sessionStorage.setItem('bordo-plano',planoPix)}catch(_){}location.href=d.url;
     }catch(x){ct.disabled=false;ok.disabled=false;ct.textContent='Pagar com cartão';err.textContent='Não deu para abrir o pagamento com cartão agora. Tente de novo ou pague com Pix.'}
   };
   setTimeout(()=>inp.focus(),80);
@@ -469,6 +469,7 @@ function telaEmail(){
 // volta do pagamento com cartão (Mercado Pago)
 function voltaCartao(){
   const q=new URLSearchParams(location.search);if(q.get('pago')!=='cartao')return;
+  try{const pp=sessionStorage.getItem('bordo-plano');if(pp==='mensal'||pp==='anual')planoPix=pp}catch(_){}
   const id=q.get('payment_id')||q.get('collection_id'),st=q.get('status')||q.get('collection_status');
   fundo.hidden=false;document.body.style.overflow='hidden';
   if(!id||id==='null'||st==='rejected'||st==='null'){
@@ -509,7 +510,7 @@ function telaPix(d){
   },4000);
 }
 function telaAprovado(){
-  try{if(window.fbq&&!sessionStorage.getItem('bordo-fbp')){sessionStorage.setItem('bordo-fbp','1');const pc=new URLSearchParams(location.search).get('pago')==='cartao';fbq('track','Purchase',pc?{currency:'BRL'}:{currency:'BRL',value:{mensal:24.90,anual:179.90}[planoPix]||0})}}catch(_){}
+  try{if(window.fbq&&!sessionStorage.getItem('bordo-fbp')){sessionStorage.setItem('bordo-fbp','1');fbq('track','Purchase',{currency:'BRL',value:{mensal:24.90,anual:179.90}[planoPix]||0})}}catch(_){}
   jan.innerHTML=`<div class="aprovado">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M7.5 12.5l3 3 6-6.5"/></svg>
     <h3 id="pix-titulo">Pagamento aprovado!</h3>
