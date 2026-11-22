@@ -24,6 +24,15 @@ Mudanças no código de pagamento (`supabase/functions/pix`, janela de pagamento
 - No app, Perfil → Clientes: quem pagou e até quando.
 - Tabela `pagamentos` no Supabase (status, valor, plano, quando foi aprovado).
 
+## Vendas
+| Data | Plano | Valor | Forma | Situação |
+|---|---|---|---|---|
+| 21/11/2026 21:06 | mensal | R$ 24,90 | Pix | **1ª venda real.** Aprovado; conta ainda não criada na hora da conferência (os 30 dias entram no 1º login) |
+
+Para conferir uma venda: SQL Editor do Supabase, `pagamentos` junto com `perfis` pelo e-mail.
+`aplicado = false` e sem perfil = pagou mas ainda não entrou no app (normal); os dias somam sozinhos no 1º login.
+Não colocar e-mail de cliente aqui (repositório público).
+
 ## Pendências
 - **Compra de teste com cartão**: Pix real já testado (10/11/2026, aprovou e liberou a conta); falta o cartão.
 - **MEI/CNPJ**: hoje o Pix mostra o nome pessoal do Rafael. Com MEI, passar a conta do Mercado Pago para o CNPJ
