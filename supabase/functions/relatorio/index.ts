@@ -5,7 +5,8 @@ import nodemailer from "npm:nodemailer@6.9.16";
 
 const sb = createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!);
 const DE = "nao-responda@trilhanova.shop";
-const LIMITE_DIA = 5;
+const LIMITE_DIA = 5; // por conta, em 24 horas
+const LIMITE_HORA_GERAL = 60; // todas as contas juntas, por hora (o mesmo e-mail manda os códigos de login)
 const CORS = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers": "content-type, authorization, apikey, x-client-info",
@@ -38,19 +39,28 @@ Deno.serve(async (req) => {
     const ate = [p?.teste_ate, p?.pago_ate].filter(Boolean).sort().pop();
     if (!p?.admin && (!ate || ate < hoje)) return json({ erro: "Seu acesso venceu. Renove para mandar o relatório." }, 403);
 
-    const desde = new Date(Date.now() - 24 * 3600_000).toISOString();
-    const { count } = await sb.from("relatorios_enviados").select("id", { count: "exact", head: true }).eq("user_id", user.id).gte("enviado_em", desde);
-    if ((count || 0) >= LIMITE_DIA) return json({ erro: "Você já mandou muitos relatórios hoje. Tente amanhã." }, 429);
-
     const pass = Deno.env.get("SMTP_PASS");
     if (!pass) return json({ erro: "O envio por e-mail ainda não foi ligado." }, 503);
+
+    // Reserva a vaga ANTES de mandar (o banco conta de forma atômica: vários pedidos juntos não passam do limite).
+    const { data: r, error: erroReserva } = await sb.rpc("reservar_relatorio", {
+      uid: user.id, mes_: mes, max_dia: LIMITE_DIA, max_hora_geral: LIMITE_HORA_GERAL,
+    });
+    if (erroReserva || !r) throw erroReserva || new Error("reserva falhou");
+    if (!r.ok) {
+      return json({ erro: r.motivo === "dia"
+        ? "Você já mandou muitos relatórios hoje. Tente amanhã."
+        : "Muita gente pedindo agora. Tente de novo daqui a pouco." }, 429);
+    }
+    const reserva = r.id as number;
     const [ano, m] = mes.split("-");
     const nomeMes = `${MESES[+m - 1]} de ${ano}`;
     const nome = String(body.nome || "").slice(0, 60);
     const resumo = String(body.resumo || "").slice(0, 300);
 
     const t = nodemailer.createTransport({ host: "smtp.hostinger.com", port: 465, secure: true, auth: { user: DE, pass } });
-    await t.sendMail({
+    try {
+      await t.sendMail({
       from: `"Diário de Bordo" <${DE}>`,
       to: user.email,
       subject: `Seu relatório de ${nomeMes} - Diário de Bordo`,
@@ -62,8 +72,12 @@ Deno.serve(async (req) => {
         <p style="color:#666;font-size:13px">Você recebeu este e-mail porque pediu o relatório no app Diário de Bordo.</p></div>`,
       attachments: [{ filename: `Diario-de-Bordo-${mes}.xlsx`, content: arquivo, encoding: "base64",
         contentType: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" }],
-    });
-    await sb.from("relatorios_enviados").insert({ user_id: user.id, mes });
+      });
+    } catch (e) {
+      // não saiu o e-mail: devolve a vaga para a pessoa poder tentar de novo
+      await sb.rpc("cancelar_relatorio", { rid: reserva });
+      throw e;
+    }
     return json({ ok: true, email: user.email });
   } catch (e) {
     console.error(e);

@@ -6,6 +6,15 @@ const PLANOS: Record<string, { valor: number; dias: number; nome: string }> = {
   mensal: { valor: 24.9, dias: 30, nome: "Diário de Bordo - Mensal" },
   anual: { valor: 179.9, dias: 365, nome: "Diário de Bordo - Anual" },
 };
+// Limite por IP (o banco conta de forma atômica). Se o banco falhar, deixa passar para não travar vendas.
+async function liberado(req: Request, acao: string, max: number, janelaMin: number) {
+  const ip = (req.headers.get("cf-connecting-ip") || req.headers.get("x-forwarded-for") || "desconhecido").split(",")[0].trim().slice(0, 64);
+  const { data, error } = await sb.rpc("limitar_cobranca", { ip_: ip, acao_: acao, max_: max, janela_min: janelaMin });
+  if (error) { console.error(error); return true; }
+  return data === true;
+}
+const MUITO = "Muitas tentativas. Espere alguns minutos e tente de novo.";
+
 const SB_URL = Deno.env.get("SUPABASE_URL")!;
 const sb = createClient(SB_URL, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!);
 const CORS = {
@@ -36,7 +45,7 @@ async function atualizar(id: string) {
   if (!linha) {
     // pagamento com cartão (Checkout Pro): o id só existe depois que a pessoa paga
     const [plano, email] = String(p.external_reference || "").split("|");
-    const P = PLANOS[plano];
+    const P = Object.hasOwn(PLANOS, plano) ? PLANOS[plano] : null;
     if (!P || !email || Number(p.transaction_amount) + 0.001 < P.valor) return null;
     const nova = { id, email, plano, valor: P.valor, dias: P.dias, status: p.status };
     await sb.from("pagamentos").upsert(nova, { onConflict: "id", ignoreDuplicates: true });
@@ -58,8 +67,9 @@ Deno.serve(async (req) => {
   try {
     if (body.acao === "criar") {
       const email = String(body.email || "").trim().toLowerCase();
-      const plano = PLANOS[body.plano];
+      const plano = Object.hasOwn(PLANOS, String(body.plano)) ? PLANOS[body.plano] : null;
       if (!/^\S+@\S+\.\S+$/.test(email) || !plano) return json({ erro: "Confira o e-mail." }, 400);
+      if (!(await liberado(req, "criar", 10, 10))) return json({ erro: MUITO }, 429);
       const vence = new Date(Date.now() + 30 * 60_000).toISOString().replace("Z", "+00:00");
       const p = await mp("/v1/payments", {
         method: "POST",
@@ -82,8 +92,9 @@ Deno.serve(async (req) => {
     }
     if (body.acao === "cartao") {
       const email = String(body.email || "").trim().toLowerCase();
-      const plano = PLANOS[body.plano];
+      const plano = Object.hasOwn(PLANOS, String(body.plano)) ? PLANOS[body.plano] : null;
       if (!/^\S+@\S+\.\S+$/.test(email) || !plano) return json({ erro: "Confira o e-mail." }, 400);
+      if (!(await liberado(req, "criar", 10, 10))) return json({ erro: MUITO }, 429);
       const volta = `https://frete.trilhanova.shop/assinar/?email=${encodeURIComponent(email)}&pago=cartao`;
       const pref = await mp("/checkout/preferences", {
         method: "POST",
@@ -104,6 +115,7 @@ Deno.serve(async (req) => {
       return json({ url: pref.init_point });
     }
     if (body.acao === "status") {
+      if (!(await liberado(req, "status", 400, 10))) return json({ erro: MUITO }, 429);
       return json({ status: await atualizar(String(body.id || "")) });
     }
     // Aviso do Mercado Pago: ?data.id=123&type=payment ou {"data":{"id":"123"}}

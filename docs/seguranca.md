@@ -35,19 +35,25 @@ rodada por um agente só, de forma **parcial**. Só leitura: nada do app foi alt
   (b) função `avisos` publicada com `timeout: 10000` no `sendNotification`.
   Falta só testar o aviso num celular real (já era pendência) para ver que o Chrome, o Firefox e o Safari continuam se inscrevendo.
 
-### 3. BAIXA — Sem trava global no e-mail de envio (PRECISA CONFIRMAR)
+### 3. BAIXA — Sem trava global no e-mail de envio — CORRIGIDO em 23/11
 - Onde: função `relatorio`.
 - Problema: o limite de 5 por dia é por conta, e a contagem é feita antes de gravar (várias chamadas juntas passam).
   O mesmo e-mail `nao-responda@` manda os códigos de login. Se a Hostinger bloquear o remetente por excesso,
   ninguém recebe o código. Não consegui ver o limite de envio da Hostinger.
-- Correção: gravar o envio antes de mandar e limitar o total por hora; ver o limite da Hostinger.
+- Correção (23/11): o envio é reservado no banco ANTES de mandar (função `reservar_relatorio`, atômica: 30 pedidos
+  juntos da mesma conta reservaram exatamente 5, em 3 de 3 rodadas), com teto geral de 60 relatórios por hora para
+  todas as contas juntas. Se o e-mail falha, a vaga volta (`cancelar_relatorio`). Migração `20261123_limites.sql`
+  aplicada; função `relatorio` publicada. Falta só ver o limite de envio da Hostinger (não consegui ler).
 
-### 4. BAIXA — Criar cobrança e consultar status sem limite
+### 4. BAIXA — Criar cobrança e consultar status sem limite — CORRIGIDO em 23/11
 - Onde: função `pix` (`criar`, `cartao`, `status`).
 - Problema: qualquer pessoa pode gerar muitos Pix pendentes e consultas ao Mercado Pago. Não gera cobrança falsa nem
   libera conta (o servidor sempre confere no Mercado Pago). Nomes de plano como `constructor` passam na checagem,
   mas o Mercado Pago recusa a cobrança.
-- Correção: limite por IP/e-mail; usar `Object.hasOwn(PLANOS, plano)`.
+- Correção (23/11): limite por IP no banco (`limitar_cobranca`, tabela `limite_cobranca`): 10 criações de Pix/cartão
+  e 400 consultas de status a cada 10 minutos (testado: 40 chamadas juntas, só 10 passaram). Se o banco falhar, deixa
+  passar para não travar vendas. O aviso do Mercado Pago (webhook) não tem limite. Plano agora é checado com
+  `Object.hasOwn` (`constructor` e `__proto__` dão "Confira o e-mail"). Função `pix` publicada e conferida no ar.
 
 ### 5. INFORMATIVO
 - A trava de "acesso vencido" do app é só na tela. O banco aceita gravar lançamentos mesmo vencido
@@ -70,5 +76,6 @@ rodada por um agente só, de forma **parcial**. Só leitura: nada do app foi alt
 - [x] Correção do achado 1 aplicada e conferida (23/11)
 - [x] Correção do achado 2 aplicada (trava no banco + função publicada) (23/11)
 - [ ] Testar "Ativar notificações" num celular (se algum celular for recusado pela trava, avisar o Claude)
-- [ ] Achados 3 e 4 (baixos): limite global de e-mail e limite em criar cobrança; ver o limite de envio da Hostinger
+- [x] Achados 3 e 4 corrigidos e publicados (23/11)
+- [ ] Ver o limite de envio de e-mails da Hostinger (para saber se 60/hora é seguro)
 - [ ] Rodar a revisão de novo depois dessas
