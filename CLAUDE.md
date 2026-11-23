@@ -13,6 +13,7 @@ Público: motoristas e donos de caminhão com pouca familiaridade com tecnologia
 - `docs/marketing.md` — página de vendas, vídeos, roteiros, como fazer vídeo novo
 - `docs/instagram.md` — manual do Instagram: algoritmo, Reels, carrossel, legenda, horários, rotina
 - `docs/anuncios.md` — anúncios pagos no Meta: plano, orçamento, regras (nada gasto sem o Rafael aprovar)
+- `docs/seguranca.md` — revisão de segurança de 23/11/2026: achados, provas e correções pendentes
 - `docs/financas.md` — preços, taxas, como acompanhar vendas, pendências (MEI, marca)
 - `docs/decisoes.md` — decisões já tomadas e por quê (não reabrir sem o Rafael pedir)
 - `docs/rotinas.md` — o que fazer toda semana / todo mês
