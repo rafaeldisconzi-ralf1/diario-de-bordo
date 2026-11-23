@@ -33,6 +33,15 @@ Para conferir uma venda: SQL Editor do Supabase, `pagamentos` junto com `perfis`
 `aplicado = false` e sem perfil = pagou mas ainda não entrou no app (normal); os dias somam sozinhos no 1º login.
 Não colocar e-mail de cliente aqui (repositório público).
 
+## Gasto com anúncios (Meta) x vendas
+| Dia | Gasto | Visitas (anúncio) | Tocou Assinar | Pix gerado | Vendas |
+|---|---|---|---|---|---|
+| 21/11 | R$ 27,50 | 59 | 4 | 1 | 1 (R$ 24,90) |
+| 22/11 (até 22h) | R$ 54,41 | 143 | 2 | 1 (venceu sem pagar) | 0 |
+
+Visitas e cliques vêm da tabela `eventos` (origem `anuncio_meta`); gasto do Gerenciador de Anúncios.
+O Meta pode gastar até ~75% acima do orçamento diário num dia (R$ 40 → R$ 54).
+
 ## Pendências
 - **Compra de teste com cartão**: Pix real já testado (10/11/2026, aprovou e liberou a conta); falta o cartão.
 - **MEI/CNPJ**: hoje o Pix mostra o nome pessoal do Rafael. Com MEI, passar a conta do Mercado Pago para o CNPJ
