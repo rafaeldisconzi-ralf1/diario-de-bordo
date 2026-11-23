@@ -11,7 +11,7 @@ rodada por um agente só, de forma **parcial**. Só leitura: nada do app foi alt
 
 ## Achados (do mais grave ao menos)
 
-### 1. ALTA — Um pagamento pode liberar vários meses (CONFIRMADO)
+### 1. ALTA — Um pagamento pode liberar vários meses (CONFIRMADO) — CORRIGIDO em 23/11
 - Onde: função `aplicar_pagamentos` em `20261109_pagamentos.sql`.
 - Problema: se duas confirmações do mesmo pagamento chegam ao mesmo tempo, as duas somam os dias.
   Isso acontece de verdade: o aviso do Mercado Pago e a consulta `status` que a tela de venda faz a cada 4 s.
@@ -21,19 +21,19 @@ rodada por um agente só, de forma **parcial**. Só leitura: nada do app foi alt
 - Correção (testada: 150 de 150 rodadas deram 30 dias; dois pagamentos diferentes somam certo, 30+365=395):
   na função, trocar o `select ... order by aprovado_em nulls last loop` por
   `select ... order by aprovado_em nulls last for update loop`.
-  Entra como nova migração `supabase/migrations/20261123_corrige_pagamento_duplicado.sql`
-  (ainda **não** criada nem aplicada; depende do OK do Rafael).
-- Depois da correção: conferir em Perfil → Clientes se alguma conta tem data de vencimento muito longe do que pagou.
+  Migração `supabase/migrations/20261123_seguranca.sql`, aplicada no Supabase em 23/11 (conferido: a função tem o `for update`).
+- Conferência feita no banco depois: nenhuma conta tem mais dias do que pagou (3 contas pagas; 365 pagos → 352 restantes; 30 pagos → 17 restantes).
 
-### 2. MÉDIA — Qualquer conta pode travar os avisos (CONFIRMADO no código)
+### 2. MÉDIA — Qualquer conta pode travar os avisos (CONFIRMADO no código) — CORRIGIDO em 23/11
 - Onde: tabela `push_inscricoes` (`20261109_notificacoes.sql`) e função `avisos`.
 - Problema: a inscrição aceita qualquer endereço https escolhido pela pessoa. A função manda os avisos em fila,
   sem tempo limite (a biblioteca `web-push` 3.6.7 só limita se pedirem). Um endereço que não responde pode travar
   o lembrete de vencimento das 9h e o "aviso para todos". Cadastro é livre (e-mail + código).
   O servidor também manda para esse endereço uma assinatura assinada com a chave de push.
-- Correção: (a) no banco, aceitar só endereços dos serviços de push conhecidos (fcm.googleapis.com,
-  updates.push.services.mozilla.com, *.notify.windows.com, web.push.apple.com); (b) na função, passar
-  `timeout: 10000` no `sendNotification`.
+- Correção (feita em 23/11): (a) no banco, trava `push_endereco_conhecido` aceita só fcm.googleapis.com,
+  updates.push.services.mozilla.com, *.notify.windows.com e web.push.apple.com (vale para inscrições novas; as antigas não foram mexidas);
+  (b) função `avisos` publicada com `timeout: 10000` no `sendNotification`.
+  Falta só testar o aviso num celular real (já era pendência) para ver que o Chrome, o Firefox e o Safari continuam se inscrevendo.
 
 ### 3. BAIXA — Sem trava global no e-mail de envio (PRECISA CONFIRMAR)
 - Onde: função `relatorio`.
@@ -67,5 +67,8 @@ rodada por um agente só, de forma **parcial**. Só leitura: nada do app foi alt
 - O service worker só abre endereços do próprio site. O lembrete diário só aceita a chave `x-cron`.
 
 ## Pendente
-- [ ] OK do Rafael para criar e aplicar a correção do achado 1 (e depois a do 2)
-- [ ] Rodar de novo depois das correções
+- [x] Correção do achado 1 aplicada e conferida (23/11)
+- [x] Correção do achado 2 aplicada (trava no banco + função publicada) (23/11)
+- [ ] Testar "Ativar notificações" num celular (se algum celular for recusado pela trava, avisar o Claude)
+- [ ] Achados 3 e 4 (baixos): limite global de e-mail e limite em criar cobrança; ver o limite de envio da Hostinger
+- [ ] Rodar a revisão de novo depois dessas

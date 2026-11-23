@@ -50,7 +50,7 @@ async function mandar(userIds: string[] | null, msg: { titulo: string; texto: st
       await webpush.sendNotification(
         { endpoint: s.endpoint, keys: { p256dh: s.p256dh, auth: s.auth } },
         JSON.stringify({ titulo: msg.titulo, texto: msg.texto, url: msg.url || "/nuvem/" }),
-        { TTL: 60 * 60 * 24 },
+        { TTL: 60 * 60 * 24, timeout: 10000 },
       );
       ok++;
     } catch (e: any) {
