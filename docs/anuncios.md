@@ -15,6 +15,11 @@ Plano completo (doc vivo): https://claude.ai/artifact/AMsPbNAjyBwKhrzTR9Msp1
 - Textos, links com UTM (`utm_campaign=fds2111`, `utm_content=img1…vid3`) e checklist: no doc do plano, seção "Campanha do fim de semana".
 - Rafael pediu (20/11): imagens não devem ser desenhadas pelo Claude ("fica ruim"); usar gerador de imagem com IA para as fotos.
 
+## Criativos "dor + balão" (23/11/2026, aguardando ok do Rafael)
+- Em `marketing/anuncios/criativo-dor/`: 3 artes (dono "quanto sobrou", patrão "acerto/diárias", caderninho), cada uma em 9x16 e 4x5.
+- Formato copiado de um anúncio que o Rafael viu: faixa verde com a pergunta da dor, foto, balão de fala, Zé no canto, faixa vermelha com a solução e "Toque em Saiba mais".
+- Fotos do Gemini; placa e placa do posto borradas na foto 1. Ainda não subidas no Meta.
+
 ## Situação (15/11/2026)
 - Plano pronto. **Nada no ar. Nenhum real gasto.** Só começa com o ok do Rafael para o valor.
 - Proposta: teste de 14 dias, R$ 30/dia (~R$ 420), campanha de Vendas 1-3-1 (ABO, R$ 10 por grupo).
