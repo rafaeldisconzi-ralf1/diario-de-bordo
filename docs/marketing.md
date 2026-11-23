@@ -95,3 +95,9 @@ Criado em 10/11/2026, perfil vazio. Arquivos em `marketing/instagram/` (`perfil.
 - Transferir voz: o `<audio>` do ElevenLabs já tem o MP3 em `data:` (currentSrc). Copiar com textarea + ctrl+c e colar no editor do GitHub (nova branch). Não precisa MediaRecorder. `window.name` não passa entre sites.
 
 - Chamada final nos vídeos novos: **Comenta APP** (link em legenda de Reel não abre). Automação testada em 17/11.
+
+## O que funcionou até 23/11/2026 (análise)
+- Instagram (views): Zé Parte 3 "Fixo ou comissão?" 2.093 (13 coment.); Zé Parte 4 "A conta, A ou B" 1.694 (11 coment.); caderninho 3D (manutenção) 1.278; Zé Parte 5 (descarga x aniversário) 344. Vídeos de propaganda/demonstração do app (V1, V2, V3, V7, V9, V10, V11, V12) e Zé 6/7 ficaram entre 74 e 188.
+- Conclusão: o que mais puxa alcance é o Zé com dilema de DINHEIRO e "Comenta A ou B". Dilema emocional (filha, ajudar colega) não gerou votos.
+- Anúncios (21–23/11, R$ 104): imagens venderam mais que vídeos (5 x 1 inícios de compra). Nos vídeos, o Meta gastou quase tudo no vid4 com voz ("quanto sobrou"); os sem voz quase não rodaram. Nas imagens, a que mais rodou foi img2 (papel/caderninho), e a mais barata por resultado foi img6 (depoimento).
+- Próximo formato sugerido: Zé com voz, dilema de dinheiro (A ou B), resposta mostrada no app. Versão orgânica termina em "Comenta A ou B"; versão anúncio termina em "Toque em Saiba mais".
