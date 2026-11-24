@@ -23,7 +23,7 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#111;font-family
 #end .p{background:#f2b705;color:#16181b;font:800 84px BC;padding:22px 60px 12px;border-radius:999px;text-transform:uppercase}
 #end .s{font:700 40px B;color:#c9c5ba;text-transform:uppercase;letter-spacing:1px}
 </style></head><body><div id="stage"></div><div id="sub"></div>
-<div id="end"><img src="icon-512.png"><div class="n">Diário de Bordo</div><div class="l" id="el"></div><div class="p">Toque em Saiba mais</div><div class="s">R$ 24,90/mês · 7 dias de garantia</div></div>
+<div id="end"><img src="icon-512.png"><div class="n">Diário de Bordo</div><div class="l" id="el"></div><div class="p" id="ep">Toque em Saiba mais</div><div class="s" id="es">R$ 24,90/mês · 7 dias de garantia</div></div>
 <script>
 const v=new URLSearchParams(location.search).get('v')||'A', $=s=>document.querySelector(s);
 const cl=x=>Math.max(0,Math.min(1,x)),eo=x=>1-Math.pow(1-cl(x),3);
@@ -68,8 +68,25 @@ B:{TOT:18.8,END:16.65,el:'Comissão e diárias<br><span class="g">certinhas</spa
   {k:'t',a:11.3,b:13.0,top:500,h:'Sem briga<br>no acerto',fs:100},
   {k:'ph',f:6,a:13.1,b:16.7,z:[1.0,1.08]},
   {k:'t',a:13.2,b:16.6,top:330,h:'Teste com<br><span class="g">7 dias</span> de garantia',fs:110}
+ ]},
+C:{TOT:16.2,END:13.1,p:'Comenta APP',s:'e receba o link no direct',el:'Comissão e diárias<br><span class="g">certinhas</span>',
+ SEG:[[0.08,1.22,"Você:1 dirige:2 pra:1 patrão?:3"],[1.7,4.91,"Então:2 anota:2 as:1 diárias:3 / os:1 adiantamentos:5 / e:1 a:1 comissão:3"],[5.07,6.42,"de:1 cada:2 viagem:2 / no:1 celular:3"],[6.76,7.21,"No:1 fim:1"],[7.42,10.01,"o:1 app:1 mostra:2 certinho:3 / o:1 que:1 você:1 tem:1 / pra:1 receber:3"],[10.38,12.84,"Sem:1 papel:2 / e:1 sem:1 briga:2 / na:1 hora:2 do:1 acerto:3"]],
+ S:[
+  {k:'ph',f:5,a:0,b:1.75,z:[1.0,1.1]},
+  {k:'t',a:0.1,b:1.7,top:330,h:'Dirige pra<br><span class="y">patrão?</span>'},
+  {k:'ph',f:5,a:1.75,b:7.0,z:[1.08,1.0],blur:1},
+  {k:'phone',img:'07-sobrou-full.png',a:1.8,b:6.95,top:150,y:[0.08,0.16],ya:2.0,yb:6.5},
+  {k:'chip',a:2.4,b:6.95,x:60,top:420,bg:'#6a3fb5',h:'Diárias'},
+  {k:'chip',a:3.3,b:6.95,x:560,top:700,bg:'#c4410f',h:'Adiantamentos'},
+  {k:'chip',a:4.3,b:6.95,x:60,top:980,bg:'#2163b3',h:'Comissão'},
+  {k:'ph',f:1,a:7.0,b:10.3,z:[1.06,1.0],blur:1},
+  {k:'phone',img:'07-sobrou-full.png',a:7.05,b:10.25,top:150,y:[0.16,0.16],ya:7.2,yb:9.0},
+  {k:'chip',a:8.0,b:10.25,x:110,top:1085,bg:'#5fd39a',c:'#10241a',h:'A receber: R$ 1.431,00',fs:66},
+  {k:'ph',f:2,a:10.3,b:13.1,z:[1.0,1.1]},
+  {k:'t',a:10.4,b:13.0,top:330,h:'Sem <span class="y">papel</span>'},
+  {k:'t',a:11.3,b:13.0,top:500,h:'Sem briga<br>no acerto',fs:100}
  ]}};
-const C=CFG[v]; window.TOT=C.TOT; $('#el').innerHTML=C.el;
+const C=CFG[v]; window.TOT=C.TOT; $('#el').innerHTML=C.el; if(C.p)$('#ep').textContent=C.p; if(C.s)$('#es').textContent=C.s;
 const st=$('#stage');
 C.S.forEach((s,i)=>{let e=document.createElement('div');s.el=e;
  if(s.k==='ph'){e.className='ph'+(s.blur?' blur':'');e.innerHTML='<img src="fotos/foto'+s.f+'.jpg"><div class="sh"></div>';}
