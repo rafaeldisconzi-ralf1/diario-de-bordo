@@ -103,3 +103,4 @@ Criado em 10/11/2026, perfil vazio. Arquivos em `marketing/instagram/` (`perfil.
 - Próximo formato sugerido: Zé com voz, dilema de dinheiro (A ou B), resposta mostrada no app. Versão orgânica termina em "Comenta A ou B"; versão anúncio termina em "Toque em Saiba mais".
 
 | V15 Zé comissão (23/11, voz+legenda; pasta v24-ze-comissao) | "O Zé ganha 10% de comissão. Qual frete paga mais?" A R$ 7 mil/600 km/2 dias x B R$ 10 mil/1.600 km/5 dias | Instagram: Comenta A ou B (resposta amanhã) · Anúncio: A dá R$ 350/dia x B R$ 200/dia, Toque em Saiba mais |
+| V16 Desafio quiz (23/11, sem voz; pasta v25-desafio-quiz) | "Desafio do caminhoneiro: quanto sobrou dessa viagem? Você tem 10 segundos" (A/B/C + relógio) | Revela B, "quem anota só o diesel acha que sobrou o dobro" · Comenta APP |
