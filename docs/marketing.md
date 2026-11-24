@@ -101,3 +101,5 @@ Criado em 10/11/2026, perfil vazio. Arquivos em `marketing/instagram/` (`perfil.
 - Conclusão: o que mais puxa alcance é o Zé com dilema de DINHEIRO e "Comenta A ou B". Dilema emocional (filha, ajudar colega) não gerou votos.
 - Anúncios (21–23/11, R$ 104): imagens venderam mais que vídeos (5 x 1 inícios de compra). Nos vídeos, o Meta gastou quase tudo no vid4 com voz ("quanto sobrou"); os sem voz quase não rodaram. Nas imagens, a que mais rodou foi img2 (papel/caderninho), e a mais barata por resultado foi img6 (depoimento).
 - Próximo formato sugerido: Zé com voz, dilema de dinheiro (A ou B), resposta mostrada no app. Versão orgânica termina em "Comenta A ou B"; versão anúncio termina em "Toque em Saiba mais".
+
+| V15 Zé comissão (23/11, voz+legenda; pasta v24-ze-comissao) | "O Zé ganha 10% de comissão. Qual frete paga mais?" A R$ 7 mil/600 km/2 dias x B R$ 10 mil/1.600 km/5 dias | Instagram: Comenta A ou B (resposta amanhã) · Anúncio: A dá R$ 350/dia x B R$ 200/dia, Toque em Saiba mais |
