@@ -35,3 +35,5 @@ Regras para o Instagram (conta nova, ainda frágil):
 - Motorista empregado NÃO paga diesel, pedágio nem diária: quem paga é o patrão. Só o dono do caminhão (autônomo) paga do próprio bolso. Todo texto sobre custo de diesel/gasto deve falar ao DONO DO CAMINHÃO, nunca dizer que "sai do seu bolso" para qualquer motorista.
 - Daqui para frente os vídeos novos (mesmo fora da série do Zé) levam narração e legenda. Voz Arnold-Br só com ok do Rafael no texto (custa crédito).
 - Pergunta "Comenta DONO" separa autônomo (cliente do app) de empregado.
+
+- 24/11/2026: TODO vídeo novo leva narração (ElevenLabs) e legenda. Nada de vídeo só com texto e efeitos, mesmo em formato novo (o desafio quiz sem voz foi refeito por isso).

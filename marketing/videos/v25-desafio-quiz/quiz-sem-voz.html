@@ -1,0 +1,122 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><style>
+@font-face{font-family:B;src:url(fonts/barlow-latin-700-normal.woff2);font-weight:700}
+@font-face{font-family:BC;src:url(fonts/barlow-condensed-latin-800-normal.woff2);font-weight:800}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#0f1113;font-family:B;color:#f4f3ee}
+#rays{position:absolute;left:540px;top:760px;width:3000px;height:3000px;margin:-1500px 0 0 -1500px;
+ background:repeating-conic-gradient(from 0deg,rgba(242,183,5,.07) 0 9deg,transparent 9deg 18deg);border-radius:50%}
+#vig{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,transparent 35%,rgba(0,0,0,.75) 85%)}
+.abs{position:absolute;opacity:0}
+.c{left:50%}
+.yel{color:#f2b705}.grn{color:#5fd39a}.red{color:#ff7a66}.gr{color:#c9c5ba}
+#wm{position:absolute;left:0;right:0;top:80px;text-align:center;font:700 36px B;opacity:.7}
+.tag{font:800 58px BC;letter-spacing:6px;color:#16181b;background:#f2b705;padding:12px 40px 4px;border-radius:12px;white-space:nowrap;text-transform:uppercase}
+.big{left:40px;right:40px;text-align:center;font:800 170px/.95 BC;text-transform:uppercase}
+.chip{font:800 64px BC;text-transform:uppercase;border:5px solid #f2b705;color:#f2b705;border-radius:999px;padding:12px 46px 4px;white-space:nowrap}
+#tk{left:80px;right:80px;top:330px;border-radius:30px;background:#f4f1e6;color:#1d1d1d;padding:40px 50px 30px;box-shadow:0 30px 60px rgba(0,0,0,.6)}
+#tk .h{font:800 62px BC;text-transform:uppercase;border-bottom:4px dashed #b9b3a2;padding-bottom:18px;margin-bottom:14px}
+#tk .h small{display:block;font:700 34px B;color:#6b665a;text-transform:none;margin-top:4px}
+#tk .r{display:flex;justify-content:space-between;align-items:baseline;font:700 44px B;padding:14px 0;opacity:0}
+#tk .r b{font:800 66px BC;white-space:nowrap}
+#tk .r small{display:block;font:700 30px B;color:#6b665a}
+#tk .pos{color:#1d7a4c}#tk .neg{color:#b8321f}
+#tk .q{border-top:4px dashed #b9b3a2;margin-top:12px;padding-top:20px;text-align:center;font:800 76px BC;text-transform:uppercase;opacity:0}
+.op{top:1075px;width:320px;height:300px;border-radius:30px;background:#22252a;border:6px solid #3a3e45;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding-top:18px;gap:8px}
+.op .L{width:96px;height:96px;border-radius:50%;background:#f2b705;color:#16181b;font:800 80px/1 BC;display:flex;align-items:center;justify-content:center;padding-top:8px}
+.op .v{font:800 84px/1 BC;white-space:nowrap}
+.op .why{font:800 38px/1 BC;text-transform:uppercase;opacity:0;white-space:nowrap}
+#timer{left:540px;top:1400px;width:230px;height:230px;margin-left:-115px}
+#timer svg{position:absolute;inset:0}
+#tn{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:800 130px/1 BC;padding-top:14px}
+#pause{left:0;right:0;top:1650px;text-align:center;font:800 70px BC;text-transform:uppercase}
+#ft{left:0;right:0;top:1760px;text-align:center;font:700 30px B;color:#c9c5ba;text-transform:uppercase;letter-spacing:2px}
+#flash{position:absolute;inset:0;background:#fff;opacity:0}
+#end{position:absolute;inset:0;background:#16181b;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:40px;opacity:0;padding-bottom:300px}
+#ico{width:240px;height:240px;border-radius:52px}
+#en{font:800 116px BC;text-transform:uppercase}
+#el{font:800 88px/1.05 BC;text-transform:uppercase;text-align:center}
+#ep{background:#f2b705;color:#16181b;font:800 100px BC;padding:24px 70px 16px;border-radius:999px;text-transform:uppercase}
+.conf{position:absolute;width:22px;height:34px;border-radius:4px;opacity:0}
+</style></head><body>
+<div id="rays"></div><div id="vig"></div><div id="wm">@appdiariodebordo</div>
+
+<div class="abs c tag" id="t0" style="top:330px">Desafio do caminhoneiro</div>
+<div class="abs big" id="h0" style="top:560px">Quanto<br><span class="yel">sobrou</span><br>dessa viagem?</div>
+<div class="abs c chip" id="c0" style="top:1180px">Você tem 10 segundos</div>
+
+<div class="abs" id="tk">
+ <div class="h">Curitiba → Salvador<small>Conta do dono do caminhão · 2.400 km</small></div>
+ <div class="r" id="r1"><span>Frete</span><b class="pos">+ R$ 12.000</b></div>
+ <div class="r" id="r2"><span>Diesel<small>960 litros × R$ 7,30</small></span><b class="neg">− R$ 7.008</b></div>
+ <div class="r" id="r3"><span>Pedágio</span><b class="neg">− R$ 640</b></div>
+ <div class="r" id="r4"><span>Comissão do motorista<small>12% do frete</small></span><b class="neg">− R$ 1.440</b></div>
+ <div class="r" id="r5"><span>Comida e outros</span><b class="neg">− R$ 380</b></div>
+ <div class="q" id="rq">Sobrou quanto?</div>
+</div>
+
+<div class="abs op" id="oA" style="left:40px"><div class="L">A</div><div class="v">R$ 4.992</div><div class="why red" id="wA">só tirou<br>o diesel</div></div>
+<div class="abs op" id="oB" style="left:380px"><div class="L">B</div><div class="v">R$ 2.532</div><div class="why grn" id="wB">conta<br>certa</div></div>
+<div class="abs op" id="oC" style="left:720px"><div class="L">C</div><div class="v">R$ 3.972</div><div class="why red" id="wC">esqueceu<br>a comissão</div></div>
+<div class="abs" id="timer"><svg viewBox="0 0 230 230"><circle cx="115" cy="115" r="100" fill="#16181b" stroke="#2b2e34" stroke-width="18"/>
+ <circle id="ring" cx="115" cy="115" r="100" fill="none" stroke="#f2b705" stroke-width="18" stroke-linecap="round" transform="rotate(-90 115 115)" stroke-dasharray="628.3" stroke-dashoffset="0"/></svg><div id="tn">10</div></div>
+<div class="abs" id="pause">Pausa e comenta: <span class="yel">A, B ou C?</span></div>
+<div class="abs big" id="tempo" style="top:1400px;font-size:200px;color:#ff7a66">Tempo!</div>
+<div class="abs" id="lesson" style="left:60px;right:60px;top:1420px;text-align:center;font:800 76px/1.05 BC;text-transform:uppercase">Quem anota só o diesel<br>acha que sobrou <span class="red">o dobro</span></div>
+<div class="abs" id="ft">números de exemplo</div>
+<div id="cf"></div>
+<div id="flash"></div>
+<div id="end"><img id="ico" src="icon-512.png"><div id="en">Diário de Bordo</div>
+ <div id="el">Lança tudo no celular<br>e a conta sai <span class="grn">certa</span></div><div id="ep">Comenta APP</div>
+ <div style="font:700 44px B;text-transform:uppercase;color:#c9c5ba;letter-spacing:1px">e receba o link no direct</div></div>
+<script>
+const TOT=28.0,$=s=>document.querySelector(s);
+const cl=x=>Math.max(0,Math.min(1,x)),eo=x=>1-Math.pow(1-cl(x),3);
+const back=x=>{x=cl(x);const c=1.7;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2)};
+let T=0;
+function vis(id,a,b,fi,fo){fi=fi||.2;fo=fo||.2;const o=cl((T-a)/fi)*(1-cl((T-b)/fo));$(id).style.opacity=o;return o}
+function pop(id,a,s0,tx){const p=back((T-a)/.4);s0=s0||.85;$(id).style.transform=(tx||'')+' scale('+(s0+(1-s0)*p)+')'}
+const X='translateX(-50%)';
+// confete
+const CF=[];const cols=['#f2b705','#5fd39a','#ff7a66','#f4f3ee','#2163b3'];
+let seed=7;const rnd=()=>{seed=(seed*16807)%2147483647;return seed/2147483647};
+for(let i=0;i<70;i++){const d=document.createElement('div');d.className='conf';d.style.background=cols[i%5];$('#cf').appendChild(d);
+ CF.push({d,x:540+(rnd()-.5)*200,vx:(rnd()-.5)*1400,vy:-900-rnd()*900,r:rnd()*360,vr:(rnd()-.5)*900})}
+const S1=3.0,S2=9.2,TA=10.0,TB=20.0,RV=20.6,E=24.6;
+window.render=function(t){T=t;
+ $('#rays').style.transform='rotate('+(t*8)+'deg)';
+ // S0 gancho
+ vis('#t0',0.05,S1-0.1);pop('#t0',0.05,.8,X);
+ vis('#h0',0.35,S1-0.1);pop('#h0',0.35,.75);
+ vis('#c0',1.4,S1-0.1);pop('#c0',1.4,.8,X);
+ // S1 nota
+ vis('#tk',S1,E-0.1);const up=eo((t-S2)/.5);$('#tk').style.transformOrigin='50% 0';$('#tk').style.transform='translateY('+(60*(1-eo((t-S1)/.5))-120*up)+'px) scale('+(1-0.12*up)+')';
+ [['#r1',S1+0.5],['#r2',S1+1.4],['#r3',S1+2.4],['#r4',S1+3.2],['#r5',S1+4.2],['#rq',S1+5.0]].forEach(([id,a])=>{const e=$(id);e.style.opacity=cl((t-a)/.15);e.style.transform='translateX('+(-40*(1-eo((t-a)/.3)))+'px)'});
+ // S2 opções + relógio
+ [['#oA',S2+0.2],['#oB',S2+0.45],['#oC',S2+0.7]].forEach(([id,a])=>{vis(id,a,E-0.1);pop(id,a,.8)});
+ const left=Math.max(0,10-(t-TA));const on=t>=TA-0.3&&t<TB;
+ $('#timer').style.opacity=on?cl((t-(TA-0.3))/.3):0;
+ $('#ring').setAttribute('stroke-dashoffset',628.3*(1-left/10));
+ $('#ring').setAttribute('stroke',left<=3?'#ff7a66':'#f2b705');
+ $('#tn').textContent=Math.ceil(left-1e-6);
+ const beat=(t-TA)%1;$('#timer').style.transform='scale('+(t>=TA&&t<TB?1+0.08*Math.max(0,1-beat*5):1)+')';
+ vis('#pause',TA+0.5,TB);$('#pause').style.transform='scale('+(1+0.04*Math.sin(t*7))+')';
+ vis('#tempo',TB,RV+0.2,.1);pop('#tempo',TB,.6);
+ // revelação
+ const rv=cl((t-RV)/.3);
+ const st=(id,ok)=>{const e=$(id);if(t<RV){e.style.borderColor='#3a3e45';e.style.background='#22252a';e.style.filter='none';return}
+  e.style.borderColor=ok?'#5fd39a':'#ff7a66';e.style.background=ok?'#16302a':'#2a1c1a';e.style.filter=ok?'none':'grayscale(.3) brightness(.85)'};
+ st('#oA',0);st('#oB',1);st('#oC',0);
+ ['#wA','#wB','#wC'].forEach((id,i)=>{$(id).style.opacity=cl((t-(RV+0.4+i*0.5))/.2)});
+ if(t>=RV){$('#oB').style.transform='scale('+(1+0.08*Math.sin(Math.PI*cl((t-RV)/.5)))+')'}
+ vis('#lesson',RV+1.8,E-0.1);pop('#lesson',RV+1.8,.85);
+ $('#flash').style.opacity=t>=RV&&t<RV+0.25?0.5*(1-(t-RV)/.25):0;
+ // confete
+ const dt=t-RV;CF.forEach(c=>{if(dt<0||dt>3){c.d.style.opacity=0;return}
+  const x=c.x+c.vx*dt,y=1220+c.vy*dt+1400*dt*dt;c.d.style.opacity=1-cl((dt-2.4)/.6);
+  c.d.style.transform='translate('+x+'px,'+y+'px) rotate('+(c.r+c.vr*dt)+'deg)'});
+ $('#ft').style.opacity=(t>S1&&t<E)?.85:0;
+ const e=$('#end');e.style.opacity=cl((t-E)/.3);e.style.transform='scale('+(.94+.06*eo((t-E)/.5))+')';
+ $('#wm').style.opacity=t<E?.7:0;
+};
+window.render(0);
+</script></body></html>
