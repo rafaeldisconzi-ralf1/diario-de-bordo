@@ -104,3 +104,4 @@ Criado em 10/11/2026, perfil vazio. Arquivos em `marketing/instagram/` (`perfil.
 
 | V15 Zé comissão (23/11, voz+legenda; pasta v24-ze-comissao) | "O Zé ganha 10% de comissão. Qual frete paga mais?" A R$ 7 mil/600 km/2 dias x B R$ 10 mil/1.600 km/5 dias | Instagram: Comenta A ou B (resposta amanhã) · Anúncio: A dá R$ 350/dia x B R$ 200/dia, Toque em Saiba mais |
 | V16 Rodando de graça (24/11, voz+legenda; pasta v25-desafio-quiz) | "Tem dono de caminhão rodando de graça e nem sabe." (polêmico) | Metade do que parecia · "Você faz essa conta toda viagem?" · Comenta APP |
+| V17 Zé a resposta (24/11, voz+legenda; pasta v26-ze-resposta) | "Ontem o Zé perguntou: qual frete paga mais? Hora da conta." | A R$ 350/dia x B R$ 200/dia · B paga mais no total, A rende mais por dia · Comenta APP |

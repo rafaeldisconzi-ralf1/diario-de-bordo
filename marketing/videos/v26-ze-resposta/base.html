@@ -1,0 +1,170 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><style>
+@font-face{font-family:B;src:url(fonts/barlow-latin-700-normal.woff2);font-weight:700}
+@font-face{font-family:BC;src:url(fonts/barlow-condensed-latin-800-normal.woff2);font-weight:800}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#16181b;font-family:B;color:#f4f3ee}
+#bg{position:absolute;inset:-100px;background:repeating-linear-gradient(-45deg,rgba(242,183,5,.045) 0 3px,transparent 3px 44px)}
+#glow{position:absolute;left:-200px;top:250px;width:1480px;height:1200px;background:radial-gradient(ellipse,rgba(242,183,5,.10),transparent 60%)}
+.abs{position:absolute;opacity:0}
+.yel{color:#f2b705}.grn{color:#5fd39a}.red{color:#ff7a66}.gr{color:#c9c5ba}
+#wm{position:absolute;left:0;right:0;top:80px;text-align:center;font:700 36px B;opacity:.7}
+.tag{left:50%;font:800 54px BC;letter-spacing:5px;color:#16181b;background:#f2b705;padding:10px 36px 4px;border-radius:12px;white-space:nowrap;text-transform:uppercase}
+.chip{left:50%;font:800 70px BC;text-transform:uppercase;color:#f4f3ee;border:5px solid #f2b705;border-radius:999px;padding:12px 50px 6px;white-space:nowrap}
+.big{left:40px;right:40px;text-align:center;font:800 150px/.98 BC;text-transform:uppercase}
+#ze{position:absolute;left:280px;top:330px;width:520px;transform-origin:50% 0;opacity:0}
+#ze svg{width:100%;height:auto;display:block;filter:drop-shadow(0 14px 20px rgba(0,0,0,.5))}
+.fr{left:70px;right:70px;height:400px;border-radius:34px;background:#22252a;border:5px solid #3a3e45;display:flex;align-items:center;gap:40px;padding:0 50px}
+.fr .L{flex:0 0 190px;height:190px;border-radius:30px;background:#f2b705;color:#16181b;font:800 170px/1 BC;display:flex;align-items:center;justify-content:center;padding-top:14px}
+.fr .ln{font:800 74px/1.12 BC;text-transform:uppercase}
+.fr .ln div{opacity:0}
+.fr .ln .v{font-size:120px;color:#f4f3ee}
+.cm{left:70px;right:70px;height:250px;border-radius:30px;background:#22252a;display:flex;align-items:center;justify-content:space-between;padding:0 50px}
+.cm .l{font:800 70px BC;text-transform:uppercase;color:#c9c5ba}
+.cm .v{font:800 150px/1 BC}
+.badge{background:#5fd39a;color:#16181b;font:800 54px BC;padding:8px 26px 2px;border-radius:12px;text-transform:uppercase;white-space:nowrap}
+.bar{left:70px;height:190px;border-radius:24px;display:flex;align-items:center;padding:0 40px;font:800 110px/1 BC;color:#16181b;white-space:nowrap}
+.blab{left:70px;font:800 64px BC;text-transform:uppercase;color:#c9c5ba}
+.ab{width:330px;height:330px;border-radius:50%;background:#22252a;border:10px solid #f2b705;display:flex;align-items:center;justify-content:center;font:800 260px/1 BC;color:#f2b705;padding-top:30px}
+#phone{left:190px;top:300px;width:700px;height:880px;border-radius:70px;background:#0c0d0f;border:14px solid #2b2e34;padding:40px 34px;box-shadow:0 30px 60px rgba(0,0,0,.55)}
+#phone .hd{font:800 54px BC;text-transform:uppercase;color:#f2b705;margin-bottom:6px}
+#phone .rt{font:700 34px B;color:#c9c5ba;margin-bottom:26px}
+#phone .row{display:flex;justify-content:space-between;align-items:baseline;font:700 40px B;padding:22px 6px;border-bottom:2px solid #22252a;opacity:0}
+#phone .row b{font:800 58px BC}
+#phone .hl{background:#16302a;border:4px solid #5fd39a;border-radius:24px;padding:26px 24px;margin-top:22px}
+#phone .hl b{color:#5fd39a;font-size:84px}
+#sub{position:absolute;left:30px;right:30px;top:1400px;height:220px;display:flex;align-items:center;justify-content:center;text-align:center;font:800 92px/1 BC;text-transform:uppercase;-webkit-text-stroke:12px #080a09;paint-order:stroke fill;opacity:0;flex-wrap:wrap;z-index:5}
+#sub span{display:inline-block;margin:0 .13em;color:#f4f3ee}
+#sub span.on{color:#f2b705;transform:scale(1.08)}
+#ft{left:0;right:0;top:1300px;text-align:center;font:700 32px B;color:#c9c5ba;text-transform:uppercase;letter-spacing:2px}
+#end{position:absolute;inset:0;background:#16181b;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:40px;opacity:0;padding-bottom:300px;z-index:6}
+#ico{width:260px;height:260px;border-radius:56px}
+#en{font:800 120px BC;text-transform:uppercase}
+#el{font:800 92px/1.05 BC;text-transform:uppercase;text-align:center}
+#ep{background:#f2b705;color:#16181b;font:800 96px BC;padding:24px 70px 16px;border-radius:999px;text-transform:uppercase}
+</style></head><body>
+<div id="bg"></div><div id="glow"></div><div id="wm">@appdiariodebordo</div>
+<div id="ze">%%ZE%%</div>
+<div class="abs tag" id="t1" style="top:230px">Resposta do Zé</div>
+<div class="abs big" id="qA" style="top:1060px;font-size:160px">Qual frete<br>paga <span class="yel">mais?</span></div>
+<div class="abs big" id="qB" style="top:1090px;font-size:190px">Hora da <span class="yel">conta</span></div>
+<div class="abs chip" id="c1" style="top:1090px">Ganha 10% do frete</div>
+
+<div class="abs fr" id="fA" style="top:340px"><div class="L">A</div><div class="ln"><div class="v" id="a1">R$ 7.000</div><div id="a2">600 km</div><div id="a3">volta em <span class="yel">2 dias</span></div></div></div>
+<div class="abs cm" id="cA" style="top:790px;border:5px solid #5fd39a"><div class="l">Comissão 10%</div><div class="v grn">R$ 700</div></div>
+
+<div class="abs tag" id="tD1" style="top:330px">Por dia · Frete A</div>
+<div class="abs blab" id="lD1" style="top:520px;left:0;right:0;text-align:center;font-size:84px">R$ 700 ÷ 2 dias</div>
+<div class="abs big grn" id="vD1" style="top:660px;font-size:330px">R$ 350</div>
+<div class="abs big gr" id="uD1" style="top:1010px;font-size:110px">por dia</div>
+
+<div class="abs fr" id="fB" style="top:340px"><div class="L">B</div><div class="ln"><div class="v" id="b1">R$ 10.000</div><div id="b2">1.600 km</div><div id="b3">volta em <span class="yel">5 dias</span></div></div></div>
+<div class="abs cm" id="cB" style="top:790px;border:5px solid #f2b705"><div class="l">Comissão 10%</div><div class="v yel">R$ 1.000</div></div>
+
+<div class="abs tag" id="tD2" style="top:330px">Por dia · Frete B</div>
+<div class="abs blab" id="lD2" style="top:520px;left:0;right:0;text-align:center;font-size:84px">R$ 1.000 ÷ 5 dias</div>
+<div class="abs big yel" id="vD2" style="top:660px;font-size:330px">R$ 200</div>
+<div class="abs big gr" id="uD2" style="top:1010px;font-size:110px">por dia</div>
+
+<div class="abs tag" id="t3" style="top:300px">Comissão total</div>
+<div class="abs cm" id="mA" style="top:440px"><div class="l">Frete A</div><div class="v">R$ 700</div></div>
+<div class="abs cm" id="mB" style="top:730px;border:5px solid #5fd39a"><div class="l">Frete B</div><div class="v grn">R$ 1.000</div></div>
+<div class="abs" id="bdg" style="left:50%;top:1010px"><div class="badge">B paga mais no total</div></div>
+
+<div class="abs tag" id="t5" style="top:300px">Quanto dá por dia</div>
+<div class="abs blab" id="lA5" style="top:440px">Frete A · R$ 700 ÷ 2 dias</div>
+<div class="abs bar" id="rA" style="top:530px;background:#5fd39a;width:900px"><span id="vA5">R$ 0</span></div>
+<div class="abs blab" id="lB5" style="top:780px">Frete B · R$ 1.000 ÷ 5 dias</div>
+<div class="abs bar" id="rB" style="top:870px;background:#c9c5ba;width:514px"><span id="vB5">R$ 0</span></div>
+<div class="abs big grn" id="q5b" style="top:1110px;font-size:118px">A rende mais por dia</div>
+
+<div class="abs big" id="qC" style="top:1060px;font-size:150px">Quer ver a<br><span class="yel">sua conta?</span></div>
+
+<div class="abs" id="phone"><div class="hd">Diário de Bordo</div><div class="rt">Viagem A · encerrada</div>
+ <div class="row" id="p1"><span>Frete</span><b>R$ 7.000,00</b></div>
+ <div class="row hl" id="p3"><span>Comissão do<br>motorista</span><b>R$ 700,00</b></div>
+</div>
+
+<div class="abs" id="ft">números de exemplo</div>
+<div id="sub"></div>
+<div id="end"><img id="ico" src="icon-512.png"><div id="en">Diário de Bordo</div>
+ <div id="el">Veja quanto você<br><span class="grn">ganhou</span> em cada viagem</div><div id="ep">Comenta APP</div>
+ <div style="font:700 44px B;text-transform:uppercase;color:#c9c5ba;letter-spacing:1px">R$ 24,90 por mês · 7 dias de garantia</div></div>
+<script>
+const $=s=>document.querySelector(s);
+const cl=x=>Math.max(0,Math.min(1,x)),eo=x=>1-Math.pow(1-cl(x),3);
+const back=x=>{x=cl(x);const c=1.7;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2)};
+const fmi=v=>Math.round(v).toString().replace(/\B(?=(\d{3})+(?!\d))/g,'.');
+const TOT=34.75;
+const SEG=[[0.05,1.416,"Ontem:2 o:1 Zé:1 perguntou:3"],[1.805,3.094,"Qual:1 frete:2 paga:2 mais?:1"],[3.637,4.457,"Hora:2 da:1 conta.:2"],
+[4.919,6.5,"O:1 Zé:1 ganha:2 10%:4"],[6.835,8.461,"O:1 frete:2 A:1 paga:2 R$_7_mil:3"],[8.906,10.453,"São:1 R$_700:4 de:1 comissão:3"],
+[10.657,12.098,"e:1 ele:1 volta:2 em:1 2:1 dias:2"],[12.413,14.64,"Isso:1 dá:1 R$_350:5 por:1 dia:2"],[15.16,16.879,"O:1 frete:2 B:1 paga:2 R$_10_mil:4"],
+[17.192,18.364,"São:1 R$_1.000:4 de:1 comissão:3"],[18.619,20.207,"mas:1 só:1 volta:2 em:1 5:2 dias:2"],[20.526,22.079,"Isso:1 dá:1 R$_200:5 por:1 dia:2"],
+[22.587,24.201,"O:1 B:1 paga:2 mais:1 no:1 total:2"],[24.607,26.93,"Mas:1 o:1 A:1 rende:2 mais:1 por:1 dia:2 / de:1 estrada:3"],
+[27.474,28.575,"Quer:1 ver:1 a:1 sua:1 conta:2 assim?:2"],[29.011,32.485,"Anote:3 suas:1 viagens:3 / no:1 app:2 / e:1 veja:2 na:1 hora:2 / quanto:2 ganhou:3"],[32.914,34.097,"Comenta:3 APP:3"]];
+const CH=[];
+SEG.forEach(([a,b,s])=>{const toks=s.split(' ').filter(x=>x!=='/');const tw=toks.reduce((q,x)=>q+(+x.split(':')[1]),0);let acc=0,cur=null;const dur=b-a;
+ s.split(' ').forEach(x=>{if(x==='/'){cur=null;return}const [w,k]=x.split(':');const ws=a+dur*acc/tw;acc+=+k;const we=a+dur*acc/tw;
+  if(!cur){cur={w:[],a:ws,b:we};CH.push(cur)}cur.w.push({t:w.replace(/_/g,' '),a:ws,b:we});cur.b=we;});});
+CH.forEach((c,i)=>{const n=CH[i+1];c.show0=c.a-0.04;c.show1=(n&&n.a-c.b<0.4)?n.a-0.04:c.b+0.15;});
+let lastCh=-1;
+function sub(t){const el=$('#sub');const i=CH.findIndex(c=>t>=c.show0&&t<c.show1);
+ if(i<0){el.style.opacity=0;lastCh=-1;return}
+ if(i!==lastCh){el.innerHTML=CH[i].w.map(w=>'<span>'+w.t+'</span>').join('');lastCh=i}
+ el.style.opacity=1;[...el.children].forEach((s,k)=>{const w=CH[i].w[k];s.className=(t>=w.a&&t<w.b)?'on':''});}
+let __t=0;
+function vis(id,a,b,fi,fo){fi=fi||.2;fo=fo||.2;const o=cl((__t-a)/fi)*(1-cl((__t-b)/fo));$(id).style.opacity=o;return o}
+function pop(id,a,s0,tx){const p=back((__t-a)/.4);s0=s0||.85;$(id).style.transform=(tx||'')+' scale('+(s0+(1-s0)*p)+')'}
+function face(ex){['calm','worried','shock','happy'].forEach(k=>{const e=document.getElementById('ex_'+k),m=document.getElementById('mo_'+k);if(e)e.style.display=k===ex?'':'none';if(m)m.style.display=k===ex?'':'none'})}
+const X='translateX(-50%)';
+const slide=(id,a)=>{$(id).style.opacity=cl((__t-a)/.2);$(id).style.transform='translateX('+(-30*(1-eo((__t-a)/.3)))+'px)'};
+window.render=function(t){__t=t;
+ $('#bg').style.transform='translate('+(-(t*14)%62)+'px,'+(-(t*14)%62)+'px)';
+ // Zé: abertura (0-6.6) e pergunta (27.4-28.9)
+ const z=$('#ze');let zo=0,zt='',ex='calm';
+ if(t<6.7){zo=cl(t/.25)*(1-cl((t-6.45)/.25));zt='translateY('+(30*(1-eo(t/.5)))+'px) scale('+(0.9+0.1*back(t/.5))+')';ex=t>3.6?'happy':'calm'}
+ else if(t>27.3&&t<29.1){zo=cl((t-27.3)/.25)*(1-cl((t-28.85)/.25));zt='translateY(20px) scale(.86)';ex='worried'}
+ z.style.opacity=zo;z.style.transform=zt;face(ex);
+ vis('#t1',0.1,3.5);pop('#t1',0.1,.9,X);
+ vis('#qA',0.15,3.55);pop('#qA',0.15,.8);
+ vis('#qB',3.64,4.85);pop('#qB',3.64,.8);
+ vis('#c1',4.92,6.45);pop('#c1',4.92,.8,X);
+ // frete A
+ vis('#fA',6.8,12.25);pop('#fA',6.8,.9);
+ slide('#a1',7.7);slide('#a2',8.2);slide('#a3',10.7);
+ vis('#cA',9.0,12.25);pop('#cA',9.0,.9);
+ // por dia A
+ vis('#tD1',12.4,14.95);pop('#tD1',12.4,.9,X);vis('#lD1',12.5,14.95);
+ vis('#vD1',13.2,14.95);pop('#vD1',13.2,.7);$('#vD1').textContent='R$ '+fmi(350*eo((t-13.2)/.8));
+ vis('#uD1',13.9,14.95);
+ // frete B
+ vis('#fB',15.15,20.4);pop('#fB',15.15,.9);
+ slide('#b1',16.0);slide('#b2',16.6);slide('#b3',18.7);
+ vis('#cB',17.3,20.4);pop('#cB',17.3,.9);
+ // por dia B
+ vis('#tD2',20.5,22.5);pop('#tD2',20.5,.9,X);vis('#lD2',20.6,22.5);
+ vis('#vD2',21.2,22.5);pop('#vD2',21.2,.7);$('#vD2').textContent='R$ '+fmi(200*eo((t-21.2)/.7));
+ vis('#uD2',21.7,22.5);
+ // total
+ vis('#t3',22.6,24.5);pop('#t3',22.6,.9,X);
+ vis('#mA',22.8,24.5);pop('#mA',22.8,.9);vis('#mB',23.1,24.5);pop('#mB',23.1,.9);
+ vis('#bdg',23.5,24.5);pop('#bdg',23.5,.7,X);
+ // por dia comparação
+ vis('#t5',24.6,27.35);pop('#t5',24.6,.9,X);
+ vis('#lA5',24.7,27.35);vis('#rA',24.7,27.35);
+ $('#rA').style.width=(140+760*eo((t-24.7)/1.0))+'px';$('#vA5').textContent='R$ '+fmi(350*eo((t-24.7)/1.0));
+ vis('#lB5',25.3,27.35);vis('#rB',25.3,27.35);
+ $('#rB').style.width=(140+374*eo((t-25.5)/0.8))+'px';$('#vB5').textContent='R$ '+fmi(200*eo((t-25.5)/0.8));
+ vis('#q5b',26.0,27.35);pop('#q5b',26.0,.7);
+ vis('#qC',27.45,28.85);pop('#qC',27.45,.85);
+ // celular
+ vis('#phone',29.0,32.7);pop('#phone',29.0,.92);
+ [['#p1',29.5],['#p3',30.6]].forEach(([id,a])=>{$(id).style.opacity=cl((t-a)/.25);$(id).style.transform='translateY('+(20*(1-eo((t-a)/.3)))+'px)'});
+ // final
+ const e=$('#end');e.style.opacity=cl((t-32.8)/.3);e.style.transform='scale('+(.94+.06*eo((t-32.8)/.5))+')';
+ const pu=1+0.04*Math.sin(t*6)*cl(t-33.3);$('#ep').style.transform='scale('+pu+')';
+ $('#ft').style.opacity=(t>6.8&&t<27.3)?.9:0;
+ $('#wm').style.opacity=t>32.8?0:.7;
+ sub(t);
+};
+window.render(0);
+</script></body></html>
