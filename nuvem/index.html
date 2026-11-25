@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#2b2e33">
-<meta name="app-version" content="nuvem-2026-11-13.1">
+<meta name="app-version" content="nuvem-2026-11-25.1">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Diário de Bordo">
@@ -29,6 +29,27 @@ button:active{transform:scale(.95);filter:brightness(.85)}
 .eco:empty{display:none}
 .aviso{background:#fff4d6;border:2px solid #f2b705;border-radius:14px;padding:14px;color:#4a3800;font-size:18px;font-weight:600;line-height:1.35;display:flex;flex-direction:column;gap:10px}
 .aviso .fix{align-self:flex-start;background:#1d1f22;color:#fff;border:0;border-radius:12px;padding:12px 16px;font:inherit;font-weight:800;font-size:18px}
+.acts2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}
+.acts2 .btn{min-width:0;min-height:84px;font-size:16px;gap:4px;padding:10px 6px;line-height:1.15;text-align:center;border:none;box-shadow:0 4px 0 var(--edge);margin-bottom:4px}
+.acts2 .btn svg{width:28px;height:28px;flex:none}
+.btn.voz{background:#6d28d9;color:#fff;--edge:#4c1d95}
+.btn.ia{background:#2b2e33;color:#fff;--edge:#000}
+.ouvindo{display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;padding:8px 0}
+.onda{width:110px;height:110px;border-radius:50%;background:#6d28d9;color:#fff;display:grid;place-items:center;animation:pulso 1.2s ease-in-out infinite}
+.onda svg{width:52px;height:52px}.onda.pensando{background:#2b2e33;animation-duration:.7s}
+@keyframes pulso{0%,100%{box-shadow:0 0 0 0 rgba(109,40,217,.45)}50%{box-shadow:0 0 0 22px rgba(109,40,217,0)}}
+@media (prefers-reduced-motion:reduce){.onda{animation:none}}
+.voz-disse{background:#efe9fb;color:#2e1065;border-radius:12px;padding:12px 14px;font-size:16px;line-height:1.35}
+.ia-msgs{display:flex;flex-direction:column;gap:10px;max-height:46vh;overflow-y:auto;padding:4px 0}
+.bolha{padding:12px 14px;border-radius:16px;font-size:17px;line-height:1.4;max-width:92%;word-wrap:break-word}
+.bolha.eu{align-self:flex-end;background:var(--sign);color:var(--sign-ink);border-bottom-right-radius:4px}
+.bolha.ela{align-self:flex-start;background:var(--surface);border:1px solid var(--line);border-bottom-left-radius:4px}
+.bolha.erro{border-color:#c2410c;color:#c2410c}.bolha.pensando{color:var(--muted);font-style:italic}
+.ia-campo{display:flex;flex-direction:column;gap:8px}
+.ia-campo textarea{width:100%;font:inherit;font-size:18px;padding:12px;border-radius:12px;border:2px solid var(--line);background:var(--surface);color:inherit;resize:none;box-sizing:border-box}
+.ia-bts{display:grid;grid-template-columns:72px 1fr;gap:10px}.ia-bts .btn{min-height:60px;font-size:18px}
+.btn.ia-mic{background:#6d28d9;color:#fff;border:none}.btn.ia-mic svg{width:28px;height:28px}
+.btn.ia-mic.gravando{animation:pulso 1.2s ease-in-out infinite}
 </style>
 <title>Diário de Bordo</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -65,6 +86,7 @@ h2{font-family:var(--display);font-weight:700;font-size:22px;text-transform:uppe
 .trip-active{border:none;background:var(--sign);color:var(--sign-ink)}
 .route{font-family:var(--display);font-weight:800;font-size:30px;line-height:1.05;text-transform:uppercase;text-wrap:balance}
 .route .arrow{opacity:.55;padding:0 4px}
+.route{overflow-wrap:anywhere}#app{min-width:0;max-width:100%}#app>*{min-width:0}
 .tag{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:999px;background:var(--road);color:var(--road-ink)}
 .tag.ex{background:var(--line);color:var(--muted)}
 .row{display:flex;justify-content:space-between;gap:12px;align-items:baseline}
@@ -178,6 +200,8 @@ const ICON={
  money:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M6 12h.01M18 12h.01"/></svg>',
  flag:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 22V4"/><path d="M5 4h12l-2 4 2 4H5"/></svg>',
  rel:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h6M9 9h2"/></svg>',
+ mic:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0"/><path d="M12 18v4"/></svg>',
+ chat:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 21l1.9-5.4A8 8 0 1 1 21 12z"/><path d="M8.5 11h.01M12 11h.01M15.5 11h.01"/></svg>',
  clock:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>'
 };
 const CATS=['Pedágio','Comida','Arla','Despachante','Balança','Manutenção','Adiantamento','Outro'];
@@ -248,7 +272,7 @@ function inicio(){
   h+=exBanner()+avisoAcesso();
   if(!t){
     h+=`<button class="btn start" data-a="nova">${ICON.flag}Começar viagem</button>
-    <div class="acts3"><button class="btn fuel" data-a="diesel">${ICON.fuel}Abasteci</button><button class="btn gas" data-a="gasto">${ICON.money}Gastei</button><button class="btn dia" data-a="diaria">${ICON.clock}Diária</button></div>`;
+    <div class="acts3"><button class="btn fuel" data-a="diesel">${ICON.fuel}Abasteci</button><button class="btn gas" data-a="gasto">${ICON.money}Gastei</button><button class="btn dia" data-a="diaria">${ICON.clock}Diária</button></div>${botoesIA()}`;
     const ym=hoje().slice(0,7),av=S.avulsos.filter(i=>(i.data||'').slice(0,7)===ym);
     if(av.length)h+=`<h2>Gastos fora de viagem</h2>`+itens({id:'avulso',itens:av});
   }else{
@@ -258,7 +282,7 @@ function inicio(){
       <div class="route">${esc(t.origem)}<span class="arrow">→</span>${esc(t.destino)}</div>
       <div class="row nums" style="font-weight:600"><span>${c.diarias?'Receita':'Frete'} ${brl(c.receita)}</span><span>Gasto até agora ${brl(c.diesel+c.gastos)}</span></div>
     </div>
-    <div class="acts3"><button class="btn fuel" data-a="diesel">${ICON.fuel}Abasteci</button><button class="btn gas" data-a="gasto">${ICON.money}Gastei</button><button class="btn dia" data-a="diaria">${ICON.clock}Diária</button></div>
+    <div class="acts3"><button class="btn fuel" data-a="diesel">${ICON.fuel}Abasteci</button><button class="btn gas" data-a="gasto">${ICON.money}Gastei</button><button class="btn dia" data-a="diaria">${ICON.clock}Diária</button></div>${botoesIA()}
     <button class="btn full chegada" data-a="fechar">${ICON.flag}Cheguei, encerrar viagem</button>
     <button class="link" data-a="editv" data-t="${t.id}" style="align-self:center;font-size:16px">Corrigir dados da viagem (cidades, frete, km)</button>
     <h2>Lançamentos desta viagem</h2>${itens(t)}`;
@@ -410,8 +434,9 @@ function novaViagem(E,fromDetail){
     document.getElementById('tkm').hidden=b.dataset.tipo!=='km';document.getElementById('tfe').hidden=b.dataset.tipo==='km';upd()});
   ['dist','vkm','vf'].forEach(i=>document.getElementById(i).oninput=upd);upd();
 }
-function abasteci(ed){
-  const t=ed?ed.t:(ativa()||{itens:S.avulsos}),I=ed?ed.item:{};
+function abasteci(ed,pre){
+  if(ed&&!ed.t)ed=null;
+  const t=ed?ed.t:(ativa()||{itens:S.avulsos}),I=ed?ed.item:(pre||{});
   open(`<h3>${ed?'Corrigir abastecimento':'Abasteci'}</h3>
    <div class="two"><label class="f">Litros<input id="l" inputmode="decimal" data-un="L" value="${fmtIn(I.litros)}"></label><label class="f">R$ por litro<input id="p" inputmode="decimal" placeholder="6,79" data-moeda value="${fmtIn(I.preco)}"></label></div>
    <div class="calc" id="tot">Total: R$ 0,00</div>
@@ -431,8 +456,9 @@ function abasteci(ed){
   const u=()=>document.getElementById('tot').textContent='Total: '+brl((num(v('l'))||0)*(num(v('p'))||0));
   document.getElementById('l').oninput=u;document.getElementById('p').oninput=u;u();
 }
-function gastei(ed){
-  const t=ed?ed.t:(ativa()||{itens:S.avulsos}),I=ed?ed.item:{};let cat=I.cat||'';
+function gastei(ed,pre){
+  if(ed&&!ed.t)ed=null;
+  const t=ed?ed.t:(ativa()||{itens:S.avulsos}),I=ed?ed.item:(pre||{});let cat=I.cat||'';
   const fora=t.itens===S.avulsos,lista=fora?CATS_FORA.concat(I.cat&&!CATS_FORA.includes(I.cat)?[I.cat]:[]):CATS.concat(I.cat&&!CATS.includes(I.cat)?[I.cat]:[]);
   open(`<h3>${ed?'Corrigir gasto':fora?'Gasto fora de viagem':'Gastei'}</h3><label class="f">Com o quê?</label>
    <div class="chips">${lista.map(c=>`<button class="chip" aria-pressed="${c===cat}" data-cat="${c}">${c}</button>`).join('')}</div>
@@ -454,16 +480,17 @@ function gastei(ed){
     t.itens.push(item);save();setTimeout(()=>toast(dia===hoje()?'Gasto salvo':'Gasto salvo no dia '+dia.split('-').reverse().slice(0,2).join('/')))});
   document.querySelectorAll('[data-cat]').forEach(b=>b.onclick=()=>{cat=b.dataset.cat;document.querySelectorAll('[data-cat]').forEach(x=>x.setAttribute('aria-pressed',x===b))});
 }
-function diaria(ed){
-  const at=ed?null:ativa();const t=ed?ed.t:(at||{itens:S.avulsos}),I=ed?ed.item:null;
+function diaria(ed,pre){
+  if(ed&&!ed.t)ed=null;
+  const at=ed?null:ativa();const t=ed?ed.t:(at||{itens:S.avulsos}),I=ed?ed.item:null,P=pre||{};
   const ult=[...S.avulsos,...S.trips.flatMap(x=>x.itens)].filter(i=>i.tipo==='diaria').sort((a,b)=>a.data<b.data?-1:1).pop();
-  let dias=I?I.dias:1;
+  let dias=I?I.dias:(P.dias||1);
   open(`<h3>${ed?'Corrigir diária':'Diária'}</h3><p class="muted" style="margin:0">Dias parado esperando carga, descarga ou liberação.</p>
    <label class="f">Quantos dias?</label>
    <div class="chips">${[1,2,3,4,5].map(n=>`<button class="chip" aria-pressed="${n===dias}" data-dias="${n}">${n}</button>`).join('')}</div>
-   <label class="f">Valor de cada diária (R$)<input id="vd" inputmode="decimal" data-moeda value="${I?fmtIn(I.valorDia):ult?String(ult.valorDia).replace('.',','):''}"></label>
+   <label class="f">Valor de cada diária (R$)<input id="vd" inputmode="decimal" data-moeda value="${I?fmtIn(I.valorDia):P.valorDia?fmtIn(P.valorDia):ult?String(ult.valorDia).replace('.',','):''}"></label>
    <div class="calc" id="tdi">Total: R$ 0,00</div>
-   <label class="f"><span>Onde <span class="h">(opcional)</span></span><input id="obs" autocomplete="off" value="${esc(I&&I.obs||'')}"></label>`,
+   <label class="f"><span>Onde <span class="h">(opcional)</span></span><input id="obs" autocomplete="off" value="${esc(I&&I.obs||P.obs||'')}"></label>`,
   (ac)=>{const vd=num(v('vd'));if(!(vd>0))return 'Coloque o valor da diária.';
     const fx=dividido('vd',100,30,2500);
     const a=confere(ac,[
@@ -541,7 +568,7 @@ function limpar(){
 }
 function bind(){
   document.querySelectorAll('#app [data-a]').forEach(b=>b.onclick=()=>{const a=b.dataset.a;
-    ({edit:()=>editar(b.dataset.t,b.dataset.i,false),editv:()=>novaViagem(S.trips.find(x=>x.id===b.dataset.t)),instalar:()=>abrirInstalar(false),relatorio:abrirRelatorio,notif:ativarNotif,aviso:mandarAviso,funil:()=>painelFunil(0),entrar:()=>{pularLogin=false;loginEtapa='email';render()},sair,admin:painelAdmin,perfil:()=>{view='perfil';render();scrollTo(0,0)},nova:novaViagem,diesel:abasteci,gasto:gastei,diaria,fechar:encerrar,limpar,ver:()=>detalhe(b.dataset.t),del:()=>askDel(b.dataset.t,b.dataset.i)})[a]()});
+    ({edit:()=>editar(b.dataset.t,b.dataset.i,false),editv:()=>novaViagem(S.trips.find(x=>x.id===b.dataset.t)),instalar:()=>abrirInstalar(false),relatorio:abrirRelatorio,notif:ativarNotif,aviso:mandarAviso,voz:lancarVoz,ia:()=>abrirIA(),funil:()=>painelFunil(0),entrar:()=>{pularLogin=false;loginEtapa='email';render()},sair,admin:painelAdmin,perfil:()=>{view='perfil';render();scrollTo(0,0)},nova:novaViagem,diesel:abasteci,gasto:gastei,diaria,fechar:encerrar,limpar,ver:()=>detalhe(b.dataset.t),del:()=>askDel(b.dataset.t,b.dataset.i)})[a]()});
 }
 document.addEventListener('touchstart',()=>{},{passive:true});
 document.addEventListener('click',e=>{if(e.target.closest('button'))try{navigator.vibrate&&navigator.vibrate(12)}catch(_){}},true);
@@ -699,6 +726,147 @@ function abrirRelatorio(){
       close();toast('Enviado para '+j.email);
     }catch(x){bm.disabled=false;bm.textContent='📧 Mandar para meu e-mail';toast(x.message||'Não deu para mandar agora.')}
   };
+}
+
+/* ===== IA: "Pergunte ao Diário" e "Lançar falando" (função ia no Supabase, Groq) ===== */
+// enquanto a IA não for ligada (chave GROQ_API_KEY no Supabase), só o admin vê os botões para testar
+const IA_PARA_TODOS=false;
+function botoesIA(){
+  if(!sb||!SESS)return '';
+  if(!IA_PARA_TODOS&&!(CONTA&&CONTA.admin))return '';
+  return `<div class="acts2"><button class="btn voz" data-a="voz">${ICON.mic}Lançar falando</button><button class="btn ia" data-a="ia">${ICON.chat}Pergunte ao Diário</button></div>`;
+}
+async function chamarIA(corpo){
+  const {data}=await sb.auth.getSession();const t=data.session&&data.session.access_token;
+  if(!navigator.onLine)throw new Error('Sem internet agora. A IA precisa de sinal.');
+  let r;
+  try{r=await fetch(SB_URL+'/functions/v1/ia',{method:'POST',headers:{'Content-Type':'application/json',apikey:SB_KEY,Authorization:'Bearer '+t},body:JSON.stringify(corpo)})}
+  catch(_){throw new Error('Sem sinal agora. Tente de novo.')}
+  const j=await r.json().catch(()=>({}));
+  if(!r.ok||j.erro)throw new Error(j.erro||'Não consegui agora. Tente de novo.');
+  return j;
+}
+/* grava o áudio do microfone; devolve {parar, cancelar, pronto: Promise<{b64,mime}>} */
+async function gravarAudio(maxSeg,aoTick){
+  if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia||!window.MediaRecorder)
+    throw new Error('Este celular não deixa gravar aqui. Atualize o navegador ou use o Chrome.');
+  let stream;
+  try{stream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true,noiseSuppression:true}})}
+  catch(e){throw new Error(e&&e.name==='NotAllowedError'?'O microfone está bloqueado. Libere o microfone para este app nas configurações do celular.':'Não achei o microfone.')}
+  const tipos=['audio/webm;codecs=opus','audio/webm','audio/mp4','audio/ogg;codecs=opus'];
+  const mime=tipos.find(x=>MediaRecorder.isTypeSupported&&MediaRecorder.isTypeSupported(x))||'';
+  const rec=new MediaRecorder(stream,mime?{mimeType:mime}:{});const partes=[];let cancelado=false,seg=0;
+  rec.ondataavailable=e=>{if(e.data&&e.data.size)partes.push(e.data)};
+  const pronto=new Promise((ok,erro)=>{rec.onstop=async()=>{stream.getTracks().forEach(x=>x.stop());clearInterval(tm);
+    if(cancelado)return erro(new Error('cancelado'));
+    const blob=new Blob(partes,{type:rec.mimeType||mime||'audio/webm'});
+    if(blob.size<1500)return erro(new Error('Não ouvi nada. Segure o celular perto e fale de novo.'));
+    const b64=await new Promise(r=>{const f=new FileReader();f.onload=()=>r(String(f.result).split(',')[1]||'');f.readAsDataURL(blob)});
+    ok({b64,mime:(blob.type||'audio/webm').split(';')[0]})}});
+  const tm=setInterval(()=>{seg++;aoTick&&aoTick(seg);if(seg>=maxSeg&&rec.state==='recording')rec.stop()},1000);
+  rec.start();
+  return {parar:()=>{if(rec.state==='recording')rec.stop()},cancelar:()=>{cancelado=true;if(rec.state==='recording')rec.stop();else{stream.getTracks().forEach(x=>x.stop());clearInterval(tm)}},pronto};
+}
+function telaOuvindo(titulo,dica){
+  open(`<h3>${titulo}</h3><div class="ouvindo" id="ouv"><div class="onda" aria-hidden="true">${ICON.mic}</div>
+    <p id="ouv-txt" style="margin:0;font-size:20px;font-weight:700">Pode falar…</p>
+    <p class="muted" style="margin:0">${dica}</p><p class="muted nums" id="ouv-seg" style="margin:0">0 s</p>
+    <button class="btn full primary" id="ouv-ok" style="min-height:72px">Pronto, terminei</button></div>`,null);
+}
+async function lancarVoz(){
+  const emViagem=!!ativa(),cats=emViagem?CATS:CATS_FORA;
+  telaOuvindo('Lançar falando',`Fale como se fosse anotar. Ex.: <b>“Abasteci 300 litros a 6 e 19”</b>, <b>“Pedágio 87 reais”</b>, <b>“Duas diárias de 250”</b>.`);
+  const x=document.getElementById('x');let g;
+  const erroNaTela=msg=>{const o=document.getElementById('ouv');if(!o)return toast(msg);
+    o.innerHTML=`<p style="margin:0;font-size:18px">${esc(msg)}</p><button class="btn full primary" id="ouv-de-novo" style="min-height:72px">${ICON.mic}Tentar de novo</button>`;
+    document.getElementById('ouv-de-novo').onclick=lancarVoz};
+  try{g=await gravarAudio(25,s=>{const e=document.getElementById('ouv-seg');if(e)e.textContent=s+' s'})}
+  catch(e){return erroNaTela(e.message)}
+  x.onclick=()=>{g.cancelar();close()};
+  document.getElementById('ouv-ok').onclick=()=>g.parar();
+  let audio;try{audio=await g.pronto}catch(e){if(e.message!=='cancelado')erroNaTela(e.message);return}
+  const o=document.getElementById('ouv');if(!o)return;
+  o.innerHTML=`<div class="onda pensando" aria-hidden="true">${ICON.mic}</div><p style="margin:0;font-size:20px;font-weight:700">Entendendo…</p>`;
+  let j;try{j=await chamarIA({acao:'voz',modo:'lancar',audio:audio.b64,mime:audio.mime,cats,emViagem})}
+  catch(e){return erroNaTela(e.message)}
+  if(!document.getElementById('ouv'))return;
+  const L=j.lancamento||{tipo:'nenhum'};
+  if(!j.texto)return erroNaTela(j.erro||'Não deu para ouvir. Fale mais perto do celular.');
+  if(L.tipo==='nenhum')return erroNaTela(`Você disse: “${j.texto}”. Por voz dá para lançar abastecimento, gasto e diária. Para começar ou encerrar viagem, use os botões da tela.`);
+  close();
+  if(L.tipo==='diesel')abasteci(null,{litros:L.litros||'',preco:L.preco||'',obs:L.obs||''});
+  else if(L.tipo==='gasto')gastei(null,{cat:cats.includes(L.cat)?L.cat:'Outro',valor:L.valor||'',data:L.data||'',obs:L.obs||''});
+  else diaria(null,{dias:L.dias,valorDia:L.valorDia,obs:L.obs||''});
+  const h=document.querySelector('.sheet h3');
+  if(h)h.insertAdjacentHTML('afterend',`<div class="voz-disse">🎤 Você disse: “${esc(j.texto)}”<br><b>Confira os valores e toque em Salvar.</b></div>`);
+  document.querySelectorAll('.sheet input').forEach(i=>i.dispatchEvent(new Event('input',{bubbles:true})));
+}
+/* --- Pergunte ao Diário --- */
+let IA_MSGS=[];
+const r2=x=>Math.round((x||0)*100)/100;
+function contextoIA(){
+  const P=S.perfil,meses={};
+  const mes=ym=>meses[ym]||(meses[ym]={mes:ym,viagens:0,faturamento:0,diarias:0,diesel:0,litros:0,outros_gastos:0,comissao_motorista:0,sobrou:0,gastos_por_tipo:{}});
+  const viagens=[...S.trips].sort((a,b)=>(a.inicio||'')<(b.inicio||'')?1:-1).map(t=>{const c=calc(t),M=mes(mesViagem(t));
+    M.viagens++;M.faturamento+=c.receita;M.diarias+=c.diarias;M.diesel+=c.diesel;M.litros+=c.litros;M.outros_gastos+=c.gastos;M.comissao_motorista+=c.comissao;M.sobrou+=c.lucro;
+    const gp={};t.itens.filter(i=>i.tipo==='gasto').forEach(i=>{gp[i.cat]=r2((gp[i.cat]||0)+i.valor);M.gastos_por_tipo[i.cat]=r2((M.gastos_por_tipo[i.cat]||0)+i.valor)});
+    return {de:t.origem,para:t.destino,inicio:t.inicio,fim:t.fim||null,situacao:t.status==='aberta'?'em andamento':'encerrada',conta_no_mes:mesViagem(t),
+      frete:r2(c.frete),tipo_frete:t.tipo==='km'?`por km (R$ ${t.valorKm}/km, ${t.distancia} km)`:'valor fechado',diarias:r2(c.diarias),faturamento:r2(c.receita),
+      diesel:r2(c.diesel),litros:r2(c.litros),outros_gastos:r2(c.gastos),gastos_por_tipo:gp,adiantamentos:r2(c.adiant),comissao_pct:t.comissao||0,comissao_motorista:r2(c.comissao),
+      km_rodado:c.km,km_por_litro:c.media?Math.round(c.media*100)/100:null,sobrou:r2(c.lucro)}});
+  S.avulsos.forEach(i=>{const M=mes((i.data||hoje()).slice(0,7));
+    if(i.tipo==='diesel'){M.diesel+=i.valor;M.litros+=i.litros||0;M.sobrou-=i.valor}
+    else if(i.tipo==='diaria'){const cm=i.valor*(i.comissao||0)/100;M.diarias+=i.valor;M.faturamento+=i.valor;M.comissao_motorista+=cm;M.sobrou+=i.valor-cm}
+    else if(i.cat!=='Adiantamento'){M.outros_gastos+=i.valor;M.sobrou-=i.valor;M.gastos_por_tipo[i.cat]=r2((M.gastos_por_tipo[i.cat]||0)+i.valor)}});
+  const lista=Object.values(meses).sort((a,b)=>a.mes<b.mes?1:-1).slice(0,12).map(M=>{for(const k of ['faturamento','diarias','diesel','litros','outros_gastos','comissao_motorista','sobrou'])M[k]=r2(M[k]);return M});
+  const fora=S.avulsos.filter(i=>(i.data||'')>=hoje().slice(0,7)).map(i=>({tipo:i.tipo==='gasto'?i.cat:i.tipo,valor:i.valor,data:i.data,obs:i.obs||undefined}));
+  const ctx={hoje:hoje(),motorista:{primeiro_nome:(P.nome||'').split(' ')[0]||null,caminhao:P.modelo||null,ano:P.ano||null,tem_patrao:!!P.patrao},
+    regras_do_app:'Cada viagem conta no mês em que terminou (em andamento: mês atual). Sobrou = faturamento - diesel - outros gastos - comissão do motorista. Adiantamento não é gasto.',
+    resumo_por_mes:lista,viagens:viagens.slice(0,30),gastos_fora_de_viagem_deste_mes:fora};
+  let txt=JSON.stringify(ctx);
+  if(txt.length>13500){ctx.viagens=viagens.slice(0,12);txt=JSON.stringify(ctx).slice(0,13500)}
+  return txt;
+}
+function iaFormata(t){return esc(t).replace(/\*\*(.+?)\*\*/g,'<b>$1</b>').replace(/\n/g,'<br>')}
+function abrirIA(){
+  const sug=['Quanto sobrou este mês?','Qual viagem deu mais lucro?','Qual minha média de km por litro?','Um frete de R$ 6.000 para 1.000 km compensa?','O que revisar antes de uma viagem longa?'];
+  open(`<h3>Pergunte ao Diário</h3><p class="muted" style="margin:0">Pergunte sobre suas viagens, diesel, fretes e manutenção. A IA olha os seus lançamentos para responder.</p>
+    <div id="ia-msgs" class="ia-msgs" aria-live="polite"></div>
+    <div class="ia-campo"><textarea id="ia-txt" rows="2" placeholder="Escreva sua pergunta…" maxlength="600"></textarea>
+    <div class="ia-bts"><button class="btn ia-mic" id="ia-mic" aria-label="Perguntar falando">${ICON.mic}</button><button class="btn primary" id="ia-env">Perguntar</button></div></div>
+    <p class="muted" style="margin:0;font-size:13px">A IA pode errar. Confira valores importantes. Documentos e leis: confirme no órgão oficial.</p>`,null);
+  const caixa=document.getElementById('ia-msgs'),txt=document.getElementById('ia-txt'),env=document.getElementById('ia-env'),mic=document.getElementById('ia-mic');
+  const desenha=()=>{caixa.innerHTML=IA_MSGS.length?IA_MSGS.map(m=>`<div class="bolha ${m.role==='user'?'eu':'ela'}${m.erro?' erro':''}">${m.role==='user'?esc(m.content):iaFormata(m.content)}</div>`).join('')
+      :`<div class="chips">${sug.map(s=>`<button class="chip ia-sug">${esc(s)}</button>`).join('')}</div>`;
+    caixa.querySelectorAll('.ia-sug').forEach(b=>b.onclick=()=>{txt.value=b.textContent;enviar()});
+    caixa.scrollTop=caixa.scrollHeight};
+  let ocupado=false;
+  const enviar=async()=>{const q=txt.value.trim();if(!q||ocupado)return;ocupado=true;env.disabled=mic.disabled=true;
+    IA_MSGS.push({role:'user',content:q});txt.value='';desenha();
+    caixa.insertAdjacentHTML('beforeend','<div class="bolha ela pensando" id="ia-pens">Pensando…</div>');caixa.scrollTop=caixa.scrollHeight;
+    try{const j=await chamarIA({acao:'pergunta',contexto:contextoIA(),mensagens:IA_MSGS.filter(m=>!m.erro).slice(-10).map(({role,content})=>({role,content}))});
+      IA_MSGS.push({role:'assistant',content:j.resposta})}
+    catch(e){IA_MSGS.push({role:'assistant',content:e.message,erro:true})}
+    ocupado=false;env.disabled=mic.disabled=false;if(document.getElementById('ia-msgs'))desenha()};
+  env.onclick=enviar;
+  txt.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();enviar()}});
+  const volta=()=>{ocupado=false;mic.classList.remove('gravando');env.textContent='Perguntar';env.disabled=mic.disabled=false;env.onclick=enviar;mic.onclick=falar;
+    const x=document.getElementById('x');if(x)x.onclick=close};
+  const falar=async()=>{if(ocupado)return;let g;
+    try{g=await gravarAudio(20)}catch(e){return toast(e.message)}
+    ocupado=true;mic.classList.add('gravando');env.textContent='Parar e perguntar';env.disabled=false;
+    env.onclick=mic.onclick=()=>g.parar();
+    document.getElementById('x').onclick=()=>{g.cancelar();close()};
+    let a;try{a=await g.pronto}catch(e){if(e.message!=='cancelado'){volta();toast(e.message)}return}
+    mic.classList.remove('gravando');env.textContent='Ouvindo…';env.disabled=mic.disabled=true;
+    try{const j=await chamarIA({acao:'voz',modo:'pergunta',audio:a.b64,mime:a.mime});
+      if(!document.getElementById('ia-txt'))return;
+      volta();
+      if(!j.texto)return toast(j.erro||'Não deu para ouvir.');
+      txt.value=j.texto;enviar()}
+    catch(e){volta();toast(e.message)}};
+  mic.onclick=falar;
+  desenha();
 }
 
 /*NUVEM*/
