@@ -101,3 +101,13 @@ Hostinger → site trilhanova.shop → Avançado → GIT, branch `main`, pasta `
 ## Perfil do admin (10/11/2026)
 - Na conta admin, o Perfil não mostra Motorista nem Caminhão. Em cima fica "Administração" (Clientes, 📊 Números do app, Mandar aviso para todos); depois Conta. Clientes continuam vendo o Perfil normal.
 - Origens (13/11): `ig` e `ig_bio` vêm do próprio Instagram (ele põe `utm_source` no link da bio). `facebook` = aberto dentro do app do Facebook/Messenger. `anuncio_meta` = link com `fbclid` (clique em anúncio ou post turbinado aberto fora do navegador do Instagram). Antes de 13/11, `fbclid` também caía em `facebook`.
+
+## IA: "Pergunte ao Diário" e "Lançar falando" (25/11/2026)
+- Botões na tela Início, abaixo de Abasteci/Gastei/Diária. **Por enquanto só o admin vê** (`IA_PARA_TODOS=false` em `nuvem/index.html`). Ligar para todos depois de testar com a chave.
+- Servidor: função `ia` (`supabase/functions/ia/index.ts`, Verify JWT OFF). Usa o **Groq** (plano grátis, sem cartão): chat `llama-3.3-70b-versatile` (troca pelo segredo opcional `IA_MODELO`) e voz `whisper-large-v3-turbo`.
+- Segredo: `GROQ_API_KEY` em Edge Functions → Secrets (quem cola é o Rafael). Sem a chave a função responde "A IA ainda está sendo ligada".
+- Só conta logada com acesso em dia (ou admin). Limite por conta/dia: 20 perguntas e 30 usos de voz; teto geral 1.500/dia (tabela `ia_uso`, função `usar_ia`, migração `20261125_ia.sql`). Se a IA falhar, a vez volta (`devolver_ia`).
+- Chat: só assuntos de caminhão, frete, diesel, manutenção, documentação, estrada e uso do app; fora disso recusa. O app manda junto um resumo dos lançamentos (até 12 meses e 30 viagens, em JSON) para a IA responder com os números da pessoa. Nada disso fica guardado no servidor.
+- Voz: grava até 25 s (MediaRecorder), o servidor transcreve e transforma em diesel / gasto / diária. O app abre o formulário **já preenchido** com "Você disse: …" e a pessoa confere e toca em Salvar (as proteções contra erro de digitação continuam valendo). Começar/encerrar viagem por voz não faz (manda usar os botões).
+- No chat, o botão roxo do microfone faz a pergunta falando.
+- Testado com Playwright (IA falsa e microfone falso) e a função rodada com dados falsos (login, vencido, limite, 429 do Groq, sem chave, categoria sem acento).

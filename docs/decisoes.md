@@ -37,3 +37,4 @@ Regras para o Instagram (conta nova, ainda frágil):
 - Pergunta "Comenta DONO" separa autônomo (cliente do app) de empregado.
 
 - 24/11/2026: TODO vídeo novo leva narração (ElevenLabs) e legenda. Nada de vídeo só com texto e efeitos, mesmo em formato novo (o desafio quiz sem voz foi refeito por isso).
+| 25/11/2026 | IA no app pelo Groq (plano grátis), chat só de caminhão + lançamento por voz que só preenche o formulário | diferencial difícil de copiar (usa os números do próprio motorista); voz ajuda quem tem dificuldade de digitar; o motorista sempre confere antes de salvar |
