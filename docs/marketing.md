@@ -116,3 +116,6 @@ Criado em 10/11/2026, perfil vazio. Arquivos em `marketing/instagram/` (`perfil.
 
 ## Novidades para anunciar (26/11/2026)
 - IA no app e lançamento por voz **no ar para todos**. Tudo o que pode e não pode dizer, respostas reais e ideias de peças: `marketing/briefings/2026-11-25-novidades-ia.md`.
+| Pack 26/11 (voz+legenda; pasta v29-pack-27-11, gerador único base.html + gerar.py + mix.py) | V19 "3 jeitos de sobrar mais no frete" (anúncio, 42 s) · R1 "o que o dono esquece" (32 s) · Zé "qual posto?" (30 s, A ou B) · Zé "mão suja" (IA, 19 s) · Zé "frete compensa?" parte 1 (A ou B) e resposta com o chat real (IA) | Toque em Saiba mais (V19) · Comenta APP · Comenta A ou B |
+- Telas da IA (26/11): prints reais do app no Playwright com Supabase/IA falsos e dados inventados, em `marketing/videos/v29-pack-27-11/telas/` (shots.py refaz). Respostas batem com os dados (custo R$ 3,53/km).
+- Gancho "o único app com IA pro caminhoneiro": NÃO usar "único" (não dá para provar; há apps com IA no exterior e o Meta pode reprovar). Usar "o app do caminhoneiro que tem IA" / "IA que só entende de caminhão".
