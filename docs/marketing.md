@@ -105,3 +105,11 @@ Criado em 10/11/2026, perfil vazio. Arquivos em `marketing/instagram/` (`perfil.
 | V15 Zé comissão (23/11, voz+legenda; pasta v24-ze-comissao) | "O Zé ganha 10% de comissão. Qual frete paga mais?" A R$ 7 mil/600 km/2 dias x B R$ 10 mil/1.600 km/5 dias | Instagram: Comenta A ou B (resposta amanhã) · Anúncio: A dá R$ 350/dia x B R$ 200/dia, Toque em Saiba mais |
 | V16 Rodando de graça (24/11, voz+legenda; pasta v25-desafio-quiz) | "Tem dono de caminhão rodando de graça e nem sabe." (polêmico) | Metade do que parecia · "Você faz essa conta toda viagem?" · Comenta APP |
 | V17 Zé a resposta (24/11, voz+legenda; pasta v26-ze-resposta) | "Ontem o Zé perguntou: qual frete paga mais? Hora da conta." | A R$ 350/dia x B R$ 200/dia · B paga mais no total, A rende mais por dia · Comenta APP |
+
+## Desmontar vídeo viral: ferramenta rea-video (26/11/2026)
+- Ferramenta grátis e aberta (github.com/JuneYaooo/rea-video, Apache-2.0), vista no reel do @igao.ia. Aprovada pelo Rafael em 26/11.
+- Desmonta um vídeo cena por cena: como cada cena foi feita (gravada, IA, 3D, código, tela gravada), legendas, voz, música, efeitos sonoros, cortes e o papel de cada parte na história. Gera report.html e VIDEO.md.
+- Instalar no ambiente do Claude (não no PC): venv + `pip install ".[ocr]"` do repo clonado; na 1ª vez baixa ~200 MB de modelos de áudio. Sem chave: o Claude faz a revisão olhando os quadros (`review` → preencher `review_answers.json` → `apply-review`). Sem revisão ela erra (no teste chamou nosso V17 de "3D"; depois da revisão: 100% código, 10 cenas, 23 efeitos sonoros).
+- Português não existe no `--lang`/`--ocr-lang`: usar `--lang en --ocr-lang en` e responder ao Rafael em português.
+- Uso no Diário de Bordo: Rafael manda um Reels de caminhoneiro que viralizou → desmontar → refazer a mesma estrutura e ritmo com o Zé e o app em código (HTML + render.py), sem custo. Não usar ChatCut nem gerador de vídeo pago sem perguntar.
+- Para baixar o vídeo do Instagram, só pelo Chrome do Rafael (o arquivo é blob); pedir o arquivo ou baixar pelo celular se não der.
