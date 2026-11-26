@@ -7,3 +7,4 @@
 - Decisão do Rafael (26/11): SEM aviso "feito com IA" no vídeo.
 - Regra: o apresentador só apresenta o app. Sem depoimento falso, sem dizer que usa ou ganha X.
 - Arquivos: grok-ugc.mp4 (bruto), ugc-final.mp4, montar-legenda.py.
+- Versão com música: ugc-musica.mp4 (batida própria gerada por código, sem direitos autorais; abaixa quando ele fala).
