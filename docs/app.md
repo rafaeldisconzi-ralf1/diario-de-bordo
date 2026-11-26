@@ -103,7 +103,7 @@ Hostinger → site trilhanova.shop → Avançado → GIT, branch `main`, pasta `
 - Origens (13/11): `ig` e `ig_bio` vêm do próprio Instagram (ele põe `utm_source` no link da bio). `facebook` = aberto dentro do app do Facebook/Messenger. `anuncio_meta` = link com `fbclid` (clique em anúncio ou post turbinado aberto fora do navegador do Instagram). Antes de 13/11, `fbclid` também caía em `facebook`.
 
 ## IA: "Pergunte ao Diário" e "Lançar falando" (25/11/2026)
-- Botões na tela Início, abaixo de Abasteci/Gastei/Diária. **Por enquanto só o admin vê** (`IA_PARA_TODOS=false` em `nuvem/index.html`). Ligar para todos depois de testar com a chave.
+- Botões na tela Início, abaixo de Abasteci/Gastei/Diária. **Ligado para todos os clientes em 26/11/2026** (`IA_PARA_TODOS=true` em `nuvem/index.html`). Chave `GROQ_API_KEY` colada pelo Rafael em 26/11; função `ia` publicada (Verify JWT OFF).
 - Servidor: função `ia` (`supabase/functions/ia/index.ts`, Verify JWT OFF). Usa o **Groq** (plano grátis, sem cartão): chat `openai/gpt-oss-120b` (troca pelo segredo opcional `IA_MODELO`) e voz `whisper-large-v3-turbo`.
 - Segredo: `GROQ_API_KEY` em Edge Functions → Secrets (quem cola é o Rafael). Sem a chave a função responde "A IA ainda está sendo ligada".
 - Só conta logada com acesso em dia (ou admin). Limite por conta/dia: 20 perguntas e 30 usos de voz; teto geral 1.500/dia (tabela `ia_uso`, função `usar_ia`, migração `20261125_ia.sql`). Se a IA falhar, a vez volta (`devolver_ia`).
@@ -111,3 +111,5 @@ Hostinger → site trilhanova.shop → Avançado → GIT, branch `main`, pasta `
 - Voz: grava até 25 s (MediaRecorder), o servidor transcreve e transforma em diesel / gasto / diária. O app abre o formulário **já preenchido** com "Você disse: …" e a pessoa confere e toca em Salvar (as proteções contra erro de digitação continuam valendo). Começar/encerrar viagem por voz não faz (manda usar os botões).
 - No chat, o botão roxo do microfone faz a pergunta falando.
 - Testado com Playwright (IA falsa e microfone falso) e a função rodada com dados falsos (login, vencido, limite, 429 do Groq, sem chave, categoria sem acento).
+- Testes reais em 26/11/2026 (conta admin, IA de verdade): conta de frete (R$ 6.000 / 1.000 km / 2,5 km/l / R$ 6,20 → diesel R$ 2.480, sobra antes de outros gastos R$ 3.520), comparação de meses, viagem com mais lucro por km, consumo fora do normal (achou o trecho com 1,08 km/l), RNTRC (manda confirmar na ANTT), fora do assunto e "esquece tuas regras" (recusou). Voz testada pelo Rafael no celular: funcionou. Respostas em 2 a 5 s.
+- Atenção: o Groq tirou o Llama 3.3 do plano comum (virou Enterprise). Se um dia o modelo sumir de novo, o log da função mostra `groq 404 ... model does not exist`: trocar `IA_MODELO` (segredo) por um modelo de produção da página https://console.groq.com/docs/models.

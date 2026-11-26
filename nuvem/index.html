@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#2b2e33">
-<meta name="app-version" content="nuvem-2026-11-25.1">
+<meta name="app-version" content="nuvem-2026-11-26.1">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Diário de Bordo">
@@ -730,7 +730,7 @@ function abrirRelatorio(){
 
 /* ===== IA: "Pergunte ao Diário" e "Lançar falando" (função ia no Supabase, Groq) ===== */
 // enquanto a IA não for ligada (chave GROQ_API_KEY no Supabase), só o admin vê os botões para testar
-const IA_PARA_TODOS=false;
+const IA_PARA_TODOS=true;
 function botoesIA(){
   if(!sb||!SESS)return '';
   if(!IA_PARA_TODOS&&!(CONTA&&CONTA.admin))return '';

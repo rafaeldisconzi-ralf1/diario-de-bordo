@@ -3,12 +3,11 @@
 Feito pela sessão do app. Leia junto com `CLAUDE.md` e `docs/marketing.md` (regras e o que já funcionou).
 Detalhes técnicos das novidades: `docs/app.md`, seção "IA: Pergunte ao Diário e Lançar falando".
 
-## ⚠️ Antes de tudo: status
-- A IA **ainda não está ligada para os clientes**. Falta o Rafael criar a chave grátis e eu publicar a função.
-  Hoje só o admin vê os botões (`IA_PARA_TODOS=false` em `nuvem/index.html`).
-- **Pode preparar roteiros, artes e vídeos agora. Não publique nem programe nada sobre a IA** até o Rafael
-  confirmar "IA ligada para todos" (vai aparecer no documento "onde paramos" e em `docs/app.md`).
-- Quando ligar, eu (sessão do app) atualizo a página de vendas. A sessão de vídeos não precisa mexer nela.
+## ✅ Status (atualizado 26/11/2026, 12h40)
+- **A IA está LIGADA para todos os clientes desde 26/11/2026.** Pode publicar, programar e anunciar.
+- Testada de verdade: chat respondeu certo contas de frete, comparação de meses, lucro por km, consumo estranho,
+  documentação (manda confirmar na ANTT) e recusou fora do assunto. A voz foi testada pelo Rafael no celular.
+- Os exemplos de resposta reais abaixo (seção "Respostas reais") podem ser usados nos criativos, com dados inventados.
 
 ## As duas novidades principais
 
@@ -85,3 +84,23 @@ legenda. Nos anúncios, **imagens** venderam mais que vídeos. Por isso:
 - Roteiro primeiro, para o Rafael aprovar. **Voz na ElevenLabs só depois do ok** (custa crédito). Voz "Arnold - Br".
 - Todo vídeo com narração e legenda. Nunca mostrar ou falar o domínio do site.
 - Registrar cada peça em `docs/marketing.md` e no documento "onde paramos".
+
+## Respostas reais da IA (teste de 26/11/2026, dados inventados do Carlos)
+Use como base para telas e balões (podem resumir, mas sem mudar os números):
+- **"Um frete de R$ 6.000 para 1.000 km compensa? Meu caminhão faz 2,5 km/l e o diesel está R$ 6,20."**
+  → Diesel: 1.000 ÷ 2,5 = 400 L × R$ 6,20 = **R$ 2.480,00**. Sobra antes de outros gastos: **R$ 3.520,00**.
+  "Com esse consumo e preço de diesel, o frete compensa. Lembre de incluir pedágio, alimentação, manutenção e a comissão."
+- **"Quanto sobrou em novembro e comparado com outubro?"** → Novembro **R$ 13.034,50**, outubro **R$ 14.685,00**:
+  **R$ 1.650,50 a menos**.
+- **"Qual viagem deu mais lucro por km?"** → Curitiba → Chapecó: R$ 5.359,50 ÷ 480 km ≈ **R$ 11,16/km**
+  (as outras: R$ 4,09/km e R$ 4,67/km).
+- **"Tem alguma coisa estranha no meu consumo de diesel?"** → apontou o trecho Curitiba → Chapecó com **1,08 km/L**,
+  muito abaixo dos outros (2,5 km/L). Ótimo gancho: "A IA achou o que você não viu."
+- **"Me passa uma receita de bolo"** → "Eu só consigo ajudar com assuntos de caminhão, frete e estrada."
+  Bom para humor: "Ela só entende de caminhão."
+
+## Ganchos sugeridos agora que está no ar
+- "Eu perguntei pro app se o frete compensava. Olha a resposta."
+- "A IA achou o trecho em que meu caminhão bebeu o dobro de diesel."
+- "Mão suja de graxa? Fala que o app anota."
+- "Pergunta qualquer coisa de caminhão. De bolo ela não entende." (humor)

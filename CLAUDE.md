@@ -36,4 +36,5 @@ Público: motoristas e donos de caminhão com pouca familiaridade com tecnologia
 - Nome "Diário de Bordo" **em revisão**: existe marca "Diário de Bordo" registrada no INPI (KUAU, classe 42,
   em vigor até 2030). Opções livres na busca: "Conta da Boleia", "Sobrou na Estrada". Ver `docs/decisoes.md`.
 - Compra real por Pix testada em 10/11/2026: aprovou, liberou a conta e o login funcionou.
+- IA no app (Pergunte ao Diário + Lançar falando) **no ar para todos desde 26/11/2026** (Groq, plano grátis). Ver `docs/app.md`.
 - Falta: compra de teste com cartão, testar notificações num celular, liberar a conta do pai, vídeo real com o pai. Depoimentos (4 prints) já na página de vendas.
