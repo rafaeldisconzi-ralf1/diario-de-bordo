@@ -95,3 +95,36 @@ Títulos: Esse frete compensa? · Fala que o app anota · Saiba quanto sobrou ·
 - `videos/v31-ganchos/`: pagou-pra-trabalhar (g1), para-nao-aceita (g2), frete-bonito-armadilha (g3). Voz + legenda, final "Toque em Saiba mais".
 - Entram no anúncio B "Vídeos" no lugar de vid4 e v19: v30, g1, g2, g3, r2ad (5 vídeos). Se sobrar vaga, r3bad.
 - Ganchos em 3ª pessoa ou ordem ("Para!"), nunca acusando quem assiste (regra do Meta).
+
+## PLANO V2 (26/11 14h30) — baseado em idade, sexo e posicionamento. SUBSTITUI o "PLANO FINAL" acima
+STATUS: pronto, nada no ar, nada gasto. Falta o ok do Rafael (data e verba) e o saldo.
+
+### O que o Meta mostrou (campanha 21–23/11, R$ 106,73, 6 inícios de compra, 1.737 pessoas)
+- **Posicionamento:** TODOS os 6 inícios vieram de Reels: Instagram Reels 5 (R$ 15,31 cada) e Facebook Reels 1 (R$ 14,45). Feed, Stories, Marketplace, coluna da direita e in-stream: 0. → só vertical 9:16.
+- **Sexo:** homens 4 inícios a R$ 14,04; mulheres 2 a R$ 25,27 (47% do alcance foi para mulheres). Amostra pequena.
+- **Idade:** o Meta jogou 65% da verba em 65+ (R$ 69,87 → 4 inícios, R$ 17,47). 18–24: 1 (R$ 5,94). 35–44: 1 (R$ 4,53). 25–34, 45–54 e 55–64: 0 (R$ 8 a R$ 10 cada, pouca verba). Amostra pequena: não dá para dizer que 65+ compra; só que foi o mais barato de alcançar.
+- **Funil do app (22/11):** 202 visitas → 6 tocaram Assinar → 2 geraram Pix → 1 venda. Meta: R$ 17,79 por início de compra, mas ~R$ 82 por venda (teto R$ 45).
+- Post impulsionado do Instagram (11/11, R$ 21,27): 10 visitas ao perfil, nenhum início de compra. Não repetir.
+
+### Decisões do plano
+1. Só 9:16 (Reels e Stories). Posicionamentos manuais: Instagram Reels, Facebook Reels, Instagram Stories, Facebook Stories.
+2. Público: Brasil, homens, 30 a 64 anos (aposta: tira o 65+ que puxou verba e as mulheres que custaram quase o dobro). Sugerir interesses de caminhoneiro (caminhão, transporte rodoviário de cargas, marcas de caminhão) se o seletor da Meta oferecer. Se a Meta tratar idade/sexo só como sugestão (Advantage+), trocar para público manual.
+3. Data: sábado 28/11 7h até segunda 30/11 23h59, R$ 40/dia = R$ 120 (mesmo ritmo do fim de semana passado, quando a venda veio no sábado à noite; evita o pico da sexta de Black Friday). Alternativa: sexta 27/11, R$ 30/dia.
+4. Expectativa honesta: R$ 120 ≈ 6 a 7 inícios de compra e 1 a 2 vendas. Para chegar no teto de R$ 45 por venda precisa melhorar a conversão (público + criativos novos + checkout).
+
+### Criativos (todos 9:16) — zip `pacote-anuncios-fim-de-semana.zip` entregue ao Rafael
+- Anúncio A "Imagens" (9): img3 toque (mais barata por início), img6 depoimento, img2 papel, d1 dono sobrou, ia1 fala que anota, ia2 frete compensa, ia3 quanto sobrou, n1 volta vazia, n3 depoimento 2. Fora: img1, img4, img5, arte2, arte3, n2, n4 (zero ou quase zero resultado, ou pouco veiculado).
+- Anúncio B "Vídeos" (6): `ugc` (UGC do Grok, apresentador de IA, 10 s, versão música+efeitos, da outra sessão), `v30` IA frete compensa, `g1` pagou pra trabalhar, `g2` Para! não aceita, `g3` frete bonito armadilha, `r2ad` Zé mão suja.
+- UGC: o apresentador só apresenta o app (sem depoimento, sem dizer que usa ou ganha). Sem aviso "feito com IA", decisão do Rafael em 26/11. A Meta pode colocar sozinha um selo de informação de IA.
+- Botão "Saiba mais". Descrição "7 dias de garantia".
+
+### Link e UTM
+https://frete.trilhanova.shop/assinar/?utm_source=anuncio_meta&utm_campaign=bf2811&utm_content=CODIGO
+Códigos: img3, img6, img2, d1, ia1, ia2, ia3, n1, n3, ugc, v30, g1, g2, g3, r2ad.
+
+### Textos (5) e títulos (5): os mesmos do PLANO FINAL acima. Primário: o 1 e o 2 (IA) primeiro.
+
+### Verba/saldo
+- Saldo Meta em 26/11: R$ 49,79. Para R$ 120 faltam R$ 70,21; colocar R$ 75 por Pix.
+- Regras: R$ 50 sem nenhum início de compra → pausar e avisar. Anúncio com R$ 20 e 0 clique → pausar só ele. Não mexer nas 48 h. Julgar pela venda real.
+- Depois do fim de semana: ver idade/sexo/posicionamento de novo e comparar com esta tabela.
