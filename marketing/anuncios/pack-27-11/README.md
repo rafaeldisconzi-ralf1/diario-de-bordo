@@ -90,3 +90,8 @@ Títulos: Esse frete compensa? · Fala que o app anota · Saiba quanto sobrou ·
 - Saldo hoje (26/11): R$ 49,79. Para R$ 120 falta ~R$ 75 → colocar R$ 80 por Pix.
 - Black Friday encarece. Opção mais leve: R$ 20/dia (R$ 80, falta ~R$ 35).
 - Regras de corte como acima (R$ 50 sem início de compra = pausa; teto R$ 45 por venda; não mexer nas primeiras 48 h).
+
+### Atualização 26/11 14h — 3 vídeos com gancho forte (Rafael aprovou os 3)
+- `videos/v31-ganchos/`: pagou-pra-trabalhar (g1), para-nao-aceita (g2), frete-bonito-armadilha (g3). Voz + legenda, final "Toque em Saiba mais".
+- Entram no anúncio B "Vídeos" no lugar de vid4 e v19: v30, g1, g2, g3, r2ad (5 vídeos). Se sobrar vaga, r3bad.
+- Ganchos em 3ª pessoa ou ordem ("Para!"), nunca acusando quem assiste (regra do Meta).

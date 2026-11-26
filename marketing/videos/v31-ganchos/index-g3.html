@@ -1,0 +1,102 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><style>
+@font-face{font-family:B;src:url(fonts/barlow-latin-700-normal.woff2);font-weight:700}
+@font-face{font-family:BC;src:url(fonts/barlow-condensed-latin-800-normal.woff2);font-weight:800}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#121418;font-family:B;color:#f4f3ee}
+#bg{position:absolute;inset:-100px;background:repeating-linear-gradient(-45deg,rgba(255,255,255,.035) 0 3px,transparent 3px 44px)}
+#glow{position:absolute;left:-200px;top:150px;width:1480px;height:1400px;background:radial-gradient(ellipse,var(--gc,rgba(255,80,60,.22)),transparent 62%)}
+#flash{position:absolute;inset:0;background:#d7261e;opacity:0}
+.abs{position:absolute;opacity:0}
+.yel{color:#f2b705}.grn{color:#5fd39a}.red{color:#ff5a45}
+#wm{position:absolute;left:0;right:0;top:80px;text-align:center;font:700 36px B;opacity:.7;z-index:4}
+.big{left:40px;right:40px;text-align:center;font:800 150px/.95 BC;text-transform:uppercase;text-shadow:0 8px 30px rgba(0,0,0,.5)}
+.mid{left:40px;right:40px;text-align:center;font:800 104px/1 BC;text-transform:uppercase}
+.chip{font:800 92px/1 BC;text-transform:uppercase;background:#22252a;border:5px solid #3a3e45;border-radius:26px;padding:22px 40px 12px;white-space:nowrap}
+.num{left:0;right:0;text-align:center;font:800 230px/1 BC;font-variant-numeric:tabular-nums}
+.lbl{left:0;right:0;text-align:center;font:800 64px BC;text-transform:uppercase;letter-spacing:3px;color:#c9c5ba}
+.gasto{left:140px;right:140px;display:flex;justify-content:space-between;font:800 76px BC;text-transform:uppercase;background:#22252a;border-left:12px solid #ff5a45;border-radius:18px;padding:18px 36px 8px}
+.gasto b{color:#ff5a45}
+.ph{left:280px;top:300px;width:520px;height:1125px;border-radius:64px;background:#0b0c0e;border:12px solid #2b2e34;box-shadow:0 30px 70px rgba(0,0,0,.6);overflow:hidden}
+.ph img{position:absolute;left:0;top:0;width:496px}
+.hl{position:absolute;border:7px solid #f2b705;border-radius:20px;box-shadow:0 0 0 2000px rgba(0,0,0,.45);opacity:0}
+.tape{position:absolute;left:-60px;right:-60px;height:90px;background:repeating-linear-gradient(-45deg,#f2b705 0 60px,#16181b 60px 120px);opacity:0}
+.card{width:470px;border-radius:30px;background:#22252a;border:6px solid #3a3e45;padding:30px 20px 26px;text-align:center}
+.card .t{font:800 54px BC;text-transform:uppercase;color:#c9c5ba;letter-spacing:2px}
+.card .v{font:800 120px/1 BC;margin:10px 0}
+.card .k{font:800 58px BC;text-transform:uppercase}
+.card .s{font:800 44px BC;text-transform:uppercase;color:#c9c5ba;margin-top:26px}
+.card .r{font:800 104px/1 BC;white-space:nowrap;font-variant-numeric:tabular-nums}
+.stamp{font:800 96px BC;text-transform:uppercase;border:10px solid;border-radius:18px;padding:16px 34px 6px;white-space:nowrap}
+#sub{position:absolute;left:30px;right:30px;top:1470px;height:220px;display:flex;align-items:center;justify-content:center;text-align:center;font:800 88px/1 BC;text-transform:uppercase;-webkit-text-stroke:12px #080a09;paint-order:stroke fill;opacity:0;flex-wrap:wrap;z-index:5}
+#sub span{display:inline-block;margin:0 .13em;color:#f4f3ee}
+#sub span.on{color:#f2b705;transform:scale(1.08)}
+#ft{left:0;right:0;top:1700px;text-align:center;font:700 28px B;color:#c9c5ba;text-transform:uppercase;letter-spacing:2px;z-index:5}
+#end{position:absolute;inset:0;background:#16181b;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding-top:280px;gap:34px;opacity:0;z-index:6}
+#ico{width:220px;height:220px;border-radius:48px}
+#en{font:800 112px BC;text-transform:uppercase}
+#el{font:800 82px/1.05 BC;text-transform:uppercase;text-align:center}
+#ep{background:#f2b705;color:#16181b;font:800 96px BC;padding:24px 70px 16px;border-radius:999px;text-transform:uppercase}
+
+</style></head><body>
+<div id="bg"></div><div id="glow"></div><div id="flash"></div><div id="wm">@appdiariodebordo</div>
+
+<div class="tape" id="tp1" style="top:200px;transform:rotate(-4deg)"></div>
+<div class="tape" id="tp2" style="top:1330px;transform:rotate(3deg)"></div>
+<div class="abs big" id="h0" style="top:380px;font-size:140px">Frete bonito<br>é a maior<br><span class="red">armadilha</span><br><span style="font-size:96px">do caminhoneiro</span></div>
+<div class="abs card" id="cB" style="left:300px;top:400px;border-color:#ff5a45"><div class="t">Frete B</div><div class="v">R$ 10.000</div><div class="k">1.600 km</div><div class="s" id="sBl">sobra</div><div class="r" id="rB">R$ 10.000</div></div>
+<div class="abs card" id="cA" style="left:560px;top:400px;border-color:#5fd39a"><div class="t">Frete A</div><div class="v">R$ 7.000</div><div class="k">600 km</div><div class="s">sobra</div><div class="r grn" id="rA">R$ 4.882</div></div>
+<div class="abs stamp" id="ok" style="left:50%;top:1060px;color:#5fd39a;border-color:#5fd39a;transform:rotate(-6deg)">Parece ótimo</div>
+<div class="abs mid" id="cs" style="top:1060px;font-size:68px;color:#ff5a45">− diesel − pedágio<br>− diária − desgaste</div>
+<div class="abs stamp" id="mais" style="left:590px;top:1060px;color:#5fd39a;border-color:#5fd39a;font-size:70px;background:rgba(18,20,24,.92)">Sobra mais</div>
+<div class="abs big" id="h3" style="top:420px;font-size:130px">Quem não<br>faz a conta,<br><span class="red">escolhe<br>errado</span></div>
+<div class="abs ph" id="ph"><img id="s1" src="telas/01-inicio-ia.png"></div>
+
+<div class="abs" id="ft">exemplo: custo de R$ 3,53 por km rodado</div>
+<div id="end"><img id="ico" src="icon-512.png"><div id="en">Diário de Bordo</div>
+ <div id="el">O app faz a conta.<br>Você escolhe<br>o frete <span class="grn">certo</span>.</div><div id="ep">Toque em Saiba mais</div>
+ <div style="font:700 42px B;text-transform:uppercase;color:#c9c5ba;letter-spacing:1px">R$ 24,90/mês · 7 dias de garantia</div></div>
+<div id="sub"></div>
+<script>
+const TOT=23.1,END=20.35,$=s=>document.querySelector(s);
+const cl=x=>Math.max(0,Math.min(1,x)),eo=x=>1-Math.pow(1-cl(x),3);
+const back=x=>{x=cl(x);const c=1.7;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2)};
+let T=0;
+function vis(id,a,b,fi,fo){fi=fi||.12;fo=fo||.12;const o=a<=0&&T<=0?1:cl((T-a)/fi)*(1-cl((T-b)/fo));$(id).style.opacity=o;return o}
+function pop(id,a,s0,tx){const p=a<=0?1:back((T-a)/.35);s0=s0||.85;$(id).style.transform=(tx||'')+' scale('+(s0+(1-s0)*p)+')'}
+function shake(id,a,d,tx){const k=(T>=a&&T<a+d)?(1-(T-a)/d):0;const x=Math.sin(T*90)*22*k,y=Math.cos(T*77)*12*k;$(id).style.transform=(tx||'')+' translate('+x+'px,'+y+'px)'}
+function brl(v){const s=Math.round(Math.abs(v)).toString().replace(/\B(?=(\d{3})+(?!\d))/g,'.');return (v<0?'−':'')+'R$ '+s}
+function cnt(a,b,v0,v1){return v0+(v1-v0)*eo((T-a)/(b-a))}
+const X='translateX(-50%)';
+const SEG=[[0.1, 3.15, "Frete:2 bonito:3 é:1 / a:1 maior:2 armadilha:4 / do:1 caminhoneiro:5"], [3.5, 6.13, "R$_10_mil:5 pra:1 / 1.600_km:9"], [6.51, 7.5, "Parece:3 ótimo:3"], [7.93, 11.35, "Mas:1 tira:2 o:1 diesel:2 / o:1 pedágio:3 a:1 diária:3 / e:1 o:1 desgaste:3"], [11.69, 14.5, "sobra:2 menos:2 que:1 / um:1 frete:2 de:1 R$_7_mil:4 / pra:1 600_km:6"], [15.12, 16.09, "Quem:1 não:1 faz:1 a:1 conta:2"], [16.35, 17.08, "escolhe:3 errado:3"], [17.53, 19.98, "O:1 Diário_de_Bordo:5 / faz:1 essa:2 conta:2 pra:1 você:2"], [20.42, 21.66, "Toque:2 em:1 Saiba:2 mais:2"]];
+const CH=[];
+SEG.forEach(([a,b,s])=>{const tk=s.split(' ').filter(x=>x!=='/');const tw=tk.reduce((q,x)=>q+(+x.split(':').pop()),0);let acc=0,cur=null;const d=b-a;
+ s.split(' ').forEach(x=>{if(x==='/'){cur=null;return}const k=+x.split(':').pop();const w=x.slice(0,x.lastIndexOf(':'));const ws=a+d*acc/tw;acc+=k;const we=a+d*acc/tw;
+  if(!cur){cur={w:[],a:ws,b:we};CH.push(cur)}cur.w.push({t:w.replace(/_/g,' '),a:ws,b:we});cur.b=we;});});
+CH.forEach((c,i)=>{const n=CH[i+1];c.s0=Math.max(0,c.a-0.1);c.s1=(n&&n.a-c.b<0.4)?n.a-0.04:c.b+0.15;});
+let last=-1;
+function sub(t){const el=$('#sub');const i=CH.findIndex(c=>t>=c.s0&&t<c.s1);
+ if(i<0||t>=END){el.style.opacity=0;last=-1;return}
+ if(i!==last){el.innerHTML=CH[i].w.map(w=>'<span>'+w.t+'</span>').join('');last=i}
+ el.style.opacity=1;[...el.children].forEach((s,k)=>{const w=CH[i].w[k];s.className=(t>=w.a&&t<w.b)?'on':''});}
+window.render=function(t){T=t;
+ $('#bg').style.transform='translate('+(-(t*14)%62)+'px,'+(-(t*14)%62)+'px)';
+
+ vis('#tp1',0,3.3);vis('#tp2',0,3.3);
+ $('#tp1').style.transform='rotate(-4deg) translateX('+(-(t*80)%120)+'px)';$('#tp2').style.transform='rotate(3deg) translateX('+((t*80)%120)+'px)';
+ vis('#h0',0,3.3);pop('#h0',0,.9);if(t>1.6&&t<2.4)shake('#h0',1.6,.6);
+ vis('#cB',3.5,14.95);vis('#ok',6.51,7.85);pop('#ok',6.51,1.6,X+' rotate(-6deg)');
+ const mv=eo((t-11.6)/.45);$('#cB').style.left=(305-255*mv)+'px';
+ $('#rB').textContent=brl(cnt(8.0,11.3,10000,4352));$('#rB').style.color=t>8?'#ff5a45':'#f4f3ee';
+ vis('#cs',7.93,11.5);
+ vis('#cA',11.69,14.95);$('#cA').style.transform='translateX('+(500*(1-eo((t-11.69)/.4)))+'px)';
+ vis('#mais',13.3,14.95);pop('#mais',13.3,1.6);
+ vis('#h3',15.05,17.45);pop('#h3',15.05,.85);if(t>16.35)shake('#h3',16.35,.5);
+ vis('#ph',17.5,20.35);$('#ph').style.transform='translateY('+(60*(1-eo((t-17.5)/.4)))+'px)';
+
+ $('#ft').style.opacity=(t>3.4&&t<END)?.85:0;
+ const e=$('#end');e.style.opacity=cl((t-END)/.3);e.style.transform='scale('+(.94+.06*eo((t-END)/.5))+')';
+ $('#wm').style.opacity=t<END?.7:0;
+ sub(t);
+};
+window.render(0);
+</script></body></html>

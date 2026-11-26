@@ -1,0 +1,109 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><style>
+@font-face{font-family:B;src:url(fonts/barlow-latin-700-normal.woff2);font-weight:700}
+@font-face{font-family:BC;src:url(fonts/barlow-condensed-latin-800-normal.woff2);font-weight:800}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#121418;font-family:B;color:#f4f3ee}
+#bg{position:absolute;inset:-100px;background:repeating-linear-gradient(-45deg,rgba(255,255,255,.035) 0 3px,transparent 3px 44px)}
+#glow{position:absolute;left:-200px;top:150px;width:1480px;height:1400px;background:radial-gradient(ellipse,var(--gc,rgba(255,80,60,.22)),transparent 62%)}
+#flash{position:absolute;inset:0;background:#d7261e;opacity:0}
+.abs{position:absolute;opacity:0}
+.yel{color:#f2b705}.grn{color:#5fd39a}.red{color:#ff5a45}
+#wm{position:absolute;left:0;right:0;top:80px;text-align:center;font:700 36px B;opacity:.7;z-index:4}
+.big{left:40px;right:40px;text-align:center;font:800 150px/.95 BC;text-transform:uppercase;text-shadow:0 8px 30px rgba(0,0,0,.5)}
+.mid{left:40px;right:40px;text-align:center;font:800 104px/1 BC;text-transform:uppercase}
+.chip{font:800 92px/1 BC;text-transform:uppercase;background:#22252a;border:5px solid #3a3e45;border-radius:26px;padding:22px 40px 12px;white-space:nowrap}
+.num{left:0;right:0;text-align:center;font:800 230px/1 BC;font-variant-numeric:tabular-nums}
+.lbl{left:0;right:0;text-align:center;font:800 64px BC;text-transform:uppercase;letter-spacing:3px;color:#c9c5ba}
+.gasto{left:140px;right:140px;display:flex;justify-content:space-between;font:800 76px BC;text-transform:uppercase;background:#22252a;border-left:12px solid #ff5a45;border-radius:18px;padding:18px 36px 8px}
+.gasto b{color:#ff5a45}
+.ph{left:280px;top:300px;width:520px;height:1125px;border-radius:64px;background:#0b0c0e;border:12px solid #2b2e34;box-shadow:0 30px 70px rgba(0,0,0,.6);overflow:hidden}
+.ph img{position:absolute;left:0;top:0;width:496px}
+.hl{position:absolute;border:7px solid #f2b705;border-radius:20px;box-shadow:0 0 0 2000px rgba(0,0,0,.45);opacity:0}
+.tape{position:absolute;left:-60px;right:-60px;height:90px;background:repeating-linear-gradient(-45deg,#f2b705 0 60px,#16181b 60px 120px);opacity:0}
+.card{width:470px;border-radius:30px;background:#22252a;border:6px solid #3a3e45;padding:30px 20px 26px;text-align:center}
+.card .t{font:800 54px BC;text-transform:uppercase;color:#c9c5ba;letter-spacing:2px}
+.card .v{font:800 120px/1 BC;margin:10px 0}
+.card .k{font:800 58px BC;text-transform:uppercase}
+.card .s{font:800 44px BC;text-transform:uppercase;color:#c9c5ba;margin-top:26px}
+.card .r{font:800 104px/1 BC;white-space:nowrap;font-variant-numeric:tabular-nums}
+.stamp{font:800 96px BC;text-transform:uppercase;border:10px solid;border-radius:18px;padding:16px 34px 6px;white-space:nowrap}
+#sub{position:absolute;left:30px;right:30px;top:1470px;height:220px;display:flex;align-items:center;justify-content:center;text-align:center;font:800 88px/1 BC;text-transform:uppercase;-webkit-text-stroke:12px #080a09;paint-order:stroke fill;opacity:0;flex-wrap:wrap;z-index:5}
+#sub span{display:inline-block;margin:0 .13em;color:#f4f3ee}
+#sub span.on{color:#f2b705;transform:scale(1.08)}
+#ft{left:0;right:0;top:1700px;text-align:center;font:700 28px B;color:#c9c5ba;text-transform:uppercase;letter-spacing:2px;z-index:5}
+#end{position:absolute;inset:0;background:#16181b;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding-top:280px;gap:34px;opacity:0;z-index:6}
+#ico{width:220px;height:220px;border-radius:48px}
+#en{font:800 112px BC;text-transform:uppercase}
+#el{font:800 82px/1.05 BC;text-transform:uppercase;text-align:center}
+#ep{background:#f2b705;color:#16181b;font:800 96px BC;padding:24px 70px 16px;border-radius:999px;text-transform:uppercase}
+
+</style></head><body>
+<div id="bg"></div><div id="glow"></div><div id="flash"></div><div id="wm">@appdiariodebordo</div>
+
+<div class="abs big" id="h0" style="top:300px;font-size:120px">Rodou o mês<br>inteiro...</div>
+<div class="abs num yel" id="dia" style="top:640px;font-size:300px">DIA 1</div>
+<div class="abs lbl" id="dl" style="top:960px">de 30</div>
+<div class="abs big" id="h1" style="top:640px;font-size:180px"><span class="red">e pagou<br>pra<br>trabalhar</span></div>
+<div class="abs lbl" id="l2" style="top:420px">Faturou no mês</div>
+<div class="abs num grn" id="n2" style="top:500px">R$ 0</div>
+<div class="abs gasto" id="gs0" style="top:800px"><span>Diesel</span><b>−R$ 15.800</b></div><div class="abs gasto" id="gs1" style="top:920px"><span>Pedágio</span><b>−R$ 3.100</b></div><div class="abs gasto" id="gs2" style="top:1040px"><span>Parcela</span><b>−R$ 7.200</b></div><div class="abs gasto" id="gs3" style="top:1160px"><span>Pneu</span><b>−R$ 2.300</b></div><div class="abs gasto" id="gs4" style="top:1280px"><span>Diária</span><b>−R$ 4.000</b></div>
+<div class="abs lbl" id="l3" style="top:540px">No fim do mês sobrou</div>
+<div class="abs num red" id="n3" style="top:650px;font-size:300px">−R$ 400</div>
+<div class="abs ph" id="ph"><img id="s1" src="telas/01-inicio-ia.png"><img id="s6" src="telas/06-chat-frete.png">
+ <div class="hl" id="hlb" style="left:248px;top:592px;width:240px;height:126px"></div></div>
+<div class="abs big" id="h5" style="top:560px;font-size:130px">Veja quanto<br><span class="grn">sobrou</span><br>de verdade</div>
+
+<div class="abs" id="ft">números de exemplo</div>
+<div id="end"><img id="ico" src="icon-512.png"><div id="en">Diário de Bordo</div>
+ <div id="el">Lance tudo.<br>Veja quanto <span class="grn">sobrou</span><br>de verdade.</div><div id="ep">Toque em Saiba mais</div>
+ <div style="font:700 42px B;text-transform:uppercase;color:#c9c5ba;letter-spacing:1px">R$ 24,90/mês · 7 dias de garantia</div></div>
+<div id="sub"></div>
+<script>
+const TOT=27.3,END=24.4,$=s=>document.querySelector(s);
+const cl=x=>Math.max(0,Math.min(1,x)),eo=x=>1-Math.pow(1-cl(x),3);
+const back=x=>{x=cl(x);const c=1.7;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2)};
+let T=0;
+function vis(id,a,b,fi,fo){fi=fi||.12;fo=fo||.12;const o=a<=0&&T<=0?1:cl((T-a)/fi)*(1-cl((T-b)/fo));$(id).style.opacity=o;return o}
+function pop(id,a,s0,tx){const p=a<=0?1:back((T-a)/.35);s0=s0||.85;$(id).style.transform=(tx||'')+' scale('+(s0+(1-s0)*p)+')'}
+function shake(id,a,d,tx){const k=(T>=a&&T<a+d)?(1-(T-a)/d):0;const x=Math.sin(T*90)*22*k,y=Math.cos(T*77)*12*k;$(id).style.transform=(tx||'')+' translate('+x+'px,'+y+'px)'}
+function brl(v){const s=Math.round(Math.abs(v)).toString().replace(/\B(?=(\d{3})+(?!\d))/g,'.');return (v<0?'−':'')+'R$ '+s}
+function cnt(a,b,v0,v1){return v0+(v1-v0)*eo((T-a)/(b-a))}
+const X='translateX(-50%)';
+const SEG=[[0.08, 2.34, "Esse:2 caminhoneiro:5 / rodou:2 o:1 mês:1 inteiro:3"], [2.74, 4.11, "e:1 pagou:2 pra:1 trabalhar:3"], [4.52, 6.73, "Faturou:3 / R$_32_mil:6"], [7.13, 10.82, "Diesel:2 pedágio:3 / parcela:3 pneu:2 / diária:3"], [11.22, 14.32, "No:1 fim:1 do:1 mês:1 / menos:2 R$_400:6"], [14.67, 17.4, "E:1 ele:2 só:1 descobriu:3 / porque:2 lançou:2 / tudo:2 no:1 app:1"], [17.78, 20.68, "Agora:3 ele:2 pergunta:3 pra:1 IA:2 / antes:2 de:1 aceitar:3 frete:2"], [21.11, 22.0, "Diário_de_Bordo:5"], [22.34, 24.17, "veja:2 quanto:2 sobrou:2 / de:1 verdade:3"], [24.52, 25.9, "Toque:2 em:1 Saiba:2 mais:2"]];
+const CH=[];
+SEG.forEach(([a,b,s])=>{const tk=s.split(' ').filter(x=>x!=='/');const tw=tk.reduce((q,x)=>q+(+x.split(':').pop()),0);let acc=0,cur=null;const d=b-a;
+ s.split(' ').forEach(x=>{if(x==='/'){cur=null;return}const k=+x.split(':').pop();const w=x.slice(0,x.lastIndexOf(':'));const ws=a+d*acc/tw;acc+=k;const we=a+d*acc/tw;
+  if(!cur){cur={w:[],a:ws,b:we};CH.push(cur)}cur.w.push({t:w.replace(/_/g,' '),a:ws,b:we});cur.b=we;});});
+CH.forEach((c,i)=>{const n=CH[i+1];c.s0=Math.max(0,c.a-0.1);c.s1=(n&&n.a-c.b<0.4)?n.a-0.04:c.b+0.15;});
+let last=-1;
+function sub(t){const el=$('#sub');const i=CH.findIndex(c=>t>=c.s0&&t<c.s1);
+ if(i<0||t>=END){el.style.opacity=0;last=-1;return}
+ if(i!==last){el.innerHTML=CH[i].w.map(w=>'<span>'+w.t+'</span>').join('');last=i}
+ el.style.opacity=1;[...el.children].forEach((s,k)=>{const w=CH[i].w[k];s.className=(t>=w.a&&t<w.b)?'on':''});}
+window.render=function(t){T=t;
+ $('#bg').style.transform='translate('+(-(t*14)%62)+'px,'+(-(t*14)%62)+'px)';
+
+ $('#flash').style.opacity=(t>=2.74&&t<4.2)?0.55*(1-cl((t-2.74)/1.2)):0;
+ vis('#h0',0,2.7);pop('#h0',0,.9);
+ vis('#dia',0,2.7);vis('#dl',0,2.7);$('#dia').textContent='DIA '+Math.max(1,Math.round(1+29*cl(t/2.3)));
+ vis('#h1',2.74,4.3);pop('#h1',2.74,1.6);if(t>3.1)shake('#h1',3.1,.6);
+ pop('#n2',4.5,.7);
+ $('#l2').textContent=t<7.2?'Faturou no mês':'Sobrando';
+ const G=[["Diesel", 15800, 7.3], ["Ped\u00e1gio", 3100, 8.05], ["Parcela", 7200, 8.8], ["Pneu", 2300, 9.55], ["Di\u00e1ria", 4000, 10.3]];let bal=cnt(4.6,6.2,0,32000);
+ G.forEach((g,i)=>{vis('#gs'+i,g[2],11.1);$('#gs'+i).style.transform='translateX('+(400*(1-eo((t-g[2])/.3)))+'px)';bal-=g[1]*eo((t-g[2]-.15)/.45)});
+ $('#n2').textContent=brl(bal);$('#n2').className='abs num '+(bal<0?'red':(t>7.3?'yel':'grn'));
+ vis('#l2',4.5,11.1);vis('#n2',4.5,11.1);
+ vis('#l3',11.2,14.45);vis('#n3',12.55,14.45);pop('#n3',12.55,1.8);if(t>12.85)shake('#n3',12.85,.7);
+ $('#flash').style.opacity=Math.max(+$('#flash').style.opacity,(t>=12.55&&t<13.6)?0.45*(1-cl((t-12.55)/1)):0);
+ vis('#ph',14.6,21.0);$('#ph').style.transform='translateY('+(60*(1-eo((t-14.6)/.4)))+'px)';
+ $('#s1').style.opacity=t<17.7?1:0;$('#s6').style.opacity=t>=17.7?1:0;
+ $('#hlb').style.opacity=cl((t-17.0)/.2)*(t<17.7?1:0);
+ vis('#h5',21.05,24.4);pop('#h5',21.05,.85);
+
+ $('#ft').style.opacity=(t>4.4&&t<END)?.85:0;
+ const e=$('#end');e.style.opacity=cl((t-END)/.3);e.style.transform='scale('+(.94+.06*eo((t-END)/.5))+')';
+ $('#wm').style.opacity=t<END?.7:0;
+ sub(t);
+};
+window.render(0);
+</script></body></html>

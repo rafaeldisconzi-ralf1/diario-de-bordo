@@ -41,6 +41,6 @@ testar "Comenta APP", UTM nos links.
 - Escalar no máximo +20% a cada 2 dias.
 
 ## Pack 27/11/2026 (Black Friday) — PRONTO, NÃO SUBIDO
-- 26/11 13h30: PLANO FINAL no README (fim do arquivo). Entrou a IA: 3 imagens (ia1 fala, ia2 frete compensa, ia3 sobrou) e vídeo v30 "Perguntei pro app: esse frete compensa?". Vídeos da sessão videomaker viraram anúncio (r1ad, r2ad, r3bad com "Toque em Saiba mais"). Saldo 26/11: R$ 49,79.
+- 26/11 13h30: PLANO FINAL no README (fim do arquivo). Entrou a IA: 3 imagens (ia1 fala, ia2 frete compensa, ia3 sobrou) e vídeo v30 "Perguntei pro app: esse frete compensa?". Vídeos da sessão videomaker viraram anúncio (r1ad, r2ad, r3bad com "Toque em Saiba mais"). Saldo 26/11: R$ 49,79. 14h: + 3 vídeos de gancho forte (v31: pagou pra trabalhar, Para!, frete bonito armadilha) no anúncio de vídeos.
 - Em `marketing/anuncios/pack-27-11/README.md`: estrutura, 7 imagens (3 campeãs + 4 novas: volta vazia, esqueceu parcela, depoimento Juninho, 3 jeitos), 2 vídeos com voz (+ V19 quando tiver voz), 5 textos, 5 títulos, UTM `utm_campaign=bf2711`.
 - Proposta R$ 30/dia sex–seg (até R$ 120). Esperando ok do Rafael para verba e para subir (precisa do Chrome do PC).
