@@ -44,7 +44,7 @@ testar "Comenta APP", UTM nos links.
 - Posicionamento: 6 de 6 inícios de compra vieram de Reels (IG 5, FB 1). Feed/Stories/outros: 0.
 - Sexo: homens 4 (R$ 14,04 cada), mulheres 2 (R$ 25,27).
 - Idade: 65% da verba foi para 65+ (4 inícios, R$ 17,47). 18–24 e 35–44: 1 cada. 25–34, 45–54, 55–64: 0. Amostra pequena.
-- Plano V2 no fim de `marketing/anuncios/pack-27-11/README.md`: só 9:16, homens 30–64, Reels+Stories, sáb 28/11 a seg 30/11, R$ 40/dia (R$ 120). Inclui o UGC do Grok.
+- Plano V2 no fim de `marketing/anuncios/pack-27-11/README.md`: só 9:16, homens 25–64, Reels+Stories, sáb 28/11 a seg 30/11, R$ 40/dia (R$ 120). Inclui o UGC do Grok.
 
 ## Pack 27/11/2026 (Black Friday) — PRONTO, NÃO SUBIDO
 - 26/11 13h30: PLANO FINAL no README (fim do arquivo). Entrou a IA: 3 imagens (ia1 fala, ia2 frete compensa, ia3 sobrou) e vídeo v30 "Perguntei pro app: esse frete compensa?". Vídeos da sessão videomaker viraram anúncio (r1ad, r2ad, r3bad com "Toque em Saiba mais"). Saldo 26/11: R$ 49,79. 14h: + 3 vídeos de gancho forte (v31: pagou pra trabalhar, Para!, frete bonito armadilha) no anúncio de vídeos.

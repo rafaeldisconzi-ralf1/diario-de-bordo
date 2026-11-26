@@ -108,7 +108,7 @@ STATUS: pronto, nada no ar, nada gasto. Falta o ok do Rafael (data e verba) e o 
 
 ### Decisões do plano
 1. Só 9:16 (Reels e Stories). Posicionamentos manuais: Instagram Reels, Facebook Reels, Instagram Stories, Facebook Stories.
-2. Público: Brasil, homens, 30 a 64 anos (aposta: tira o 65+ que puxou verba e as mulheres que custaram quase o dobro). Sugerir interesses de caminhoneiro (caminhão, transporte rodoviário de cargas, marcas de caminhão) se o seletor da Meta oferecer. Se a Meta tratar idade/sexo só como sugestão (Advantage+), trocar para público manual.
+2. Público: Brasil, homens, 25 a 64 anos, decisão do Rafael em 26/11 (aposta: tira o 65+ que puxou verba e as mulheres que custaram quase o dobro). Sugerir interesses de caminhoneiro (caminhão, transporte rodoviário de cargas, marcas de caminhão) se o seletor da Meta oferecer. Se a Meta tratar idade/sexo só como sugestão (Advantage+), trocar para público manual.
 3. Data: sábado 28/11 7h até segunda 30/11 23h59, R$ 40/dia = R$ 120 (mesmo ritmo do fim de semana passado, quando a venda veio no sábado à noite; evita o pico da sexta de Black Friday). Alternativa: sexta 27/11, R$ 30/dia.
 4. Expectativa honesta: R$ 120 ≈ 6 a 7 inícios de compra e 1 a 2 vendas. Para chegar no teto de R$ 45 por venda precisa melhorar a conversão (público + criativos novos + checkout).
 
