@@ -43,3 +43,12 @@ Saiba quanto sobrou · Frete bom é o que sobra · Veja a sobra de verdade · Ch
 - Gastou R$ 50 e nenhum "Iniciar compra": pausar e avisar o Rafael.
 - Anúncio/imagem com R$ 20 e nenhum clique: pausar só ele.
 - Não mexer nas primeiras 48 h. Julgar pela venda real (Mercado Pago / painel do app). Teto por venda: R$ 45.
+
+## Atualização 26/11 12h40 — vídeos e carrossel prontos
+- Vídeos com voz em `marketing/videos/v29-pack-27-11/out/`:
+  - v19.mp4 "3 jeitos de sobrar mais no frete" (42 s) — ANÚNCIO (final "Toque em Saiba mais"). Código UTM: v19.
+  - r1.mp4 "o que o dono esquece" (32 s, Comenta APP) — orgânico, pode ir ao ar.
+  - posto.mp4 Zé "qual posto?" (30 s, Comenta A ou B) — orgânico. Resposta no dia seguinte (falta fazer).
+  - r2.mp4 Zé "mão suja" e r3a/r3b Zé "frete compensa?" — IA. GUARDAR até "IA ligada para todos".
+- Telas da IA: prints reais do app (nuvem/) rodando no Playwright com Supabase falso e IA falsa, dados inventados (Carlos, ABC 1D23); custo por km dos dados = R$ 3,53, bate com o vídeo. Script em `v29-pack-27-11/telas/shots.py`.
+- Carrossel de anúncio "3 jeitos" (5 cards 4:5) em `carrossel/c1..c5-3jeitos.jpg`. Código UTM: car3.
