@@ -1,5 +1,5 @@
 # V18 — Zé "Qual posto sai mais barato?" (rascunho 24/11/2026, para quinta 26/11 7h)
-STATUS: roteiro aguardando ok do Rafael. Voz (ElevenLabs) só depois do ok.
+STATUS: APROVADO 25/11 21h. Falta gerar a voz (Chrome do PC estava fechado).
 Dilema de dinheiro, final "Comenta A ou B". Resposta na sexta 27/11 7h.
 
 Texto falado (~75 palavras):
