@@ -117,5 +117,7 @@ Criado em 10/11/2026, perfil vazio. Arquivos em `marketing/instagram/` (`perfil.
 ## Novidades para anunciar (26/11/2026)
 - IA no app e lançamento por voz **no ar para todos**. Tudo o que pode e não pode dizer, respostas reais e ideias de peças: `marketing/briefings/2026-11-25-novidades-ia.md`.
 | Pack 26/11 (voz+legenda; pasta v29-pack-27-11, gerador único base.html + gerar.py + mix.py) | V19 "3 jeitos de sobrar mais no frete" (anúncio, 42 s) · R1 "o que o dono esquece" (32 s) · Zé "qual posto?" (30 s, A ou B) · Zé "mão suja" (IA, 19 s) · Zé "frete compensa?" parte 1 (A ou B) e resposta com o chat real (IA) | Toque em Saiba mais (V19) · Comenta APP · Comenta A ou B |
+| V30 IA anúncio (26/11, voz+legenda; pasta v30-ia-anuncio) | "Perguntei pro app: esse frete compensa?" R$ 6 mil/1.000 km/volta vazia → perderia R$ 1.060; depois "Lançar falando" | A IA que só entende de caminhão · Toque em Saiba mais |
+- Versões de anúncio (26/11): r1ad, r2ad, r3bad em v29-pack-27-11/out (gerar.py cria a partir de r1/r2/r3b; final "Toque em Saiba mais").
 - Telas da IA (26/11): prints reais do app no Playwright com Supabase/IA falsos e dados inventados, em `marketing/videos/v29-pack-27-11/telas/` (shots.py refaz). Respostas batem com os dados (custo R$ 3,53/km).
 - Gancho "o único app com IA pro caminhoneiro": NÃO usar "único" (não dá para provar; há apps com IA no exterior e o Meta pode reprovar). Usar "o app do caminhoneiro que tem IA" / "IA que só entende de caminhão".

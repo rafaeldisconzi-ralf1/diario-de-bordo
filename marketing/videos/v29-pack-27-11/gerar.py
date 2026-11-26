@@ -154,6 +154,14 @@ V['r3b'] = dict(TOT=20.4, ft=[0, 0], end=dict(a=18.75), endtxt=COMENTA | dict(el
  vis('#ph',0,16.2);pop('#ph',0,.95);vis('#fim',16.35,18.7);pop('#fim',16.35,.8);vis('#pq',0,16.2);pop('#pq',0,.9,X);
  $('#c1').style.opacity=t<3.83?1:0;$('#c2').style.opacity=t>=3.83?1:0;''')
 
+# ---------------- versões de ANÚNCIO (final "Toque em Saiba mais", voz do v30) ----------------
+SAIBA = dict(ep='Toque em Saiba mais', es='R$ 24,90 por mês · 7 dias de garantia')
+import copy
+for k, tot, t0 in [('r1', 32.2, 30.07), ('r2', 19.2, 17.43), ('r3b', 20.6, 18.82)]:
+    n = copy.deepcopy(V[k]); n['TOT'] = tot; n['endtxt'] = V[k]['endtxt'] | SAIBA
+    n['ph'][-1] = [t0, t0 + 1.22, 'Toque em Saiba mais.']
+    V[k + 'ad'] = n
+
 def build(k):
     s = V[k]
     et = s['endtxt']
