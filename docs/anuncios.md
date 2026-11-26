@@ -39,3 +39,7 @@ testar "Comenta APP", UTM nos links.
 - Nunca criar campanha nem gastar sem o Rafael aprovar o valor.
 - Sem dados reais e sem domínio nos criativos.
 - Escalar no máximo +20% a cada 2 dias.
+
+## Pack 27/11/2026 (Black Friday) — PRONTO, NÃO SUBIDO
+- Em `marketing/anuncios/pack-27-11/README.md`: estrutura, 7 imagens (3 campeãs + 4 novas: volta vazia, esqueceu parcela, depoimento Juninho, 3 jeitos), 2 vídeos com voz (+ V19 quando tiver voz), 5 textos, 5 títulos, UTM `utm_campaign=bf2711`.
+- Proposta R$ 30/dia sex–seg (até R$ 120). Esperando ok do Rafael para verba e para subir (precisa do Chrome do PC).

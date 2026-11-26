@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<style>
+@font-face{font-family:Nunito;src:url(fonts/nunito-latin-900-normal.woff2);font-weight:900}
+@font-face{font-family:Kalam;src:url(fonts/kalam-latin-700-normal.woff2);font-weight:700}
+@font-face{font-family:Barlow;src:url(fonts/barlow-latin-700-normal.woff2);font-weight:700}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:#000}
+#c{position:relative;width:1080px;height:1920px;overflow:hidden;font-family:Nunito}
+#c.f45{height:1350px}
+#foto{position:absolute;left:0;width:1080px;height:auto}
+.faixa{white-space:nowrap;position:absolute;left:50%;transform:translateX(-50%) rotate(var(--r,0deg));color:#fff;font-weight:900;font-style:italic;text-align:center;
+  line-height:1.08;padding:22px 40px 26px;border-radius:30px;box-shadow:0 10px 30px rgba(0,0,0,.35);text-shadow:0 3px 0 rgba(0,0,0,.22);width:max-content;max-width:1000px}
+.verde{background:#2bb24c}
+.vermelha{background:#e23b4b}
+.cta{background:#2bb24c;font-family:Barlow;font-style:normal;font-weight:700;letter-spacing:.02em;border-radius:16px;padding:14px 34px 16px}
+.balao{position:absolute;background:#fff;border:6px solid #1d1d1d;border-radius:50%;display:flex;align-items:center;justify-content:center;text-align:center;
+  font-family:Kalam;font-weight:700;color:#1d1d1d;line-height:1.05;padding:30px 56px 30px 22px}
+.balao svg{position:absolute}
+#ze{position:absolute;filter:drop-shadow(0 8px 14px rgba(0,0,0,.45))}
+</style></head><body>
+<div id="c">
+  <img id="foto">
+  <div id="topo" class="faixa verde"></div>
+  <div id="balao" class="balao"><span id="fala"></span></div>
+  <div id="baixo" class="faixa vermelha"></div>
+  <div id="cta" class="faixa cta">TOQUE EM SAIBA MAIS</div>
+  <img id="ze" src="ze-preocupado.svg">
+</div>
+<script>
+const q=new URLSearchParams(location.search),v=q.get('v')||'1',f45=q.get('f')==='45';
+const V={
+ '1':{foto:'foto1-hd.jpg',topo:'Caminhoneiro? Não sabe<br>quanto sobrou da viagem?',fala:'Cadê o dinheiro do frete?',
+      baixo:'Anote frete, diesel e gastos<br>no celular e veja quanto sobrou',
+      y916:-10,y45:-330,b916:{x:40,y:470,w:400,h:250,cauda:'d'},b45:{x:30,y:300,w:380,h:230,cauda:'d'}},
+ '2':{foto:'foto2-hd.jpg',topo:'Dirige pra patrão? Já perdeu<br>a conta das diárias?',fala:'O acerto nunca bate...',
+      baixo:'Anote diárias, adiantamentos<br>e comissão no celular',
+      y916:-10,y45:-330,b916:{x:40,y:470,w:400,h:250,cauda:'d'},b45:{x:30,y:300,w:380,h:230,cauda:'d'}},
+ '3':{foto:'foto3-hd.jpg',topo:'Ainda anota tudo<br>no caderninho?',fala:'Molhou... perdi tudo!',
+      baixo:'Troque o caderno pelo celular:<br>frete, diesel e gastos salvos',
+      y916:-6,y45:-290,b916:{x:40,y:440,w:380,h:240,cauda:'d'},b45:{x:24,y:250,w:360,h:220,cauda:'d'}} ,'4':{foto:'foto3-hd.jpg',topo:'Frete de R$ 8 mil...<br>e voltou vazio?',fala:'Paguei pra trabalhar?',
+      baixo:'Veja quanto custa cada km<br>antes de fechar o frete',
+      y916:-6,y45:-290,b916:{x:40,y:440,w:380,h:240,cauda:'d'},b45:{x:24,y:250,w:360,h:220,cauda:'d'}},
+ '5':{foto:'foto2-hd.jpg',topo:'Faturou bem e não<br>sobrou nada?',fala:'E a parcela do caminhão?',
+      baixo:'Lance parcela, seguro e imposto<br>e veja a sobra de verdade',
+      y916:-10,y45:-330,b916:{x:30,y:470,w:470,h:240,cauda:'d'},b45:{x:24,y:300,w:450,h:220,cauda:'d'}}
+}[v];
+const c=document.getElementById('c');if(f45)c.classList.add('f45');
+const foto=document.getElementById('foto');foto.src=V.foto;foto.style.top=(f45?V.y45:V.y916)+'px';
+const $=id=>document.getElementById(id);
+$('topo').innerHTML=V.topo;$('fala').textContent=V.fala;$('baixo').innerHTML=V.baixo;
+const L=f45?{topo:40,fs:62,baixo:930,bfs:52,cta:1110,ze:[30,1060,250]}:{topo:200,fs:70,baixo:1250,bfs:56,cta:1480,ze:[30,1440,300]};
+$('topo').style.cssText+=`top:${L.topo}px;font-size:${L.fs}px;--r:-1.5deg`;
+$('baixo').style.cssText+=`top:${L.baixo}px;font-size:${L.bfs}px;--r:-2deg`;
+$('cta').style.cssText+=`top:${L.cta}px;font-size:${f45?40:46}px;left:${f45?600:620}px`;
+for(const id of ['topo','baixo']){const e=$(id);let fs=parseFloat(e.style.fontSize);while(e.offsetWidth>1010&&fs>30){fs-=2;e.style.fontSize=fs+'px'}}
+const z=$('ze');z.style.left=L.ze[0]+'px';z.style.top=L.ze[1]+'px';z.style.width=L.ze[2]+'px';
+const B=f45?V.b45:V.b916,b=$('balao');
+b.style.left=B.x+'px';b.style.top=B.y+'px';b.style.width=B.w+'px';b.style.height=B.h+'px';b.style.fontSize=(f45?50:56)+'px';
+// cauda do balão apontando para a direita (para o rosto)
+const s=document.createElementNS('http://www.w3.org/2000/svg','svg');s.setAttribute('viewBox','0 0 120 80');s.setAttribute('width','120');s.setAttribute('height','80');
+s.style.cssText=`right:-78px;top:${B.h*0.48}px`;
+s.innerHTML='<path d="M0 6 L112 40 L0 58" fill="#fff" stroke="#1d1d1d" stroke-width="6" stroke-linejoin="round"/><rect x="-2" y="14" width="14" height="36" fill="#fff"/>';
+b.appendChild(s);
+</script>
+</body></html>
