@@ -1,12 +1,12 @@
 // IA do app: "Pergunte ao Diário" (chat só sobre caminhão/frete) e "Lançar falando" (voz → lançamento).
 // Usa o Groq (plano grátis). Segredo necessário: GROQ_API_KEY, colado em Edge Functions → Secrets.
-// Opcional: IA_MODELO (padrão llama-3.3-70b-versatile) para trocar o modelo sem mexer no código.
+// Opcional: IA_MODELO (padrão openai/gpt-oss-120b; o Llama 3.3 virou só Enterprise no Groq em 11/2026) para trocar o modelo sem mexer no código.
 // Verify JWT: OFF (a função confere o login sozinha, igual às outras).
 import { createClient } from "jsr:@supabase/supabase-js@2";
 
 const sb = createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!);
 const GROQ = "https://api.groq.com/openai/v1";
-const MODELO = Deno.env.get("IA_MODELO") || "llama-3.3-70b-versatile";
+const MODELO = Deno.env.get("IA_MODELO") || "openai/gpt-oss-120b";
 const MODELO_VOZ = "whisper-large-v3-turbo";
 const LIMITE = { pergunta: 20, voz: 30 };   // por conta, por dia
 const LIMITE_GERAL = 1500;                   // todo o app, por dia (protege o plano grátis)
@@ -51,12 +51,13 @@ Números: "seis e dezenove" = 6.19; "trezentos litros" = 300; "mil e duzentos" =
 Nunca invente valor que ele não falou: deixe null.
 Hoje é ${new Date(Date.now() - 3 * 3600_000).toISOString().slice(0, 10)}.`;
 
-async function groqChat(messages: unknown[], jsonMode = false, maxTokens = 450) {
+async function groqChat(messages: unknown[], jsonMode = false, maxTokens = 1500) {
   const r = await fetch(`${GROQ}/chat/completions`, {
     method: "POST",
     headers: { Authorization: `Bearer ${Deno.env.get("GROQ_API_KEY")}`, "Content-Type": "application/json" },
     body: JSON.stringify({
-      model: MODELO, messages, temperature: jsonMode ? 0 : 0.4, max_tokens: maxTokens,
+      model: MODELO, messages, temperature: jsonMode ? 0.2 : 0.5, max_tokens: maxTokens,
+      ...(/gpt-oss/.test(MODELO) ? { reasoning_effort: "low" } : {}),
       ...(jsonMode ? { response_format: { type: "json_object" } } : {}),
     }),
   });
@@ -150,7 +151,7 @@ Deno.serve(async (req) => {
     const bruto = await groqChat([
       { role: "system", content: REGRAS_VOZ(cats.length ? cats : ["Outro"], !!body.emViagem) },
       { role: "user", content: texto.slice(0, 600) },
-    ], true, 250);
+    ], true, 900);
     let l: Record<string, unknown> = {};
     try { l = JSON.parse(bruto); } catch { l = { tipo: "nenhum", motivo: "não entendi" }; }
     const tipo = ["diesel", "gasto", "diaria"].includes(String(l.tipo)) ? String(l.tipo) : "nenhum";

@@ -104,7 +104,7 @@ Hostinger → site trilhanova.shop → Avançado → GIT, branch `main`, pasta `
 
 ## IA: "Pergunte ao Diário" e "Lançar falando" (25/11/2026)
 - Botões na tela Início, abaixo de Abasteci/Gastei/Diária. **Por enquanto só o admin vê** (`IA_PARA_TODOS=false` em `nuvem/index.html`). Ligar para todos depois de testar com a chave.
-- Servidor: função `ia` (`supabase/functions/ia/index.ts`, Verify JWT OFF). Usa o **Groq** (plano grátis, sem cartão): chat `llama-3.3-70b-versatile` (troca pelo segredo opcional `IA_MODELO`) e voz `whisper-large-v3-turbo`.
+- Servidor: função `ia` (`supabase/functions/ia/index.ts`, Verify JWT OFF). Usa o **Groq** (plano grátis, sem cartão): chat `openai/gpt-oss-120b` (troca pelo segredo opcional `IA_MODELO`) e voz `whisper-large-v3-turbo`.
 - Segredo: `GROQ_API_KEY` em Edge Functions → Secrets (quem cola é o Rafael). Sem a chave a função responde "A IA ainda está sendo ligada".
 - Só conta logada com acesso em dia (ou admin). Limite por conta/dia: 20 perguntas e 30 usos de voz; teto geral 1.500/dia (tabela `ia_uso`, função `usar_ia`, migração `20261125_ia.sql`). Se a IA falhar, a vez volta (`devolver_ia`).
 - Chat: só assuntos de caminhão, frete, diesel, manutenção, documentação, estrada e uso do app; fora disso recusa. O app manda junto um resumo dos lançamentos (até 12 meses e 30 viagens, em JSON) para a IA responder com os números da pessoa. Nada disso fica guardado no servidor.
