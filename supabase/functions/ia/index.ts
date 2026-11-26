@@ -172,8 +172,8 @@ Deno.serve(async (req) => {
     } else lanc.motivo = String(l.motivo || "").slice(0, 120);
     return json({ texto, lancamento: lanc, restam: r.restam });
   } catch (e) {
-    if (reservado) await sb.rpc("devolver_ia", { uid: reservado.uid, tipo_: reservado.tipo }).catch(() => {});
     console.error(e);
+    if (reservado) { try { await sb.rpc("devolver_ia", { uid: reservado.uid, tipo_: reservado.tipo }); } catch { /* ignora */ } }
     const limite = (e as { limite?: boolean })?.limite;
     return json({ erro: limite ? "A IA está muito ocupada agora. Tente daqui a um minuto." : "Não consegui agora. Tente de novo." }, limite ? 429 : 500);
   }
