@@ -2,6 +2,11 @@
 
 Plano completo (doc vivo): https://claude.ai/artifact/AMsPbNAjyBwKhrzTR9Msp1
 
+## Campanha 28–30/11/2026 (PUBLICADA em 27/11, Plano V2)
+- "Vendas - Fim de semana 28-30/11": 1 conjunto "Homens 25-64 - Reels e Stories", R$ 40/dia, sáb 28/11 07:00 → seg 30/11 23:59. 2 anúncios: Imagens (9 artes 9x16) e Videos (6 vídeos 9x16). UTM `bf2811` + `utm_content=imagens|videos`. Detalhes e diferenças do plano em `marketing/anuncios/pack-27-11/README.md`.
+- Lições: campanha de Vendas Advantage+ só obedece idade mínima; público e posicionamento são sugestão. "Publicar" do editor publica só o anúncio aberto: conferir o outro. Vídeos grandes: comprimir (crf 30) para subir pelo navegador.
+- Regras: R$ 50 sem início de compra → pausar e avisar. Não mexer em 48 h. Ler resultado na terça.
+
 ## Campanha do fim de semana 21–23/11/2026 (NO AR, publicada em 21/11)
 - Status 21/11: campanha "Vendas - Fim de semana 21-23/11" publicada. Conjunto "Brasil amplo - Advantage+", R$ 40/dia (ok do Rafael), começa 21/11 07:00. Saldo pré-pago ~R$ 121.
 - 2 anúncios com mídia flexível: "Imagens - 6 fotos" (6 imagens, cada uma em 4:5 e 9:16, + img1 quadrada 1:1) e "Vídeos - 5 vídeos". 5 textos e 5 títulos; links com UTM em "Parâmetros de URL". Imagens por IA e aprimoramentos do Meta desligados.

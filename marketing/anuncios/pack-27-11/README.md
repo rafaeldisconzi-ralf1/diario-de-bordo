@@ -128,3 +128,10 @@ Códigos: img3, img6, img2, d1, ia1, ia2, ia3, n1, n3, ugc, v30, g1, g2, g3, r2a
 - Saldo Meta em 26/11: R$ 49,79. Para R$ 120 faltam R$ 70,21; colocar R$ 75 por Pix.
 - Regras: R$ 50 sem nenhum início de compra → pausar e avisar. Anúncio com R$ 20 e 0 clique → pausar só ele. Não mexer nas 48 h. Julgar pela venda real.
 - Depois do fim de semana: ver idade/sexo/posicionamento de novo e comparar com esta tabela.
+
+
+## PUBLICADO em 27/11/2026 (Plano V2 montado no Gerenciador de Anúncios)
+- Campanha "Vendas - Fim de semana 28-30/11" (Vendas, otimiza "Iniciar finalização da compra", pixel "Diario de Bordo - Site"). Conjunto "Homens 25-64 - Reels e Stories": R$ 40/dia, sáb 28/11 07:00 → seg 30/11 23:59 (≈ R$ 120). Status: em processamento/revisão do Meta.
+- Anúncio "Imagens - 9 artes 9x16" (9 imagens) e "Videos - 6 videos 9x16" (ugc, v30, g1, g2, g3, r2ad). 5 textos, 5 títulos, botão "Saiba mais". Aprimoramentos de IA do Meta desligados.
+- Diferenças do plano: (1) campanha de Vendas é Advantage+: só a idade mínima 25 é regra; homens 25-64 é só sugestão para o Meta. (2) Posicionamentos automáticos (Advantage+), não manuais. (3) UTM por anúncio, não por criativo: `utm_content=imagens` e `utm_content=videos`. (4) ugc e r2ad foram comprimidos para subir (mesma arte). (5) Sugestões de imagem por IA do Meta não aplicadas; CTA e efeitos de vídeo do Meta desligados.
+- O botão "Publicar" do editor publicou só o anúncio de vídeos; o de imagens ficou rascunho e foi publicado à parte ("Postar" na linha do anúncio). Conferir sempre que os dois estão "Em processamento"/ativos.
