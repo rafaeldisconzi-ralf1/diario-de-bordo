@@ -113,6 +113,8 @@ Criado em 10/11/2026, perfil vazio. Arquivos em `marketing/instagram/` (`perfil.
 - Português não existe no `--lang`/`--ocr-lang`: usar `--lang en --ocr-lang en` e responder ao Rafael em português.
 - Uso no Diário de Bordo: Rafael manda um Reels de caminhoneiro que viralizou → desmontar → refazer a mesma estrutura e ritmo com o Zé e o app em código (HTML + render.py), sem custo. Não usar ChatCut nem gerador de vídeo pago sem perguntar.
 - Para baixar o vídeo do Instagram, só pelo Chrome do Rafael (o arquivo é blob); pedir o arquivo ou baixar pelo celular se não der.
+- Jeito que funcionou (26/11): no Chrome, `performance.getEntriesByType('resource')` dá as URLs .mp4 (vídeo m367, áudio m78); `fetch` sem bytestart/byteend baixa o arquivo inteiro. Para LER o vídeo não precisa transferir: montar folhas de quadros (1 por segundo) num canvas na própria página e tirar print. O áudio (~400 KB) vai pela branch temporária do GitHub. A transcrição automática (rea-video/whisper) não funciona aqui: os modelos são bloqueados; ler as legendas queimadas nos quadros.
+- 26/11: desmontado o reel do @ofelipemart (MiroFish, "Comenta SIMULA", 957 comentários em 5 h). Estrutura "existe um X que… / só tem 3 passos / aviso honesto / manda pro amigo / comenta PALAVRA". Roteiro da nossa versão (aguardando aprovação) em `marketing/ideias/2026-11-26-reel-simula-mirofish.md`.
 
 ## Novidades para anunciar (26/11/2026)
 - IA no app e lançamento por voz **no ar para todos**. Tudo o que pode e não pode dizer, respostas reais e ideias de peças: `marketing/briefings/2026-11-25-novidades-ia.md`.
