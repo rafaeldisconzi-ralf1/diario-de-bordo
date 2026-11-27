@@ -3,7 +3,7 @@
 Plano completo (doc vivo): https://claude.ai/artifact/AMsPbNAjyBwKhrzTR9Msp1
 
 ## Campanha 28–30/11/2026 (PUBLICADA em 27/11, Plano V2)
-- MUDANÇA 27/11 18h: Rafael pediu para começar no mesmo dia. Início passou para sex 27/11 18:30 (fim segue seg 30/11 23:59), total ≈ R$ 160 (4 dias x R$ 40). Sem interesses definidos: público é só Advantage+ (idade mín. 25, sugestão homens 25–64).
+- MUDANÇA 27/11 18h: Rafael pediu para começar no mesmo dia. Início passou para sex 27/11 18:30 (fim segue seg 30/11 23:59), total ≈ R$ 160 (4 dias x R$ 40). Interesses colocados às 18h45 como sugestão (Advantage+): cargo "Motorista de Carreta", empregador "caminhoneiro", interesses Transporte rodoviário, Scania, Volvo Trucks, Renault Trucks. Idade mín. 25; sugestão homens 25–64. Rafael exige sempre definir interesse do público em campanha nova.
 - "Vendas - Fim de semana 28-30/11": 1 conjunto "Homens 25-64 - Reels e Stories", R$ 40/dia, sáb 28/11 07:00 → seg 30/11 23:59. 2 anúncios: Imagens (9 artes 9x16) e Videos (6 vídeos 9x16). UTM `bf2811` + `utm_content=imagens|videos`. Detalhes e diferenças do plano em `marketing/anuncios/pack-27-11/README.md`.
 - Lições: campanha de Vendas Advantage+ só obedece idade mínima; público e posicionamento são sugestão. "Publicar" do editor publica só o anúncio aberto: conferir o outro. Vídeos grandes: comprimir (crf 30) para subir pelo navegador.
 - Regras: R$ 50 sem início de compra → pausar e avisar. Não mexer em 48 h. Ler resultado na terça.
