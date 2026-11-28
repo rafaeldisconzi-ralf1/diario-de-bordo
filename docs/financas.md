@@ -61,3 +61,6 @@ rodar `select aplicar_pagamentos('<email>')`. Não entram como venda (valor 0).
 - Servidor (`supabase/functions/pix/index.ts`, `BF_FIM`) cobra R$ 19,90 até `2026-12-01T03:00Z` e volta sozinho para R$ 24,90. Pagamento aberto durante a Black Friday vale o preço dela, mesmo se pago depois.
 - Página de vendas: faixa preta no topo, quadro "Black Friday" com relógio e cartão do mensal "de R$ 24,90 por R$ 19,90". Tudo some sozinho depois do prazo (mesmo `BF_FIM` no `assinar/index.html`).
 - Depois de 01/12 pode apagar o código da Black Friday (não é obrigatório: ele não faz nada fora do prazo).
+
+## Preço de lançamento: mensagem retirada (27/11/2026)
+- A pedido do Rafael, saiu da página de vendas o quadro "Preço de lançamento" ("o app vale R$ 49,90… depois do lançamento passa para R$ 49,90") e a linha "Depois do lançamento: R$ 49,90" do cartão mensal (virou "Sem fidelidade. Pague mês a mês."). Não há mais promessa de aumento para R$ 49,90 na página.
