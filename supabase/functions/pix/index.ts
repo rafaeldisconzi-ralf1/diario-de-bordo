@@ -6,6 +6,12 @@ const PLANOS: Record<string, { valor: number; dias: number; nome: string }> = {
   mensal: { valor: 24.9, dias: 30, nome: "Diário de Bordo - Mensal" },
   anual: { valor: 179.9, dias: 365, nome: "Diário de Bordo - Anual" },
 };
+// Black Friday 2026: mensal R$ 19,90 até o fim de segunda 30/11 (Brasília). Depois volta sozinho para R$ 24,90.
+const BF_FIM = Date.parse("2026-12-01T03:00:00Z");
+function planosEm(quando = Date.now()) {
+  if (quando >= BF_FIM) return PLANOS;
+  return { ...PLANOS, mensal: { ...PLANOS.mensal, valor: 19.9, nome: "Diário de Bordo - Mensal (Black Friday)" } };
+}
 // Limite por IP (o banco conta de forma atômica). Se o banco falhar, deixa passar para não travar vendas.
 async function liberado(req: Request, acao: string, max: number, janelaMin: number) {
   const ip = (req.headers.get("cf-connecting-ip") || req.headers.get("x-forwarded-for") || "desconhecido").split(",")[0].trim().slice(0, 64);
@@ -45,7 +51,9 @@ async function atualizar(id: string) {
   if (!linha) {
     // pagamento com cartão (Checkout Pro): o id só existe depois que a pessoa paga
     const [plano, email] = String(p.external_reference || "").split("|");
-    const P = Object.hasOwn(PLANOS, plano) ? PLANOS[plano] : null;
+    // vale o preço do momento em que a pessoa abriu o pagamento (quem abriu na Black Friday paga o preço dela)
+    const tabela = planosEm(Date.parse(p.date_created) || Date.now());
+    const P = Object.hasOwn(tabela, plano) ? tabela[plano] : null;
     if (!P || !email || Number(p.transaction_amount) + 0.001 < P.valor) return null;
     const nova = { id, email, plano, valor: P.valor, dias: P.dias, status: p.status };
     await sb.from("pagamentos").upsert(nova, { onConflict: "id", ignoreDuplicates: true });
@@ -67,7 +75,8 @@ Deno.serve(async (req) => {
   try {
     if (body.acao === "criar") {
       const email = String(body.email || "").trim().toLowerCase();
-      const plano = Object.hasOwn(PLANOS, String(body.plano)) ? PLANOS[body.plano] : null;
+      const tabela = planosEm();
+      const plano = Object.hasOwn(tabela, String(body.plano)) ? tabela[body.plano] : null;
       if (!/^\S+@\S+\.\S+$/.test(email) || !plano) return json({ erro: "Confira o e-mail." }, 400);
       if (!(await liberado(req, "criar", 10, 10))) return json({ erro: MUITO }, 429);
       const vence = new Date(Date.now() + 30 * 60_000).toISOString().replace("Z", "+00:00");
@@ -92,7 +101,8 @@ Deno.serve(async (req) => {
     }
     if (body.acao === "cartao") {
       const email = String(body.email || "").trim().toLowerCase();
-      const plano = Object.hasOwn(PLANOS, String(body.plano)) ? PLANOS[body.plano] : null;
+      const tabela = planosEm();
+      const plano = Object.hasOwn(tabela, String(body.plano)) ? tabela[body.plano] : null;
       if (!/^\S+@\S+\.\S+$/.test(email) || !plano) return json({ erro: "Confira o e-mail." }, 400);
       if (!(await liberado(req, "criar", 10, 10))) return json({ erro: MUITO }, 429);
       const volta = `https://frete.trilhanova.shop/assinar/?email=${encodeURIComponent(email)}&pago=cartao`;
