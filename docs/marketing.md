@@ -121,6 +121,8 @@ Criado em 10/11/2026, perfil vazio. Arquivos em `marketing/instagram/` (`perfil.
 | Pack 26/11 (voz+legenda; pasta v29-pack-27-11, gerador único base.html + gerar.py + mix.py) | V19 "3 jeitos de sobrar mais no frete" (anúncio, 42 s) · R1 "o que o dono esquece" (32 s) · Zé "qual posto?" (30 s, A ou B) · Zé "mão suja" (IA, 19 s) · Zé "frete compensa?" parte 1 (A ou B) e resposta com o chat real (IA) | Toque em Saiba mais (V19) · Comenta APP · Comenta A ou B |
 | V30 IA anúncio (26/11, voz+legenda; pasta v30-ia-anuncio) | "Perguntei pro app: esse frete compensa?" R$ 6 mil/1.000 km/volta vazia → perderia R$ 1.060; depois "Lançar falando" | A IA que só entende de caminhão · Toque em Saiba mais |
 | V31 ganchos fortes (26/11, voz+legenda; pasta v31-ganchos) | "Pagou pra trabalhar" (−R$ 400 no mês) · "Para! Não aceita esse frete" (IA: −R$ 1.060) · "Frete bonito é armadilha" (R$ 10 mil sobra menos que R$ 7 mil) | Toque em Saiba mais |
+| V30 UGC Grok (26/11; pasta v30-ugc-grok) | Apresentador de IA: "esse app faz a conta do frete pra você" | Toque em Saiba mais |
+| V32 UGC 3 ângulos (28/11; pasta v32-ugc-angulos; Grok + edit.py) | A depoimento real (lê print real) · B "pagou pra trabalhar" · C demonstração (abastecer falando) | 7 dias de garantia · Toque em Saiba mais |
 - Versões de anúncio (26/11): r1ad, r2ad, r3bad em v29-pack-27-11/out (gerar.py cria a partir de r1/r2/r3b; final "Toque em Saiba mais").
 - Telas da IA (26/11): prints reais do app no Playwright com Supabase/IA falsos e dados inventados, em `marketing/videos/v29-pack-27-11/telas/` (shots.py refaz). Respostas batem com os dados (custo R$ 3,53/km).
 - Gancho "o único app com IA pro caminhoneiro": NÃO usar "único" (não dá para provar; há apps com IA no exterior e o Meta pode reprovar). Usar "o app do caminhoneiro que tem IA" / "IA que só entende de caminhão".
@@ -129,3 +131,5 @@ Criado em 10/11/2026, perfil vazio. Arquivos em `marketing/instagram/` (`perfil.
 - Seção "Novidade · Agora o app escuta e responde" (`#ia`), logo depois de "É só tocar no botão": cartão "Lançar falando" (fala → formulário preenchido) e cartão "Pergunte ao Diário" (conversa com a resposta real do teste de frete). Nota: pode errar, confira; já vem na assinatura.
 - Item "Fala e o app anota." em "Fácil de verdade" e pergunta "Como funciona a IA?" nas Dúvidas (precisa de internet).
 - Para anúncio, dá para mandar direto para a seção: link da página com `#ia` no fim.
+
+- UGC no Grok (28/11): fluxo = imagem 9:16 (prompt com cabine/caminhão real, sem texto) → vídeo 10 s com a fala exata no prompt → baixar pelo Chrome → `edit.py` (legenda, telas, música, efeitos, cartão final). Rafael aprovou: sem aviso de IA; pode juntar clipes de 10 s para vídeo maior. Ator nunca finge ser cliente. Rotação de ângulos em `marketing/videos/v32-ugc-angulos/roteiro.md`.
