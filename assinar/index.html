@@ -232,6 +232,13 @@ footer{padding-block:28px 40px;color:var(--apagado);font-size:17px;border-top:2p
 .lanc{display:flex;flex-direction:column;align-items:flex-start;gap:10px;background:var(--asfalto2);border:2px dashed var(--placa);border-radius:16px;padding:16px 18px;margin:18px 0 26px;max-width:820px}
 .lanc-tag{background:var(--placa);color:var(--placa-tinta);font-family:var(--display);font-weight:800;font-size:20px;letter-spacing:.04em;text-transform:uppercase;padding:5px 14px;border-radius:99px}
 .lanc p{margin:0;font-size:20px;line-height:1.35}
+.bf-faixa{display:block;background:#0b0b0c;color:#fff;text-align:center;font-weight:800;font-size:17px;line-height:1.3;padding:10px 16px;text-decoration:none;border-bottom:3px solid var(--placa)}
+.bf-faixa b{color:var(--placa)}
+.bf{display:flex;flex-direction:column;align-items:flex-start;gap:8px;background:#0b0b0c;border:3px solid var(--placa);border-radius:16px;padding:16px 18px;margin:18px 0 18px;max-width:640px}
+.bf-tag{background:var(--placa);color:var(--placa-tinta);font-family:var(--display);font-weight:800;font-size:22px;letter-spacing:.06em;text-transform:uppercase;padding:5px 14px;border-radius:99px}
+.bf p{margin:0;font-size:21px;line-height:1.35}
+.bf .relogio{font-family:var(--display);font-weight:800;font-size:26px;color:var(--placa);font-variant-numeric:tabular-nums}
+.plano .de .bf-de{color:var(--placa);font-weight:800}
 </style>
 <!-- Meta Pixel (Diario de Bordo - Site). ID publico, nao e segredo. Admin (bordo-admin=1) nao conta. -->
 <script>
@@ -243,6 +250,7 @@ fbq('init','2259208501675823');fbq('track','PageView');})();
 <body>
 <script>document.documentElement.classList.add("js")</script>
 
+<a class="bf-faixa" id="bf-faixa" href="#preco" hidden>🖤 <b>BLACK FRIDAY:</b> mensal de R$ 24,90 por <b>R$ 19,90</b>, só até segunda 30/11</a>
 <header class="faixa"><div class="miolo topo"><img src="/icon-192.png" alt="">Diário de Bordo</div></header>
 
 <main>
@@ -321,13 +329,14 @@ fbq('init','2259208501675823');fbq('track','PageView');})();
 
 <section class="faixa bloco" id="preco"><div class="miolo">
   <h2>Menos de <span class="amarelo">1 real</span> por dia</h2>
+  <div class="bf" id="bf" hidden><span class="bf-tag">Black Friday</span><p>Plano mensal de <s>R$ 24,90</s> por <b style="white-space:nowrap">R$ 19,90</b>. Só até segunda, 30/11, às 23h59.</p><span class="relogio" id="bf-relogio" aria-live="off"></span></div>
   <div class="lanc surge"><span class="lanc-tag">Preço de lançamento</span><p>O app vale <b style="white-space:nowrap">R$ 49,90</b> por mês. Neste lançamento, sai por <b style="white-space:nowrap">R$ 24,90</b>. Por tempo limitado: depois do lançamento, o mensal passa para <span style="white-space:nowrap">R$ 49,90</span>.</p></div>
   <div class="planos">
     <div class="plano surge">
       <span class="nome">Mensal</span>
-      <span class="de">Depois do lançamento: <s>R$ 49,90</s></span>
-      <span class="valor">R$ 24,90<small>/mês</small></span>
-      <span class="dia">Dá R$ 0,83 por dia</span>
+      <span class="de" id="m-de">Depois do lançamento: <s>R$ 49,90</s></span>
+      <span class="valor" id="m-valor">R$ 24,90<small>/mês</small></span>
+      <span class="dia" id="m-dia">Dá R$ 0,83 por dia</span>
       <a class="btn" href="/nuvem/" data-plano="mensal">Assinar mensal</a>
     </div>
     <div class="plano melhor surge">
@@ -368,11 +377,29 @@ fbq('init','2259208501675823');fbq('track','PageView');})();
 <div class="fundo" id="pix" hidden role="dialog" aria-modal="true" aria-labelledby="pix-titulo">
  <div class="janela" id="pix-janela"></div>
 </div>
-<div class="barra" id="barra" aria-hidden="true"><span class="preco">R$ 24,90<small>por mês</small></span><a class="btn" href="#preco" tabindex="-1">Quero o meu</a></div>
+<div class="barra" id="barra" aria-hidden="true"><span class="preco" id="barra-preco">R$ 24,90<small>por mês</small></span><a class="btn" href="#preco" tabindex="-1">Quero o meu</a></div>
 
 <footer class="faixa" style="padding-bottom:110px">Diário de Bordo · <a href="/nuvem/" style="color:inherit">Já sou cliente</a></footer>
 
 <script>
+/* ===== Black Friday 2026 (some sozinha depois de segunda 30/11, 23h59 de Brasília) ===== */
+const BF_FIM=Date.parse('2026-12-01T03:00:00Z');
+const VALORES={mensal:Date.now()<BF_FIM?19.90:24.90,anual:179.90};
+(function(){
+  if(Date.now()>=BF_FIM)return;
+  const $=id=>document.getElementById(id);
+  ['bf-faixa','bf'].forEach(id=>{const e=$(id);if(e)e.hidden=false});
+  const de=$('m-de'),val=$('m-valor'),dia=$('m-dia'),barra=$('barra-preco');
+  if(de)de.innerHTML='<span class="bf-de">Black Friday:</span> de <s>R$ 24,90</s>';
+  if(val)val.innerHTML='R$ 19,90<small>/mês</small>';
+  if(dia)dia.textContent='Dá R$ 0,66 por dia';
+  if(barra)barra.innerHTML='R$ 19,90<small>Black Friday</small>';
+  const rel=$('bf-relogio');
+  const tick=()=>{const f=BF_FIM-Date.now();if(f<=0){location.reload();return}
+    const d=Math.floor(f/864e5),h=Math.floor(f/36e5)%24,m=Math.floor(f/6e4)%60,sg=Math.floor(f/1e3)%60;
+    if(rel)rel.textContent='Acaba em '+(d?d+'d ':'')+String(h).padStart(2,'0')+'h '+String(m).padStart(2,'0')+'min '+String(sg).padStart(2,'0')+'s'};
+  tick();setInterval(tick,1000);
+})();
 
 // ===== efeitos =====
 const calmo=matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -417,13 +444,15 @@ const EV_ORIGEM=(()=>{const q=new URLSearchParams(location.search),u=(q.get('utm
     for(const [k,re] of [['instagram',/instagram/],['facebook',/facebook|fb\.|messenger/],['whatsapp',/whatsapp|wa\.me/],['google',/google/],['youtube',/youtube|youtu\.be/],['tiktok',/tiktok/]])if(re.test(h))return k;
     return h.slice(0,20)}catch(_){return 'direto'}})();
 function evento(tipo){try{if(localStorage.getItem('bordo-admin')==='1')return}catch(_){}
-  try{if(window.fbq){const v={mensal:24.90,anual:179.90}[typeof planoPix!=='undefined'?planoPix:'']||0;if(tipo==='assinar')fbq('track','InitiateCheckout',{currency:'BRL',value:v});else if(tipo==='pix'||tipo==='cartao')fbq('track','AddPaymentInfo',{currency:'BRL',value:v,payment_type:tipo})}}catch(_){}
+  try{if(window.fbq){const v=VALORES[typeof planoPix!=='undefined'?planoPix:'']||0;if(tipo==='assinar')fbq('track','InitiateCheckout',{currency:'BRL',value:v});else if(tipo==='pix'||tipo==='cartao')fbq('track','AddPaymentInfo',{currency:'BRL',value:v,payment_type:tipo})}}catch(_){}
   try{fetch(EV_URL,{method:'POST',keepalive:true,headers:{'Content-Type':'application/json',apikey:EV_KEY,Authorization:'Bearer '+EV_KEY},body:JSON.stringify({p_tipo:tipo,p_origem:EV_ORIGEM,p_visitante:EV_VIS})}).catch(()=>{})}catch(_){}}
 if(!new URLSearchParams(location.search).has('pago'))evento('visita');
 
 // ===== Pix =====
 const PIX_URL='https://kmaldmypdvapihsxpfmz.supabase.co/functions/v1/pix';
 const PLANOS={mensal:{nome:'Mensal',valor:'R$ 24,90',obs:'30 dias de acesso'},anual:{nome:'Anual',valor:'R$ 179,90',obs:'1 ano de acesso'}};
+// Black Friday 2026: mensal R$ 19,90 até o fim de segunda 30/11 (Brasília). O servidor cobra o mesmo valor e volta sozinho depois.
+if(Date.now()<BF_FIM){PLANOS.mensal.valor='R$ 19,90';PLANOS.mensal.nome='Mensal (Black Friday)'}
 const fundo=document.getElementById('pix'),jan=document.getElementById('pix-janela');
 let emailPix=(new URLSearchParams(location.search).get('email')||'').trim(),planoPix='anual',espera=null;
 const escH=t=>String(t||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -510,7 +539,7 @@ function telaPix(d){
   },4000);
 }
 function telaAprovado(){
-  try{if(window.fbq&&!sessionStorage.getItem('bordo-fbp')){sessionStorage.setItem('bordo-fbp','1');fbq('track','Purchase',{currency:'BRL',value:{mensal:24.90,anual:179.90}[planoPix]||0})}}catch(_){}
+  try{if(window.fbq&&!sessionStorage.getItem('bordo-fbp')){sessionStorage.setItem('bordo-fbp','1');fbq('track','Purchase',{currency:'BRL',value:VALORES[planoPix]||0})}}catch(_){}
   jan.innerHTML=`<div class="aprovado">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M7.5 12.5l3 3 6-6.5"/></svg>
     <h3 id="pix-titulo">Pagamento aprovado!</h3>

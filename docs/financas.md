@@ -54,3 +54,10 @@ Liberados pelo SQL Editor do Supabase: uma linha em `pagamentos` com id `cortesi
 Se a conta ainda não existe, vale no primeiro login (gatilho `novo_usuario` → `aplicar_pagamentos`); se já existe,
 rodar `select aplicar_pagamentos('<email>')`. Não entram como venda (valor 0).
 - 10/11/2026: luiscarlosdisconzi2529@gmail.com e leandrobomfim16089912@gmail.com — 365 dias (pedido do Rafael).
+
+## Black Friday 2026 (27/11 a 30/11)
+- Mensal **R$ 19,90** (de R$ 24,90) até segunda 30/11 às 23h59 de Brasília. Anual continua R$ 179,90.
+- Desconto real, decidido pelo Rafael em 27/11 (não usar "preço de Black Friday" sem baixar preço: risco de propaganda enganosa).
+- Servidor (`supabase/functions/pix/index.ts`, `BF_FIM`) cobra R$ 19,90 até `2026-12-01T03:00Z` e volta sozinho para R$ 24,90. Pagamento aberto durante a Black Friday vale o preço dela, mesmo se pago depois.
+- Página de vendas: faixa preta no topo, quadro "Black Friday" com relógio e cartão do mensal "de R$ 24,90 por R$ 19,90". Tudo some sozinho depois do prazo (mesmo `BF_FIM` no `assinar/index.html`).
+- Depois de 01/12 pode apagar o código da Black Friday (não é obrigatório: ele não faz nada fora do prazo).
