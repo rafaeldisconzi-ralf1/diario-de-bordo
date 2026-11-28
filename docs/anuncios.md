@@ -56,3 +56,12 @@ testar "Comenta APP", UTM nos links.
 - 26/11 13h30: PLANO FINAL no README (fim do arquivo). Entrou a IA: 3 imagens (ia1 fala, ia2 frete compensa, ia3 sobrou) e vídeo v30 "Perguntei pro app: esse frete compensa?". Vídeos da sessão videomaker viraram anúncio (r1ad, r2ad, r3bad com "Toque em Saiba mais"). Saldo 26/11: R$ 49,79. 14h: + 3 vídeos de gancho forte (v31: pagou pra trabalhar, Para!, frete bonito armadilha) no anúncio de vídeos.
 - Em `marketing/anuncios/pack-27-11/README.md`: estrutura, 7 imagens (3 campeãs + 4 novas: volta vazia, esqueceu parcela, depoimento Juninho, 3 jeitos), 2 vídeos com voz (+ V19 quando tiver voz), 5 textos, 5 títulos, UTM `utm_campaign=bf2711`.
 - Proposta R$ 30/dia sex–seg (até R$ 120). Esperando ok do Rafael para verba e para subir (precisa do Chrome do PC).
+
+## Pesquisa low ticket no Meta (28/11/2026)
+Fontes: guias de 2026 (viniensina, Jon Loomer, selzee, bir.ch, ugcbuilder, metricfixer). Resumo:
+- Estrutura enxuta: 1 campanha Vendas, poucos conjuntos, público amplo, posicionamentos automáticos.
+- Criativo é o "novo público" (Andromeda): anúncios com ângulos realmente diferentes (dor, prova, demonstração, formato), não variações do mesmo. Referências: 8–15 anúncios por conjunto; trocar/entrar criativos novos a cada 1–2 semanas.
+- Orçamento de infoproduto barato no Brasil: R$ 40–80/dia (guia viniensina). Nosso R$ 40/dia está no piso.
+- Evento: ideal é Compra. Com pouco volume, otimizar um evento mais acima (Iniciar finalização) é aceito, mas conferir toda semana o custo real por venda no app. Meta cita ~50 resultados/semana como referência, não obrigação.
+- Conferir Pixel + API de Conversões (Compra com valor) para o sinal não falhar.
+- Não mudar durante a aprendizagem; 2–3 dias sem mexer.
