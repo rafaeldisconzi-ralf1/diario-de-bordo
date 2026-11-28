@@ -124,3 +124,8 @@ Criado em 10/11/2026, perfil vazio. Arquivos em `marketing/instagram/` (`perfil.
 - Versões de anúncio (26/11): r1ad, r2ad, r3bad em v29-pack-27-11/out (gerar.py cria a partir de r1/r2/r3b; final "Toque em Saiba mais").
 - Telas da IA (26/11): prints reais do app no Playwright com Supabase/IA falsos e dados inventados, em `marketing/videos/v29-pack-27-11/telas/` (shots.py refaz). Respostas batem com os dados (custo R$ 3,53/km).
 - Gancho "o único app com IA pro caminhoneiro": NÃO usar "único" (não dá para provar; há apps com IA no exterior e o Meta pode reprovar). Usar "o app do caminhoneiro que tem IA" / "IA que só entende de caminhão".
+
+## Página de vendas: seção da IA (27/11/2026)
+- Seção "Novidade · Agora o app escuta e responde" (`#ia`), logo depois de "É só tocar no botão": cartão "Lançar falando" (fala → formulário preenchido) e cartão "Pergunte ao Diário" (conversa com a resposta real do teste de frete). Nota: pode errar, confira; já vem na assinatura.
+- Item "Fala e o app anota." em "Fácil de verdade" e pergunta "Como funciona a IA?" nas Dúvidas (precisa de internet).
+- Para anúncio, dá para mandar direto para a seção: link da página com `#ia` no fim.
