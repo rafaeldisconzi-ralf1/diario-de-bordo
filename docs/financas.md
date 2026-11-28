@@ -38,6 +38,7 @@ Não colocar e-mail de cliente aqui (repositório público).
 |---|---|---|---|---|---|
 | 21/11 | R$ 27,50 | 59 | 4 | 1 | 1 (R$ 24,90) |
 | 22/11 (até 22h) | R$ 54,41 | 143 | 2 | 1 (venceu sem pagar) | 0 |
+| 27/11 18:30 a 28/11 (~9h) | R$ 21,55 | 36 | 2 | 0 | 0 |
 
 Visitas e cliques vêm da tabela `eventos` (origem `anuncio_meta`); gasto do Gerenciador de Anúncios.
 O Meta pode gastar até ~75% acima do orçamento diário num dia (R$ 40 → R$ 54).
